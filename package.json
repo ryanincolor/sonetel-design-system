@@ -1,0 +1,21 @@
+{
+  "name": "sonetel-design-system",
+  "version": "1.0.0",
+  "description": "Sonetel Design System - Design tokens and Style Dictionary configuration",
+  "scripts": {
+    "build-tokens": "style-dictionary build",
+    "clean": "rm -rf dist/",
+    "build": "npm run clean && npm run build-tokens"
+  },
+  "devDependencies": {
+    "@tokens-studio/sd-transforms": "^1.0.0",
+    "style-dictionary": "^4.0.0"
+  },
+  "keywords": [
+    "design-tokens",
+    "style-dictionary",
+    "design-system"
+  ],
+  "author": "Sonetel",
+  "license": "MIT"
+}
