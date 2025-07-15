@@ -1,6 +1,9 @@
 {
   "tokenSetOrder": [
     "Core/Colors",
-    "Core/Spacings"
+    "Core/Spacings",
+    "Webapp/Color/Light",
+    "Webapp/Color/Dark",
+    "Webapp/Spacing/Desktop"
   ]
 }

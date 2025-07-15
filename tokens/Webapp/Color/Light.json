@@ -1,0 +1,144 @@
+{
+  "elevation": {
+    "solid": {
+      "01": {
+        "value": "{neutral.solid.light.05}",
+        "type": "color"
+      },
+      "00": {
+        "value": "{neutral.solid.light.00}",
+        "type": "color"
+      },
+      "02": {
+        "value": "{neutral.solid.light.10}",
+        "type": "color"
+      },
+      "06": {
+        "value": "{neutral.solid.light.60}",
+        "type": "color"
+      },
+      "03": {
+        "value": "{neutral.solid.light.20}",
+        "type": "color"
+      },
+      "04": {
+        "value": "{neutral.solid.light.30}",
+        "type": "color"
+      },
+      "05": {
+        "value": "{neutral.solid.light.50}",
+        "type": "color"
+      },
+      "07": {
+        "value": "{neutral.solid.light.70}",
+        "type": "color"
+      }
+    },
+    "alpha": {
+      "01": {
+        "value": "{neutral.alpha.light.05}",
+        "type": "color"
+      },
+      "02": {
+        "value": "{neutral.alpha.light.10}",
+        "type": "color"
+      },
+      "03": {
+        "value": "{neutral.alpha.light.20}",
+        "type": "color"
+      },
+      "04": {
+        "value": "{neutral.alpha.light.30}",
+        "type": "color"
+      },
+      "05": {
+        "value": "{neutral.alpha.light.50}",
+        "type": "color"
+      },
+      "06": {
+        "value": "{neutral.alpha.light.60}",
+        "type": "color"
+      },
+      "07": {
+        "value": "{neutral.alpha.light.100}",
+        "type": "color"
+      },
+      "00": {
+        "value": "{neutral.alpha.light.00}",
+        "type": "color"
+      }
+    }
+  },
+  "on-surface": {
+    "inverse": {
+      "value": "{elevation.solid.00}",
+      "type": "color"
+    },
+    "seconday": {
+      "value": "{elevation.solid.05}",
+      "type": "color"
+    },
+    "tertiary": {
+      "value": "{elevation.solid.03}",
+      "type": "color"
+    },
+    "primary": {
+      "value": "{elevation.solid.07}",
+      "type": "color"
+    },
+    "on-dark": {
+      "value": "{elevation.solid.00}",
+      "type": "color"
+    },
+    "on-light": {
+      "value": "{elevation.solid.07}",
+      "type": "color"
+    }
+  },
+  "accents": {
+    "purple": {
+      "value": "{accents.purple}",
+      "type": "color"
+    },
+    "yellow": {
+      "value": "{accents.yellow}",
+      "type": "color"
+    },
+    "orange": {
+      "value": "{accents.orange}",
+      "type": "color"
+    },
+    "blue": {
+      "value": "{accents.blue}",
+      "type": "color"
+    },
+    "green": {
+      "value": "{accents.green}",
+      "type": "color"
+    },
+    "pink": {
+      "value": "{accents.pink}",
+      "type": "color"
+    }
+  },
+  "on-accent-surface-secondary": {
+    "value": "{Archive.Dark 600}",
+    "type": "color"
+  },
+  "alert": {
+    "critical": {
+      "value": "{accents.red}",
+      "type": "color"
+    }
+  },
+  "outline": {
+    "subtle": {
+      "value": "#e1e1e1",
+      "type": "color"
+    }
+  },
+  "on-accent-surface-primary": {
+    "value": "{Archive.Dark 900}",
+    "type": "color"
+  }
+}
