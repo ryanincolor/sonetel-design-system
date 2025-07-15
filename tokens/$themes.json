@@ -4,10 +4,7 @@
     "name": "Mode 1",
     "group": "Core/Colors",
     "selectedTokenSets": {
-      "Core/Colors": "enabled",
-      "Webapp/Color/Light": "disabled",
-      "Webapp/Color/Dark": "disabled",
-      "Webapp/Spacing/Desktop": "disabled"
+      "Core/Colors": "enabled"
     },
     "$figmaStyleReferences": {},
     "$figmaVariableReferences": {
@@ -65,10 +62,7 @@
     "name": "Mode 1",
     "group": "Core/Spacings",
     "selectedTokenSets": {
-      "Core/Spacings": "enabled",
-      "Webapp/Color/Light": "disabled",
-      "Webapp/Color/Dark": "disabled",
-      "Webapp/Spacing/Desktop": "disabled"
+      "Core/Spacings": "enabled"
     },
     "$figmaStyleReferences": {},
     "$figmaVariableReferences": {
@@ -97,11 +91,7 @@
     "id": "core/typography-value",
     "name": "Value",
     "group": "Core/Typography",
-    "selectedTokenSets": {
-      "Webapp/Color/Light": "disabled",
-      "Webapp/Color/Dark": "disabled",
-      "Webapp/Spacing/Desktop": "disabled"
-    },
+    "selectedTokenSets": {},
     "$figmaStyleReferences": {},
     "$figmaVariableReferences": {
       "font.weight.regular": "4b470c4c2a8c82ba85e9eab0ec471949138f4347",
@@ -136,11 +126,7 @@
     "id": "core/icons-mode 1",
     "name": "Mode 1",
     "group": "Core/Icons",
-    "selectedTokenSets": {
-      "Webapp/Color/Light": "disabled",
-      "Webapp/Color/Dark": "disabled",
-      "Webapp/Spacing/Desktop": "disabled"
-    },
+    "selectedTokenSets": {},
     "$figmaStyleReferences": {},
     "$figmaVariableReferences": {
       "stroke.default": "4cdbdc1a36b066706c34fb1fa4119c418fb1ad06",
@@ -156,11 +142,7 @@
     "id": "sys/spacing-desktop",
     "name": "Desktop",
     "group": "Sys/Spacing",
-    "selectedTokenSets": {
-      "Webapp/Color/Light": "disabled",
-      "Webapp/Color/Dark": "disabled",
-      "Webapp/Spacing/Desktop": "enabled"
-    },
+    "selectedTokenSets": {},
     "$figmaStyleReferences": {},
     "$figmaVariableReferences": {
       "spacing.2xs": "cb4452a9c8d95d3fa39fc66fdbb392d17f637b8b",
@@ -189,9 +171,7 @@
     "name": "Light",
     "group": "Sys/Color",
     "selectedTokenSets": {
-      "Webapp/Color/Light": "enabled",
-      "Webapp/Color/Dark": "disabled",
-      "Webapp/Spacing/Desktop": "disabled"
+      "Webapp/Color/Light": "enabled"
     },
     "$figmaStyleReferences": {},
     "$figmaVariableReferences": {
@@ -236,9 +216,7 @@
     "name": "Dark",
     "group": "Sys/Color",
     "selectedTokenSets": {
-      "Webapp/Color/Light": "disabled",
-      "Webapp/Color/Dark": "enabled",
-      "Webapp/Spacing/Desktop": "disabled"
+      "Webapp/Color/Dark": "enabled"
     },
     "$figmaStyleReferences": {},
     "$figmaVariableReferences": {
@@ -279,11 +257,7 @@
     "id": "sys/typography-mode 1",
     "name": "Mode 1",
     "group": "Sys/Typography",
-    "selectedTokenSets": {
-      "Webapp/Color/Light": "disabled",
-      "Webapp/Color/Dark": "disabled",
-      "Webapp/Spacing/Desktop": "disabled"
-    },
+    "selectedTokenSets": {},
     "$figmaStyleReferences": {},
     "$figmaVariableReferences": {
       "font-size.headline.h1": "0717cd8e3aaa7816561678b37b29fb58e15c23ee",
@@ -332,11 +306,7 @@
     "id": "responsive-desktop xl",
     "name": "Desktop XL",
     "group": "Responsive",
-    "selectedTokenSets": {
-      "Webapp/Color/Light": "disabled",
-      "Webapp/Color/Dark": "disabled",
-      "Webapp/Spacing/Desktop": "disabled"
-    },
+    "selectedTokenSets": {},
     "$figmaStyleReferences": {},
     "$figmaVariableReferences": {
       "Content Container": "a439b675fa9f7eb8ab50fd7e8a4ce65c2c4b3644",
@@ -351,11 +321,7 @@
     "id": "responsive-desktop",
     "name": "Desktop",
     "group": "Responsive",
-    "selectedTokenSets": {
-      "Webapp/Color/Light": "disabled",
-      "Webapp/Color/Dark": "disabled",
-      "Webapp/Spacing/Desktop": "disabled"
-    },
+    "selectedTokenSets": {},
     "$figmaStyleReferences": {},
     "$figmaVariableReferences": {
       "Content Container": "a439b675fa9f7eb8ab50fd7e8a4ce65c2c4b3644",
@@ -370,11 +336,7 @@
     "id": "responsive-tablet",
     "name": "Tablet",
     "group": "Responsive",
-    "selectedTokenSets": {
-      "Webapp/Color/Light": "disabled",
-      "Webapp/Color/Dark": "disabled",
-      "Webapp/Spacing/Desktop": "disabled"
-    },
+    "selectedTokenSets": {},
     "$figmaStyleReferences": {},
     "$figmaVariableReferences": {
       "Content Container": "a439b675fa9f7eb8ab50fd7e8a4ce65c2c4b3644",
@@ -389,11 +351,7 @@
     "id": "responsive-mobile",
     "name": "Mobile",
     "group": "Responsive",
-    "selectedTokenSets": {
-      "Webapp/Color/Light": "disabled",
-      "Webapp/Color/Dark": "disabled",
-      "Webapp/Spacing/Desktop": "disabled"
-    },
+    "selectedTokenSets": {},
     "$figmaStyleReferences": {},
     "$figmaVariableReferences": {
       "Content Container": "a439b675fa9f7eb8ab50fd7e8a4ce65c2c4b3644",
@@ -408,11 +366,7 @@
     "id": "sys / border radius-mode 1",
     "name": "Mode 1",
     "group": "Sys / Border Radius",
-    "selectedTokenSets": {
-      "Webapp/Color/Light": "disabled",
-      "Webapp/Color/Dark": "disabled",
-      "Webapp/Spacing/Desktop": "disabled"
-    },
+    "selectedTokenSets": {},
     "$figmaStyleReferences": {},
     "$figmaVariableReferences": {
       "border-radius.large": "06dbc6871d1de37af2c123b1e0e92eed8c5ed609",
@@ -428,11 +382,7 @@
     "id": "comp / cards-mode 1",
     "name": "Mode 1",
     "group": "Comp / Cards",
-    "selectedTokenSets": {
-      "Webapp/Color/Light": "disabled",
-      "Webapp/Color/Dark": "disabled",
-      "Webapp/Spacing/Desktop": "disabled"
-    },
+    "selectedTokenSets": {},
     "$figmaStyleReferences": {},
     "$figmaVariableReferences": {
       "border-radius": "0e690c5bb61141b17c7bf091b14ece665bb9514e"

@@ -3,7 +3,6 @@
     "Core/Colors",
     "Core/Spacings",
     "Webapp/Color/Light",
-    "Webapp/Color/Dark",
-    "Webapp/Spacing/Desktop"
+    "Webapp/Color/Dark"
   ]
 }
