@@ -3,196 +3,196 @@
     "solid": {
       "light": {
         "10": {
-          "value": "#f0f0f0",
-          "type": "color"
+          "$type": "color",
+          "$value": "#f0f0f0"
         },
         "20": {
-          "value": "#e0e0e0",
-          "type": "color"
+          "$type": "color",
+          "$value": "#e0e0e0"
         },
         "30": {
-          "value": "#b8b8b8",
-          "type": "color"
+          "$type": "color",
+          "$value": "#b8b8b8"
         },
         "40": {
-          "value": "#8f8f8f",
-          "type": "color"
+          "$type": "color",
+          "$value": "#8f8f8f"
         },
         "50": {
-          "value": "#666666",
-          "type": "color"
+          "$type": "color",
+          "$value": "#666666"
         },
         "60": {
-          "value": "#292929",
-          "type": "color"
+          "$type": "color",
+          "$value": "#292929"
         },
         "70": {
-          "value": "#0a0a0a",
-          "type": "color"
+          "$type": "color",
+          "$value": "#0a0a0a"
         },
         "00": {
-          "value": "#ffffff",
-          "type": "color"
+          "$type": "color",
+          "$value": "#ffffff"
         },
         "05": {
-          "value": "#f5f5f5",
-          "type": "color"
+          "$type": "color",
+          "$value": "#f5f5f5"
         }
       },
       "dark": {
         "10": {
-          "value": "#141414",
-          "type": "color"
+          "$type": "color",
+          "$value": "#141414"
         },
         "20": {
-          "value": "#1f1f1f",
-          "type": "color"
+          "$type": "color",
+          "$value": "#1f1f1f"
         },
         "30": {
-          "value": "#292929",
-          "type": "color"
+          "$type": "color",
+          "$value": "#292929"
         },
         "40": {
-          "value": "#333333",
-          "type": "color"
+          "$type": "color",
+          "$value": "#333333"
         },
         "50": {
-          "value": "#3d3d3d",
-          "type": "color"
+          "$type": "color",
+          "$value": "#3d3d3d"
         },
         "60": {
-          "value": "#808080",
-          "type": "color"
+          "$type": "color",
+          "$value": "#808080"
         },
         "70": {
-          "value": "#b2b2b2",
-          "type": "color"
+          "$type": "color",
+          "$value": "#b2b2b2"
         },
         "100": {
-          "value": "#ffffff",
-          "type": "color"
+          "$type": "color",
+          "$value": "#ffffff"
         },
         "05": {
-          "value": "#0a0a0a",
-          "type": "color"
+          "$type": "color",
+          "$value": "#0a0a0a"
         },
         "00": {
-          "value": "#000000",
-          "type": "color"
+          "$type": "color",
+          "$value": "#000000"
         }
       }
     },
     "alpha": {
       "light": {
         "10": {
-          "value": "#0000000f",
-          "type": "color"
+          "$type": "color",
+          "$value": "#0000000f"
         },
         "20": {
-          "value": "#0000001f",
-          "type": "color"
+          "$type": "color",
+          "$value": "#0000001f"
         },
         "30": {
-          "value": "#00000047",
-          "type": "color"
+          "$type": "color",
+          "$value": "#00000047"
         },
         "40": {
-          "value": "#00000070",
-          "type": "color"
+          "$type": "color",
+          "$value": "#00000070"
         },
         "50": {
-          "value": "#00000099",
-          "type": "color"
+          "$type": "color",
+          "$value": "#00000099"
         },
         "60": {
-          "value": "#000000d6",
-          "type": "color"
+          "$type": "color",
+          "$value": "#000000d6"
         },
         "70": {
-          "value": "#000000f5",
-          "type": "color"
+          "$type": "color",
+          "$value": "#000000f5"
         },
         "100": {
-          "value": "#000000",
-          "type": "color"
+          "$type": "color",
+          "$value": "#000000"
         },
         "05": {
-          "value": "#0000000a",
-          "type": "color"
+          "$type": "color",
+          "$value": "#0000000a"
         },
         "00": {
-          "value": "#00000000",
-          "type": "color"
+          "$type": "color",
+          "$value": "#00000000"
         }
       },
       "dark": {
         "10": {
-          "value": "#ffffff14",
-          "type": "color"
+          "$type": "color",
+          "$value": "#ffffff14"
         },
         "20": {
-          "value": "#ffffff1f",
-          "type": "color"
+          "$type": "color",
+          "$value": "#ffffff1f"
         },
         "30": {
-          "value": "#ffffff29",
-          "type": "color"
+          "$type": "color",
+          "$value": "#ffffff29"
         },
         "40": {
-          "value": "#ffffff33",
-          "type": "color"
+          "$type": "color",
+          "$value": "#ffffff33"
         },
         "50": {
-          "value": "#f0f0f040",
-          "type": "color"
+          "$type": "color",
+          "$value": "#f0f0f040"
         },
         "60": {
-          "value": "#ffffff80",
-          "type": "color"
+          "$type": "color",
+          "$value": "#ffffff80"
         },
         "70": {
-          "value": "#ffffffb3",
-          "type": "color"
+          "$type": "color",
+          "$value": "#ffffffb3"
         },
         "100": {
-          "value": "#ffffff",
-          "type": "color"
+          "$type": "color",
+          "$value": "#ffffff"
         },
         "05": {
-          "value": "#ffffff0a",
-          "type": "color"
+          "$type": "color",
+          "$value": "#ffffff0a"
         }
       }
     }
   },
   "accents": {
     "red": {
-      "value": "#ff0000",
-      "type": "color"
+      "$type": "color",
+      "$value": "#ff0000"
     },
     "orange": {
-      "value": "#ff9e9e",
-      "type": "color"
+      "$type": "color",
+      "$value": "#ff9e9e"
     },
     "pink": {
-      "value": "#ff68b0",
-      "type": "color"
+      "$type": "color",
+      "$value": "#ff68b0"
     },
     "purple": {
-      "value": "#aaa1f1",
-      "type": "color"
+      "$type": "color",
+      "$value": "#aaa1f1"
     },
     "green": {
-      "value": "#7ad085",
-      "type": "color"
+      "$type": "color",
+      "$value": "#7ad085"
     },
     "blue": {
-      "value": "#638eff",
-      "type": "color"
+      "$type": "color",
+      "$value": "#638eff"
     },
     "yellow": {
-      "value": "#ffef62",
-      "type": "color"
+      "$type": "color",
+      "$value": "#ffef62"
     }
   }
 }
