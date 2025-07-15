@@ -40,6 +40,14 @@
         }
       },
       "dark": {
+        "0": {
+          "$type": "color",
+          "$value": "#000000"
+        },
+        "5": {
+          "$type": "color",
+          "$value": "#0a0a0a"
+        },
         "10": {
           "$type": "color",
           "$value": "#141414"
@@ -71,19 +79,19 @@
         "100": {
           "$type": "color",
           "$value": "#ffffff"
-        },
-        "05": {
-          "$type": "color",
-          "$value": "#0a0a0a"
-        },
-        "00": {
-          "$type": "color",
-          "$value": "#000000"
         }
       }
     },
     "alpha": {
       "light": {
+        "0": {
+          "$type": "color",
+          "$value": "#00000000"
+        },
+        "5": {
+          "$type": "color",
+          "$value": "#0000000a"
+        },
         "10": {
           "$type": "color",
           "$value": "#0000000f"
@@ -115,17 +123,13 @@
         "100": {
           "$type": "color",
           "$value": "#000000"
-        },
-        "05": {
-          "$type": "color",
-          "$value": "#0000000a"
-        },
-        "00": {
-          "$type": "color",
-          "$value": "#00000000"
         }
       },
       "dark": {
+        "5": {
+          "$type": "color",
+          "$value": "#ffffff0a"
+        },
         "10": {
           "$type": "color",
           "$value": "#ffffff14"
@@ -157,10 +161,6 @@
         "100": {
           "$type": "color",
           "$value": "#ffffff"
-        },
-        "05": {
-          "$type": "color",
-          "$value": "#ffffff0a"
         }
       }
     }

@@ -16,7 +16,7 @@
       "$type": "dimension",
       "$value": "12px"
     },
-    "15": {
+    "16": {
       "$type": "dimension",
       "$value": "16px"
     },
@@ -36,13 +36,13 @@
       "$type": "dimension",
       "$value": "32px"
     },
+    "40": {
+      "$type": "dimension",
+      "$value": "40px"
+    },
     "48": {
       "$type": "dimension",
       "$value": "48px"
-    },
-    "50": {
-      "$type": "dimension",
-      "$value": "40px"
     },
     "56": {
       "$type": "dimension",
