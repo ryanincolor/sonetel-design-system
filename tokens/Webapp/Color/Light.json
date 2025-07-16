@@ -1,12 +1,12 @@
 {
   "elevation": {
     "solid": {
-      "01": {
-        "value": "{neutral.solid.light.05}",
+      "0": {
+        "value": "{neutral.solid.light.0}",
         "type": "color"
       },
-      "00": {
-        "value": "{neutral.solid.light.00}",
+      "01": {
+        "value": "{neutral.solid.light.5}",
         "type": "color"
       },
       "02": {
@@ -36,7 +36,7 @@
     },
     "alpha": {
       "01": {
-        "value": "{neutral.alpha.light.05}",
+        "value": "{neutral.alpha.light.5}",
         "type": "color"
       },
       "02": {
@@ -64,14 +64,14 @@
         "type": "color"
       },
       "00": {
-        "value": "{neutral.alpha.light.00}",
+        "value": "{neutral.alpha.light.0}",
         "type": "color"
       }
     }
   },
   "on-surface": {
     "inverse": {
-      "value": "{elevation.solid.00}",
+      "value": "{elevation.solid.0}",
       "type": "color"
     },
     "seconday": {
@@ -87,7 +87,7 @@
       "type": "color"
     },
     "on-dark": {
-      "value": "{elevation.solid.00}",
+      "value": "{elevation.solid.0}",
       "type": "color"
     },
     "on-light": {
