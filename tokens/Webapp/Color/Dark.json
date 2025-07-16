@@ -1,93 +1,93 @@
 {
   "elevation": {
     "solid": {
-      "01": {
+      "0": {
+        "value": "{neutral.solid.dark.5}",
+        "type": "color"
+      },
+      "1": {
         "value": "{neutral.solid.dark.10}",
         "type": "color"
       },
-      "00": {
-        "value": "{neutral.solid.dark.05}",
-        "type": "color"
-      },
-      "02": {
+      "2": {
         "value": "{neutral.solid.dark.20}",
         "type": "color"
       },
-      "06": {
-        "value": "{neutral.solid.dark.70}",
-        "type": "color"
-      },
-      "03": {
+      "3": {
         "value": "{neutral.solid.dark.40}",
         "type": "color"
       },
-      "04": {
+      "4": {
         "value": "{neutral.solid.dark.50}",
         "type": "color"
       },
-      "05": {
+      "5": {
         "value": "{neutral.solid.dark.60}",
         "type": "color"
       },
-      "07": {
+      "6": {
+        "value": "{neutral.solid.dark.70}",
+        "type": "color"
+      },
+      "7": {
         "value": "{neutral.solid.dark.100}",
         "type": "color"
       }
     },
     "alpha": {
-      "01": {
+      "0": {
+        "value": "{neutral.alpha.dark.5}",
+        "type": "color"
+      },
+      "1": {
         "value": "{neutral.alpha.dark.10}",
         "type": "color"
       },
-      "02": {
+      "2": {
         "value": "{neutral.alpha.dark.20}",
         "type": "color"
       },
-      "03": {
+      "3": {
         "value": "{neutral.alpha.dark.30}",
         "type": "color"
       },
-      "04": {
+      "4": {
         "value": "{neutral.alpha.dark.30}",
         "type": "color"
       },
-      "05": {
+      "5": {
         "value": "{neutral.alpha.dark.60}",
         "type": "color"
       },
-      "06": {
+      "6": {
         "value": "{neutral.alpha.dark.70}",
         "type": "color"
       },
-      "07": {
+      "7": {
         "value": "{neutral.alpha.dark.100}",
-        "type": "color"
-      },
-      "00": {
-        "value": "{neutral.alpha.dark.5}",
         "type": "color"
       }
     }
   },
   "on-surface": {
     "inverse": {
-      "value": "{elevation.solid.01}",
+      "value": "{elevation.solid.1}",
       "type": "color"
     },
     "seconday": {
-      "value": "{elevation.solid.06}",
+      "value": "{elevation.solid.6}",
       "type": "color"
     },
     "tertiary": {
-      "value": "{elevation.solid.03}",
+      "value": "{elevation.solid.3}",
       "type": "color"
     },
     "primary": {
-      "value": "{elevation.solid.07}",
+      "value": "{elevation.solid.7}",
       "type": "color"
     },
     "on-dark": {
-      "value": "{elevation.solid.07}",
+      "value": "{elevation.solid.7}",
       "type": "color"
     },
     "on-light": {

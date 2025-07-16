@@ -40,6 +40,14 @@
         }
       },
       "dark": {
+        "0": {
+          "value": "#000000",
+          "type": "color"
+        },
+        "5": {
+          "value": "#0a0a0a",
+          "type": "color"
+        },
         "10": {
           "value": "#141414",
           "type": "color"
@@ -70,14 +78,6 @@
         },
         "100": {
           "value": "#ffffff",
-          "type": "color"
-        },
-        "05": {
-          "value": "#0a0a0a",
-          "type": "color"
-        },
-        "00": {
-          "value": "#000000",
           "type": "color"
         }
       }
