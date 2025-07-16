@@ -95,9 +95,9 @@
       "type": "color"
     }
   },
-  "alert": {
+  "status": {
     "critical": {
-      "value": "{accents.red}",
+      "value": "{hues.red}",
       "type": "color"
     }
   }
