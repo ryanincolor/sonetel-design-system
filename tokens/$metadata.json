@@ -4,7 +4,6 @@
     "Core/Spacing",
     "Webapp/Color/Light",
     "Webapp/Color/Dark",
-    "Webapp/Spacing",
-    "Sys/Spacing"
+    "Webapp/Spacing"
   ]
 }

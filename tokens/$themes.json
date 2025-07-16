@@ -5,8 +5,7 @@
     "group": "Core/Colors",
     "selectedTokenSets": {
       "Core/Color": "enabled",
-      "Webapp/Spacing": "disabled",
-      "Sys/Spacing": "disabled"
+      "Webapp/Spacing": "disabled"
     },
     "$figmaStyleReferences": {},
     "$figmaVariableReferences": {
@@ -65,8 +64,7 @@
     "group": "Core/Spacings",
     "selectedTokenSets": {
       "Core/Spacing": "enabled",
-      "Webapp/Spacing": "disabled",
-      "Sys/Spacing": "disabled"
+      "Webapp/Spacing": "disabled"
     },
     "$figmaStyleReferences": {},
     "$figmaVariableReferences": {
@@ -96,8 +94,7 @@
     "name": "Value",
     "group": "Core/Typography",
     "selectedTokenSets": {
-      "Webapp/Spacing": "disabled",
-      "Sys/Spacing": "disabled"
+      "Webapp/Spacing": "disabled"
     },
     "$figmaStyleReferences": {},
     "$figmaVariableReferences": {
@@ -134,8 +131,7 @@
     "name": "Mode 1",
     "group": "Core/Icons",
     "selectedTokenSets": {
-      "Webapp/Spacing": "disabled",
-      "Sys/Spacing": "disabled"
+      "Webapp/Spacing": "disabled"
     },
     "$figmaStyleReferences": {},
     "$figmaVariableReferences": {
@@ -154,8 +150,7 @@
     "group": "Sys/Color",
     "selectedTokenSets": {
       "Webapp/Color/Light": "enabled",
-      "Webapp/Spacing": "disabled",
-      "Sys/Spacing": "disabled"
+      "Webapp/Spacing": "disabled"
     },
     "$figmaStyleReferences": {},
     "$figmaVariableReferences": {
@@ -198,8 +193,7 @@
     "group": "Sys/Color",
     "selectedTokenSets": {
       "Webapp/Color/Dark": "enabled",
-      "Webapp/Spacing": "disabled",
-      "Sys/Spacing": "disabled"
+      "Webapp/Spacing": "disabled"
     },
     "$figmaStyleReferences": {},
     "$figmaVariableReferences": {
@@ -241,8 +235,7 @@
     "name": "Light",
     "group": "Web/Color",
     "selectedTokenSets": {
-      "Web/Color/Light": "enabled",
-      "Sys/Spacing": "disabled"
+      "Webapp/Spacing": "disabled"
     },
     "$figmaStyleReferences": {},
     "$figmaVariableReferences": {
@@ -287,8 +280,7 @@
     "name": "Dark",
     "group": "Web/Color",
     "selectedTokenSets": {
-      "Web/Color/Dark": "enabled",
-      "Sys/Spacing": "disabled"
+      "Webapp/Spacing": "disabled"
     },
     "$figmaStyleReferences": {},
     "$figmaVariableReferences": {
@@ -333,8 +325,7 @@
     "name": "Desktop",
     "group": "Sys/Spacing",
     "selectedTokenSets": {
-      "Webapp/Spacing": "disabled",
-      "Sys/Spacing": "enabled"
+      "Webapp/Spacing": "enabled"
     },
     "$figmaStyleReferences": {},
     "$figmaVariableReferences": {
@@ -364,8 +355,7 @@
     "name": "Mode 1",
     "group": "Sys/Typography",
     "selectedTokenSets": {
-      "Webapp/Spacing": "disabled",
-      "Sys/Spacing": "disabled"
+      "Webapp/Spacing": "disabled"
     },
     "$figmaStyleReferences": {},
     "$figmaVariableReferences": {
@@ -416,8 +406,7 @@
     "name": "Desktop XL",
     "group": "Responsive",
     "selectedTokenSets": {
-      "Webapp/Spacing": "disabled",
-      "Sys/Spacing": "disabled"
+      "Webapp/Spacing": "disabled"
     },
     "$figmaStyleReferences": {},
     "$figmaVariableReferences": {
@@ -434,8 +423,7 @@
     "name": "Desktop",
     "group": "Responsive",
     "selectedTokenSets": {
-      "Webapp/Spacing": "disabled",
-      "Sys/Spacing": "disabled"
+      "Webapp/Spacing": "disabled"
     },
     "$figmaStyleReferences": {},
     "$figmaVariableReferences": {
@@ -452,8 +440,7 @@
     "name": "Tablet",
     "group": "Responsive",
     "selectedTokenSets": {
-      "Webapp/Spacing": "disabled",
-      "Sys/Spacing": "disabled"
+      "Webapp/Spacing": "disabled"
     },
     "$figmaStyleReferences": {},
     "$figmaVariableReferences": {
@@ -470,8 +457,7 @@
     "name": "Mobile",
     "group": "Responsive",
     "selectedTokenSets": {
-      "Webapp/Spacing": "disabled",
-      "Sys/Spacing": "disabled"
+      "Webapp/Spacing": "disabled"
     },
     "$figmaStyleReferences": {},
     "$figmaVariableReferences": {
@@ -488,8 +474,7 @@
     "name": "Mode 1",
     "group": "Sys / Border Radius",
     "selectedTokenSets": {
-      "Webapp/Spacing": "disabled",
-      "Sys/Spacing": "disabled"
+      "Webapp/Spacing": "disabled"
     },
     "$figmaStyleReferences": {},
     "$figmaVariableReferences": {
@@ -507,8 +492,7 @@
     "name": "Mode 1",
     "group": "Comp / Cards",
     "selectedTokenSets": {
-      "Webapp/Spacing": "disabled",
-      "Sys/Spacing": "disabled"
+      "Webapp/Spacing": "disabled"
     },
     "$figmaStyleReferences": {},
     "$figmaVariableReferences": {
