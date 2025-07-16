@@ -95,50 +95,10 @@
       "type": "color"
     }
   },
-  "accents": {
-    "purple": {
-      "value": "{accents.purple}",
-      "type": "color"
-    },
-    "yellow": {
-      "value": "{accents.yellow}",
-      "type": "color"
-    },
-    "orange": {
-      "value": "{accents.orange}",
-      "type": "color"
-    },
-    "blue": {
-      "value": "{accents.blue}",
-      "type": "color"
-    },
-    "green": {
-      "value": "{accents.green}",
-      "type": "color"
-    },
-    "pink": {
-      "value": "{accents.pink}",
-      "type": "color"
-    }
-  },
-  "on-accent-surface-secondary": {
-    "value": "{Archive.Dark 600}",
-    "type": "color"
-  },
   "alert": {
     "critical": {
       "value": "{accents.red}",
       "type": "color"
     }
-  },
-  "outline": {
-    "subtle": {
-      "value": "#e1e1e1",
-      "type": "color"
-    }
-  },
-  "on-accent-surface-primary": {
-    "value": "{Archive.Dark 900}",
-    "type": "color"
   }
 }
