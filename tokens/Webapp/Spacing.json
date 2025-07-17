@@ -15,6 +15,22 @@
     "md": {
       "value": "{spacing.16}",
       "type": "spacing"
+    },
+    "lg": {
+      "value": "{spacing.16}",
+      "type": "spacing"
+    },
+    "xl": {
+      "value": "{spacing.20}",
+      "type": "spacing"
+    },
+    "2xl": {
+      "value": "{spacing.24}",
+      "type": "spacing"
+    },
+    "3xl": {
+      "value": "{spacing.28}",
+      "type": "spacing"
     }
   }
 }
