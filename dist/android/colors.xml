@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+  <color name="neutral_solid_light_0">#ffffff</color>
+  <color name="neutral_solid_light_5">#f5f5f5</color>
+  <color name="neutral_solid_light_10">#f0f0f0</color>
+  <color name="neutral_solid_dark_0">#000000</color>
+  <color name="neutral_solid_dark_5">#0a0a0a</color>
+  <color name="hues_blue">#638eff</color>
+  <color name="hues_red">#ff0000</color>
+  <color name="hues_green">#7ad085</color>
+</resources>
