@@ -7,6 +7,10 @@
     "xs": {
       "value": "{spacing.4}",
       "type": "spacing"
+    },
+    "sm": {
+      "value": "{spacing.8}",
+      "type": "spacing"
     }
   }
 }
