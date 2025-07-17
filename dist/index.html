@@ -1182,8 +1182,21 @@
                   }
 
                   preview = `<div class="token-preview" style="background-color: ${colorValue}"></div>`;
-                } else if (tokenType === "dimension") {
-                  const width = token.value.replace("px", "") + "px";
+                } else if (
+                  tokenType === "dimension" ||
+                  tokenType === "spacing"
+                ) {
+                  let dimensionValue = token.value;
+
+                  // For webapp tokens, resolve references to actual dimension values
+                  if (isWebapp && coreTokens) {
+                    dimensionValue = resolveTokenReference(
+                      token.value,
+                      coreTokens,
+                    );
+                  }
+
+                  const width = dimensionValue.replace("px", "") + "px";
                   preview = `<div class="dimension-preview" style="width: ${width}; height: 8px;"></div>`;
                 }
 
