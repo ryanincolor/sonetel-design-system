@@ -70,6 +70,10 @@
   <string name="xs">4px</string>
   <string name="sm">12px</string>
   <string name="md">16px</string>
+  <string name="lg">16px</string>
+  <string name="xl">20px</string>
+  <string name="2xl">24px</string>
+  <string name="3xl">28px</string>
   <color name="0">#fff</color>
   <color name="1">#f5f5f5</color>
   <color name="2">#f0f0f0</color>

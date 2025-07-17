@@ -36,6 +36,7 @@ public class SonetelTokens {
     public static let 20 = 20px
     public static let 24 = 24px
     public static let 28 = 28px
+    public static let 2xl = 24px
     public static let 2xs = 2px
     public static let 3 = #e0e0e0
     public static let 3 = #0000001f
@@ -44,6 +45,7 @@ public class SonetelTokens {
     public static let 30 = #00000047
     public static let 30 = #ffffff29
     public static let 32 = 32px
+    public static let 3xl = 28px
     public static let 4 = 4px
     public static let 4 = #b8b8b8
     public static let 4 = #00000047
@@ -85,6 +87,7 @@ public class SonetelTokens {
     public static let critical = #ff0000
     public static let green = #7ad085
     public static let inverse = #fff
+    public static let lg = 16px
     public static let md = 16px
     public static let on-dark = #fff
     public static let on-light = #0a0a0a
@@ -96,6 +99,7 @@ public class SonetelTokens {
     public static let seconday = #666666
     public static let sm = 12px
     public static let tertiary = #e0e0e0
+    public static let xl = 20px
     public static let xs = 4px
     public static let yellow = #ffef62
 }
