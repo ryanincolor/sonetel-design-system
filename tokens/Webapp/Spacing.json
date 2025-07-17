@@ -9,7 +9,7 @@
       "type": "spacing"
     },
     "sm": {
-      "value": "{spacing.8}",
+      "value": "{spacing.12}",
       "type": "spacing"
     }
   }
