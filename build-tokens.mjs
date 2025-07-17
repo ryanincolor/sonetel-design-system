@@ -114,10 +114,16 @@ const sd = new StyleDictionary({
 // Build all platforms
 await sd.buildAllPlatforms();
 
-// Copy index.html to dist folder
+// Copy index.html to dist folder with corrected CSS path
 if (fs.existsSync("index.html")) {
-  fs.copyFileSync("index.html", "dist/index.html");
-  console.log("✅ Restored index.html");
+  let indexContent = fs.readFileSync("index.html", "utf8");
+  // Fix the CSS path for the dist version
+  indexContent = indexContent.replace(
+    'href="dist/web/tokens.css"',
+    'href="web/tokens.css"',
+  );
+  fs.writeFileSync("dist/index.html", indexContent);
+  console.log("✅ Restored index.html with corrected CSS path");
 }
 
 console.log("✅ Design tokens built successfully!");
