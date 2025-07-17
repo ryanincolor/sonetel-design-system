@@ -3,13 +3,22 @@
   "version": "1.0.0",
   "description": "Sonetel Design System - Design tokens and Style Dictionary configuration",
   "scripts": {
-    "build-tokens": "style-dictionary build",
+    "build-tokens": "node build-tokens.mjs",
     "clean": "rm -rf dist/",
-    "build": "npm run clean && npm run build-tokens"
+    "build": "npm run clean && npm run build-tokens",
+    "start": "npm run build && npx http-server dist -p 3000 -c-1 --cors",
+    "dev": "npm run build && npx http-server dist -p 3000 -c-1 --cors",
+    "webhook": "node webhook-server.js",
+    "watch": "node watch-tokens.js",
+    "dev:watch": "npm run build && npx concurrently \"npm run watch\" \"npx http-server dist -p 3000 -c-1 --cors\"",
+    "dev:full": "npm run build && npx concurrently \"npm run webhook\" \"npx http-server dist -p 3000 -c-1 --cors\"",
+    "deploy": "npm run build && echo 'Build complete - ready for deployment'"
   },
   "devDependencies": {
     "@tokens-studio/sd-transforms": "^1.0.0",
-    "style-dictionary": "^4.0.0"
+    "style-dictionary": "^4.0.0",
+    "http-server": "^14.1.1",
+    "concurrently": "^8.2.0"
   },
   "keywords": [
     "design-tokens",
