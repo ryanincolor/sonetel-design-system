@@ -109,11 +109,6 @@ const sd = new StyleDictionary({
       ],
       files: [
         {
-          destination: "tokens.scss",
-          format: "scss/variables",
-          filter: "webapp-only",
-        },
-        {
           destination: "tokens.json",
           format: "json/flat",
           filter: "webapp-only",
@@ -140,6 +135,56 @@ const sd = new StyleDictionary({
         {
           destination: "tokens.js",
           format: "javascript/es6",
+          filter: "webapp-only",
+        },
+      ],
+    },
+    // SCSS Light theme
+    "scss-light": {
+      transforms: [
+        "ts/descriptionToComment",
+        "ts/size/px",
+        "ts/opacity",
+        "ts/color/modifiers",
+        "ts/typography/fontWeight",
+        "name/kebab",
+      ],
+      buildPath: "dist/web/",
+      prefix: "swa",
+      source: [
+        "tokens/Core/**/*.json",
+        "tokens/Webapp/Color/Light.json",
+        "tokens/Webapp/Spacing.json",
+      ],
+      files: [
+        {
+          destination: "tokens-light.scss",
+          format: "scss/variables",
+          filter: "webapp-only",
+        },
+      ],
+    },
+    // SCSS Dark theme
+    "scss-dark": {
+      transforms: [
+        "ts/descriptionToComment",
+        "ts/size/px",
+        "ts/opacity",
+        "ts/color/modifiers",
+        "ts/typography/fontWeight",
+        "name/kebab",
+      ],
+      buildPath: "dist/web/",
+      prefix: "swa",
+      source: [
+        "tokens/Core/**/*.json",
+        "tokens/Webapp/Color/Dark.json",
+        "tokens/Webapp/Spacing.json",
+      ],
+      files: [
+        {
+          destination: "tokens-dark.scss",
+          format: "scss/variables",
           filter: "webapp-only",
         },
       ],
@@ -189,8 +234,8 @@ const sd = new StyleDictionary({
 // Build all platforms
 await sd.buildAllPlatforms();
 
-// Create complete themed CSS file
-async function createThemedCSS() {
+// Create complete themed CSS and SCSS files
+async function createThemedFiles() {
   // Build light theme tokens
   const lightSD = new StyleDictionary({
     source: [
@@ -275,6 +320,43 @@ async function createThemedCSS() {
   // Write the themed CSS file
   fs.writeFileSync("dist/web/tokens.css", themedCSS);
 
+  // Create combined SCSS file if individual SCSS files exist
+  if (
+    fs.existsSync("dist/web/tokens-light.scss") &&
+    fs.existsSync("dist/web/tokens-dark.scss")
+  ) {
+    const lightSCSS = fs.readFileSync("dist/web/tokens-light.scss", "utf8");
+    const darkSCSS = fs.readFileSync("dist/web/tokens-dark.scss", "utf8");
+
+    // Create themed SCSS with mixins
+    let themedSCSS = "// Light theme variables\n";
+    themedSCSS += "@mixin light-theme {\n";
+    themedSCSS += lightSCSS
+      .replace(/^\$swa-/gm, "  $swa-")
+      .replace(/^\/\*\*[\s\S]*?\*\/\s*/gm, "");
+    themedSCSS += "}\n\n";
+
+    themedSCSS += "// Dark theme variables\n";
+    themedSCSS += "@mixin dark-theme {\n";
+    themedSCSS += darkSCSS
+      .replace(/^\$swa-/gm, "  $swa-")
+      .replace(/^\/\*\*[\s\S]*?\*\/\s*/gm, "");
+    themedSCSS += "}\n\n";
+
+    themedSCSS += "// Default to light theme\n";
+    themedSCSS += "@include light-theme;\n\n";
+
+    themedSCSS += "// Dark theme class override\n";
+    themedSCSS += ".dark-theme {\n";
+    themedSCSS += "  @include dark-theme;\n";
+    themedSCSS += "}\n";
+
+    fs.writeFileSync("dist/web/tokens.scss", themedSCSS);
+    console.log(
+      "✅ Complete themed tokens.scss created with light/dark mode mixins",
+    );
+  }
+
   // Clean up temp files
   if (fs.existsSync("temp")) {
     fs.rmSync("temp", { recursive: true });
@@ -285,7 +367,7 @@ async function createThemedCSS() {
   );
 }
 
-// Create themed CSS
-await createThemedCSS();
+// Create themed CSS and SCSS
+await createThemedFiles();
 
 console.log("✅ Design tokens built successfully!");
