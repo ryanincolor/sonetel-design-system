@@ -2,69 +2,69 @@
   "elevation": {
     "solid": {
       "0": {
-        "value": "{color/neutral.solid.light.0}",
+        "value": "{color.solid.light.0}",
         "type": "color"
       },
       "1": {
-        "value": "{color/neutral.solid.light.5}",
+        "value": "{color.solid.light.5}",
         "type": "color"
       },
       "2": {
-        "value": "{color/neutral.solid.light.10}",
+        "value": "{color.solid.light.10}",
         "type": "color"
       },
       "3": {
-        "value": "{color/neutral.solid.light.20}",
+        "value": "{color.solid.light.20}",
         "type": "color"
       },
       "4": {
-        "value": "{color/neutral.solid.light.30}",
+        "value": "{color.solid.light.30}",
         "type": "color"
       },
       "5": {
-        "value": "{color/neutral.solid.light.50}",
+        "value": "{color.solid.light.50}",
         "type": "color"
       },
       "6": {
-        "value": "{color/neutral.solid.light.60}",
+        "value": "{color.solid.light.60}",
         "type": "color"
       },
       "7": {
-        "value": "{color/neutral.solid.light.70}",
+        "value": "{color.solid.light.70}",
         "type": "color"
       }
     },
     "alpha": {
       "0": {
-        "value": "{color/neutral.alpha.light.0}",
+        "value": "{color.alpha.light.0}",
         "type": "color"
       },
       "1": {
-        "value": "{color/neutral.alpha.light.5}",
+        "value": "{color.alpha.light.5}",
         "type": "color"
       },
       "2": {
-        "value": "{color/neutral.alpha.light.10}",
+        "value": "{color.alpha.light.10}",
         "type": "color"
       },
       "3": {
-        "value": "{color/neutral.alpha.light.20}",
+        "value": "{color.alpha.light.20}",
         "type": "color"
       },
       "4": {
-        "value": "{color/neutral.alpha.light.30}",
+        "value": "{color.alpha.light.30}",
         "type": "color"
       },
       "5": {
-        "value": "{color/neutral.alpha.light.50}",
+        "value": "{color.alpha.light.50}",
         "type": "color"
       },
       "6": {
-        "value": "{color/neutral.alpha.light.60}",
+        "value": "{color.alpha.light.60}",
         "type": "color"
       },
       "7": {
-        "value": "{color/neutral.alpha.light.100}",
+        "value": "{color.alpha.light.100}",
         "type": "color"
       }
     }
