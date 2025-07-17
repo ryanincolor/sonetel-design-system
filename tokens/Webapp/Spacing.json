@@ -21,7 +21,7 @@
       "type": "spacing"
     },
     "xl": {
-      "value": "{spacing.120}",
+      "value": "{spacing.20}",
       "type": "spacing"
     },
     "2xl": {

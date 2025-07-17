@@ -1,8 +1,21 @@
 :root, .light-theme {
   --swa-spacing-2xs: 2px;
   --swa-spacing-xs: 4px;
-  --swa-spacing-sm: 12px;
-  --swa-spacing-md: 16px;
+  --swa-spacing-sm: 8px;
+  --swa-spacing-md: 12px;
+  --swa-spacing-lg: 16px;
+  --swa-spacing-xl: 20px;
+  --swa-spacing-2xl: 24px;
+  --swa-spacing-3xl: 28px;
+  --swa-spacing-4xl: 32px;
+  --swa-spacing-5xl: 48px;
+  --swa-spacing-6xl: 40px;
+  --swa-spacing-7xl: 56px;
+  --swa-spacing-8xl: 64px;
+  --swa-spacing-9xl: 72px;
+  --swa-spacing-10xl: 80px;
+  --swa-spacing-11xl: 96px;
+  --swa-spacing-12xl: 128px;
   --swa-elevation-solid-0: #fff;
   --swa-elevation-solid-1: #f5f5f5;
   --swa-elevation-solid-2: #f0f0f0;
@@ -31,8 +44,21 @@
 .dark-theme {
   --swa-spacing-2xs: 2px;
   --swa-spacing-xs: 4px;
-  --swa-spacing-sm: 12px;
-  --swa-spacing-md: 16px;
+  --swa-spacing-sm: 8px;
+  --swa-spacing-md: 12px;
+  --swa-spacing-lg: 16px;
+  --swa-spacing-xl: 20px;
+  --swa-spacing-2xl: 24px;
+  --swa-spacing-3xl: 28px;
+  --swa-spacing-4xl: 32px;
+  --swa-spacing-5xl: 48px;
+  --swa-spacing-6xl: 40px;
+  --swa-spacing-7xl: 56px;
+  --swa-spacing-8xl: 64px;
+  --swa-spacing-9xl: 72px;
+  --swa-spacing-10xl: 80px;
+  --swa-spacing-11xl: 96px;
+  --swa-spacing-12xl: 128px;
   --swa-elevation-solid-0: #0a0a0a;
   --swa-elevation-solid-1: #141414;
   --swa-elevation-solid-2: #1f1f1f;

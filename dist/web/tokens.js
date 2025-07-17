@@ -4,8 +4,21 @@
 
 export const spacing2xs = "2px";
 export const spacingxs = "4px";
-export const spacingsm = "12px";
-export const spacingmd = "16px";
+export const spacingsm = "8px";
+export const spacingmd = "12px";
+export const spacinglg = "16px";
+export const spacingxl = "20px";
+export const spacing2xl = "24px";
+export const spacing3xl = "28px";
+export const spacing4xl = "32px";
+export const spacing5xl = "48px";
+export const spacing6xl = "40px";
+export const spacing7xl = "56px";
+export const spacing8xl = "64px";
+export const spacing9xl = "72px";
+export const spacing10xl = "80px";
+export const spacing11xl = "96px";
+export const spacing12xl = "128px";
 export const elevationsolid0 = "#fff";
 export const elevationsolid1 = "#f5f5f5";
 export const elevationsolid2 = "#f0f0f0";
