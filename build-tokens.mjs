@@ -10,7 +10,7 @@ console.log('Building design tokens...');
 // StyleDictionary v4 APB
 const sd = new StyleDictionary({
   source: ['tokens/**/*.json'],
-  platforms: {\n    web: {
+  platforms: {    web: {
       transforms: [
         'ts/descriptionToComment',
         'ts/size/px',
