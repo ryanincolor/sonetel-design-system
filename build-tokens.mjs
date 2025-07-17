@@ -1,1 +1,121 @@
-import { register } from '@tokens-studio/sd-transforms';\nimport StyleDictionary from 'style-dictionary';\nimport fs from 'fs';\nimport path from 'path';\nimport { fileURLToPath } from 'url';\n\nconst __dirname = path.dirname(fileURLToPath(import.meta.url));\n\n// Register the token studio transforms\nregister(StyleDictionary);\n\nconsole.log('Building design tokens...');\n\n// Build the tokens\nawait StyleDictionary.extend({\n  source: ['tokens/**/*.json'],\n  platforms: {\n    web: {\n      transforms: [\n        'ts/descriptionToComment',\n        'ts/size/px',\n        'ts/opacity',\n        'ts/size/css/letterSpacing',\n        'ts/color/modifiers',\n        'ts/typography/fontWeight',\n        'ts/resolve/math',\n        'ts/size/rem',\n        'ts/color/css',\n        'name/kebab'\n      ],\n      buildPath: 'dist/web/',\n      files: [\n        {\n          destination: 'tokens.css',\n          format: 'css/variables'\n        },\n        {\n          destination: 'tokens.scss',\n          format: 'scss/variables'\n        },\n        {\n          destination: 'tokens.js',\n          format: 'javascript/es6'\n        },\n        {\n          destination: 'tokens.json',\n          format: 'json/flat'\n        }\n      ]\n    },\n    ios: {\n      transforms: [\n        'ts/descriptionToComment',\n        'ts/size/px',\n        'ts/opacity',\n        'ts/color/modifiers',\n        'ts/typography/fontWeight',\n        'ts/resolve/math',\n        'ts/color/SwiftUI'\n      ],\n      buildPath: 'dist/ios/',\n      files: [\n        {\n          destination: 'SonetelTokens.swift',\n          format: 'ios-swift/class.swift',\n          options: {\n            className: 'SonetelTokens'\n          },\n          filter: {\n            attributes: {}\n          }\n        }\n      ]\n    },\n    android: {\n      transforms: [\n        'ts/descriptionToComment',\n        'ts/size/px',\n        'ts/opacity',\n        'ts/color/modifiers',\n        'ts/typography/fontWeight',\n        'ts/resolve/math',\n        'ts/color/hex'\n      ],\n      buildPath: 'dist/android/',\n      files: [\n        {\n          destination: 'colors.xml',\n          format: 'android/resources'\n        },\n        {\n          destination: 'dimens.xml',\n          format: 'android/resources'\n        }\n      ]\n    }\n  }\n}).buildAllPlatforms();\n\n// Convert camelCase to kebab-case in CSS files\nfunction convertToKebabCase(filePath) {\n  const fileContent = fs.readFileSync(filePath, 'utf8');\n  const kebabCaseContent = fileContent.replace(/--([a-z])(?:([a-zA-Z])[a-zA-Z0-9]*)*/g, (match, firstChar, rest) => {\n    return `--${firstChar}${rest.toLowerCase()}`;\n  });\n  fs.writeFileSync(filePath, kebabCaseContent);\n}\n\n// Convert css and scss files\nconvertToKebabCase('dist/web/tokens.css');\nconvertToKebabCase('dist/web/tokens.scss');\n\nconsole.log('⌅ Converted CSS variables to kebab-case');\nconsole.log('⌅ Converted SCSS variables to kebab-case');\n\n// Copy index.html to dist folder\nif (fs.existsSync('index.html')) {\n  fs.copyFileSync('index.html', 'dist/index.html');\n  console.log('⌅ Restored index.html');\n}\n\nconsole.log('✅ Design tokens built successfully!');\n
+import { register } from '@tokens-studio/sd-transforms';
+import StyleDictionary from 'style-dictionary';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+// Register the token studio transforms
+register(StyleDictionary);
+
+console.log('Building design tokens...');
+
+// Build the tokens
+await StyleDictionary.extend({
+  source: ['tokens/**/*.json'],
+  platforms: {
+    web: {
+      transforms: [
+        'ts/descriptionToComment',
+        'ts/size/px',
+        'ts/opacity',
+        'ts/size/css/letterSpacing',
+        'ts/color/modifiers',
+        'ts/typography/fontWeight',
+        'ts/resolve/math',
+        'ts/size/rem',
+        'ts/color/css',
+        'name/kebab'
+      ],
+      buildPath: 'dist/web/',
+      files: [
+        {
+          destination: 'tokens.css',
+          format: 'css/variables'
+        },
+        {
+          destination: 'tokens.scss',
+          format: 'scss/variables'
+        },
+        {
+          destination: 'tokens.js',
+          format: 'javascript/es6'
+        },
+        {
+          destination: 'tokens.json',
+          format: 'json/flat'
+        }
+      ]
+    },
+    ios: {\n      transforms: [
+        'ts/descriptionToComment',
+        'ts/size/px',
+        'ts/opacity',
+        'ts/color/modifiers',
+        'ts/typography/fontWeight',
+        'ts/resolve/math',
+        'ts/color/SwiftUI'
+      ],
+      buildPath: 'dist/ios/',
+      files: [
+        {
+          destination: 'SonetelTokens.swift',
+          format: 'ios-swift/class.swift',
+          options: {
+            className: 'SonetelTokens'
+          },
+          filter: {
+            attributes: {}
+          }
+        }
+      ]
+    },
+    android: {
+      transforms: [
+        'ts/descriptionToComment',
+        'ts/size/px',
+        'ts/opacity',
+        'ts/color/modifiers',
+        'ts/typography/fontWeight',
+        'ts/resolve/math',
+        'ts/color/hex'
+      ],
+      buildPath: 'dist/android/',
+      files: [
+        {
+          destination: 'colors.xml',
+          format: 'android/resources'
+        },
+        {
+          destination: 'dimens.xml',
+          format: 'android/resources'
+        }
+      ]
+    }
+  }
+}).buildAllPlatforms();
+
+// Convert camelCase to kebab-case in CSS files
+function convertToKebabCase(filePath) {
+  const fileContent = fs.readFileSync(filePath, 'utf8');
+  const kebabCaseContent = fileContent.replace(/--([a-z])(?:([a-zA-Z])[a-zA-Z0-9]*)*/g, (match, firstChar, rest) => {
+    return `--${firstChar}${rest.toLowerCase()}`;
+  });
+  fs.writeFileSync(filePath, kebabCaseContent);
+}
+
+// Convert css and scss files
+convertToKebabCase('dist/web/tokens.css');
+convertToKebabCase('dist/web/tokens.scss');
+
+console.log('✅ Converted CSS variables to kebab-case');
+console.log('⌅ Converted SCSS variables to kebab-case');
+
+// Copy index.html to dist folder
+if (fs.existsSync('index.html')) {
+  fs.copyFileSync('index.html', 'dist/index.html');
+  console.log('⌅ Restored index.html');
+}
+
+console.log('✅ Design tokens built successfully!');
