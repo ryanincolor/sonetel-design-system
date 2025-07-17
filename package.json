@@ -7,7 +7,8 @@
     "clean": "rm -rf dist/",
     "build": "npm run clean && npm run build-tokens",
     "dev": "python3 -m http.server 8000",
-    "start": "npm run build && npm run dev"
+    "start": "npm run build && npm run dev",
+    "update": "git pull && npm run build && echo '✅ Tokens updated! Restart dev server to see changes.'"
   },
   "devDependencies": {
     "@tokens-studio/sd-transforms": "^1.0.0",
