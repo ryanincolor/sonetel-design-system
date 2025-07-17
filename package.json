@@ -5,7 +5,9 @@
   "scripts": {
     "build-tokens": "node build-tokens.mjs",
     "clean": "rm -rf dist/",
-    "build": "npm run clean && npm run build-tokens"
+    "build": "npm run clean && npm run build-tokens",
+    "dev": "python3 -m http.server 8000",
+    "start": "npm run build && npm run dev"
   },
   "devDependencies": {
     "@tokens-studio/sd-transforms": "^1.0.0",
