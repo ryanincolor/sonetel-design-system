@@ -1243,11 +1243,18 @@
           const themeLabel = isDarkTheme ? "Dark" : "Light";
 
           // Load appropriate theme tokens
-          const themeFile = isDarkTheme
-            ? "tokens/Webapp/Color/Dark.json"
-            : "tokens/Webapp/Color/Light.json";
-          const themeResponse = await fetch(themeFile);
-          const themeTokens = await themeResponse.json();
+          let themeTokens = null;
+          try {
+            const themeFile = isDarkTheme
+              ? "tokens/Webapp/Color/Dark.json"
+              : "tokens/Webapp/Color/Light.json";
+            const themeResponse = await fetch(themeFile);
+            if (themeResponse.ok) {
+              themeTokens = await themeResponse.json();
+            }
+          } catch (error) {
+            console.log("No webapp color tokens found:", error.message);
+          }
 
           // Load webapp spacing tokens
           let webappSpacingTokens = null;
@@ -1339,6 +1346,31 @@
               true,
               coreTokens,
             );
+          }
+
+          // Show message if no webapp color tokens are available
+          if (!themeTokens && !webappSpacingTokens) {
+            webappGrid.innerHTML = `
+              <div class="empty-state">
+                <div class="empty-state-icon">🔧</div>
+                <h4 class="empty-state-title">Webapp Tokens Temporarily Unavailable</h4>
+                <p class="empty-state-description">
+                  Webapp color tokens are currently being fixed due to a reference error in the build process.
+                  Webapp spacing tokens will be shown when available.
+                </p>
+              </div>
+            `;
+          } else if (!themeTokens) {
+            // Only webapp spacing tokens available
+            if (webappSpacingTokens) {
+              const message = document.createElement("div");
+              message.innerHTML = `
+                <p style="text-align: center; color: var(--color-solid-light-50); margin-bottom: 24px; font-style: italic;">
+                  ℹ️ Webapp color tokens temporarily unavailable due to build issue
+                </p>
+              `;
+              webappGrid.insertBefore(message, webappGrid.firstChild);
+            }
           }
 
           // Update format for all webapp tokens
