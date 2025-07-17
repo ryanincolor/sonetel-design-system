@@ -66,6 +66,7 @@ export const spacing96 = "96px";
 export const spacing128 = "128px";
 export const spacing2xs = "2px";
 export const spacingxs = "4px";
+export const spacingsm = "8px";
 export const elevationsolid0 = "#fff";
 export const elevationsolid1 = "#f5f5f5";
 export const elevationsolid2 = "#f0f0f0";
