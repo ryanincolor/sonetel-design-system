@@ -11,6 +11,10 @@
     "sm": {
       "value": "{spacing.12}",
       "type": "spacing"
+    },
+    "md": {
+      "value": "{spacing.16}",
+      "type": "spacing"
     }
   }
 }
