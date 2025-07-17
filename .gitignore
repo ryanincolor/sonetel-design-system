@@ -5,7 +5,7 @@ yarn-debug.log*
 yarn-error.log*
 
 # Build outputs
-dist/
+# dist/ - Commented out to allow generated tokens to be committed for consumption by other repos
 
 # Environment files
 .env
