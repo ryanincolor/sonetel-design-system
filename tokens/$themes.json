@@ -84,13 +84,6 @@
     "$figmaCollectionId": "VariableCollectionId:265:4507",
     "$figmaModeId": "265:1",
     "$figmaVariableReferences": {
-      "hues.red": "21568918a812e4c60a6b854d5d6c685e2ff8d479",
-      "hues.orange": "b8de4978a81f49194244e94082ffc27a55c93f69",
-      "hues.pink": "84412cf9c51c073c24d20c17d2b768defc162f56",
-      "hues.purple": "535e142910b81a11c5a277cfb72e246b4993a989",
-      "hues.green": "530f94d80c1f2d30e53bd51ef3b973c16c36b128",
-      "hues.blue": "948397a348c77296a2c697be105e7cb5831dbe2a",
-      "hues.yellow": "3d1325d75337fcc695e8c53419599785fd180007",
       "color.solid.light.0": "faf704a550a15d0c1526cf0a06592f27720d77d6",
       "color.solid.light.5": "cdb1a9cac60bea4269955afbee575d5abbeebf27",
       "color.solid.light.10": "3c1c122b0ba318870dc01c24c997bd8c7f6e6846",
@@ -128,7 +121,14 @@
       "color.alpha.dark.50": "213879dbb7f8a69f835d94588e26215519a9d50a",
       "color.alpha.dark.60": "8173a137d05ae5936ab25942ce633f4dbaaa2b3a",
       "color.alpha.dark.70": "4a2b7b899e4583a02f3924ec7305350ef5ad81bf",
-      "color.alpha.dark.100": "8afb2a3ee780bac93fbcb815deabc762565b0878"
+      "color.alpha.dark.100": "8afb2a3ee780bac93fbcb815deabc762565b0878",
+      "color/solid/hues.red": "21568918a812e4c60a6b854d5d6c685e2ff8d479",
+      "color/solid/hues.orange": "b8de4978a81f49194244e94082ffc27a55c93f69",
+      "color/solid/hues.pink": "84412cf9c51c073c24d20c17d2b768defc162f56",
+      "color/solid/hues.purple": "535e142910b81a11c5a277cfb72e246b4993a989",
+      "color/solid/hues.green": "530f94d80c1f2d30e53bd51ef3b973c16c36b128",
+      "color/solid/hues.blue": "948397a348c77296a2c697be105e7cb5831dbe2a",
+      "color/solid/hues.yellow": "3d1325d75337fcc695e8c53419599785fd180007"
     }
   }
 ]

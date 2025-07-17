@@ -97,7 +97,7 @@
   },
   "status": {
     "critical": {
-      "value": "{hues.red}",
+      "value": "{color/solid/hues.red}",
       "type": "color"
     }
   }
