@@ -1,106 +1,123 @@
-import { register } from '@tokens-studio/sd-transforms';
-import StyleDictionary from 'style-dictionary';
-import fs from 'fs';
+import { register } from "@tokens-studio/sd-transforms";
+import StyleDictionary from "style-dictionary";
+import fs from "fs";
 
 // Register the token studio transforms
 register(StyleDictionary);
 
-console.log('Building design tokens...');
+// Add custom transform to handle token names that start with numbers
+StyleDictionary.registerTransform({
+  name: "name/camel/safe",
+  type: "name",
+  transform: function (token) {
+    let name = token.path.join("");
+    // Convert to camelCase
+    name = name.replace(/[-_\s]+(.)?/g, (_, c) => (c ? c.toUpperCase() : ""));
+    // If name starts with a number, prefix with underscore
+    if (/^[0-9]/.test(name)) {
+      name = "_" + name;
+    }
+    return name;
+  },
+});
+
+console.log("Building design tokens...");
 
 // StyleDictionary v4 APB
 const sd = new StyleDictionary({
-  source: ['tokens/**/*.json'],
-  platforms: {    web: {
+  source: ["tokens/**/*.json"],
+  platforms: {
+    web: {
       transforms: [
-        'ts/descriptionToComment',
-        'ts/size/px',
-        'ts/opacity',
-        'ts/color/modifiers',
-        'ts/typography/fontWeight',
-        'name/kebab'
+        "ts/descriptionToComment",
+        "ts/size/px",
+        "ts/opacity",
+        "ts/color/modifiers",
+        "ts/typography/fontWeight",
+        "name/kebab",
       ],
-      buildPath: 'dist/web/',
+      buildPath: "dist/web/",
       files: [
         {
-          destination: 'tokens.css',
-          format: 'css/variables'
+          destination: "tokens.css",
+          format: "css/variables",
         },
         {
-          destination: 'tokens.scss',
-          format: 'scss/variables'
+          destination: "tokens.scss",
+          format: "scss/variables",
         },
         {
-          destination: 'tokens.json',
-          format: 'json/flat'
-        }
-      ]
+          destination: "tokens.json",
+          format: "json/flat",
+        },
+      ],
     },
-    'web-js': {
+    "web-js": {
       transforms: [
-        'ts/descriptionToComment',
-        'ts/size/px',
-        'ts/opacity',
-        'ts/color/modifiers',
-        'ts/typography/fontWeight',
-        'name/camel'
+        "ts/descriptionToComment",
+        "ts/size/px",
+        "ts/opacity",
+        "ts/color/modifiers",
+        "ts/typography/fontWeight",
+        "name/camel/safe",
       ],
-      buildPath: 'dist/web/',
+      buildPath: "dist/web/",
       files: [
         {
-          destination: 'tokens.js',
-          format: 'javascript/es6'
-        }
-      ]
+          destination: "tokens.js",
+          format: "javascript/es6",
+        },
+      ],
     },
     ios: {
       transforms: [
-        'ts/descriptionToComment',
-        'ts/size/px',
-        'ts/opacity',
-        'ts/color/modifiers',
-        'ts/typography/fontWeight'
+        "ts/descriptionToComment",
+        "ts/size/px",
+        "ts/opacity",
+        "ts/color/modifiers",
+        "ts/typography/fontWeight",
       ],
-      buildPath: 'dist/ios/',
+      buildPath: "dist/ios/",
       files: [
         {
-          destination: 'SonetelTokens.swift',
-          format: 'ios-swift/class.swift',
+          destination: "SonetelTokens.swift",
+          format: "ios-swift/class.swift",
           options: {
-            className: 'SonetelTokens'
-          }
-        }
-      ]
+            className: "SonetelTokens",
+          },
+        },
+      ],
     },
     android: {
       transforms: [
-        'ts/descriptionToComment',
-        'ts/size/px',
-        'ts/opacity',
-        'ts/color/modifiers',
-        'ts/typography/fontWeight'
+        "ts/descriptionToComment",
+        "ts/size/px",
+        "ts/opacity",
+        "ts/color/modifiers",
+        "ts/typography/fontWeight",
       ],
-      buildPath: 'dist/android/',
+      buildPath: "dist/android/",
       files: [
         {
-          destination: 'colors.xml',
-          format: 'android/resources'
+          destination: "colors.xml",
+          format: "android/resources",
         },
         {
-          destination: 'dimens.xml',
-          format: 'android/resources'
-        }
-      ]
-    }
-  }
+          destination: "dimens.xml",
+          format: "android/resources",
+        },
+      ],
+    },
+  },
 });
 
 // Build all platforms
 await sd.buildAllPlatforms();
 
 // Copy index.html to dist folder
-if (fs.existsSync('index.html')) {
-  fs.copyFileSync('index.html', 'dist/index.html');
-  console.log('✅ Restored index.html');
+if (fs.existsSync("index.html")) {
+  fs.copyFileSync("index.html", "dist/index.html");
+  console.log("✅ Restored index.html");
 }
 
-console.log('✅ Design tokens built successfully!');
+console.log("✅ Design tokens built successfully!");

@@ -1,31 +1,91 @@
 /**
- * Design Tokens - JavaScript ES6 Module
+ * Do not edit directly, this file was auto-generated.
  */
 
-const tokens = {
-  spacing2xs: "2px",
-  neutralSolidLight0: "#fff",
-  neutralSolidLight5: "#f5f5f5",
-  neutralSolidLight10: "#f0f0f0",
-  neutralSolidLight20: "#e0e0e0",
-  neutralSolidLight30: "#b8b8b8",
-  neutralSolidLight40: "#8f8f8f",
-  neutralSolidLight50: "#666666",
-  neutralSolidLight60: "#292929",
-  neutralSolidLight70: "#0a0a0a",
-  neutralSolidDark0: "#000000",
-  neutralSolidDark5: "#0a0a0a",
-  neutralSolidDark10: "#141414",
-  neutralSolidDark20: "#1f1f1f",
-  neutralSolidDark30: "#292929",
-  neutralSolidDark40: "#333333",
-  neutralSolidDark50: "#3d3d3d",
-  neutralSolidDark60: "#808080",
-  neutralSolidDark70: "#b2b2b2",
-  neutralSolidDark100: "#ffffff",
-  huesBlue: "#638eff",
-  huesRed: "#ff0000",
-  huesGreen: "#7ad085",
-};
-
-export default tokens;
+export const neutralsolidlight0 = "#fff";
+export const neutralsolidlight5 = "#f5f5f5";
+export const neutralsolidlight10 = "#f0f0f0";
+export const neutralsolidlight20 = "#e0e0e0";
+export const neutralsolidlight30 = "#b8b8b8";
+export const neutralsolidlight40 = "#8f8f8f";
+export const neutralsolidlight50 = "#666666";
+export const neutralsolidlight60 = "#292929";
+export const neutralsolidlight70 = "#0a0a0a";
+export const neutralsoliddark0 = "#000000";
+export const neutralsoliddark5 = "#0a0a0a";
+export const neutralsoliddark10 = "#141414";
+export const neutralsoliddark20 = "#1f1f1f";
+export const neutralsoliddark30 = "#292929";
+export const neutralsoliddark40 = "#333333";
+export const neutralsoliddark50 = "#3d3d3d";
+export const neutralsoliddark60 = "#808080";
+export const neutralsoliddark70 = "#b2b2b2";
+export const neutralsoliddark100 = "#ffffff";
+export const neutralalphalight0 = "#00000000";
+export const neutralalphalight5 = "#0000000a";
+export const neutralalphalight10 = "#0000000f";
+export const neutralalphalight20 = "#0000001f";
+export const neutralalphalight30 = "#00000047";
+export const neutralalphalight40 = "#00000070";
+export const neutralalphalight50 = "#00000099";
+export const neutralalphalight60 = "#000000d6";
+export const neutralalphalight70 = "#000000f5";
+export const neutralalphalight100 = "#000000";
+export const neutralalphadark5 = "#ffffff0a";
+export const neutralalphadark10 = "#ffffff14";
+export const neutralalphadark20 = "#ffffff1f";
+export const neutralalphadark30 = "#ffffff29";
+export const neutralalphadark40 = "#ffffff33";
+export const neutralalphadark50 = "#f0f0f040";
+export const neutralalphadark60 = "#ffffff80";
+export const neutralalphadark70 = "#ffffffb3";
+export const neutralalphadark100 = "#ffffff";
+export const huesred = "#ff0000";
+export const huesorange = "#ff9e9e";
+export const huespink = "#ff68b0";
+export const huespurple = "#aaa1f1";
+export const huesgreen = "#7ad085";
+export const huesblue = "#638eff";
+export const huesyellow = "#ffef62";
+export const spacing2 = "2px";
+export const spacing4 = "4px";
+export const spacing8 = "8px";
+export const spacing12 = "12px";
+export const spacing16 = "16px";
+export const spacing20 = "20px";
+export const spacing24 = "24px";
+export const spacing28 = "28px";
+export const spacing32 = "32px";
+export const spacing48 = "48px";
+export const spacing50 = "40px";
+export const spacing56 = "56px";
+export const spacing64 = "64px";
+export const spacing72 = "72px";
+export const spacing80 = "80px";
+export const spacing96 = "96px";
+export const spacing128 = "128px";
+export const elevationsolid0 = "#fff";
+export const elevationsolid1 = "#f5f5f5";
+export const elevationsolid2 = "#f0f0f0";
+export const elevationsolid3 = "#e0e0e0";
+export const elevationsolid4 = "#b8b8b8";
+export const elevationsolid5 = "#666666";
+export const elevationsolid6 = "#292929";
+export const elevationsolid7 = "#0a0a0a";
+export const elevationalpha0 = "#00000000";
+export const elevationalpha1 = "#0000000a";
+export const elevationalpha2 = "#0000000f";
+export const elevationalpha3 = "#0000001f";
+export const elevationalpha4 = "#00000047";
+export const elevationalpha5 = "#00000099";
+export const elevationalpha6 = "#000000d6";
+export const elevationalpha7 = "#000000";
+export const onSurfaceinverse = "#fff";
+export const onSurfaceseconday = "#666666";
+export const onSurfacetertiary = "#e0e0e0";
+export const onSurfaceprimary = "#0a0a0a";
+export const onSurfaceonDark = "#fff";
+export const onSurfaceonLight = "#0a0a0a";
+export const statuscritical = "#ff0000";
+export const _2xs = "2px";
+export const xs = "4px";
