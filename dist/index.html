@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sonetel Design System</title>
-    <link rel="stylesheet" href="web/tokens.css" />
+    <link rel="stylesheet" href="web/core-tokens.css" />
     <style>
       * {
         box-sizing: border-box;
@@ -58,8 +58,9 @@
         gap: var(--spacing-16);
       }
 
+      .demo-link,
       .tokens-button {
-        background: var(--hues-blue);
+        background: var(--color-hues-blue);
         color: white;
         border: none;
         padding: var(--spacing-12) var(--spacing-24);
@@ -68,8 +69,16 @@
         font-size: 14px;
         cursor: pointer;
         transition: all 0.2s ease;
+        margin-right: var(--spacing-12);
+        text-decoration: none;
+        display: inline-block;
       }
 
+      .demo-link {
+        background: var(--color-hues-green);
+      }
+
+      .demo-link:hover,
       .tokens-button:hover {
         transform: translateY(-1px);
       }
@@ -279,7 +288,7 @@
       }
 
       .dimension-preview {
-        background: var(--hues-blue);
+        background: var(--color-hues-blue);
         border-radius: 3px;
         flex-shrink: 0;
       }
@@ -312,7 +321,7 @@
       .reference-value {
         font-family: "Monaco", "Menlo", "Consolas", monospace;
         font-size: 13px;
-        color: var(--hues-purple);
+        color: var(--color-hues-purple);
         font-weight: 600;
       }
 
@@ -362,13 +371,13 @@
       }
 
       .format-dropdown:hover {
-        border-color: var(--hues-blue);
+        border-color: var(--color-hues-blue);
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
       }
 
       .format-dropdown:focus {
         outline: none;
-        border-color: var(--hues-blue);
+        border-color: var(--color-hues-blue);
         box-shadow: 0 0 0 3px rgba(99, 142, 255, 0.1);
       }
 
@@ -466,7 +475,7 @@
       }
 
       .dark-theme .reference-value {
-        color: var(--hues-purple);
+        color: var(--color-hues-purple);
       }
 
       .dark-theme .format-label {
@@ -491,7 +500,7 @@
       }
 
       .dark-theme .token-item:hover {
-        border-color: var(--hues-blue);
+        border-color: var(--color-hues-blue);
         box-shadow: 0 2px 8px rgba(99, 142, 255, 0.2);
       }
 
@@ -529,7 +538,7 @@
         opacity: 0;
         transition: opacity 0.2s ease;
         font-size: 14px;
-        color: var(--hues-blue);
+        color: var(--color-hues-blue);
         font-weight: 600;
       }
 
@@ -656,7 +665,7 @@
         font-family: "Monaco", "Menlo", "Consolas", monospace;
         font-size: 11px;
         background: var(--color-solid-light-5);
-        color: var(--hues-purple);
+        color: var(--color-hues-purple);
         padding: 4px 8px;
         border-radius: 4px;
         font-weight: 600;
@@ -666,7 +675,7 @@
       .dark-theme .token-formatted-output {
         background: var(--color-solid-dark-20);
         border-color: var(--color-solid-dark-30);
-        color: var(--hues-purple);
+        color: var(--color-hues-purple);
       }
 
       @media (max-width: 768px) {
@@ -745,7 +754,7 @@
       }
 
       .token-item:hover {
-        border-color: var(--hues-blue);
+        border-color: var(--color-hues-blue);
         box-shadow: 0 2px 8px rgba(99, 142, 255, 0.1);
       }
 
@@ -814,6 +823,7 @@
             <h1>Sonetel Design System</h1>
           </div>
           <div class="header-actions">
+            <a href="demo.html" class="demo-link"> Demo </a>
             <button class="tokens-button" onclick="viewTokenFiles()">
               View Token Files
             </button>
@@ -1127,7 +1137,7 @@
       }
 
       // Helper function to resolve token references
-      function resolveTokenReference(value, coreTokens) {
+      function resolveTokenReference(value, coreTokens, webappTokens = null) {
         if (
           typeof value === "string" &&
           value.startsWith("{") &&
@@ -1135,9 +1145,30 @@
         ) {
           // Remove braces and split the path
           const path = value.slice(1, -1).split(".");
-          let resolved = coreTokens;
 
-          // Navigate through the object path
+          // Try webapp tokens first if available
+          if (webappTokens) {
+            let resolved = webappTokens;
+            for (const segment of path) {
+              if (resolved && resolved[segment] !== undefined) {
+                resolved = resolved[segment];
+              } else {
+                resolved = null;
+                break;
+              }
+            }
+            if (resolved && resolved.value !== undefined) {
+              // Recursively resolve if the value is also a reference
+              return resolveTokenReference(
+                resolved.value,
+                coreTokens,
+                webappTokens,
+              );
+            }
+          }
+
+          // Fall back to core tokens
+          let resolved = coreTokens;
           for (const segment of path) {
             if (resolved && resolved[segment] !== undefined) {
               resolved = resolved[segment];
@@ -1160,6 +1191,7 @@
         defaultType,
         isWebapp = false,
         coreTokens = null,
+        webappTokens = null,
       ) {
         const categoryDiv = document.createElement("div");
         categoryDiv.className = "token-category";
@@ -1182,7 +1214,11 @@
 
                   // For webapp tokens, resolve references to actual color values
                   if (isWebapp && coreTokens) {
-                    colorValue = resolveTokenReference(token.value, coreTokens);
+                    colorValue = resolveTokenReference(
+                      token.value,
+                      coreTokens,
+                      webappTokens || tokens,
+                    );
                   } else if (!colorValue.includes("#")) {
                     // For core tokens, use CSS variables
                     colorValue = `var(--${fullPath.replace(/\./g, "-")})`;
@@ -1200,11 +1236,16 @@
                     dimensionValue = resolveTokenReference(
                       token.value,
                       coreTokens,
+                      webappTokens || tokens,
                     );
                   }
 
-                  const width = dimensionValue.replace("px", "") + "px";
-                  preview = `<div class="dimension-preview" style="width: ${width}; height: 8px;"></div>`;
+                  // Parse the dimension value and create preview
+                  const numericValue = parseFloat(
+                    dimensionValue.replace("px", ""),
+                  );
+                  const width = Math.max(2, numericValue) + "px"; // Minimum 2px width for visibility
+                  preview = `<div class="dimension-preview" style="width: ${width}; height: 8px; background: #007aff !important;"></div>`;
                 }
 
                 const formattedOutput = isWebapp
@@ -1302,6 +1343,7 @@
                 "color",
                 true,
                 coreTokens,
+                themeTokens,
               );
             }
             if (themeTokens.elevation && themeTokens.elevation.alpha) {
@@ -1312,6 +1354,7 @@
                 "color",
                 true,
                 coreTokens,
+                themeTokens,
               );
             }
             if (themeTokens["on-surface"]) {
@@ -1322,6 +1365,7 @@
                 "color",
                 true,
                 coreTokens,
+                themeTokens,
               );
             }
             if (themeTokens.status) {
@@ -1332,6 +1376,7 @@
                 "color",
                 true,
                 coreTokens,
+                themeTokens,
               );
             }
           }
@@ -1342,7 +1387,7 @@
               webappGrid,
               "Webapp Spacing",
               webappSpacingTokens,
-              "dimension",
+              "spacing",
               true,
               coreTokens,
             );
@@ -1502,6 +1547,103 @@
       // Close file modal
       function closeFileModal() {
         const modal = document.getElementById("file-modal");
+        if (modal) {
+          modal.style.display = "none";
+        }
+      }
+
+      // Open demo modal
+      function openDemo() {
+        // Create demo modal if it doesn't exist
+        let demoModal = document.getElementById("demo-modal");
+        if (!demoModal) {
+          demoModal = document.createElement("div");
+          demoModal.id = "demo-modal";
+          demoModal.className = "modal";
+          demoModal.innerHTML = `
+            <div class="modal-content" style="max-width: 800px;">
+              <div class="modal-header">
+                <h3 class="modal-title">Webapp Token Demo</h3>
+                <button class="modal-close" onclick="closeDemoModal()">&times;</button>
+              </div>
+              <div class="modal-body" style="padding: 24px;">
+                <div class="demo-app">
+                  <h4 style="margin: 0 0 16px 0; color: var(--elevation-solid-7);">Sample App Interface</h4>
+
+                  <!-- Card using elevation tokens -->
+                  <div class="demo-card" style="
+                    background: var(--elevation-solid-0);
+                    border: 1px solid var(--elevation-solid-2);
+                    border-radius: 12px;
+                    padding: 24px;
+                    margin-bottom: 24px;
+                    box-shadow: 0 2px 8px var(--elevation-alpha-2);
+                  ">
+                    <h5 style="margin: 0 0 12px 0; color: var(--on-surface-primary);">Card Title</h5>
+                    <p style="margin: 0 0 16px 0; color: var(--on-surface-seconday);">This card demonstrates elevation tokens for background and borders, plus surface color tokens for text.</p>
+                    <button style="
+                      background: var(--elevation-solid-3);
+                      border: 1px solid var(--elevation-solid-4);
+                      color: var(--on-surface-primary);
+                      padding: 8px 16px;
+                      border-radius: 6px;
+                      cursor: pointer;
+                      margin-right: 8px;
+                    ">Primary</button>
+                    <button style="
+                      background: var(--elevation-solid-1);
+                      border: 1px solid var(--elevation-solid-2);
+                      color: var(--on-surface-seconday);
+                      padding: 8px 16px;
+                      border-radius: 6px;
+                      cursor: pointer;
+                    ">Secondary</button>
+                  </div>
+
+                  <!-- Alert using status tokens -->
+                  <div class="demo-alert" style="
+                    background: var(--elevation-alpha-1);
+                    border: 1px solid var(--status-critical);
+                    border-radius: 8px;
+                    padding: 16px;
+                    margin-bottom: 24px;
+                  ">
+                    <p style="margin: 0; color: var(--on-surface-primary);">
+                      <strong style="color: var(--status-critical);">Alert:</strong> This demonstrates status color tokens in action.
+                    </p>
+                  </div>
+
+                  <!-- Navigation using surface tokens -->
+                  <nav style="
+                    background: var(--elevation-solid-1);
+                    border: 1px solid var(--elevation-solid-2);
+                    border-radius: 8px;
+                    padding: 16px;
+                    margin-bottom: 24px;
+                  ">
+                    <ul style="margin: 0; padding: 0; list-style: none; display: flex; gap: 24px;">
+                      <li><a href="#" style="color: var(--on-surface-primary); text-decoration: none; font-weight: 500;">Home</a></li>
+                      <li><a href="#" style="color: var(--on-surface-seconday); text-decoration: none;">About</a></li>
+                      <li><a href="#" style="color: var(--on-surface-tertiary); text-decoration: none;">Contact</a></li>
+                    </ul>
+                  </nav>
+
+                  <p style="color: var(--on-surface-seconday); font-size: 14px; margin: 0;">
+                    Toggle between light and dark themes to see how the webapp tokens adapt automatically.
+                  </p>
+                </div>
+              </div>
+            </div>
+          `;
+          document.body.appendChild(demoModal);
+        }
+
+        demoModal.style.display = "flex";
+      }
+
+      // Close demo modal
+      function closeDemoModal() {
+        const modal = document.getElementById("demo-modal");
         if (modal) {
           modal.style.display = "none";
         }
