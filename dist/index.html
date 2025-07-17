@@ -1127,7 +1127,7 @@
       }
 
       // Helper function to resolve token references
-      function resolveTokenReference(value, coreTokens) {
+      function resolveTokenReference(value, coreTokens, webappTokens = null) {
         if (
           typeof value === "string" &&
           value.startsWith("{") &&
@@ -1135,9 +1135,30 @@
         ) {
           // Remove braces and split the path
           const path = value.slice(1, -1).split(".");
-          let resolved = coreTokens;
 
-          // Navigate through the object path
+          // Try webapp tokens first if available
+          if (webappTokens) {
+            let resolved = webappTokens;
+            for (const segment of path) {
+              if (resolved && resolved[segment] !== undefined) {
+                resolved = resolved[segment];
+              } else {
+                resolved = null;
+                break;
+              }
+            }
+            if (resolved && resolved.value !== undefined) {
+              // Recursively resolve if the value is also a reference
+              return resolveTokenReference(
+                resolved.value,
+                coreTokens,
+                webappTokens,
+              );
+            }
+          }
+
+          // Fall back to core tokens
+          let resolved = coreTokens;
           for (const segment of path) {
             if (resolved && resolved[segment] !== undefined) {
               resolved = resolved[segment];
@@ -1160,6 +1181,7 @@
         defaultType,
         isWebapp = false,
         coreTokens = null,
+        webappTokens = null,
       ) {
         const categoryDiv = document.createElement("div");
         categoryDiv.className = "token-category";
@@ -1182,7 +1204,11 @@
 
                   // For webapp tokens, resolve references to actual color values
                   if (isWebapp && coreTokens) {
-                    colorValue = resolveTokenReference(token.value, coreTokens);
+                    colorValue = resolveTokenReference(
+                      token.value,
+                      coreTokens,
+                      webappTokens || tokens,
+                    );
                   } else if (!colorValue.includes("#")) {
                     // For core tokens, use CSS variables
                     colorValue = `var(--${fullPath.replace(/\./g, "-")})`;
@@ -1200,11 +1226,16 @@
                     dimensionValue = resolveTokenReference(
                       token.value,
                       coreTokens,
+                      webappTokens || tokens,
                     );
                   }
 
-                  const width = dimensionValue.replace("px", "") + "px";
-                  preview = `<div class="dimension-preview" style="width: ${width}; height: 8px;"></div>`;
+                  // Parse the dimension value and create preview
+                  const numericValue = parseFloat(
+                    dimensionValue.replace("px", ""),
+                  );
+                  const width = Math.max(2, numericValue) + "px"; // Minimum 2px width for visibility
+                  preview = `<div class="dimension-preview" style="width: ${width}; height: 8px; background: #007aff !important;"></div>`;
                 }
 
                 const formattedOutput = isWebapp
@@ -1302,6 +1333,7 @@
                 "color",
                 true,
                 coreTokens,
+                themeTokens,
               );
             }
             if (themeTokens.elevation && themeTokens.elevation.alpha) {
@@ -1312,6 +1344,7 @@
                 "color",
                 true,
                 coreTokens,
+                themeTokens,
               );
             }
             if (themeTokens["on-surface"]) {
@@ -1322,6 +1355,7 @@
                 "color",
                 true,
                 coreTokens,
+                themeTokens,
               );
             }
             if (themeTokens.status) {
@@ -1332,6 +1366,7 @@
                 "color",
                 true,
                 coreTokens,
+                themeTokens,
               );
             }
           }
@@ -1342,7 +1377,7 @@
               webappGrid,
               "Webapp Spacing",
               webappSpacingTokens,
-              "dimension",
+              "spacing",
               true,
               coreTokens,
             );
