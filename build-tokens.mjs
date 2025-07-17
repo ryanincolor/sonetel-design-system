@@ -288,16 +288,4 @@ async function createThemedCSS() {
 // Create themed CSS
 await createThemedCSS();
 
-// Copy index.html to dist folder with corrected CSS path
-if (fs.existsSync("index.html")) {
-  let indexContent = fs.readFileSync("index.html", "utf8");
-  // Fix the CSS path for the dist version
-  indexContent = indexContent.replace(
-    'href="dist/web/core-tokens.css"',
-    'href="web/core-tokens.css"',
-  );
-  fs.writeFileSync("dist/index.html", indexContent);
-  console.log("✅ Restored index.html with corrected CSS path");
-}
-
 console.log("✅ Design tokens built successfully!");

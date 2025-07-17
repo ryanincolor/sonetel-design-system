@@ -1210,17 +1210,17 @@
                 let preview = "";
 
                 if (tokenType === "color") {
-                  let colorValue = token.value;
+                  let colorValue;
 
-                  // For webapp tokens, resolve references to actual color values
                   if (isWebapp && coreTokens) {
+                    // For webapp tokens, resolve references to actual color values
                     colorValue = resolveTokenReference(
                       token.value,
                       coreTokens,
                       webappTokens || tokens,
                     );
-                  } else if (!colorValue.includes("#")) {
-                    // For core tokens, use CSS variables
+                  } else {
+                    // For core tokens, always use CSS variables for live updates
                     colorValue = `var(--${fullPath.replace(/\./g, "-")})`;
                   }
 
@@ -1379,6 +1379,17 @@
                 themeTokens,
               );
             }
+            if (themeTokens.brand) {
+              displayTokenCategory(
+                webappGrid,
+                `Brand Colors (${themeLabel})`,
+                { brand: themeTokens.brand },
+                "color",
+                true,
+                coreTokens,
+                themeTokens,
+              );
+            }
           }
 
           // Display webapp spacing tokens (theme-independent)
@@ -1411,7 +1422,7 @@
               const message = document.createElement("div");
               message.innerHTML = `
                 <p style="text-align: center; color: var(--color-solid-light-50); margin-bottom: 24px; font-style: italic;">
-                  ℹ️ Webapp color tokens temporarily unavailable due to build issue
+                  ��️ Webapp color tokens temporarily unavailable due to build issue
                 </p>
               `;
               webappGrid.insertBefore(message, webappGrid.firstChild);
@@ -1672,6 +1683,11 @@
       document.addEventListener("DOMContentLoaded", function () {
         loadTheme();
         loadSectionContent("core");
+
+        // Auto-switch to webapp section to show new brand tokens
+        setTimeout(() => {
+          switchSection("webapp");
+        }, 1000);
       });
     </script>
   </body>
