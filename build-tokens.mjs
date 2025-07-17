@@ -29,13 +29,7 @@ StyleDictionary.registerFilter({
   },
 });
 
-// Register filter for core tokens only
-StyleDictionary.registerFilter({
-  name: "core-only",
-  filter: function (token) {
-    return token.filePath && token.filePath.includes("Core/");
-  },
-});
+// Core tokens are now only used as references for webapp tokens
 
 // Register a format for themed CSS
 StyleDictionary.registerFormat({
@@ -71,25 +65,6 @@ console.log("Building design tokens...");
 const sd = new StyleDictionary({
   source: ["tokens/**/*.json"],
   platforms: {
-    // Core tokens - simple CSS for UI documentation only
-    "core-tokens": {
-      transforms: [
-        "ts/descriptionToComment",
-        "ts/size/px",
-        "ts/opacity",
-        "ts/color/modifiers",
-        "ts/typography/fontWeight",
-        "name/kebab",
-      ],
-      buildPath: "dist/web/",
-      files: [
-        {
-          destination: "core-tokens.css",
-          format: "css/variables",
-          filter: "core-only",
-        },
-      ],
-    },
     // Main webapp export in all formats - only semantic tokens
     web: {
       transforms: [
