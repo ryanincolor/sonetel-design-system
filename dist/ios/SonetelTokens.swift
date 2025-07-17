@@ -93,6 +93,7 @@ public class SonetelTokens {
     public static let purple = #aaa1f1
     public static let red = #ff0000
     public static let seconday = #666666
+    public static let sm = 8px
     public static let tertiary = #e0e0e0
     public static let xs = 4px
     public static let yellow = #ffef62
