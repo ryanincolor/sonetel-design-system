@@ -1,10 +1,12 @@
 {
-  "2xs": {
-    "value": "{spacing.2}",
-    "type": "spacing"
-  },
-  "xs": {
-    "value": "{spacing.4}",
-    "type": "spacing"
+  "spacing": {
+    "2xs": {
+      "value": "{spacing.2}",
+      "type": "spacing"
+    },
+    "xs": {
+      "value": "{spacing.4}",
+      "type": "spacing"
+    }
   }
 }
