@@ -65,6 +65,8 @@
   --spacing-80: 80px;
   --spacing-96: 96px;
   --spacing-128: 128px;
+  --spacing-2xs: 2px;
+  --spacing-xs: 4px;
   --elevation-solid-0: #fff;
   --elevation-solid-1: #f5f5f5;
   --elevation-solid-2: #f0f0f0;
@@ -88,6 +90,4 @@
   --on-surface-on-dark: #fff;
   --on-surface-on-light: #0a0a0a;
   --status-critical: #ff0000;
-  --2xs: 2px;
-  --xs: 4px;
 }
