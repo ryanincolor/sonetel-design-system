@@ -53,6 +53,18 @@ StyleDictionary.registerFormat({
   },
 });
 
+// Register a format for complete themed CSS with light and dark modes
+StyleDictionary.registerFormat({
+  name: "css/complete-themed",
+  format: function (dictionary, config) {
+    const prefix = config.prefix || "";
+
+    // We'll manually build this by reading both light and dark token files
+    // and generating a complete CSS file with proper theme selectors
+    return "/* This format will be populated by the build script */";
+  },
+});
+
 console.log("Building design tokens...");
 
 // StyleDictionary v4 - Build semantic webapp tokens with theming
@@ -106,62 +118,6 @@ const sd = new StyleDictionary({
           format: "json/flat",
           filter: "webapp-only",
         },
-      ],
-    },
-    // Webapp light theme - semantic tokens only
-    "webapp-light": {
-      transforms: [
-        "ts/descriptionToComment",
-        "ts/size/px",
-        "ts/opacity",
-        "ts/color/modifiers",
-        "ts/typography/fontWeight",
-        "name/kebab",
-      ],
-      buildPath: "dist/web/",
-      prefix: "swa",
-      files: [
-        {
-          destination: "webapp-light.css",
-          format: "css/themed",
-          filter: "webapp-only",
-          options: {
-            selector: ":root, .light-theme",
-          },
-        },
-      ],
-      source: [
-        "tokens/Core/**/*.json",
-        "tokens/Webapp/Color/Light.json",
-        "tokens/Webapp/Spacing.json",
-      ],
-    },
-    // Webapp dark theme - semantic tokens only
-    "webapp-dark": {
-      transforms: [
-        "ts/descriptionToComment",
-        "ts/size/px",
-        "ts/opacity",
-        "ts/color/modifiers",
-        "ts/typography/fontWeight",
-        "name/kebab",
-      ],
-      buildPath: "dist/web/",
-      prefix: "swa",
-      files: [
-        {
-          destination: "webapp-dark.css",
-          format: "css/themed",
-          filter: "webapp-only",
-          options: {
-            selector: ".dark-theme",
-          },
-        },
-      ],
-      source: [
-        "tokens/Core/**/*.json",
-        "tokens/Webapp/Color/Dark.json",
-        "tokens/Webapp/Spacing.json",
       ],
     },
     "web-js": {
@@ -233,23 +189,104 @@ const sd = new StyleDictionary({
 // Build all platforms
 await sd.buildAllPlatforms();
 
-// Combine webapp light and dark CSS into main tokens.css export
-if (
-  fs.existsSync("dist/web/webapp-light.css") &&
-  fs.existsSync("dist/web/webapp-dark.css")
-) {
-  const lightCSS = fs.readFileSync("dist/web/webapp-light.css", "utf8");
-  const darkCSS = fs.readFileSync("dist/web/webapp-dark.css", "utf8");
+// Create complete themed CSS file
+async function createThemedCSS() {
+  // Build light theme tokens
+  const lightSD = new StyleDictionary({
+    source: [
+      "tokens/Core/**/*.json",
+      "tokens/Webapp/Color/Light.json",
+      "tokens/Webapp/Spacing.json",
+    ],
+    platforms: {
+      temp: {
+        transforms: [
+          "ts/descriptionToComment",
+          "ts/size/px",
+          "ts/opacity",
+          "ts/color/modifiers",
+          "ts/typography/fontWeight",
+          "name/kebab",
+        ],
+        prefix: "swa",
+        buildPath: "temp/",
+        files: [
+          {
+            destination: "light.json",
+            format: "json/flat",
+            filter: "webapp-only",
+          },
+        ],
+      },
+    },
+  });
 
-  const combinedCSS = lightCSS + "\n" + darkCSS;
-  fs.writeFileSync("dist/web/tokens.css", combinedCSS);
+  // Build dark theme tokens
+  const darkSD = new StyleDictionary({
+    source: [
+      "tokens/Core/**/*.json",
+      "tokens/Webapp/Color/Dark.json",
+      "tokens/Webapp/Spacing.json",
+    ],
+    platforms: {
+      temp: {
+        transforms: [
+          "ts/descriptionToComment",
+          "ts/size/px",
+          "ts/opacity",
+          "ts/color/modifiers",
+          "ts/typography/fontWeight",
+          "name/kebab",
+        ],
+        prefix: "swa",
+        buildPath: "temp/",
+        files: [
+          {
+            destination: "dark.json",
+            format: "json/flat",
+            filter: "webapp-only",
+          },
+        ],
+      },
+    },
+  });
 
-  // Clean up individual files
-  fs.unlinkSync("dist/web/webapp-light.css");
-  fs.unlinkSync("dist/web/webapp-dark.css");
+  // Build both
+  await lightSD.buildAllPlatforms();
+  await darkSD.buildAllPlatforms();
 
-  console.log("✅ Main tokens.css created with webapp tokens");
+  // Read the generated JSON files
+  const lightTokens = JSON.parse(fs.readFileSync("temp/light.json", "utf8"));
+  const darkTokens = JSON.parse(fs.readFileSync("temp/dark.json", "utf8"));
+
+  // Generate themed CSS
+  let themedCSS = ":root, .light-theme {\n";
+  Object.entries(lightTokens).forEach(([name, value]) => {
+    themedCSS += `  --${name}: ${value};\n`;
+  });
+  themedCSS += "}\n\n";
+
+  themedCSS += ".dark-theme {\n";
+  Object.entries(darkTokens).forEach(([name, value]) => {
+    themedCSS += `  --${name}: ${value};\n`;
+  });
+  themedCSS += "}\n";
+
+  // Write the themed CSS file
+  fs.writeFileSync("dist/web/tokens.css", themedCSS);
+
+  // Clean up temp files
+  if (fs.existsSync("temp")) {
+    fs.rmSync("temp", { recursive: true });
+  }
+
+  console.log(
+    "✅ Complete themed tokens.css created with light/dark mode support",
+  );
 }
+
+// Create themed CSS
+await createThemedCSS();
 
 // Copy index.html to dist folder with corrected CSS path
 if (fs.existsSync("index.html")) {
