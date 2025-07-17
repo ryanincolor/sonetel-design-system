@@ -100,5 +100,11 @@
       "value": "{color.hues.red}",
       "type": "color"
     }
+  },
+  "brand": {
+    "yellow": {
+      "value": "{color.hues.yellow}",
+      "type": "color"
+    }
   }
 }
