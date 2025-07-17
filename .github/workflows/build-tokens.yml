@@ -2,40 +2,77 @@ name: Build Design Tokens
 
 on:
   push:
-    branches: [ main, master ]
-    paths: 
-      - 'tokens/**'
-  pull_request:
-    branches: [ main, master ]
+    branches: [main, master]
     paths:
-      - 'tokens/**'
+      - "tokens/**"
+      - "build-tokens.mjs"
+      - "style-dictionary.config.js"
+  pull_request:
+    branches: [main, master]
+    paths:
+      - "tokens/**"
+      - "build-tokens.mjs"
+      - "style-dictionary.config.js"
   workflow_dispatch:
 
 jobs:
   build-tokens:
     runs-on: ubuntu-latest
-    
+
+    permissions:
+      contents: write
+
     steps:
-    - uses: actions/checkout@v3
-    
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '18'
-        cache: 'npm'
-    
-    - name: Install dependencies
-      run: npm ci
-    
-    - name: Build design tokens
-      run: npm run build-tokens
-    
-    - name: Commit generated files
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add dist/
-        git diff --staged --quiet || git commit -m "Auto-generate design tokens [skip ci]"
-        git push
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Clean previous build
+        run: npm run clean
+
+      - name: Build design tokens
+        run: npm run build-tokens
+
+      - name: Check for changes
+        id: verify-changed-files
+        run: |
+          if [ -n "$(git status --porcelain dist/)" ]; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "changed=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Commit generated files
+        if: steps.verify-changed-files.outputs.changed == 'true'
+        run: |
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add dist/
+          git commit -m "🤖 Auto-generate design tokens from Token Studio
+
+          Generated from token changes in ${{ github.sha }}
+
+          [skip ci]"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create summary
+        run: |
+          echo "## 🎨 Design Tokens Build Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "✅ **Build Status**: Success" >> $GITHUB_STEP_SUMMARY
+          echo "📦 **Generated Files**:" >> $GITHUB_STEP_SUMMARY
+          find dist/ -type f -name "*.css" -o -name "*.scss" -o -name "*.js" -o -name "*.json" -o -name "*.xml" -o -name "*.swift" | sed 's/^/- /' >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "🔄 **Changes Committed**: ${{ steps.verify-changed-files.outputs.changed }}" >> $GITHUB_STEP_SUMMARY

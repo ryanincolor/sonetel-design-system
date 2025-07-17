@@ -1229,9 +1229,29 @@
           const themeResponse = await fetch(themeFile);
           const themeTokens = await themeResponse.json();
 
-          // Load core tokens for reference resolution
-          const coreResponse = await fetch("tokens/Core/Color.json");
-          const coreTokens = await coreResponse.json();
+          // Load webapp spacing tokens
+          let webappSpacingTokens = null;
+          try {
+            const spacingResponse = await fetch("tokens/Webapp/Spacing.json");
+            if (spacingResponse.ok) {
+              webappSpacingTokens = await spacingResponse.json();
+            }
+          } catch (error) {
+            console.log("No webapp spacing tokens found");
+          }
+
+          // Load core tokens for reference resolution (both color and spacing)
+          const coreColorResponse = await fetch("tokens/Core/Color.json");
+          const coreColorTokens = await coreColorResponse.json();
+
+          const coreSpacingResponse = await fetch("tokens/Core/Spacing.json");
+          const coreSpacingTokens = await coreSpacingResponse.json();
+
+          // Combine core tokens for reference resolution
+          const coreTokens = {
+            ...coreColorTokens,
+            ...coreSpacingTokens,
+          };
 
           const grid = document.querySelector("#webapp .token-grid");
           if (!grid) {
@@ -1287,6 +1307,18 @@
                 coreTokens,
               );
             }
+          }
+
+          // Display webapp spacing tokens (theme-independent)
+          if (webappSpacingTokens) {
+            displayTokenCategory(
+              webappGrid,
+              "Webapp Spacing",
+              webappSpacingTokens,
+              "dimension",
+              true,
+              coreTokens,
+            );
           }
 
           // Update format for all webapp tokens
