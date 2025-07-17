@@ -1,0 +1,1484 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sonetel Design System</title>
+    <link rel="stylesheet" href="dist/web/tokens.css" />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: var(--neutral-solid-light-0);
+        color: var(--neutral-solid-light-60);
+        line-height: 1.5;
+        font-size: 14px;
+      }
+
+      .app-container {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .header {
+        background: var(--neutral-solid-light-0);
+        border-bottom: 1px solid var(--neutral-solid-light-10);
+        padding: 24px;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      }
+
+      .header-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo h1 {
+        margin: 0;
+        font-size: 24px;
+        font-weight: 700;
+        color: var(--neutral-solid-light-70);
+      }
+
+      .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .tokens-button {
+        background: var(--hues-blue);
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .tokens-button:hover {
+        transform: translateY(-1px);
+      }
+
+      .theme-toggle {
+        background: var(--neutral-solid-light-5);
+        border: 1px solid var(--neutral-solid-light-20);
+        padding: 8px 12px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 14px;
+        color: var(--neutral-solid-light-60);
+        transition: all 0.2s ease;
+      }
+
+      .theme-toggle:hover {
+        background: var(--neutral-solid-light-10);
+      }
+
+      .main-content {
+        flex: 1;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 32px 24px;
+        width: 100%;
+      }
+
+      .intro {
+        text-align: center;
+        margin-bottom: 48px;
+      }
+
+      .intro h2 {
+        font-size: 32px;
+        font-weight: 700;
+        color: var(--neutral-solid-light-70);
+        margin: 0 0 12px 0;
+      }
+
+      .intro p {
+        font-size: 18px;
+        color: var(--neutral-solid-light-50);
+        margin: 0;
+      }
+
+      .navigation {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 32px;
+        background: var(--neutral-solid-light-5);
+        padding: 8px;
+        border-radius: 12px;
+        border: 1px solid var(--neutral-solid-light-10);
+      }
+
+      .nav-button {
+        background: transparent;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 14px;
+        color: var(--neutral-solid-light-50);
+        transition: all 0.2s ease;
+        flex: 1;
+        text-align: center;
+      }
+
+      .nav-button.active {
+        background: var(--neutral-solid-light-0);
+        color: var(--neutral-solid-light-70);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
+
+      .nav-button:hover:not(.active) {
+        color: var(--neutral-solid-light-60);
+        background: var(--neutral-solid-light-10);
+      }
+
+      .section {
+        display: none;
+      }
+
+      .section.active {
+        display: block;
+      }
+
+      .platform-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 24px;
+      }
+
+      .section-title {
+        font-size: 24px;
+        font-weight: 700;
+        color: var(--neutral-solid-light-70);
+        margin: 0;
+      }
+
+      .theme-switcher {
+        display: flex;
+        background: var(--neutral-solid-light-5);
+        border: 1px solid var(--neutral-solid-light-10);
+        border-radius: 8px;
+        padding: 4px;
+      }
+
+      .theme-switch-button {
+        background: transparent;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 14px;
+        color: var(--neutral-solid-light-50);
+        transition: all 0.2s ease;
+      }
+
+      .theme-switch-button.active {
+        background: var(--neutral-solid-light-0);
+        color: var(--neutral-solid-light-70);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
+
+      .token-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 16px;
+      }
+
+      .token-card {
+        background: var(--neutral-solid-light-0);
+        border: 1px solid var(--neutral-solid-light-10);
+        border-radius: 12px;
+        padding: 20px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        position: relative;
+      }
+
+      .token-card:hover {
+        border-color: var(--neutral-solid-light-20);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+        transform: translateY(-1px);
+      }
+
+      .token-header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        margin-bottom: 16px;
+      }
+
+      .token-name {
+        font-family: "Monaco", "Menlo", "Consolas", monospace;
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--neutral-solid-light-70);
+        flex: 1;
+        line-height: 1.3;
+      }
+
+      .token-type {
+        background: var(--neutral-solid-light-5);
+        color: var(--neutral-solid-light-60);
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-left: 12px;
+      }
+
+      .token-value {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 12px;
+      }
+
+      .color-preview {
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        border: 1px solid var(--neutral-solid-light-20);
+        flex-shrink: 0;
+        position: relative;
+      }
+
+      .color-preview.transparent {
+        background-image:
+          linear-gradient(45deg, #ccc 25%, transparent 25%),
+          linear-gradient(-45deg, #ccc 25%, transparent 25%),
+          linear-gradient(45deg, transparent 75%, #ccc 75%),
+          linear-gradient(-45deg, transparent 75%, #ccc 75%);
+        background-size: 8px 8px;
+        background-position:
+          0 0,
+          0 4px,
+          4px -4px,
+          -4px 0px;
+      }
+
+      .dimension-preview {
+        background: var(--hues-blue);
+        border-radius: 3px;
+        flex-shrink: 0;
+      }
+
+      .value-text {
+        font-family: "Monaco", "Menlo", "Consolas", monospace;
+        font-size: 14px;
+        color: var(--neutral-solid-light-60);
+        font-weight: 500;
+        flex: 1;
+      }
+
+      .token-reference {
+        background: var(--neutral-solid-light-5);
+        border: 1px solid var(--neutral-solid-light-10);
+        border-radius: 8px;
+        padding: 12px;
+        margin-top: 12px;
+      }
+
+      .reference-label {
+        font-size: 11px;
+        color: var(--neutral-solid-light-50);
+        text-transform: uppercase;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        margin-bottom: 4px;
+      }
+
+      .reference-value {
+        font-family: "Monaco", "Menlo", "Consolas", monospace;
+        font-size: 13px;
+        color: var(--hues-purple);
+        font-weight: 600;
+      }
+
+      .copy-indicator {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        opacity: 0;
+        transition: opacity 0.2s ease;
+        font-size: 12px;
+        color: var(--neutral-solid-light-40);
+      }
+
+      .token-card:hover .copy-indicator {
+        opacity: 1;
+      }
+
+      .group-title {
+        font-size: 18px;
+        font-weight: 600;
+        margin: 0 0 16px 0;
+        color: var(--neutral-solid-light-70);
+      }
+
+      .format-toggle {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .format-label {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--neutral-solid-light-60);
+      }
+
+      .format-dropdown {
+        background: var(--neutral-solid-light-0);
+        border: 1px solid var(--neutral-solid-light-20);
+        border-radius: 8px;
+        padding: 8px 12px;
+        font-size: 14px;
+        color: var(--neutral-solid-light-70);
+        cursor: pointer;
+        transition: all 0.2s ease;
+        min-width: 160px;
+      }
+
+      .format-dropdown:hover {
+        border-color: var(--hues-blue);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .format-dropdown:focus {
+        outline: none;
+        border-color: var(--hues-blue);
+        box-shadow: 0 0 0 3px rgba(99, 142, 255, 0.1);
+      }
+
+      .token-output {
+        background: var(--neutral-solid-light-5);
+        border: 1px solid var(--neutral-solid-light-10);
+        border-radius: 6px;
+        padding: 8px 12px;
+        margin-top: 8px;
+        font-family: "Monaco", "Menlo", "Consolas", monospace;
+        font-size: 12px;
+        color: var(--neutral-solid-light-60);
+        overflow-x: auto;
+        white-space: pre;
+      }
+
+      /* Dark theme */
+      body.dark-theme {
+        background: var(--neutral-solid-dark-5);
+        color: var(--neutral-solid-dark-70);
+      }
+
+      .dark-theme .header {
+        background: var(--neutral-solid-dark-5);
+        border-color: var(--neutral-solid-dark-20);
+      }
+
+      .dark-theme .logo h1 {
+        color: var(--neutral-solid-dark-100);
+      }
+
+      .dark-theme .theme-toggle {
+        background: var(--neutral-solid-dark-10);
+        border-color: var(--neutral-solid-dark-30);
+        color: var(--neutral-solid-dark-70);
+      }
+
+      .dark-theme .navigation {
+        background: var(--neutral-solid-dark-10);
+        border-color: var(--neutral-solid-dark-20);
+      }
+
+      .dark-theme .nav-button {
+        color: var(--neutral-solid-dark-60);
+      }
+
+      .dark-theme .nav-button.active {
+        background: var(--neutral-solid-dark-5);
+        color: var(--neutral-solid-dark-100);
+      }
+
+      .dark-theme .token-card {
+        background: var(--neutral-solid-dark-10);
+        border-color: var(--neutral-solid-dark-20);
+      }
+
+      .dark-theme .token-name {
+        color: var(--neutral-solid-dark-100);
+      }
+
+      .dark-theme .section-title {
+        color: var(--neutral-solid-dark-100);
+      }
+
+      .dark-theme .intro h2 {
+        color: var(--neutral-solid-dark-100);
+      }
+
+      .dark-theme .token-reference {
+        background: var(--neutral-solid-dark-10);
+        border-color: var(--neutral-solid-dark-20);
+      }
+
+      .dark-theme .theme-switcher {
+        background: var(--neutral-solid-dark-10);
+        border-color: var(--neutral-solid-dark-20);
+      }
+
+      .dark-theme .theme-switch-button.active {
+        background: var(--neutral-solid-dark-5);
+        color: var(--neutral-solid-dark-100);
+      }
+
+      .dark-theme .group-title {
+        color: var(--neutral-solid-dark-100);
+      }
+
+      .dark-theme .value-text {
+        color: var(--neutral-solid-dark-100);
+      }
+
+      .dark-theme .token-type {
+        background: var(--neutral-solid-dark-20);
+        color: var(--neutral-solid-dark-100);
+      }
+
+      .dark-theme .reference-value {
+        color: var(--hues-purple);
+      }
+
+      .dark-theme .format-label {
+        color: var(--neutral-solid-dark-70);
+      }
+
+      .dark-theme .format-dropdown {
+        background: var(--neutral-solid-dark-10);
+        border-color: var(--neutral-solid-dark-30);
+        color: var(--neutral-solid-dark-100);
+      }
+
+      .dark-theme .token-output {
+        background: var(--neutral-solid-dark-20);
+        border-color: var(--neutral-solid-dark-30);
+        color: var(--neutral-solid-dark-70);
+      }
+
+      .dark-theme .token-item {
+        background: var(--neutral-solid-dark-10);
+        border-color: var(--neutral-solid-dark-30);
+      }
+
+      .dark-theme .token-item:hover {
+        border-color: var(--hues-blue);
+        box-shadow: 0 2px 8px rgba(99, 142, 255, 0.2);
+      }
+
+      .dark-theme .token-name {
+        color: var(--neutral-solid-dark-100);
+      }
+
+      .dark-theme .token-value {
+        color: var(--neutral-solid-dark-70);
+      }
+
+      .dark-theme .token-category h3 {
+        color: var(--neutral-solid-dark-100);
+      }
+
+      .dark-theme .empty-state {
+        background: var(--neutral-solid-dark-10);
+        border-color: var(--neutral-solid-dark-20);
+      }
+
+      .dark-theme .empty-state-title {
+        color: var(--neutral-solid-dark-100);
+      }
+
+      .dark-theme .empty-state-description {
+        color: var(--neutral-solid-dark-70);
+      }
+
+      .file-card {
+        cursor: pointer;
+        position: relative;
+      }
+
+      .file-card .copy-indicator {
+        opacity: 0;
+        transition: opacity 0.2s ease;
+        font-size: 14px;
+        color: var(--hues-blue);
+        font-weight: 600;
+      }
+
+      .file-card:hover .copy-indicator {
+        opacity: 1;
+      }
+
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+
+      .modal-content {
+        background: var(--neutral-solid-light-0);
+        border-radius: 12px;
+        max-width: 90%;
+        max-height: 90%;
+        display: flex;
+        flex-direction: column;
+        border: 1px solid var(--neutral-solid-light-10);
+      }
+
+      .modal-header {
+        padding: 20px 24px 16px;
+        border-bottom: 1px solid var(--neutral-solid-light-10);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .modal-title {
+        margin: 0;
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--neutral-solid-light-70);
+        font-family: "Monaco", "Menlo", "Consolas", monospace;
+      }
+
+      .modal-close {
+        background: none;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+        color: var(--neutral-solid-light-50);
+        padding: 0;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 6px;
+        transition: all 0.2s ease;
+      }
+
+      .modal-close:hover {
+        background: var(--neutral-solid-light-10);
+        color: var(--neutral-solid-light-70);
+      }
+
+      .modal-body {
+        padding: 0;
+        overflow: hidden;
+        flex: 1;
+        min-height: 0;
+      }
+
+      .file-content {
+        margin: 0;
+        padding: 24px;
+        font-family: "Monaco", "Menlo", "Consolas", monospace;
+        font-size: 13px;
+        line-height: 1.5;
+        background: var(--neutral-solid-light-5);
+        color: var(--neutral-solid-light-70);
+        overflow: auto;
+        max-height: 70vh;
+        white-space: pre-wrap;
+        word-break: break-word;
+      }
+
+      .dark-theme .modal-content {
+        background: var(--neutral-solid-dark-10);
+        border-color: var(--neutral-solid-dark-20);
+      }
+
+      .dark-theme .modal-header {
+        border-color: var(--neutral-solid-dark-20);
+      }
+
+      .dark-theme .modal-title {
+        color: var(--neutral-solid-dark-100);
+      }
+
+      .dark-theme .modal-close {
+        color: var(--neutral-solid-dark-60);
+      }
+
+      .dark-theme .modal-close:hover {
+        background: var(--neutral-solid-dark-20);
+        color: var(--neutral-solid-dark-100);
+      }
+
+      .dark-theme .file-content {
+        background: var(--neutral-solid-dark-20);
+        color: var(--neutral-solid-dark-100);
+      }
+
+      .webapp-token .token-info {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .token-formatted-output {
+        font-family: "Monaco", "Menlo", "Consolas", monospace;
+        font-size: 11px;
+        background: var(--neutral-solid-light-5);
+        color: var(--hues-purple);
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-weight: 600;
+        border: 1px solid var(--neutral-solid-light-10);
+      }
+
+      .dark-theme .token-formatted-output {
+        background: var(--neutral-solid-dark-20);
+        border-color: var(--neutral-solid-dark-30);
+        color: var(--hues-purple);
+      }
+
+      @media (max-width: 768px) {
+        .header-content {
+          flex-direction: column;
+          gap: 16px;
+          text-align: center;
+        }
+
+        .navigation {
+          flex-direction: column;
+        }
+
+        .token-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .main-content {
+          padding: 24px 16px;
+        }
+
+        .intro h2 {
+          font-size: 24px;
+        }
+
+        .platform-header {
+          flex-direction: column;
+          gap: 16px;
+          align-items: flex-start;
+        }
+
+        .format-toggle {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 8px;
+        }
+
+        .format-dropdown {
+          width: 100%;
+        }
+      }
+
+      .token-category {
+        margin-bottom: 32px;
+      }
+
+      .token-category h3 {
+        margin: 0 0 16px 0;
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--neutral-solid-light-70);
+      }
+
+      .token-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 12px;
+      }
+
+      .token-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+      }
+
+      .token-item {
+        background: var(--neutral-solid-light-0);
+        border: 1px solid var(--neutral-solid-light-10);
+        border-radius: 8px;
+        padding: 16px;
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        transition: all 0.2s ease;
+        min-height: 80px;
+      }
+
+      .token-item:hover {
+        border-color: var(--hues-blue);
+        box-shadow: 0 2px 8px rgba(99, 142, 255, 0.1);
+      }
+
+      .token-preview {
+        width: 40px;
+        height: 40px;
+        border-radius: 6px;
+        border: 1px solid var(--neutral-solid-light-20);
+        flex-shrink: 0;
+      }
+
+      .token-info {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .token-name {
+        font-weight: 500;
+        color: var(--neutral-solid-light-70);
+        margin-bottom: 4px;
+        font-size: 13px;
+      }
+
+      .token-value {
+        color: var(--neutral-solid-light-50);
+        font-size: 12px;
+        font-family: "Monaco", "Menlo", monospace;
+        word-break: break-all;
+      }
+
+      .empty-state {
+        text-align: center;
+        padding: 64px 24px;
+        background: var(--neutral-solid-light-0);
+        border: 1px solid var(--neutral-solid-light-10);
+        border-radius: 12px;
+        max-width: 400px;
+        margin: 0 auto;
+      }
+
+      .empty-state-icon {
+        font-size: 48px;
+        margin-bottom: 16px;
+        display: block;
+      }
+
+      .empty-state-title {
+        font-size: 20px;
+        font-weight: 600;
+        color: var(--neutral-solid-light-70);
+        margin: 0 0 8px 0;
+      }
+
+      .empty-state-description {
+        color: var(--neutral-solid-light-50);
+        margin: 0;
+        line-height: 1.5;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app-container">
+      <header class="header">
+        <div class="header-content">
+          <div class="logo">
+            <h1>Sonetel Design System</h1>
+          </div>
+          <div class="header-actions">
+            <button class="tokens-button" onclick="viewTokenFiles()">
+              View Token Files
+            </button>
+            <button class="theme-toggle" onclick="toggleTheme()">
+              🌙 Dark
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <main class="main-content">
+        <div class="intro">
+          <h2>Design Tokens</h2>
+          <p>
+            Core primitives and platform-specific tokens for consistent design
+          </p>
+        </div>
+
+        <nav class="navigation">
+          <button class="nav-button active" onclick="switchSection('core')">
+            Core Tokens
+          </button>
+          <button class="nav-button" onclick="switchSection('webapp')">
+            Web App
+          </button>
+          <button class="nav-button" onclick="switchSection('android')">
+            Android
+          </button>
+          <button class="nav-button" onclick="switchSection('ios')">iOS</button>
+          <button class="nav-button" onclick="switchSection('outputs')">
+            Outputs
+          </button>
+        </nav>
+
+        <!-- Core Tokens Section -->
+        <section id="core" class="section active">
+          <h3 class="section-title">Core Tokens</h3>
+          <div class="token-grid">
+            <!-- Core tokens will be loaded dynamically -->
+          </div>
+        </section>
+
+        <!-- Web App Section -->
+        <section id="webapp" class="section">
+          <div class="platform-header">
+            <h3 class="section-title">Web App Tokens ✨</h3>
+            <div class="format-toggle">
+              <label for="token-format" class="format-label"
+                >Output Format:</label
+              >
+              <select
+                id="token-format"
+                class="format-dropdown"
+                onchange="updateTokenFormat()"
+              >
+                <option value="names">Token names only</option>
+                <option value="css">CSS Variables</option>
+                <option value="js">JavaScript</option>
+                <option value="json">JSON</option>
+              </select>
+            </div>
+          </div>
+          <div class="token-grid">
+            <!-- Web app tokens will be loaded dynamically -->
+          </div>
+          <div class="token-output" id="token-output">
+            Click on tokens to see their output format
+          </div>
+        </section>
+
+        <!-- Android Section -->
+        <section id="android" class="section">
+          <h3 class="section-title">Android Tokens</h3>
+          <div class="empty-state">
+            <div class="empty-state-icon">📱</div>
+            <h4 class="empty-state-title">Android tokens coming soon</h4>
+            <p class="empty-state-description">
+              Android XML resources and token formats will be available in a
+              future update.
+            </p>
+          </div>
+        </section>
+
+        <!-- iOS Section -->
+        <section id="ios" class="section">
+          <h3 class="section-title">iOS Tokens</h3>
+          <div class="empty-state">
+            <div class="empty-state-icon">🍎</div>
+            <h4 class="empty-state-title">iOS tokens coming soon</h4>
+            <p class="empty-state-description">
+              iOS Swift constants and token formats will be available in a
+              future update.
+            </p>
+          </div>
+        </section>
+
+        <!-- Outputs Section -->
+        <section id="outputs" class="section">
+          <h3 class="section-title">Generated Files</h3>
+          <div class="token-grid" id="outputs-grid">
+            <!-- Output files will be loaded dynamically -->
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script>
+      // Navigation switching
+      function switchSection(sectionId) {
+        // Hide all sections
+        const sections = document.querySelectorAll(".section");
+        sections.forEach((section) => section.classList.remove("active"));
+
+        // Remove active class from all nav buttons
+        const navButtons = document.querySelectorAll(".nav-button");
+        navButtons.forEach((button) => button.classList.remove("active"));
+
+        // Show selected section
+        document.getElementById(sectionId).classList.add("active");
+
+        // Add active class to clicked button
+        event.target.classList.add("active");
+
+        // Load content for the section
+        loadSectionContent(sectionId);
+      }
+
+      // Theme switching
+      function toggleTheme() {
+        const body = document.body;
+        const button = document.querySelector(".theme-toggle");
+
+        body.classList.toggle("dark-theme");
+
+        if (body.classList.contains("dark-theme")) {
+          button.textContent = "☀️ Light";
+          localStorage.setItem("theme", "dark");
+        } else {
+          button.textContent = "🌙 Dark";
+          localStorage.setItem("theme", "light");
+        }
+
+        // Only reload webapp tokens since core tokens never change
+        const webappSection = document.getElementById("webapp");
+        if (webappSection && webappSection.classList.contains("active")) {
+          loadWebTokens();
+        }
+      }
+
+      // Token format updating
+      async function updateTokenFormat() {
+        const format = document.getElementById("token-format").value;
+        const output = document.getElementById("token-output");
+
+        try {
+          let content = "";
+
+          if (format === "names") {
+            const response = await fetch("dist/web/tokens.json");
+            const tokens = await response.json();
+            content = Object.keys(tokens).join("\n");
+          } else if (format === "css") {
+            const response = await fetch("dist/web/tokens.css");
+            content = await response.text();
+          } else if (format === "js") {
+            const response = await fetch("dist/web/tokens.js");
+            content = await response.text();
+          } else if (format === "json") {
+            const response = await fetch("dist/web/tokens.json");
+            const tokens = await response.json();
+            content = JSON.stringify(tokens, null, 2);
+          }
+
+          output.textContent = content || "Loading...";
+
+          // Also update individual webapp tokens
+          updateWebappTokenFormat();
+        } catch (error) {
+          console.error("Error loading token format:", error);
+          output.textContent = "Error loading tokens";
+        }
+      }
+
+      // Update webapp token format for individual tokens
+      async function updateWebappTokenFormat() {
+        const format = document.getElementById("token-format").value;
+        const webappTokens = document.querySelectorAll(
+          ".token-formatted-output",
+        );
+
+        try {
+          let tokensData = {};
+
+          if (format !== "names") {
+            const response = await fetch("dist/web/tokens.json");
+            tokensData = await response.json();
+          }
+
+          webappTokens.forEach((tokenEl) => {
+            const tokenName = tokenEl.getAttribute("data-token");
+            const tokenValue = tokenEl.getAttribute("data-value");
+            const kebabName = tokenName.replace(/\./g, "-");
+
+            let formattedValue = "";
+
+            switch (format) {
+              case "names":
+                // Hide the formatted output section for "names only"
+                tokenEl.style.display = "none";
+                return;
+              case "css":
+                formattedValue = `var(--${kebabName})`;
+                break;
+              case "js":
+                formattedValue = `tokens.${tokenName.replace(/\./g, "")}`;
+                break;
+              case "json":
+                const finalValue = tokensData[kebabName] || tokenValue;
+                formattedValue = `"${kebabName}": "${finalValue}"`;
+                break;
+            }
+
+            tokenEl.textContent = formattedValue;
+            tokenEl.style.display = formattedValue ? "block" : "none";
+          });
+        } catch (error) {
+          console.error("Error updating webapp token format:", error);
+        }
+      }
+
+      // Load content for sections
+      async function loadSectionContent(sectionId) {
+        console.log(`Loading content for ${sectionId}`);
+
+        if (sectionId === "core") {
+          await loadCoreTokens();
+        } else if (sectionId === "webapp") {
+          await loadWebTokens();
+        } else if (sectionId === "android") {
+          await loadAndroidTokens();
+        } else if (sectionId === "ios") {
+          await loadIOSTokens();
+        } else if (sectionId === "outputs") {
+          await loadOutputFiles();
+        }
+      }
+
+      // Load and display core tokens
+      async function loadCoreTokens() {
+        try {
+          // Load core color tokens
+          const colorResponse = await fetch("tokens/Core/Color.json");
+          const colorTokens = await colorResponse.json();
+
+          // Load core spacing tokens
+          const spacingResponse = await fetch("tokens/Core/Spacing.json");
+          const spacingTokens = await spacingResponse.json();
+
+          const grid = document.querySelector("#core .token-grid");
+          grid.innerHTML = "";
+
+          // Group and display color tokens - always show all core tokens
+          if (colorTokens) {
+            if (colorTokens.neutral && colorTokens.neutral.solid) {
+              displayTokenCategory(
+                grid,
+                "Neutral Solid Colors",
+                { neutral: { solid: colorTokens.neutral.solid } },
+                "color",
+              );
+            }
+            if (colorTokens.neutral && colorTokens.neutral.alpha) {
+              displayTokenCategory(
+                grid,
+                "Neutral Alpha Colors",
+                { neutral: { alpha: colorTokens.neutral.alpha } },
+                "color",
+              );
+            }
+            if (colorTokens.hues) {
+              displayTokenCategory(
+                grid,
+                "Brand Colors",
+                { hues: colorTokens.hues },
+                "color",
+              );
+            }
+          }
+
+          // Display spacing tokens
+          if (spacingTokens) {
+            displayTokenCategory(
+              grid,
+              "Spacing Scale",
+              spacingTokens,
+              "dimension",
+            );
+          }
+        } catch (error) {
+          console.error("Error loading core tokens:", error);
+          document.querySelector("#core .token-grid").innerHTML =
+            "<p>Error loading tokens</p>";
+        }
+      }
+
+      // Helper function to resolve token references
+      function resolveTokenReference(value, coreTokens) {
+        if (
+          typeof value === "string" &&
+          value.startsWith("{") &&
+          value.endsWith("}")
+        ) {
+          // Remove braces and split the path
+          const path = value.slice(1, -1).split(".");
+          let resolved = coreTokens;
+
+          // Navigate through the object path
+          for (const segment of path) {
+            if (resolved && resolved[segment] !== undefined) {
+              resolved = resolved[segment];
+            } else {
+              return value; // Return original if path not found
+            }
+          }
+
+          // Return the resolved value or original if not found
+          return resolved && resolved.value ? resolved.value : value;
+        }
+        return value;
+      }
+
+      // Helper function to display token categories
+      function displayTokenCategory(
+        container,
+        categoryName,
+        tokens,
+        defaultType,
+        isWebapp = false,
+        coreTokens = null,
+      ) {
+        const categoryDiv = document.createElement("div");
+        categoryDiv.className = "token-category";
+
+        let categoryHtml = `<h3>${categoryName}</h3><div class="token-list">`;
+
+        function renderTokens(obj, prefix = "") {
+          Object.keys(obj).forEach((key) => {
+            const fullPath = prefix ? `${prefix}.${key}` : key;
+            const token = obj[key];
+
+            if (token && typeof token === "object") {
+              if (token.value !== undefined) {
+                // This is a token
+                const tokenType = token.type || defaultType;
+                let preview = "";
+
+                if (tokenType === "color") {
+                  let colorValue = token.value;
+
+                  // For webapp tokens, resolve references to actual color values
+                  if (isWebapp && coreTokens) {
+                    colorValue = resolveTokenReference(token.value, coreTokens);
+                  } else if (!colorValue.includes("#")) {
+                    // For core tokens, use CSS variables
+                    colorValue = `var(--${fullPath.replace(/\./g, "-")})`;
+                  }
+
+                  preview = `<div class="token-preview" style="background-color: ${colorValue}"></div>`;
+                } else if (tokenType === "dimension") {
+                  const width = token.value.replace("px", "") + "px";
+                  preview = `<div class="dimension-preview" style="width: ${width}; height: 8px;"></div>`;
+                }
+
+                const formattedOutput = isWebapp
+                  ? `<div class="token-formatted-output" data-token="${fullPath}" data-value="${token.value}"></div>`
+                  : "";
+
+                categoryHtml += `
+                  <div class="token-item${isWebapp ? " webapp-token" : ""}">
+                    ${preview}
+                    <div class="token-info">
+                      <div class="token-name">${fullPath}</div>
+                      <div class="token-value">${token.value}</div>
+                      ${formattedOutput}
+                    </div>
+                  </div>
+                `;
+              } else {
+                // This is a nested object
+                renderTokens(token, fullPath);
+              }
+            }
+          });
+        }
+
+        renderTokens(tokens);
+        categoryHtml += `</div>`;
+        categoryDiv.innerHTML = categoryHtml;
+        container.appendChild(categoryDiv);
+      }
+
+      // Load and display web tokens
+      async function loadWebTokens() {
+        try {
+          // Determine current theme
+          const isDarkTheme = document.body.classList.contains("dark-theme");
+          const themeLabel = isDarkTheme ? "Dark" : "Light";
+
+          // Load appropriate theme tokens
+          const themeFile = isDarkTheme
+            ? "tokens/Webapp/Color/Dark.json"
+            : "tokens/Webapp/Color/Light.json";
+          const themeResponse = await fetch(themeFile);
+          const themeTokens = await themeResponse.json();
+
+          // Load webapp spacing tokens
+          let webappSpacingTokens = null;
+          try {
+            const spacingResponse = await fetch("tokens/Webapp/Spacing.json");
+            if (spacingResponse.ok) {
+              webappSpacingTokens = await spacingResponse.json();
+            }
+          } catch (error) {
+            console.log("No webapp spacing tokens found");
+          }
+
+          // Load core tokens for reference resolution (both color and spacing)
+          const coreColorResponse = await fetch("tokens/Core/Color.json");
+          const coreColorTokens = await coreColorResponse.json();
+
+          const coreSpacingResponse = await fetch("tokens/Core/Spacing.json");
+          const coreSpacingTokens = await coreSpacingResponse.json();
+
+          // Combine core tokens for reference resolution
+          const coreTokens = {
+            ...coreColorTokens,
+            ...coreSpacingTokens,
+          };
+
+          const grid = document.querySelector("#webapp .token-grid");
+          if (!grid) {
+            // Create token grid if it doesn't exist
+            const webappSection = document.querySelector("#webapp");
+            const tokenGrid = document.createElement("div");
+            tokenGrid.className = "token-grid";
+            webappSection.appendChild(tokenGrid);
+          }
+
+          const webappGrid = document.querySelector("#webapp .token-grid");
+          webappGrid.innerHTML = "";
+
+          // Group and display webapp tokens by type for current theme
+          if (themeTokens) {
+            if (themeTokens.elevation && themeTokens.elevation.solid) {
+              displayTokenCategory(
+                webappGrid,
+                `Elevation Solid (${themeLabel})`,
+                { elevation: { solid: themeTokens.elevation.solid } },
+                "color",
+                true,
+                coreTokens,
+              );
+            }
+            if (themeTokens.elevation && themeTokens.elevation.alpha) {
+              displayTokenCategory(
+                webappGrid,
+                `Elevation Alpha (${themeLabel})`,
+                { elevation: { alpha: themeTokens.elevation.alpha } },
+                "color",
+                true,
+                coreTokens,
+              );
+            }
+            if (themeTokens["on-surface"]) {
+              displayTokenCategory(
+                webappGrid,
+                `Surface Colors (${themeLabel})`,
+                { "on-surface": themeTokens["on-surface"] },
+                "color",
+                true,
+                coreTokens,
+              );
+            }
+            if (themeTokens.status) {
+              displayTokenCategory(
+                webappGrid,
+                `Status Colors (${themeLabel})`,
+                { status: themeTokens.status },
+                "color",
+                true,
+                coreTokens,
+              );
+            }
+          }
+
+          // Display webapp spacing tokens (theme-independent)
+          if (webappSpacingTokens) {
+            displayTokenCategory(
+              webappGrid,
+              "Webapp Spacing",
+              webappSpacingTokens,
+              "dimension",
+              true,
+              coreTokens,
+            );
+          }
+
+          // Update format for all webapp tokens
+          updateWebappTokenFormat();
+        } catch (error) {
+          console.error("Error loading webapp tokens:", error);
+          // Fallback to the format toggle functionality
+          updateTokenFormat();
+        }
+      }
+
+      // Load Android tokens
+      async function loadAndroidTokens() {
+        const grid = document.getElementById("android-tokens-grid");
+        grid.innerHTML = "<p>Android tokens would be loaded from XML files</p>";
+      }
+
+      // Load iOS tokens
+      async function loadIOSTokens() {
+        // iOS section now shows empty state
+      }
+
+      // Load output files
+      async function loadOutputFiles() {
+        const grid = document.getElementById("outputs-grid");
+
+        const outputFiles = [
+          {
+            path: "dist/web/tokens.css",
+            type: "CSS",
+            description: "CSS Custom Properties",
+          },
+          {
+            path: "dist/web/tokens.scss",
+            type: "SCSS",
+            description: "Sass Variables",
+          },
+          {
+            path: "dist/web/tokens.js",
+            type: "JS",
+            description: "JavaScript ES6 Module",
+          },
+          {
+            path: "dist/web/tokens.json",
+            type: "JSON",
+            description: "JSON Token Data",
+          },
+          {
+            path: "dist/android/colors.xml",
+            type: "XML",
+            description: "Android Color Resources",
+          },
+          {
+            path: "dist/android/dimens.xml",
+            type: "XML",
+            description: "Android Dimension Resources",
+          },
+          {
+            path: "dist/ios/SonetelTokens.swift",
+            type: "Swift",
+            description: "iOS Swift Constants",
+          },
+        ];
+
+        grid.innerHTML = "";
+
+        for (const file of outputFiles) {
+          try {
+            const response = await fetch(file.path);
+            if (response.ok) {
+              const fileName = file.path.split("/").pop();
+              const fileCard = document.createElement("div");
+              fileCard.className = "token-card file-card";
+              fileCard.onclick = () => showFileContent(file.path, fileName);
+
+              fileCard.innerHTML = `
+                <div class="token-header">
+                  <div class="token-name">${fileName}</div>
+                  <div class="token-type">${file.type}</div>
+                </div>
+                <div class="token-value">
+                  <div class="value-text">${file.description}</div>
+                </div>
+                <div class="copy-indicator">👁️ View</div>
+              `;
+
+              grid.appendChild(fileCard);
+            }
+          } catch (error) {
+            console.log(`File ${file.path} not available`);
+          }
+        }
+      }
+
+      // Show file content in modal
+      async function showFileContent(filePath, fileName) {
+        try {
+          const response = await fetch(filePath);
+          const content = await response.text();
+
+          // Create modal if it doesn't exist
+          let modal = document.getElementById("file-modal");
+          if (!modal) {
+            modal = document.createElement("div");
+            modal.id = "file-modal";
+            modal.className = "modal";
+            modal.innerHTML = `
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h3 class="modal-title"></h3>
+                  <button class="modal-close" onclick="closeFileModal()">&times;</button>
+                </div>
+                <div class="modal-body">
+                  <pre class="file-content"></pre>
+                </div>
+              </div>
+            `;
+            document.body.appendChild(modal);
+          }
+
+          modal.querySelector(".modal-title").textContent = fileName;
+          modal.querySelector(".file-content").textContent = content;
+          modal.style.display = "flex";
+        } catch (error) {
+          console.error("Error loading file:", error);
+        }
+      }
+
+      // Close file modal
+      function closeFileModal() {
+        const modal = document.getElementById("file-modal");
+        if (modal) {
+          modal.style.display = "none";
+        }
+      }
+
+      // View token files
+      function viewTokenFiles() {
+        switchSection("outputs");
+        document
+          .querySelector("[onclick=\"switchSection('outputs')\"]")
+          .classList.add("active");
+      }
+
+      // Load saved theme
+      function loadTheme() {
+        const savedTheme = localStorage.getItem("theme");
+        const button = document.querySelector(".theme-toggle");
+
+        if (savedTheme === "dark") {
+          document.body.classList.add("dark-theme");
+          button.textContent = "☀️ Light";
+        }
+      }
+
+      // Initialize on page load
+      document.addEventListener("DOMContentLoaded", function () {
+        loadTheme();
+        loadSectionContent("core");
+      });
+    </script>
+  </body>
+</html>

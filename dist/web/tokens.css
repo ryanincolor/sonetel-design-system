@@ -1,0 +1,7 @@
+/* Design Tokens - Web CSS Variables */
+:root {
+  --spacing-2xs: 2px;
+  --neutral-solid-light-0: #fff;
+  --neutral-solid-dark-0: #000;
+  --hues-blue: #638eff;
+}
