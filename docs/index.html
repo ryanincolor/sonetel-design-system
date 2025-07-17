@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sonetel Design System</title>
-    <link rel="stylesheet" href="dist/web/core-tokens.css" />
+    <link rel="stylesheet" href="../dist/web/core-tokens.css" />
     <style>
       * {
         box-sizing: border-box;
@@ -1090,11 +1090,11 @@
       async function loadCoreTokens() {
         try {
           // Load core color tokens
-          const colorResponse = await fetch("tokens/Core/Color.json");
+          const colorResponse = await fetch("../tokens/Core/Color.json");
           const colorTokens = await colorResponse.json();
 
           // Load core spacing tokens
-          const spacingResponse = await fetch("tokens/Core/Spacing.json");
+          const spacingResponse = await fetch("../tokens/Core/Spacing.json");
           const spacingTokens = await spacingResponse.json();
 
           const grid = document.querySelector("#core .token-grid");
@@ -1302,8 +1302,8 @@
           let themeTokens = null;
           try {
             const themeFile = isDarkTheme
-              ? "tokens/Webapp/Color/Dark.json"
-              : "tokens/Webapp/Color/Light.json";
+              ? "../tokens/Webapp/Color/Dark.json"
+              : "../tokens/Webapp/Color/Light.json";
             const themeResponse = await fetch(themeFile);
             if (themeResponse.ok) {
               themeTokens = await themeResponse.json();
@@ -1315,7 +1315,9 @@
           // Load webapp spacing tokens
           let webappSpacingTokens = null;
           try {
-            const spacingResponse = await fetch("tokens/Webapp/Spacing.json");
+            const spacingResponse = await fetch(
+              "../tokens/Webapp/Spacing.json",
+            );
             if (spacingResponse.ok) {
               webappSpacingTokens = await spacingResponse.json();
             }
@@ -1324,10 +1326,12 @@
           }
 
           // Load core tokens for reference resolution (both color and spacing)
-          const coreColorResponse = await fetch("tokens/Core/Color.json");
+          const coreColorResponse = await fetch("../tokens/Core/Color.json");
           const coreColorTokens = await coreColorResponse.json();
 
-          const coreSpacingResponse = await fetch("tokens/Core/Spacing.json");
+          const coreSpacingResponse = await fetch(
+            "../tokens/Core/Spacing.json",
+          );
           const coreSpacingTokens = await coreSpacingResponse.json();
 
           // Combine core tokens for reference resolution
