@@ -111,4 +111,5 @@ public class SonetelTokens {
     public static let xl = 20px
     public static let xs = 4px
     public static let yellow = #ffef62
+    public static let yellow = #ffef62
 }

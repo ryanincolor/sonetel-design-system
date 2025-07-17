@@ -42,3 +42,4 @@ export const onSurfaceprimary = "#0a0a0a";
 export const onSurfaceonDark = "#fff";
 export const onSurfaceonLight = "#0a0a0a";
 export const statuscritical = "#ff0000";
+export const brandyellow = "#ffef62";
