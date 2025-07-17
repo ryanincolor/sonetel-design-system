@@ -7,21 +7,16 @@ register(StyleDictionary);
 
 console.log('Building design tokens...');
 
-// Build the tokens
-await StyleDictionary.extend({
+// StyleDictionary v4 APB
+const sd = new StyleDictionary({
   source: ['tokens/**/*.json'],
-  platforms: {
-    web: {
+  platforms: {\n    web: {
       transforms: [
         'ts/descriptionToComment',
         'ts/size/px',
         'ts/opacity',
-        'ts/size/css/letterSpacing',
         'ts/color/modifiers',
         'ts/typography/fontWeight',
-        'ts/resolve/math',
-        'ts/size/rem',
-        'ts/color/css',
         'name/kebab'
       ],
       buildPath: 'dist/web/',
@@ -35,12 +30,25 @@ await StyleDictionary.extend({
           format: 'scss/variables'
         },
         {
-          destination: 'tokens.js',
-          format: 'javascript/es6'
-        },
-        {
           destination: 'tokens.json',
           format: 'json/flat'
+        }
+      ]
+    },
+    'web-js': {
+      transforms: [
+        'ts/descriptionToComment',
+        'ts/size/px',
+        'ts/opacity',
+        'ts/color/modifiers',
+        'ts/typography/fontWeight',
+        'name/camel'
+      ],
+      buildPath: 'dist/web/',
+      files: [
+        {
+          destination: 'tokens.js',
+          format: 'javascript/es6'
         }
       ]
     },
@@ -50,9 +58,7 @@ await StyleDictionary.extend({
         'ts/size/px',
         'ts/opacity',
         'ts/color/modifiers',
-        'ts/typography/fontWeight',
-        'ts/resolve/math',
-        'ts/color/SwiftUI'
+        'ts/typography/fontWeight'
       ],
       buildPath: 'dist/ios/',
       files: [
@@ -71,9 +77,7 @@ await StyleDictionary.extend({
         'ts/size/px',
         'ts/opacity',
         'ts/color/modifiers',
-        'ts/typography/fontWeight',
-        'ts/resolve/math',
-        'ts/color/hex'
+        'ts/typography/fontWeight'
       ],
       buildPath: 'dist/android/',
       files: [
@@ -88,7 +92,10 @@ await StyleDictionary.extend({
       ]
     }
   }
-}).buildAllPlatforms();
+});
+
+// Build all platforms
+await sd.buildAllPlatforms();
 
 // Copy index.html to dist folder
 if (fs.existsSync('index.html')) {
