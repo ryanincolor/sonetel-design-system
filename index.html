@@ -955,6 +955,12 @@
           button.textContent = "🌙 Dark";
           localStorage.setItem("theme", "light");
         }
+
+        // Only reload webapp tokens since core tokens never change
+        const webappSection = document.getElementById("webapp");
+        if (webappSection && webappSection.classList.contains("active")) {
+          loadWebTokens();
+        }
       }
 
       // Token format updating
@@ -1069,7 +1075,7 @@
           const grid = document.querySelector("#core .token-grid");
           grid.innerHTML = "";
 
-          // Group and display color tokens
+          // Group and display color tokens - always show all core tokens
           if (colorTokens) {
             if (colorTokens.neutral && colorTokens.neutral.solid) {
               displayTokenCategory(
@@ -1113,6 +1119,32 @@
         }
       }
 
+      // Helper function to resolve token references
+      function resolveTokenReference(value, coreTokens) {
+        if (
+          typeof value === "string" &&
+          value.startsWith("{") &&
+          value.endsWith("}")
+        ) {
+          // Remove braces and split the path
+          const path = value.slice(1, -1).split(".");
+          let resolved = coreTokens;
+
+          // Navigate through the object path
+          for (const segment of path) {
+            if (resolved && resolved[segment] !== undefined) {
+              resolved = resolved[segment];
+            } else {
+              return value; // Return original if path not found
+            }
+          }
+
+          // Return the resolved value or original if not found
+          return resolved && resolved.value ? resolved.value : value;
+        }
+        return value;
+      }
+
       // Helper function to display token categories
       function displayTokenCategory(
         container,
@@ -1120,6 +1152,7 @@
         tokens,
         defaultType,
         isWebapp = false,
+        coreTokens = null,
       ) {
         const categoryDiv = document.createElement("div");
         categoryDiv.className = "token-category";
@@ -1138,9 +1171,16 @@
                 let preview = "";
 
                 if (tokenType === "color") {
-                  const colorValue = token.value.includes("#")
-                    ? token.value
-                    : `var(--${fullPath.replace(/\./g, "-")})`;
+                  let colorValue = token.value;
+
+                  // For webapp tokens, resolve references to actual color values
+                  if (isWebapp && coreTokens) {
+                    colorValue = resolveTokenReference(token.value, coreTokens);
+                  } else if (!colorValue.includes("#")) {
+                    // For core tokens, use CSS variables
+                    colorValue = `var(--${fullPath.replace(/\./g, "-")})`;
+                  }
+
                   preview = `<div class="token-preview" style="background-color: ${colorValue}"></div>`;
                 } else if (tokenType === "dimension") {
                   const width = token.value.replace("px", "") + "px";
@@ -1178,13 +1218,20 @@
       // Load and display web tokens
       async function loadWebTokens() {
         try {
-          // Load webapp light tokens
-          const lightResponse = await fetch("tokens/Webapp/Color/Light.json");
-          const lightTokens = await lightResponse.json();
+          // Determine current theme
+          const isDarkTheme = document.body.classList.contains("dark-theme");
+          const themeLabel = isDarkTheme ? "Dark" : "Light";
 
-          // Load webapp dark tokens
-          const darkResponse = await fetch("tokens/Webapp/Color/Dark.json");
-          const darkTokens = await darkResponse.json();
+          // Load appropriate theme tokens
+          const themeFile = isDarkTheme
+            ? "tokens/Webapp/Color/Dark.json"
+            : "tokens/Webapp/Color/Light.json";
+          const themeResponse = await fetch(themeFile);
+          const themeTokens = await themeResponse.json();
+
+          // Load core tokens for reference resolution
+          const coreResponse = await fetch("tokens/Core/Color.json");
+          const coreTokens = await coreResponse.json();
 
           const grid = document.querySelector("#webapp .token-grid");
           if (!grid) {
@@ -1198,63 +1245,46 @@
           const webappGrid = document.querySelector("#webapp .token-grid");
           webappGrid.innerHTML = "";
 
-          // Group and display webapp tokens by type
-          if (lightTokens) {
-            if (lightTokens.elevation) {
+          // Group and display webapp tokens by type for current theme
+          if (themeTokens) {
+            if (themeTokens.elevation && themeTokens.elevation.solid) {
               displayTokenCategory(
                 webappGrid,
-                "Elevation (Light)",
-                { elevation: lightTokens.elevation },
+                `Elevation Solid (${themeLabel})`,
+                { elevation: { solid: themeTokens.elevation.solid } },
                 "color",
                 true,
+                coreTokens,
               );
             }
-            if (lightTokens["on-surface"]) {
+            if (themeTokens.elevation && themeTokens.elevation.alpha) {
               displayTokenCategory(
                 webappGrid,
-                "Surface Colors (Light)",
-                { "on-surface": lightTokens["on-surface"] },
+                `Elevation Alpha (${themeLabel})`,
+                { elevation: { alpha: themeTokens.elevation.alpha } },
                 "color",
                 true,
+                coreTokens,
               );
             }
-            if (lightTokens.status) {
+            if (themeTokens["on-surface"]) {
               displayTokenCategory(
                 webappGrid,
-                "Status Colors (Light)",
-                { status: lightTokens.status },
+                `Surface Colors (${themeLabel})`,
+                { "on-surface": themeTokens["on-surface"] },
                 "color",
                 true,
+                coreTokens,
               );
             }
-          }
-
-          if (darkTokens) {
-            if (darkTokens.elevation) {
+            if (themeTokens.status) {
               displayTokenCategory(
                 webappGrid,
-                "Elevation (Dark)",
-                { elevation: darkTokens.elevation },
+                `Status Colors (${themeLabel})`,
+                { status: themeTokens.status },
                 "color",
                 true,
-              );
-            }
-            if (darkTokens["on-surface"]) {
-              displayTokenCategory(
-                webappGrid,
-                "Surface Colors (Dark)",
-                { "on-surface": darkTokens["on-surface"] },
-                "color",
-                true,
-              );
-            }
-            if (darkTokens.status) {
-              displayTokenCategory(
-                webappGrid,
-                "Status Colors (Dark)",
-                { status: darkTokens.status },
-                "color",
-                true,
+                coreTokens,
               );
             }
           }
