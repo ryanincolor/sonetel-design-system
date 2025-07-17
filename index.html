@@ -1093,7 +1093,14 @@
                 "color",
               );
             }
-            if (colorTokens.hues) {
+            if (colorTokens.color && colorTokens.color.hues) {
+              displayTokenCategory(
+                grid,
+                "Brand Colors",
+                { hues: colorTokens.color.hues },
+                "color",
+              );
+            } else if (colorTokens.hues) {
               displayTokenCategory(
                 grid,
                 "Brand Colors",
