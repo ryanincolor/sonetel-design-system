@@ -1,177 +1,116 @@
-import { register } from "@tokens-studio/sd-transforms";
-import StyleDictionary from "style-dictionary";
-import fs from "fs";
+#!/usr/bin/env node
 
-// Register the token studio transforms
+import StyleDictionary from "style-dictionary";
+import { register } from "@tokens-studio/sd-transforms";
+import fs from "fs";
+import path from "path";
+
+// Register the tokens-studio transforms
 register(StyleDictionary);
 
-// Add custom transform to handle token names that start with numbers
-StyleDictionary.registerTransform({
-  name: "name/camel/safe",
-  type: "name",
-  transform: function (token) {
-    let name = token.path.join("");
-    // Convert to camelCase
-    name = name.replace(/[-_\s]+(.)?/g, (_, c) => (c ? c.toUpperCase() : ""));
-    // If name starts with a number, prefix with underscore
-    if (/^[0-9]/.test(name)) {
-      name = "_" + name;
-    }
-    return name;
-  },
-});
+console.log("🏗️  Building design tokens...");
 
-// Register filter for webapp tokens only
-StyleDictionary.registerFilter({
-  name: "webapp-only",
-  filter: function (token) {
-    return token.filePath && token.filePath.includes("Webapp/");
-  },
-});
-
-// Core tokens are now only used as references for webapp tokens
-
-// Register a format for themed CSS
-StyleDictionary.registerFormat({
-  name: "css/themed",
-  format: function (dictionary, config) {
-    const selector = config?.options?.selector || ":root";
-
-    let output = `${selector} {\n`;
-    dictionary.allTokens.forEach((token) => {
-      output += `  --${token.name}: ${token.value};\n`;
-    });
-    output += "}\n";
-
-    return output;
-  },
-});
-
-// Register a format for complete themed CSS with light and dark modes
-StyleDictionary.registerFormat({
-  name: "css/complete-themed",
-  format: function (dictionary, config) {
-    const prefix = config.prefix || "";
-
-    // We'll manually build this by reading both light and dark token files
-    // and generating a complete CSS file with proper theme selectors
-    return "/* This format will be populated by the build script */";
-  },
-});
-
-console.log("Building design tokens...");
-
-// StyleDictionary v4 - Build semantic webapp tokens with theming
-const sd = new StyleDictionary({
-  source: ["tokens/**/*.json"],
+// Configuration for mode-independent tokens (spacing only)
+const spacingConfig = {
+  source: ["tokens/Core/**/*.json", "tokens/Webapp/Spacing.json"],
+  preprocessors: ["tokens-studio"],
   platforms: {
-    // Main webapp export in all formats - only semantic tokens
     web: {
-      transforms: [
-        "ts/descriptionToComment",
-        "ts/size/px",
-        "ts/opacity",
-        "ts/color/modifiers",
-        "ts/typography/fontWeight",
-        "name/kebab",
-      ],
+      transformGroup: "tokens-studio",
       buildPath: "dist/web/",
-      prefix: "swa",
-      source: [
-        "tokens/Core/**/*.json",
-        "tokens/Webapp/Color/Light.json",
-        "tokens/Webapp/Spacing.json",
-      ],
       files: [
         {
-          destination: "tokens.json",
-          format: "json/flat",
-          filter: "webapp-only",
+          destination: "tokens-spacing.css",
+          format: "css/variables",
+          filter: function (token) {
+            // Only include webapp spacing tokens, not core tokens
+            return token.filePath.includes("Webapp/Spacing");
+          },
+          options: {
+            showFileHeader: true,
+            selector: ":root",
+          },
         },
       ],
     },
-    "web-js": {
-      transforms: [
-        "ts/descriptionToComment",
-        "ts/size/px",
-        "ts/opacity",
-        "ts/color/modifiers",
-        "ts/typography/fontWeight",
-        "name/camel/safe",
-      ],
+  },
+};
+
+// Configuration for light theme (default)
+const lightConfig = {
+  source: ["tokens/Core/**/*.json", "tokens/Webapp/Color/Light.json"],
+  preprocessors: ["tokens-studio"],
+  platforms: {
+    web: {
+      transformGroup: "tokens-studio",
       buildPath: "dist/web/",
-      prefix: "swa",
-      source: [
-        "tokens/Core/**/*.json",
-        "tokens/Webapp/Color/Light.json",
-        "tokens/Webapp/Spacing.json",
-      ],
       files: [
         {
-          destination: "tokens.js",
-          format: "javascript/es6",
-          filter: "webapp-only",
+          destination: "tokens-light.css",
+          format: "css/variables",
+          filter: function (token) {
+            // Only include webapp light theme tokens, not core tokens
+            return token.filePath.includes("Webapp/Color/Light");
+          },
+          options: {
+            showFileHeader: true,
+            selector: ":root",
+          },
         },
       ],
     },
-    // SCSS Light theme
-    "scss-light": {
-      transforms: [
-        "ts/descriptionToComment",
-        "ts/size/px",
-        "ts/opacity",
-        "ts/color/modifiers",
-        "ts/typography/fontWeight",
-        "name/kebab",
-      ],
+  },
+};
+
+// Configuration for dark theme webapp tokens
+const darkConfig = {
+  source: ["tokens/Core/**/*.json", "tokens/Webapp/Color/Dark.json"],
+  preprocessors: ["tokens-studio"],
+  platforms: {
+    web: {
+      transformGroup: "tokens-studio",
       buildPath: "dist/web/",
-      prefix: "swa",
-      source: [
-        "tokens/Core/**/*.json",
-        "tokens/Webapp/Color/Light.json",
-        "tokens/Webapp/Spacing.json",
-      ],
       files: [
         {
-          destination: "tokens-light.scss",
-          format: "scss/variables",
-          filter: "webapp-only",
+          destination: "tokens-dark.css",
+          format: "css/variables",
+          filter: function (token) {
+            // Only include webapp color tokens, not core tokens
+            return token.filePath.includes("Webapp/Color/Dark");
+          },
+          options: {
+            showFileHeader: true,
+            selector: '[data-theme="dark"]',
+          },
         },
       ],
     },
-    // SCSS Dark theme
-    "scss-dark": {
-      transforms: [
-        "ts/descriptionToComment",
-        "ts/size/px",
-        "ts/opacity",
-        "ts/color/modifiers",
-        "ts/typography/fontWeight",
-        "name/kebab",
-      ],
-      buildPath: "dist/web/",
-      prefix: "swa",
-      source: [
-        "tokens/Core/**/*.json",
-        "tokens/Webapp/Color/Dark.json",
-        "tokens/Webapp/Spacing.json",
-      ],
-      files: [
-        {
-          destination: "tokens-dark.scss",
-          format: "scss/variables",
-          filter: "webapp-only",
-        },
-      ],
-    },
+  },
+};
+
+// Build spacing tokens (mode-independent)
+console.log("📏 Building spacing tokens (mode-independent)...");
+const spacingSd = new StyleDictionary(spacingConfig);
+await spacingSd.buildAllPlatforms();
+
+// Build light theme tokens (default)
+console.log("☀️  Building light theme tokens (default)...");
+const lightSd = new StyleDictionary(lightConfig);
+await lightSd.buildAllPlatforms();
+
+// Build dark theme tokens
+console.log("🌙 Building dark theme tokens...");
+const darkSd = new StyleDictionary(darkConfig);
+await darkSd.buildAllPlatforms();
+
+// Also build other platforms with full config for completeness
+console.log("📱 Building other platforms...");
+const fullConfig = {
+  source: ["tokens/**/*.json"],
+  preprocessors: ["tokens-studio"],
+  platforms: {
     ios: {
-      transforms: [
-        "ts/descriptionToComment",
-        "ts/size/px",
-        "ts/opacity",
-        "ts/color/modifiers",
-        "ts/typography/fontWeight",
-      ],
+      transformGroup: "ios",
       buildPath: "dist/ios/",
       files: [
         {
@@ -179,170 +118,154 @@ const sd = new StyleDictionary({
           format: "ios-swift/class.swift",
           options: {
             className: "SonetelTokens",
+            showFileHeader: true,
           },
         },
       ],
     },
     android: {
-      transforms: [
-        "ts/descriptionToComment",
-        "ts/size/px",
-        "ts/opacity",
-        "ts/color/modifiers",
-        "ts/typography/fontWeight",
-      ],
+      transformGroup: "android",
       buildPath: "dist/android/",
       files: [
         {
           destination: "colors.xml",
           format: "android/resources",
+          filter: {
+            type: "color",
+          },
+          options: {
+            showFileHeader: true,
+          },
         },
         {
           destination: "dimens.xml",
           format: "android/resources",
+          filter: {
+            type: "dimension",
+          },
+          options: {
+            showFileHeader: true,
+          },
+        },
+      ],
+    },
+    "web-other": {
+      transformGroup: "tokens-studio",
+      buildPath: "dist/web/",
+      files: [
+        {
+          destination: "tokens.scss",
+          format: "scss/variables",
+          options: {
+            showFileHeader: true,
+          },
+        },
+        {
+          destination: "tokens.js",
+          format: "javascript/es6",
+          options: {
+            showFileHeader: true,
+          },
+        },
+        {
+          destination: "tokens.json",
+          format: "json/nested",
+          options: {
+            showFileHeader: false,
+          },
         },
       ],
     },
   },
-});
+};
 
-// Build all platforms
-await sd.buildAllPlatforms();
+const fullSd = new StyleDictionary(fullConfig);
+await fullSd.buildAllPlatforms();
 
-// Create complete themed CSS and SCSS files
-async function createThemedFiles() {
-  // Build light theme tokens
-  const lightSD = new StyleDictionary({
-    source: [
-      "tokens/Core/**/*.json",
-      "tokens/Webapp/Color/Light.json",
-      "tokens/Webapp/Spacing.json",
-    ],
-    platforms: {
-      temp: {
-        transforms: [
-          "ts/descriptionToComment",
-          "ts/size/px",
-          "ts/opacity",
-          "ts/color/modifiers",
-          "ts/typography/fontWeight",
-          "name/kebab",
-        ],
-        prefix: "swa",
-        buildPath: "temp/",
-        files: [
-          {
-            destination: "light.json",
-            format: "json/flat",
-            filter: "webapp-only",
-          },
-        ],
-      },
-    },
-  });
+console.log("🔄 Combining CSS files...");
 
-  // Build dark theme tokens
-  const darkSD = new StyleDictionary({
-    source: [
-      "tokens/Core/**/*.json",
-      "tokens/Webapp/Color/Dark.json",
-      "tokens/Webapp/Spacing.json",
-    ],
-    platforms: {
-      temp: {
-        transforms: [
-          "ts/descriptionToComment",
-          "ts/size/px",
-          "ts/opacity",
-          "ts/color/modifiers",
-          "ts/typography/fontWeight",
-          "name/kebab",
-        ],
-        prefix: "swa",
-        buildPath: "temp/",
-        files: [
-          {
-            destination: "dark.json",
-            format: "json/flat",
-            filter: "webapp-only",
-          },
-        ],
-      },
-    },
-  });
+// Read the separate CSS files
+const distPath = "dist/web/";
+let spacingCss = "";
+let lightCss = "";
+let darkCss = "";
 
-  // Build both
-  await lightSD.buildAllPlatforms();
-  await darkSD.buildAllPlatforms();
-
-  // Read the generated JSON files
-  const lightTokens = JSON.parse(fs.readFileSync("temp/light.json", "utf8"));
-  const darkTokens = JSON.parse(fs.readFileSync("temp/dark.json", "utf8"));
-
-  // Generate themed CSS
-  let themedCSS = ":root, .light-theme {\n";
-  Object.entries(lightTokens).forEach(([name, value]) => {
-    themedCSS += `  --${name}: ${value};\n`;
-  });
-  themedCSS += "}\n\n";
-
-  themedCSS += ".dark-theme {\n";
-  Object.entries(darkTokens).forEach(([name, value]) => {
-    themedCSS += `  --${name}: ${value};\n`;
-  });
-  themedCSS += "}\n";
-
-  // Write the themed CSS file
-  fs.writeFileSync("dist/web/tokens.css", themedCSS);
-
-  // Create combined SCSS file if individual SCSS files exist
-  if (
-    fs.existsSync("dist/web/tokens-light.scss") &&
-    fs.existsSync("dist/web/tokens-dark.scss")
-  ) {
-    const lightSCSS = fs.readFileSync("dist/web/tokens-light.scss", "utf8");
-    const darkSCSS = fs.readFileSync("dist/web/tokens-dark.scss", "utf8");
-
-    // Create themed SCSS with mixins
-    let themedSCSS = "// Light theme variables\n";
-    themedSCSS += "@mixin light-theme {\n";
-    themedSCSS += lightSCSS
-      .replace(/^\$swa-/gm, "  $swa-")
-      .replace(/^\/\*\*[\s\S]*?\*\/\s*/gm, "");
-    themedSCSS += "}\n\n";
-
-    themedSCSS += "// Dark theme variables\n";
-    themedSCSS += "@mixin dark-theme {\n";
-    themedSCSS += darkSCSS
-      .replace(/^\$swa-/gm, "  $swa-")
-      .replace(/^\/\*\*[\s\S]*?\*\/\s*/gm, "");
-    themedSCSS += "}\n\n";
-
-    themedSCSS += "// Default to light theme\n";
-    themedSCSS += "@include light-theme;\n\n";
-
-    themedSCSS += "// Dark theme class override\n";
-    themedSCSS += ".dark-theme {\n";
-    themedSCSS += "  @include dark-theme;\n";
-    themedSCSS += "}\n";
-
-    fs.writeFileSync("dist/web/tokens.scss", themedSCSS);
-    console.log(
-      "✅ Complete themed tokens.scss created with light/dark mode mixins",
-    );
-  }
-
-  // Clean up temp files
-  if (fs.existsSync("temp")) {
-    fs.rmSync("temp", { recursive: true });
-  }
-
-  console.log(
-    "✅ Complete themed tokens.css created with light/dark mode support",
-  );
+// Read spacing tokens file (mode-independent)
+const spacingPath = path.join(distPath, "tokens-spacing.css");
+if (fs.existsSync(spacingPath)) {
+  spacingCss = fs.readFileSync(spacingPath, "utf8");
 }
 
-// Create themed CSS and SCSS
-await createThemedFiles();
+// Read light theme file (default)
+const lightPath = path.join(distPath, "tokens-light.css");
+if (fs.existsSync(lightPath)) {
+  lightCss = fs.readFileSync(lightPath, "utf8");
+}
+
+// Read dark theme file
+const darkPath = path.join(distPath, "tokens-dark.css");
+if (fs.existsSync(darkPath)) {
+  darkCss = fs.readFileSync(darkPath, "utf8");
+}
+
+// Combine them into one file with proper swa prefix
+let combinedCss = spacingCss;
+if (lightCss) {
+  combinedCss += `\n\n${lightCss}`;
+}
+if (darkCss) {
+  combinedCss += `\n\n${darkCss}`;
+}
+
+// Convert variable names to use --swa- prefix and kebab-case
+combinedCss = combinedCss
+  .replace(/--elevation/g, "--swa-elevation")
+  .replace(/--onSurface/g, "--swa-on-surface")
+  .replace(/--status/g, "--swa-status")
+  .replace(/--brand/g, "--swa-brand")
+  .replace(/--spacing/g, "--swa-spacing")
+  // Convert camelCase to kebab-case for better matching
+  .replace(/--swa-elevationSolid/g, "--swa-elevation-solid")
+  .replace(/--swa-elevationAlpha/g, "--swa-elevation-alpha")
+  .replace(/--swa-on-surfaceInverse/g, "--swa-on-surface-inverse")
+  .replace(/--swa-on-surfaceSeconday/g, "--swa-on-surface-seconday")
+  .replace(/--swa-on-surfaceTertiary/g, "--swa-on-surface-tertiary")
+  .replace(/--swa-on-surfacePrimary/g, "--swa-on-surface-primary")
+  .replace(/--swa-on-surfaceOnDark/g, "--swa-on-surface-on-dark")
+  .replace(/--swa-on-surfaceOnLight/g, "--swa-on-surface-on-light")
+  .replace(/--swa-statusCritical/g, "--swa-status-critical")
+  .replace(/--swa-brandYellow/g, "--swa-brand-yellow")
+  // Add hyphens before numbers
+  .replace(/--swa-elevation-solid(\d)/g, "--swa-elevation-solid-$1")
+  .replace(/--swa-elevation-alpha(\d)/g, "--swa-elevation-alpha-$1")
+  .replace(/--swa-spacing(\d)/g, "--swa-spacing-$1")
+  // Fix spacing variable names to use consistent hyphen formatting
+  .replace(/--swa-spacingXs/g, "--swa-spacing-xs")
+  .replace(/--swa-spacingSm/g, "--swa-spacing-sm")
+  .replace(/--swa-spacingMd/g, "--swa-spacing-md")
+  .replace(/--swa-spacingLg/g, "--swa-spacing-lg")
+  .replace(/--swa-spacingXl/g, "--swa-spacing-xl");
+
+// Write the combined file
+fs.writeFileSync(path.join(distPath, "tokens.css"), combinedCss);
+
+// Clean up the separate files
+if (fs.existsSync(spacingPath)) {
+  fs.unlinkSync(spacingPath);
+}
+if (fs.existsSync(lightPath)) {
+  fs.unlinkSync(lightPath);
+}
+if (fs.existsSync(darkPath)) {
+  fs.unlinkSync(darkPath);
+}
 
 console.log("✅ Design tokens built successfully!");
+console.log("📝 Generated files:");
+console.log("   - dist/web/tokens.css (webapp only with --swa- prefix)");
+console.log("   - dist/web/tokens.scss");
+console.log("   - dist/web/tokens.js");
+console.log("   - dist/web/tokens.json");
+console.log("   - dist/android/colors.xml");
+console.log("   - dist/android/dimens.xml");
+console.log("   - dist/ios/SonetelTokens.swift");
