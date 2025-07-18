@@ -605,6 +605,10 @@ async function loadIOSTokens() {
   // iOS section shows empty state by default
 }
 
+// Store last modification times for file watching
+let fileModificationTimes = new Map();
+let fileWatchInterval = null;
+
 // Load output files
 async function loadOutputFiles() {
   const grid = document.getElementById("outputs-grid");
@@ -614,11 +618,6 @@ async function loadOutputFiles() {
       path: "dist/web/tokens.css",
       type: "CSS",
       description: "CSS Custom Properties",
-    },
-    {
-      path: "dist/web/tokens.scss",
-      type: "SCSS",
-      description: "Sass Variables",
     },
     {
       path: "dist/web/tokens.js",
@@ -656,7 +655,6 @@ async function loadOutputFiles() {
         const fileName = file.path.split("/").pop();
         const fileCard = document.createElement("div");
         fileCard.className = "token-card file-card";
-        fileCard.onclick = () => showFileContent(file.path, fileName);
 
         fileCard.innerHTML = `
           <div class="token-header">
@@ -666,7 +664,23 @@ async function loadOutputFiles() {
           <div class="token-value">
             <div class="value-text">${file.description}</div>
           </div>
-          <div class="copy-indicator">👁️ View</div>
+                    <div class="file-actions">
+            <button class="file-action-btn" onclick="event.stopPropagation(); showFileContent('${file.path}', '${fileName}')" title="View file">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                <circle cx="12" cy="12" r="3"/>
+              </svg>
+              View
+            </button>
+            <button class="file-action-btn" onclick="event.stopPropagation(); downloadFile('${file.path}', '${fileName}')" title="Download file">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7,10 12,15 17,10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+              Download
+            </button>
+          </div>
         `;
 
         grid.appendChild(fileCard);
@@ -675,6 +689,60 @@ async function loadOutputFiles() {
       console.log(`File ${file.path} not available`);
     }
   }
+
+  // Start file watching if not already started
+  startFileWatching();
+}
+
+// Start watching for file changes
+function startFileWatching() {
+  // Clear existing interval if any
+  if (fileWatchInterval) {
+    clearInterval(fileWatchInterval);
+  }
+
+  // Check for file updates every 2 seconds
+  fileWatchInterval = setInterval(async () => {
+    let hasChanges = false;
+
+    // Check if we're on the outputs section
+    const outputsSection = document.getElementById("outputs");
+    if (!outputsSection || !outputsSection.classList.contains("active")) {
+      return; // Don't check if not viewing outputs
+    }
+
+    const outputFiles = [
+      "dist/web/tokens.css",
+      "dist/web/tokens.js",
+      "dist/web/tokens.json",
+      "dist/android/colors.xml",
+      "dist/android/dimens.xml",
+      "dist/ios/SonetelTokens.swift",
+    ];
+
+    for (const filePath of outputFiles) {
+      try {
+        const response = await fetch(filePath, { method: "HEAD" });
+        if (response.ok) {
+          const lastModified = response.headers.get("Last-Modified");
+          const currentTime = new Date(lastModified).getTime();
+          const storedTime = fileModificationTimes.get(filePath);
+
+          if (storedTime && currentTime > storedTime) {
+            hasChanges = true;
+          }
+          fileModificationTimes.set(filePath, currentTime);
+        }
+      } catch (error) {
+        // File might not exist yet, ignore
+      }
+    }
+
+    if (hasChanges) {
+      console.log("📄 Detected file changes, refreshing output files...");
+      await loadOutputFiles();
+    }
+  }, 2000);
 }
 
 // Show file content in modal
@@ -716,6 +784,39 @@ function closeFileModal() {
   const modal = document.getElementById("file-modal");
   if (modal) {
     modal.style.display = "none";
+  }
+}
+
+// Download file function
+async function downloadFile(filePath, fileName) {
+  try {
+    const response = await fetch(filePath);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch file: ${response.statusText}`);
+    }
+
+    const content = await response.text();
+
+    // Create a blob with the file content
+    const blob = new Blob([content], { type: "text/plain" });
+
+    // Create a download link
+    const downloadLink = document.createElement("a");
+    downloadLink.href = URL.createObjectURL(blob);
+    downloadLink.download = fileName;
+
+    // Trigger the download
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+
+    // Clean up the URL object
+    URL.revokeObjectURL(downloadLink.href);
+
+    console.log(`📥 Downloaded: ${fileName}`);
+  } catch (error) {
+    console.error("Error downloading file:", error);
+    alert(`Failed to download ${fileName}. Please try again.`);
   }
 }
 

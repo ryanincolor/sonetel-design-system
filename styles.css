@@ -454,6 +454,41 @@ body {
   opacity: 1;
 }
 
+.file-actions {
+  display: flex;
+  gap: var(--swa-spacing-sm);
+  margin-top: var(--swa-spacing-md);
+}
+
+.file-action-btn {
+  background: var(--swa-elevation-solid-2);
+  border: 1px solid var(--swa-elevation-solid-2);
+  border-radius: 6px;
+  padding: var(--swa-spacing-sm) var(--swa-spacing-md);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--swa-on-surface-primary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex: 1;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--swa-spacing-xs);
+}
+
+.file-action-btn svg {
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
+}
+
+.file-action-btn:hover {
+  background: var(--swa-elevation-solid-3);
+  border-color: var(--swa-elevation-solid-3);
+}
+
 .modal {
   display: none;
   position: fixed;
