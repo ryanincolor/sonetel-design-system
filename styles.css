@@ -46,6 +46,12 @@ body {
   display: flex;
   align-items: center;
   gap: var(--swa-spacing-md);
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.logo:hover {
+  opacity: 0.8;
 }
 
 .logo-icon {

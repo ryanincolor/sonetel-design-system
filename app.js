@@ -20,7 +20,7 @@ function switchSection(sectionId, event) {
   } else {
     // If called programmatically, find and activate the corresponding button
     const targetButton = document.querySelector(
-      `[onclick*="switchSection('${sectionId}')"]`,
+      `.nav-button[onclick*="switchSection('${sectionId}', event)"]`,
     );
     if (targetButton) {
       targetButton.classList.add("active");
