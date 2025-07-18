@@ -57,10 +57,13 @@ function copyToken(tokenName, tokenValue, isWebapp) {
           textToCopy = tokenName;
           break;
         case "css":
-          textToCopy = `var(--${kebabName})`;
+          textToCopy = `var(--swa-${kebabName})`;
           break;
         case "js":
-          textToCopy = `tokens.${tokenName.replace(/\./g, "")}`;
+          const camelCaseName = kebabName
+            .replace(/-([a-z])/g, (g) => g[1].toUpperCase())
+            .replace(/-/g, "");
+          textToCopy = `swa${camelCaseName.charAt(0).toUpperCase() + camelCaseName.slice(1)}`;
           break;
         case "json":
           textToCopy = `"${kebabName}": "${tokenValue}"`;
@@ -159,10 +162,13 @@ async function updateWebappTokenFormat() {
           tokenEl.style.display = "none";
           return;
         case "css":
-          formattedValue = `var(--${kebabName})`;
+          formattedValue = `var(--swa-${kebabName})`;
           break;
         case "js":
-          formattedValue = `tokens.${tokenName.replace(/\./g, "")}`;
+          const camelCaseName = kebabName
+            .replace(/-([a-z])/g, (g) => g[1].toUpperCase())
+            .replace(/-/g, "");
+          formattedValue = `swa${camelCaseName.charAt(0).toUpperCase() + camelCaseName.slice(1)}`;
           break;
         case "json":
           const finalValue = tokensData[kebabName] || tokenValue;

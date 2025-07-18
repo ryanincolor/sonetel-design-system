@@ -154,13 +154,6 @@ const fullConfig = {
       buildPath: "dist/web/",
       files: [
         {
-          destination: "tokens.scss",
-          format: "scss/variables",
-          options: {
-            showFileHeader: true,
-          },
-        },
-        {
           destination: "tokens.js",
           format: "javascript/es6",
           options: {
@@ -249,6 +242,10 @@ combinedCss = combinedCss
 // Write the combined file
 fs.writeFileSync(path.join(distPath, "tokens.css"), combinedCss);
 
+// Generate custom JavaScript exports for webapp tokens
+console.log("🔧 Generating JavaScript exports...");
+await generateJavaScriptTokens();
+
 // Clean up the separate files
 if (fs.existsSync(spacingPath)) {
   fs.unlinkSync(spacingPath);
@@ -260,11 +257,120 @@ if (fs.existsSync(darkPath)) {
   fs.unlinkSync(darkPath);
 }
 
+// Function to generate JavaScript exports for webapp tokens
+async function generateJavaScriptTokens() {
+  const lightConfig = {
+    source: [
+      "tokens/Core/**/*.json",
+      "tokens/Webapp/Color/Light.json",
+      "tokens/Webapp/Spacing.json",
+    ],
+    preprocessors: ["tokens-studio"],
+    platforms: {
+      js: {
+        transformGroup: "tokens-studio",
+        buildPath: "dist/web/",
+        files: [
+          {
+            destination: "tokens-light.json",
+            format: "json/flat",
+            filter: function (token) {
+              return token.filePath.includes("Webapp/");
+            },
+          },
+        ],
+      },
+    },
+  };
+
+  const darkConfig = {
+    source: [
+      "tokens/Core/**/*.json",
+      "tokens/Webapp/Color/Dark.json",
+      "tokens/Webapp/Spacing.json",
+    ],
+    preprocessors: ["tokens-studio"],
+    platforms: {
+      js: {
+        transformGroup: "tokens-studio",
+        buildPath: "dist/web/",
+        files: [
+          {
+            destination: "tokens-dark.json",
+            format: "json/flat",
+            filter: function (token) {
+              return token.filePath.includes("Webapp/");
+            },
+          },
+        ],
+      },
+    },
+  };
+
+  // Build light and dark tokens for JS
+  const lightJsSd = new StyleDictionary(lightConfig);
+  const darkJsSd = new StyleDictionary(darkConfig);
+
+  await lightJsSd.buildAllPlatforms();
+  await darkJsSd.buildAllPlatforms();
+
+  // Read the generated JSON files
+  const lightTokensPath = path.join(distPath, "tokens-light.json");
+  const darkTokensPath = path.join(distPath, "tokens-dark.json");
+
+  let lightTokens = {};
+  let darkTokens = {};
+
+  if (fs.existsSync(lightTokensPath)) {
+    lightTokens = JSON.parse(fs.readFileSync(lightTokensPath, "utf8"));
+  }
+
+  if (fs.existsSync(darkTokensPath)) {
+    darkTokens = JSON.parse(fs.readFileSync(darkTokensPath, "utf8"));
+  }
+
+  // Convert to JavaScript exports
+  let jsContent = `/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+// Light theme tokens (default)
+`;
+
+  // Add light theme exports
+  for (const [key, value] of Object.entries(lightTokens)) {
+    const camelCaseKey = key
+      .replace(/-([a-z])/g, (g) => g[1].toUpperCase())
+      .replace(/-/g, "");
+    jsContent += `export const swa${camelCaseKey.charAt(0).toUpperCase() + camelCaseKey.slice(1)} = "${value}";\n`;
+  }
+
+  jsContent += `\n// Dark theme tokens\n`;
+
+  // Add dark theme exports
+  for (const [key, value] of Object.entries(darkTokens)) {
+    const camelCaseKey = key
+      .replace(/-([a-z])/g, (g) => g[1].toUpperCase())
+      .replace(/-/g, "");
+    jsContent += `export const swa${camelCaseKey.charAt(0).toUpperCase() + camelCaseKey.slice(1)}Dark = "${value}";\n`;
+  }
+
+  // Write the JavaScript file
+  fs.writeFileSync(path.join(distPath, "tokens.js"), jsContent);
+
+  // Clean up temporary files
+  if (fs.existsSync(lightTokensPath)) {
+    fs.unlinkSync(lightTokensPath);
+  }
+  if (fs.existsSync(darkTokensPath)) {
+    fs.unlinkSync(darkTokensPath);
+  }
+}
+
 console.log("✅ Design tokens built successfully!");
 console.log("📝 Generated files:");
 console.log("   - dist/web/tokens.css (webapp only with --swa- prefix)");
-console.log("   - dist/web/tokens.scss");
-console.log("   - dist/web/tokens.js");
+console.log("   - dist/web/tokens.js (webapp only with swa prefix)");
 console.log("   - dist/web/tokens.json");
 console.log("   - dist/android/colors.xml");
 console.log("   - dist/android/dimens.xml");
