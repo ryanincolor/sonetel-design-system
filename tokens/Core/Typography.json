@@ -3,100 +3,104 @@
     "family": {
       "sans": {
         "value": "'Inter', sans-serif",
-        "type": "fontFamily"
+        "type": "fontFamilies"
       }
     },
     "size": {
       "10": {
         "value": "10",
-        "type": "fontSize"
+        "type": "fontSizes"
       },
       "12": {
         "value": "12",
-        "type": "fontSize"
+        "type": "fontSizes"
       },
       "14": {
         "value": "14",
-        "type": "fontSize"
+        "type": "fontSizes"
       },
       "16": {
         "value": "16",
-        "type": "fontSize"
+        "type": "fontSizes"
       },
       "18": {
         "value": "10",
-        "type": "fontSize"
+        "type": "fontSizes"
       },
       "20": {
         "value": "20",
-        "type": "fontSize"
+        "type": "fontSizes"
       },
       "24": {
         "value": "24",
-        "type": "fontSize"
+        "type": "fontSizes"
       },
       "28": {
         "value": "28",
-        "type": "fontSize"
+        "type": "fontSizes"
       },
       "34": {
         "value": "34",
-        "type": "fontSize"
+        "type": "fontSizes"
       },
       "40": {
         "value": "40",
-        "type": "fontSize"
+        "type": "fontSizes"
       },
       "48": {
         "value": "48",
-        "type": "fontSize"
+        "type": "fontSizes"
       }
     },
     "weight": {
       "regular": {
         "value": "400",
-        "type": "fontWeight"
+        "type": "fontWeights"
       },
       "medium": {
         "value": "500",
-        "type": "fontWeight"
+        "type": "fontWeights"
       },
       "semibold": {
         "value": "600",
-        "type": "fontWeight"
+        "type": "fontWeights"
       },
       "bold": {
         "value": "700",
-        "type": "fontWeight"
+        "type": "fontWeights"
+      }
+    },
+    "letter-spacing": {
+      "tight": {
+        "value": "-2%",
+        "type": "letterSpacing"
+      },
+      "normal": {
+        "value": "0%",
+        "type": "letterSpacing"
+      },
+      "wide": {
+        "value": "5%",
+        "type": "letterSpacing"
       }
     }
   },
-  "lineHeight": {
+  "line-height": {
     "tight": {
       "value": "1.2",
-      "type": "lineHeight"
+      "type": "lineHeights"
     },
     "base": {
       "value": "1.5",
-      "type": "lineHeight"
+      "type": "lineHeights"
     },
     "loose": {
       "value": "1.75",
-      "type": "lineHeight"
-    }
-  },
-  "letterSpacing": {
-    "tight": {
-      "value": "-2%",
-      "type": "letterSpacing"
+      "type": "lineHeights"
     },
-    "normal": {
-      "value": "0%",
-      "type": "letterSpacing"
-    },
-    "wide": {
-      "value": "5%",
-      "type": "letterSpacing"
+    "xtight": {
+      "value": "1",
+      "type": "lineHeights"
     }
   }
 }
