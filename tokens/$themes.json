@@ -142,7 +142,6 @@
     "$figmaCollectionId": "VariableCollectionId:5616:205",
     "$figmaModeId": "5616:0",
     "$figmaVariableReferences": {
-      "font.family.sans": "31e11cbad1a8d963536f5b5501ffd96f7bc48f2f",
       "font.size.10": "811aa29e37ccba9df3d42f1873335435b2f62963",
       "font.size.12": "3b7449fad2d00ce013a238afb00306b7ed62eaa5",
       "font.size.14": "ce0c92c85f696bfe6dfe8cad6a7bef6e690385f0",
@@ -154,14 +153,49 @@
       "font.size.34": "10852ef2440453af0fc073bd3db9b866b3f58529",
       "font.size.40": "07ca45b983091e30788fb4047e7c5e62f5b2a4f1",
       "font.size.48": "d83a839c55e8be4cad10b54486c0aa972ec8d463",
-      "font.weight.regular": "eb8b2c0157224f8c9044c9d56081996d84d9fa17",
-      "font.weight.medium": "76d674648439c6b36f38d5f8940c4d890ce225a5",
-      "font.weight.semibold": "01caf509e5d343c3091766de9d376952964d0467",
-      "font.weight.bold": "1bb82cc453a1ca01d9c112ee4c4135df7b554538",
       "font.line-height.tight": "adcbdde2e658651cb0cec9bc15e113ab80c4bff6",
       "font.line-height.base": "418bdc0cb503f1fc89120318e4605db1f6b0582d",
       "font.line-height.loose": "23a4644d9c7201acc74105e3222e48aedc717296",
-      "font.line-height.xtight": "47922d67f8b5026ac9aa8ebed28cda0fab2fe6a0"
+      "font.line-height.xtight": "47922d67f8b5026ac9aa8ebed28cda0fab2fe6a0",
+      "font.family.web": "31e11cbad1a8d963536f5b5501ffd96f7bc48f2f",
+      "font.weight.400": "eb8b2c0157224f8c9044c9d56081996d84d9fa17",
+      "font.weight.500": "76d674648439c6b36f38d5f8940c4d890ce225a5",
+      "font.weight.600": "01caf509e5d343c3091766de9d376952964d0467",
+      "font.weight.700": "1bb82cc453a1ca01d9c112ee4c4135df7b554538"
     }
+  },
+  {
+    "id": "f2f63640e9aacf2073a6c8edfb43e1e5ba8b91dd",
+    "name": "Desktop",
+    "$figmaStyleReferences": {},
+    "selectedTokenSets": {
+      "Core/Typography": "source",
+      "Webapp/Typography": "enabled"
+    },
+    "group": "Webapp/Typography",
+    "$figmaVariableReferences": {
+      "font.family.web": "0e43150c3c97f08ce789004d27784c1d9770b36f",
+      "font.weight.regular": "b0b4a9e9346b7a937ba2938ce147060212738a78",
+      "font.weight.medium": "769cc51790b8449d9b0aaebe5b1d3e3873533968",
+      "font.weight.semibold": "dd2580deab7cfa7bd4b302beca8b5a6fe24f78f1",
+      "font.weight.bold": "5b266765987070cad935169fecca329f54deb50a",
+      "font.size.display.lg": "e045346611ad00df5f30561992fea418391ce0a1",
+      "font.size.body.sm": "273c32d1612d11e39a8687c6877f4608b998f0f0",
+      "font.size.body.md": "b98a126f337b5e3b58259313f46d866cb24745a1",
+      "font.size.body.lg": "ad60d1ddc3bcb24c062a3adca78ae0b88e65b35f",
+      "font.size.body.xl": "dc80239413ea7dacd884700b96e894a0265a7880",
+      "font.size.label.sm": "a33a8a62e4948df042387342f4c98fccda0c9426",
+      "font.size.label.md": "203bfdc32deb4bd7063598c10b7e84c4c71670d7",
+      "font.size.label.lg": "b88957fd7d2f28cd184f485911523a1700541aa0",
+      "font.size.label.xl": "9b49ea089e21a7e00416dff34800cc04fd5b4b4f",
+      "font.size.headline.sm": "de0580f592f0b108e7b0ee436ccf6b3c1ca03659",
+      "font.size.headline.md": "dad7a99c35a30c676ac82c88185c292f3e8a8aa0",
+      "font.size.headline.lg": "2711b0a089512e137c05acf84c3a23dfb8033848",
+      "font.size.headline.xl": "6648374b810a02487c3985efc0b3af1f357fb9a3",
+      "font.size.headline.2xl": "1078ea216e584db96a19219e7161132c5896b6ea",
+      "font.size.headline.3xl": "0717cd8e3aaa7816561678b37b29fb58e15c23ee"
+    },
+    "$figmaCollectionId": "VariableCollectionId:5693:2192",
+    "$figmaModeId": "5693:0"
   }
 ]

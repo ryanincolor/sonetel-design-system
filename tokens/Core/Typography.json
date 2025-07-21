@@ -50,37 +50,41 @@
       "48": {
         "value": "48",
         "type": "fontSizes"
+      },
+      "96": {
+        "value": "96",
+        "type": "fontSizes"
       }
     },
     "weight": {
-      "regular": {
+      "400": {
         "value": "400",
         "type": "fontWeights"
       },
-      "medium": {
+      "500": {
         "value": "500",
         "type": "fontWeights"
       },
-      "semibold": {
+      "600": {
         "value": "600",
         "type": "fontWeights"
       },
-      "bold": {
+      "700": {
         "value": "700",
         "type": "fontWeights"
       }
     },
     "letter-spacing": {
-      "tight": {
-        "value": "-2%",
-        "type": "letterSpacing"
-      },
-      "normal": {
+      "0": {
         "value": "0%",
         "type": "letterSpacing"
       },
-      "wide": {
+      "5": {
         "value": "5%",
+        "type": "letterSpacing"
+      },
+      "-2": {
+        "value": "-2%",
         "type": "letterSpacing"
       }
     },
