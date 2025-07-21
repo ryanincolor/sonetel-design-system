@@ -89,20 +89,20 @@
       }
     },
     "line-height": {
-      "tight": {
+      "1": {
+        "value": "1",
+        "type": "lineHeights"
+      },
+      "1_2": {
         "value": "1.2",
         "type": "lineHeights"
       },
-      "base": {
+      "1_5": {
         "value": "1.5",
         "type": "lineHeights"
       },
-      "loose": {
+      "1_75": {
         "value": "1.75",
-        "type": "lineHeights"
-      },
-      "xtight": {
-        "value": "1",
         "type": "lineHeights"
       }
     }

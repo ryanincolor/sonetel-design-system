@@ -311,7 +311,7 @@
         "value": {
           "fontFamily": "{font.family.web}",
           "fontWeight": "{font.weight.semibold}",
-          "lineHeight": "{font.line-height.tight}",
+          "lineHeight": "{font.line-height.xtight}",
           "fontSize": "{font.size.label.xl}",
           "letterSpacing": "{font.letter-spacing.tight}"
         },
@@ -323,7 +323,7 @@
         "value": {
           "fontFamily": "{font.family.web}",
           "fontWeight": "{font.weight.medium}",
-          "lineHeight": "{font.line-height.tight}",
+          "lineHeight": "{font.line-height.xtight}",
           "fontSize": "{font.size.label.lg}",
           "letterSpacing": "{font.letter-spacing.tight}"
         },
@@ -333,7 +333,7 @@
         "value": {
           "fontFamily": "{font.family.web}",
           "fontWeight": "{font.weight.semibold}",
-          "lineHeight": "{font.line-height.tight}",
+          "lineHeight": "{font.line-height.xtight}",
           "fontSize": "{font.size.label.lg}",
           "letterSpacing": "{font.letter-spacing.tight}"
         },
@@ -345,7 +345,7 @@
         "value": {
           "fontFamily": "{font.family.web}",
           "fontWeight": "{font.weight.medium}",
-          "lineHeight": "{font.line-height.tight}",
+          "lineHeight": "{font.line-height.xtight}",
           "fontSize": "{font.size.label.md}",
           "letterSpacing": "{font.letter-spacing.tight}"
         },
@@ -355,7 +355,7 @@
         "value": {
           "fontFamily": "{font.family.web}",
           "fontWeight": "{font.weight.semibold}",
-          "lineHeight": "{font.line-height.tight}",
+          "lineHeight": "{font.line-height.xtight}",
           "fontSize": "{font.size.label.md}",
           "letterSpacing": "{font.letter-spacing.tight}"
         },
@@ -367,7 +367,7 @@
         "value": {
           "fontFamily": "{font.family.web}",
           "fontWeight": "{font.weight.medium}",
-          "lineHeight": "{font.line-height.tight}",
+          "lineHeight": "{font.line-height.xtight}",
           "fontSize": "{font.size.label.sm}",
           "letterSpacing": "{font.letter-spacing.tight}"
         },
@@ -377,7 +377,7 @@
         "value": {
           "fontFamily": "{font.family.web}",
           "fontWeight": "{font.weight.semibold}",
-          "lineHeight": "{font.line-height.tight}",
+          "lineHeight": "{font.line-height.xtight}",
           "fontSize": "{font.size.label.sm}",
           "letterSpacing": "{font.letter-spacing.tight}"
         },
@@ -492,6 +492,24 @@
       "wide": {
         "value": "{font.letter-spacing.5}",
         "type": "letterSpacing"
+      }
+    },
+    "line-height": {
+      "tight": {
+        "value": "{font.line-height.tight}",
+        "type": "lineHeights"
+      },
+      "base": {
+        "value": "{font.line-height.base}",
+        "type": "lineHeights"
+      },
+      "loose": {
+        "value": "{font.line-height.1_75}",
+        "type": "lineHeights"
+      },
+      "xtight": {
+        "value": "{font.line-height.1}",
+        "type": "lineHeights"
       }
     }
   }
