@@ -10,9 +10,9 @@ register(StyleDictionary);
 
 console.log("🏗️  Building design tokens...");
 
-// Configuration for mode-independent tokens (spacing only)
+// Configuration for mode-independent tokens (spacing and typography)
 const spacingConfig = {
-  source: ["tokens/Core/**/*.json", "tokens/Webapp/Spacing.json"],
+  source: ["tokens/Core/**/*.json", "tokens/Webapp/Spacing.json", "tokens/Webapp/Typography.json"],
   preprocessors: ["tokens-studio"],
   platforms: {
     web: {
@@ -20,11 +20,11 @@ const spacingConfig = {
       buildPath: "dist/web/",
       files: [
         {
-          destination: "tokens-spacing.css",
+          destination: "tokens-layout.css",
           format: "css/variables",
           filter: function (token) {
-            // Only include webapp spacing tokens, not core tokens
-            return token.filePath.includes("Webapp/Spacing");
+            // Only include webapp spacing and typography tokens, not core tokens
+            return token.filePath.includes("Webapp/Spacing") || token.filePath.includes("Webapp/Typography");
           },
           options: {
             showFileHeader: true,
@@ -88,8 +88,8 @@ const darkConfig = {
   },
 };
 
-// Build spacing tokens (mode-independent)
-console.log("📏 Building spacing tokens (mode-independent)...");
+// Build layout tokens (spacing and typography - mode-independent)
+console.log("📏 Building layout tokens (spacing and typography - mode-independent)...");
 const spacingSd = new StyleDictionary(spacingConfig);
 await spacingSd.buildAllPlatforms();
 
@@ -183,8 +183,8 @@ let spacingCss = "";
 let lightCss = "";
 let darkCss = "";
 
-// Read spacing tokens file (mode-independent)
-const spacingPath = path.join(distPath, "tokens-spacing.css");
+// Read layout tokens file (spacing and typography - mode-independent)
+const spacingPath = path.join(distPath, "tokens-layout.css");
 if (fs.existsSync(spacingPath)) {
   spacingCss = fs.readFileSync(spacingPath, "utf8");
 }
@@ -217,6 +217,11 @@ combinedCss = combinedCss
   .replace(/--status/g, "--swa-status")
   .replace(/--brand/g, "--swa-brand")
   .replace(/--spacing/g, "--swa-spacing")
+  .replace(/--font/g, "--swa-font")
+  .replace(/--display/g, "--swa-display")
+  .replace(/--headline/g, "--swa-headline")
+  .replace(/--body/g, "--swa-body")
+  .replace(/--label/g, "--swa-label")
   // Convert camelCase to kebab-case for better matching
   .replace(/--swa-elevationSolid/g, "--swa-elevation-solid")
   .replace(/--swa-elevationAlpha/g, "--swa-elevation-alpha")
@@ -237,7 +242,26 @@ combinedCss = combinedCss
   .replace(/--swa-spacingSm/g, "--swa-spacing-sm")
   .replace(/--swa-spacingMd/g, "--swa-spacing-md")
   .replace(/--swa-spacingLg/g, "--swa-spacing-lg")
-  .replace(/--swa-spacingXl/g, "--swa-spacing-xl");
+  .replace(/--swa-spacingXl/g, "--swa-spacing-xl")
+  // Fix typography variable names
+  .replace(/--swa-fontFamily/g, "--swa-font-family")
+  .replace(/--swa-fontSize/g, "--swa-font-size")
+  .replace(/--swa-fontWeight/g, "--swa-font-weight")
+  .replace(/--swa-lineHeight/g, "--swa-line-height")
+  .replace(/--swa-letterSpacing/g, "--swa-letter-spacing")
+  .replace(/--swa-displayLarge/g, "--swa-display-large")
+  .replace(/--swa-headlineXLarge/g, "--swa-headline-x-large")
+  .replace(/--swa-headlineLarge/g, "--swa-headline-large")
+  .replace(/--swa-headlineMedium/g, "--swa-headline-medium")
+  .replace(/--swa-headlineSmall/g, "--swa-headline-small")
+  .replace(/--swa-bodyXLarge/g, "--swa-body-x-large")
+  .replace(/--swa-bodyLarge/g, "--swa-body-large")
+  .replace(/--swa-bodyMedium/g, "--swa-body-medium")
+  .replace(/--swa-bodySmall/g, "--swa-body-small")
+  .replace(/--swa-labelXLarge/g, "--swa-label-x-large")
+  .replace(/--swa-labelLarge/g, "--swa-label-large")
+  .replace(/--swa-labelMedium/g, "--swa-label-medium")
+  .replace(/--swa-labelSmall/g, "--swa-label-small");
 
 // Write the combined file
 fs.writeFileSync(path.join(distPath, "tokens.css"), combinedCss);
@@ -264,6 +288,7 @@ async function generateJavaScriptTokens() {
       "tokens/Core/**/*.json",
       "tokens/Webapp/Color/Light.json",
       "tokens/Webapp/Spacing.json",
+      "tokens/Webapp/Typography.json",
     ],
     preprocessors: ["tokens-studio"],
     platforms: {
@@ -288,6 +313,7 @@ async function generateJavaScriptTokens() {
       "tokens/Core/**/*.json",
       "tokens/Webapp/Color/Dark.json",
       "tokens/Webapp/Spacing.json",
+      "tokens/Webapp/Typography.json",
     ],
     preprocessors: ["tokens-studio"],
     platforms: {

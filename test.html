@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Token Test</title>
+</head>
+<body>
+    <h1>Typography Token Test</h1>
+    <div id="test-output"></div>
+    
+    <script>
+        console.log("Script executing...");
+        
+        async function testTokenLoading() {
+            try {
+                console.log("Attempting to load typography tokens...");
+                const response = await fetch("tokens/Core/Typography.json");
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                console.log("Typography tokens loaded:", data);
+                
+                document.getElementById("test-output").innerHTML = `
+                    <h2>Success!</h2>
+                    <p>Typography tokens loaded successfully</p>
+                    <pre>${JSON.stringify(data, null, 2)}</pre>
+                `;
+            } catch (error) {
+                console.error("Error loading typography tokens:", error);
+                document.getElementById("test-output").innerHTML = `
+                    <h2>Error!</h2>
+                    <p>Failed to load typography tokens: ${error.message}</p>
+                `;
+            }
+        }
+        
+        document.addEventListener("DOMContentLoaded", () => {
+            console.log("DOM loaded, starting test...");
+            testTokenLoading();
+        });
+    </script>
+</body>
+</html>

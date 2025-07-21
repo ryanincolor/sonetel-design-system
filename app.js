@@ -212,6 +212,10 @@ async function loadCoreTokens() {
     const spacingResponse = await fetch("tokens/Core/Spacing.json");
     const spacingTokens = await spacingResponse.json();
 
+    // Load core typography tokens
+    const typographyResponse = await fetch("tokens/Core/Typography.json");
+    const typographyTokens = await typographyResponse.json();
+
     const grid = document.querySelector("#core .token-grid");
     grid.innerHTML = "";
 
@@ -285,6 +289,13 @@ async function loadCoreTokens() {
     if (spacingTokens) {
       displayTokenCategory(grid, "Spacing", spacingTokens, "dimension");
     }
+
+    // Display typography tokens (Core tokens use regular display, not special typography showcase)
+    console.log("Typography tokens:", typographyTokens);
+    if (typographyTokens) {
+      displayTokenCategory(grid, "Typography", typographyTokens, "fontFamilies");
+      console.log("Typography tokens displayed");
+    }
   } catch (error) {
     console.error("Error loading core tokens:", error);
     document.querySelector("#core .token-grid").innerHTML =
@@ -335,6 +346,137 @@ function resolveTokenReference(value, coreTokens, webappTokens = null) {
   return value;
 }
 
+// Helper function to find what core token a webapp token references
+function findCoreTokenReference(tokenReference, webappTypographyTokens, coreTokens) {
+  if (!tokenReference || typeof tokenReference !== 'string' || !tokenReference.startsWith('{') || !tokenReference.endsWith('}')) {
+    return tokenReference; // Not a token reference
+  }
+
+  // Remove braces and split the path
+  const path = tokenReference.slice(1, -1).split('.');
+
+  // Try to find the webapp typography token
+  let webappToken = webappTypographyTokens;
+  for (const segment of path) {
+    if (webappToken && webappToken[segment] !== undefined) {
+      webappToken = webappToken[segment];
+    } else {
+      webappToken = null;
+      break;
+    }
+  }
+
+  // If we found the webapp token and it has a value that's also a reference
+  if (webappToken && webappToken.value && typeof webappToken.value === 'string' &&
+      webappToken.value.startsWith('{') && webappToken.value.endsWith('}')) {
+    return webappToken.value; // Return the core token reference
+  }
+
+  return tokenReference; // Return original if we can't resolve
+}
+
+// Helper function to render typography tokens with large dedicated component
+function renderTypographyToken(token, fullPath, isWebapp, coreTokens, webappTokens) {
+  const typographyValue = token.value;
+  const fontFamily = resolveTokenReference(typographyValue.fontFamily || "'Inter', sans-serif", coreTokens, webappTokens);
+  let fontSize = resolveTokenReference(typographyValue.fontSize || "16", coreTokens, webappTokens);
+  const fontWeight = resolveTokenReference(typographyValue.fontWeight || "400", coreTokens, webappTokens);
+  const lineHeight = resolveTokenReference(typographyValue.lineHeight || "1.5", coreTokens, webappTokens);
+  const letterSpacing = resolveTokenReference(typographyValue.letterSpacing || "0%", coreTokens, webappTokens);
+
+  // Ensure fontSize has units
+  if (!isNaN(fontSize) && !fontSize.toString().includes('px')) {
+    fontSize = fontSize + 'px';
+  }
+
+  // Convert percentage letter-spacing to em
+  let letterSpacingValue = letterSpacing;
+  if (letterSpacing.includes("%")) {
+    const percentage = parseFloat(letterSpacing.replace("%", ""));
+    letterSpacingValue = `${percentage / 100}em`;
+  }
+
+  // Debug log
+  console.log('Typography values:', { fontFamily, fontSize, fontWeight, lineHeight, letterSpacingValue });
+
+  const formattedOutput = isWebapp
+    ? `<div class="token-formatted-output" data-token="${fullPath}" data-value="${JSON.stringify(token.value)}"></div>`
+    : "";
+
+  return `
+    <div class="typography-showcase${isWebapp ? " webapp-token" : ""}" onclick="copyToken('${fullPath}', '${JSON.stringify(token.value)}', ${isWebapp})">
+      <div class="typography-header">
+        <h4 class="typography-title">${fullPath}</h4>
+      </div>
+      <div class="typography-demo" style="font-family: ${fontFamily}; font-size: ${fontSize}; font-weight: ${fontWeight}; line-height: ${lineHeight}; letter-spacing: ${letterSpacingValue};">
+        The quick brown fox jumps over the lazy dog
+      </div>
+      <div class="typography-details">
+        <div class="typography-token-references">
+          <div class="token-reference-item">
+            <span class="token-reference-name">${typographyValue.fontFamily.replace(/[{}]/g, '')}</span>
+            <span class="token-reference-resolved">${findCoreTokenReference(typographyValue.fontFamily, webappTokens, coreTokens)}</span>
+          </div>
+          <div class="token-reference-item">
+            <span class="token-reference-name">${typographyValue.fontSize.replace(/[{}]/g, '')}</span>
+            <span class="token-reference-resolved">${findCoreTokenReference(typographyValue.fontSize, webappTokens, coreTokens)}</span>
+          </div>
+          <div class="token-reference-item">
+            <span class="token-reference-name">${typographyValue.fontWeight.replace(/[{}]/g, '')}</span>
+            <span class="token-reference-resolved">${findCoreTokenReference(typographyValue.fontWeight, webappTokens, coreTokens)}</span>
+          </div>
+          <div class="token-reference-item">
+            <span class="token-reference-name">${typographyValue.lineHeight.replace(/[{}]/g, '')}</span>
+            <span class="token-reference-resolved">${findCoreTokenReference(typographyValue.lineHeight, webappTokens, coreTokens)}</span>
+          </div>
+          <div class="token-reference-item">
+            <span class="token-reference-name">${typographyValue.letterSpacing.replace(/[{}]/g, '')}</span>
+            <span class="token-reference-resolved">${findCoreTokenReference(typographyValue.letterSpacing, webappTokens, coreTokens)}</span>
+          </div>
+        </div>
+        ${formattedOutput}
+      </div>
+    </div>
+  `;
+}
+
+// Helper function to display typography categories with special layout
+function displayTypographyCategory(
+  container,
+  categoryName,
+  tokens,
+  isWebapp = false,
+  coreTokens = null,
+  fullWebappTypographyTokens = null,
+) {
+  const categoryDiv = document.createElement("div");
+  categoryDiv.className = "typography-category";
+
+  let categoryHtml = `<h3 class="typography-category-title">${categoryName}</h3><div class="typography-showcase-list">`;
+
+  function renderTypographyTokens(obj, prefix = "") {
+    Object.keys(obj).forEach((key) => {
+      const fullPath = prefix ? `${prefix}.${key}` : key;
+      const token = obj[key];
+
+      if (token && typeof token === "object") {
+        if (token.value !== undefined && token.type === "typography" && typeof token.value === "object") {
+          // This is a typography token
+          categoryHtml += renderTypographyToken(token, fullPath, isWebapp, coreTokens, fullWebappTypographyTokens);
+        } else if (token.value === undefined) {
+          // This is a nested object
+          renderTypographyTokens(token, fullPath);
+        }
+      }
+    });
+  }
+
+  renderTypographyTokens(tokens);
+  categoryHtml += `</div>`;
+  categoryDiv.innerHTML = categoryHtml;
+  container.appendChild(categoryDiv);
+}
+
 // Helper function to display token categories
 function displayTokenCategory(
   container,
@@ -360,6 +502,12 @@ function displayTokenCategory(
           // This is a token
           const tokenType = token.type || defaultType;
           let preview = "";
+
+          // Handle typography tokens with dedicated function
+          if (tokenType === "typography" && typeof token.value === "object") {
+            categoryHtml += renderTypographyToken(token, fullPath, isWebapp, coreTokens, webappTokens);
+            return;
+          }
 
           if (tokenType === "color") {
             let colorValue;
@@ -401,6 +549,62 @@ function displayTokenCategory(
             const numericValue = parseFloat(dimensionValue.replace("px", ""));
             const width = Math.max(2, numericValue) + "px"; // Minimum 2px width for visibility
             preview = `<div class="dimension-preview" style="width: ${width}; height: 8px; background: #007aff !important;"></div>`;
+
+          } else if (tokenType === "typography") {
+            // Handle typography tokens
+            let typographyValue = token.value;
+            if (typeof typographyValue === "object") {
+              // For composite typography tokens, show sample text with applied styles
+              const fontFamily = resolveTokenReference(typographyValue.fontFamily || "'Inter', sans-serif", coreTokens, webappTokens);
+              let fontSize = resolveTokenReference(typographyValue.fontSize || "16", coreTokens, webappTokens);
+              // Ensure fontSize has units
+              if (!isNaN(fontSize) && !fontSize.toString().includes('px')) {
+                fontSize = fontSize + 'px';
+              }
+              const fontWeight = resolveTokenReference(typographyValue.fontWeight || "400", coreTokens, webappTokens);
+              const lineHeight = resolveTokenReference(typographyValue.lineHeight || "1.5", coreTokens, webappTokens);
+              const letterSpacing = resolveTokenReference(typographyValue.letterSpacing || "0%", coreTokens, webappTokens);
+
+              // Convert percentage letter-spacing to em
+              let letterSpacingValue = letterSpacing;
+              if (letterSpacing.includes("%")) {
+                const percentage = parseFloat(letterSpacing.replace("%", ""));
+                letterSpacingValue = `${percentage / 100}em`;
+              }
+
+              preview = `<div class="typography-preview" style="font-family: ${fontFamily}; font-size: ${fontSize}px; font-weight: ${fontWeight}; line-height: ${lineHeight}; letter-spacing: ${letterSpacingValue}; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 200px;">The quick brown fox</div>`;
+            } else {
+              // For primitive typography tokens, just show the value
+              preview = `<div class="typography-preview">"${typographyValue}"</div>`;
+            }
+          } else if (tokenType === "fontFamilies" || tokenType === "fontSizes" || tokenType === "fontWeights" || tokenType === "letterSpacing" || tokenType === "lineHeights") {
+            // Handle individual typography properties
+            let typographyValue = token.value;
+            if (isWebapp && coreTokens) {
+              typographyValue = resolveTokenReference(token.value, coreTokens, webappTokens || tokens);
+            }
+
+            if (tokenType === "fontFamilies") {
+              preview = `<div class="typography-preview" style="font-family: ${typographyValue};">The quick brown fox</div>`;
+            } else if (tokenType === "fontSizes") {
+              let fontSizeValue = typographyValue;
+              if (!isNaN(fontSizeValue) && !fontSizeValue.toString().includes('px')) {
+                fontSizeValue = fontSizeValue + 'px';
+              }
+              preview = `<div class="typography-preview" style="font-size: ${fontSizeValue};">Aa</div>`;
+            } else if (tokenType === "fontWeights") {
+              preview = `<div class="typography-preview" style="font-weight: ${typographyValue};">The quick brown fox</div>`;
+            } else if (tokenType === "letterSpacing") {
+              let letterSpacingValue = typographyValue;
+              if (typographyValue.includes("%")) {
+                const percentage = parseFloat(typographyValue.replace("%", ""));
+                letterSpacingValue = `${percentage / 100}em`;
+              }
+              preview = `<div class="typography-preview" style="letter-spacing: ${letterSpacingValue};">The quick brown fox</div>`;
+            } else if (tokenType === "lineHeights") {
+              preview = `<div class="typography-preview" style="line-height: ${typographyValue};">The quick brown fox<br>jumps over the lazy dog</div>`;
+            }
+
           }
 
           const formattedOutput = isWebapp
@@ -463,6 +667,17 @@ async function loadWebTokens() {
       }
     } catch (error) {
       console.log("No webapp spacing tokens found");
+    }
+
+    // Load webapp typography tokens
+    let webappTypographyTokens = null;
+    try {
+      const typographyResponse = await fetch("tokens/Webapp/Typography.json");
+      if (typographyResponse.ok) {
+        webappTypographyTokens = await typographyResponse.json();
+      }
+    } catch (error) {
+      console.log("No webapp typography tokens found");
     }
 
     // Load core tokens for reference resolution (both color and spacing)
@@ -561,8 +776,71 @@ async function loadWebTokens() {
       );
     }
 
+    // Display webapp typography tokens grouped by type (theme-independent)
+    console.log("Webapp typography tokens:", webappTypographyTokens);
+    if (webappTypographyTokens) {
+      // Group typography tokens by semantic categories using special typography display
+      if (webappTypographyTokens.Display) {
+        displayTypographyCategory(
+          webappGrid,
+          "Display",
+          { Display: webappTypographyTokens.Display },
+          true,
+          coreTokens,
+          webappTypographyTokens,
+        );
+      }
+
+      if (webappTypographyTokens.Headline) {
+        displayTypographyCategory(
+          webappGrid,
+          "Headline",
+          { Headline: webappTypographyTokens.Headline },
+          true,
+          coreTokens,
+          webappTypographyTokens,
+        );
+      }
+
+      if (webappTypographyTokens.Body) {
+        displayTypographyCategory(
+          webappGrid,
+          "Body",
+          { Body: webappTypographyTokens.Body },
+          true,
+          coreTokens,
+          webappTypographyTokens,
+        );
+      }
+
+      if (webappTypographyTokens.Label) {
+        displayTypographyCategory(
+          webappGrid,
+          "Label",
+          { Label: webappTypographyTokens.Label },
+          true,
+          coreTokens,
+          webappTypographyTokens,
+        );
+      }
+
+      // Display any core font tokens if they exist in webapp typography
+      if (webappTypographyTokens.font) {
+        displayTokenCategory(
+          webappGrid,
+          "Font Properties",
+          { font: webappTypographyTokens.font },
+          "typography",
+          true,
+          coreTokens,
+        );
+      }
+
+      console.log("Webapp typography tokens displayed by category");
+    }
+
     // Show message if no webapp color tokens are available
-    if (!themeTokens && !webappSpacingTokens) {
+    if (!themeTokens && !webappSpacingTokens && !webappTypographyTokens) {
       webappGrid.innerHTML = `
         <div class="empty-state">
           <div class="empty-state-icon">🔧</div>
@@ -574,8 +852,8 @@ async function loadWebTokens() {
         </div>
       `;
     } else if (!themeTokens) {
-      // Only webapp spacing tokens available
-      if (webappSpacingTokens) {
+      // Only webapp spacing and/or typography tokens available
+      if (webappSpacingTokens || webappTypographyTokens) {
         const message = document.createElement("div");
         message.innerHTML = `
           <p style="text-align: center; color: var(--swa-on-surface-seconday); margin-bottom: 24px; font-style: italic;">
