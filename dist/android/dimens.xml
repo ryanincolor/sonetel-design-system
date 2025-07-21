@@ -38,7 +38,7 @@
   <dimen name="spacing_10xl">1280.00dp</dimen>
   <dimen name="spacing_11xl">1536.00dp</dimen>
   <dimen name="spacing_12xl">2048.00dp</dimen>
-  <dimen name="letter_spacing_tight">-32.00dp</dimen>
-  <dimen name="letter_spacing_normal">0.00dp</dimen>
-  <dimen name="letter_spacing_wide">80.00dp</dimen>
+  <dimen name="font_letter_spacing_tight">-32.00dp</dimen>
+  <dimen name="font_letter_spacing_normal">0.00dp</dimen>
+  <dimen name="font_letter_spacing_wide">80.00dp</dimen>
 </resources>

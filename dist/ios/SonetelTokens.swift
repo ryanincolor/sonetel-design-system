@@ -72,6 +72,9 @@ public class SonetelTokens {
     public static let ElevationSolid6 = [UIColor colorWithRed:0.161f green:0.161f blue:0.161f alpha:1.000f]
     public static let ElevationSolid7 = [UIColor colorWithRed:0.039f green:0.039f blue:0.039f alpha:1.000f]
     public static let FontFamilySans = 'Inter', sans-serif
+    public static let FontLetterSpacingNormal = 0.00f
+    public static let FontLetterSpacingTight = -32.00f
+    public static let FontLetterSpacingWide = 80.00f
     public static let FontSize10 = 160.00f
     public static let FontSize12 = 192.00f
     public static let FontSize14 = 224.00f
@@ -87,12 +90,10 @@ public class SonetelTokens {
     public static let FontWeightMedium = 500
     public static let FontWeightRegular = 400
     public static let FontWeightSemibold = 600
-    public static let LetterSpacingNormal = 0.00f
-    public static let LetterSpacingTight = -32.00f
-    public static let LetterSpacingWide = 80.00f
     public static let LineHeightBase = 1.5
     public static let LineHeightLoose = 1.75
     public static let LineHeightTight = 1.2
+    public static let LineHeightXtight = 1
     public static let OnSurfaceInverse = [UIColor colorWithRed:1.000f green:1.000f blue:1.000f alpha:1.000f]
     public static let OnSurfaceOnDark = [UIColor colorWithRed:1.000f green:1.000f blue:1.000f alpha:1.000f]
     public static let OnSurfaceOnLight = [UIColor colorWithRed:0.039f green:0.039f blue:0.039f alpha:1.000f]
