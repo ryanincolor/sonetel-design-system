@@ -496,11 +496,11 @@
     },
     "line-height": {
       "tight": {
-        "value": "{font.line-height.tight}",
+        "value": "{font.line-height.1_2}",
         "type": "lineHeights"
       },
       "base": {
-        "value": "{font.line-height.base}",
+        "value": "{font.line-height.1_5}",
         "type": "lineHeights"
       },
       "loose": {
