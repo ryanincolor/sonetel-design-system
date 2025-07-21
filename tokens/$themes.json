@@ -5,7 +5,8 @@
     "$figmaStyleReferences": {},
     "selectedTokenSets": {
       "Core/Color": "source",
-      "Webapp/Color/Light": "enabled"
+      "Webapp/Color/Light": "enabled",
+      "Core/Typography": "disabled"
     },
     "$figmaCollectionId": "VariableCollectionId:5680:546",
     "$figmaModeId": "5680:2",
@@ -42,7 +43,8 @@
     "$figmaStyleReferences": {},
     "selectedTokenSets": {
       "Core/Color": "source",
-      "Webapp/Color/Dark": "enabled"
+      "Webapp/Color/Dark": "enabled",
+      "Core/Typography": "disabled"
     },
     "$figmaCollectionId": "VariableCollectionId:5680:546",
     "$figmaModeId": "5685:0",
@@ -78,7 +80,8 @@
     "name": "Primitives",
     "$figmaStyleReferences": {},
     "selectedTokenSets": {
-      "Core/Color": "enabled"
+      "Core/Color": "enabled",
+      "Core/Typography": "disabled"
     },
     "group": "Core/Colors",
     "$figmaCollectionId": "VariableCollectionId:265:4507",
