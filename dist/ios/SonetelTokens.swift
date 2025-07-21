@@ -79,7 +79,7 @@ public class SonetelTokens {
     public static let FontSize12 = 192.00f
     public static let FontSize14 = 224.00f
     public static let FontSize16 = 256.00f
-    public static let FontSize18 = 160.00f
+    public static let FontSize18 = 288.00f
     public static let FontSize20 = 320.00f
     public static let FontSize24 = 384.00f
     public static let FontSize28 = 448.00f
