@@ -739,10 +739,10 @@ body {
 
 .typography-preview {
   width: 200px;
-  height: 40px;
+  min-height: 60px;
   display: flex;
   align-items: center;
-  padding: 0 8px;
+  padding: 8px;
   font-size: 14px;
   color: var(--swa-on-surface-primary);
   background: var(--swa-elevation-solid-0);

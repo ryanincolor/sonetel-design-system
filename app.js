@@ -902,16 +902,67 @@ async function loadWebTokens() {
         );
       }
 
-      // Display any core font tokens if they exist in webapp typography
+      // Display webapp font properties organized by categories
       if (webappTypographyTokens.font) {
-        displayTokenCategory(
-          webappGrid,
-          "Font Properties",
-          { font: webappTypographyTokens.font },
-          "typography",
-          true,
-          coreTokens,
-        );
+        // Display webapp font families
+        if (webappTypographyTokens.font.family) {
+          displayTokenCategory(
+            webappGrid,
+            "Webapp Font Families",
+            { font: { family: webappTypographyTokens.font.family } },
+            "fontFamilies",
+            true,
+            coreTokens,
+          );
+        }
+
+        // Display webapp font sizes
+        if (webappTypographyTokens.font.size) {
+          displayTokenCategory(
+            webappGrid,
+            "Webapp Font Sizes",
+            { font: { size: webappTypographyTokens.font.size } },
+            "fontSizes",
+            true,
+            coreTokens,
+          );
+        }
+
+        // Display webapp font weights
+        if (webappTypographyTokens.font.weight) {
+          displayTokenCategory(
+            webappGrid,
+            "Webapp Font Weights",
+            { font: { weight: webappTypographyTokens.font.weight } },
+            "fontWeights",
+            true,
+            coreTokens,
+          );
+        }
+
+        // Display webapp line heights
+        if (webappTypographyTokens.font["line-height"]) {
+          displayTokenCategory(
+            webappGrid,
+            "Webapp Line Heights",
+            { font: { "line-height": webappTypographyTokens.font["line-height"] } },
+            "lineHeights",
+            true,
+            coreTokens,
+          );
+        }
+
+        // Display webapp letter spacing
+        if (webappTypographyTokens.font["letter-spacing"]) {
+          displayTokenCategory(
+            webappGrid,
+            "Webapp Letter Spacing",
+            { font: { "letter-spacing": webappTypographyTokens.font["letter-spacing"] } },
+            "letterSpacing",
+            true,
+            coreTokens,
+          );
+        }
       }
 
       console.log("Webapp typography tokens displayed by category");
