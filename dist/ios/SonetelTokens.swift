@@ -9,6 +9,14 @@
 import SwiftUI
 
 public class SonetelTokens {
+    public static let BodyLargeProminent = [object Object]
+    public static let BodyLargeRegular = [object Object]
+    public static let BodyMediumProminent = [object Object]
+    public static let BodyMediumRegular = [object Object]
+    public static let BodySmallProminent = [object Object]
+    public static let BodySmallRegular = [object Object]
+    public static let BodyXLargeProminent = [object Object]
+    public static let BodyXLargeRegular = [object Object]
     public static let BrandYellow = [UIColor colorWithRed:1.000f green:0.937f blue:0.384f alpha:1.000f]
     public static let ColorAlphaDark10 = [UIColor colorWithRed:1.000f green:1.000f blue:1.000f alpha:0.078f]
     public static let ColorAlphaDark100 = [UIColor colorWithRed:1.000f green:1.000f blue:1.000f alpha:1.000f]
@@ -55,6 +63,7 @@ public class SonetelTokens {
     public static let ColorSolidLight50 = [UIColor colorWithRed:0.400f green:0.400f blue:0.400f alpha:1.000f]
     public static let ColorSolidLight60 = [UIColor colorWithRed:0.161f green:0.161f blue:0.161f alpha:1.000f]
     public static let ColorSolidLight70 = [UIColor colorWithRed:0.039f green:0.039f blue:0.039f alpha:1.000f]
+    public static let DisplayLarge = [object Object]
     public static let ElevationAlpha0 = [UIColor colorWithRed:0.000f green:0.000f blue:0.000f alpha:0.000f]
     public static let ElevationAlpha1 = [UIColor colorWithRed:0.000f green:0.000f blue:0.000f alpha:0.039f]
     public static let ElevationAlpha2 = [UIColor colorWithRed:0.000f green:0.000f blue:0.000f alpha:0.059f]
@@ -75,6 +84,10 @@ public class SonetelTokens {
     public static let FontLetterSpacingNormal = 0.00f
     public static let FontLetterSpacingTight = -32.00f
     public static let FontLetterSpacingWide = 80.00f
+    public static let FontLineHeightBase = 1.5
+    public static let FontLineHeightLoose = 1.75
+    public static let FontLineHeightTight = 1.2
+    public static let FontLineHeightXtight = 1
     public static let FontSize10 = 160.00f
     public static let FontSize12 = 192.00f
     public static let FontSize14 = 224.00f
@@ -90,10 +103,32 @@ public class SonetelTokens {
     public static let FontWeightMedium = 500
     public static let FontWeightRegular = 400
     public static let FontWeightSemibold = 600
-    public static let LineHeightBase = 1.5
-    public static let LineHeightLoose = 1.75
-    public static let LineHeightTight = 1.2
-    public static let LineHeightXtight = 1
+    public static let Headline2xLargeLight = [object Object]
+    public static let Headline2xLargeProminent = [object Object]
+    public static let Headline2xLargeRegular = [object Object]
+    public static let Headline3xLargeLight = [object Object]
+    public static let Headline3xLargeProminent = [object Object]
+    public static let Headline3xLargeRegular = [object Object]
+    public static let HeadlineLargeLight = [object Object]
+    public static let HeadlineLargeProminent = [object Object]
+    public static let HeadlineLargeRegular = [object Object]
+    public static let HeadlineMediumLight = [object Object]
+    public static let HeadlineMediumProminent = [object Object]
+    public static let HeadlineMediumRegular = [object Object]
+    public static let HeadlineSmallLight = [object Object]
+    public static let HeadlineSmallProminant = [object Object]
+    public static let HeadlineSmallRegular = [object Object]
+    public static let HeadlineXLargeLight = [object Object]
+    public static let HeadlineXLargeProminent = [object Object]
+    public static let HeadlineXLargeRegular = [object Object]
+    public static let LabelLargeProminent = [object Object]
+    public static let LabelLargeRegular = [object Object]
+    public static let LabelMediumProminent = [object Object]
+    public static let LabelMediumRegular = [object Object]
+    public static let LabelSmallProminent = [object Object]
+    public static let LabelSmallRegular = [object Object]
+    public static let LabelXLargeProminent = [object Object]
+    public static let LabelXLargeRegular = [object Object]
     public static let OnSurfaceInverse = [UIColor colorWithRed:1.000f green:1.000f blue:1.000f alpha:1.000f]
     public static let OnSurfaceOnDark = [UIColor colorWithRed:1.000f green:1.000f blue:1.000f alpha:1.000f]
     public static let OnSurfaceOnLight = [UIColor colorWithRed:0.039f green:0.039f blue:0.039f alpha:1.000f]
