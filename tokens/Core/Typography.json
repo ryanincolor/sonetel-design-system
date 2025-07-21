@@ -83,24 +83,24 @@
         "value": "5%",
         "type": "letterSpacing"
       }
-    }
-  },
-  "line-height": {
-    "tight": {
-      "value": "1.2",
-      "type": "lineHeights"
     },
-    "base": {
-      "value": "1.5",
-      "type": "lineHeights"
-    },
-    "loose": {
-      "value": "1.75",
-      "type": "lineHeights"
-    },
-    "xtight": {
-      "value": "1",
-      "type": "lineHeights"
+    "line-height": {
+      "tight": {
+        "value": "1.2",
+        "type": "lineHeights"
+      },
+      "base": {
+        "value": "1.5",
+        "type": "lineHeights"
+      },
+      "loose": {
+        "value": "1.75",
+        "type": "lineHeights"
+      },
+      "xtight": {
+        "value": "1",
+        "type": "lineHeights"
+      }
     }
   }
 }

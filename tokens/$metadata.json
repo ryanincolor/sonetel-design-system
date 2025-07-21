@@ -3,6 +3,7 @@
     "Core/Color",
     "Core/Spacing",
     "Core/Typography",
+    "Webapp/Typography",
     "Webapp/Color/Light",
     "Webapp/Color/Dark",
     "Webapp/Spacing"

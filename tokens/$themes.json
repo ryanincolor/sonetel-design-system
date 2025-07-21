@@ -158,10 +158,10 @@
       "font.weight.medium": "76d674648439c6b36f38d5f8940c4d890ce225a5",
       "font.weight.semibold": "01caf509e5d343c3091766de9d376952964d0467",
       "font.weight.bold": "1bb82cc453a1ca01d9c112ee4c4135df7b554538",
-      "line-height.tight": "adcbdde2e658651cb0cec9bc15e113ab80c4bff6",
-      "line-height.base": "418bdc0cb503f1fc89120318e4605db1f6b0582d",
-      "line-height.loose": "23a4644d9c7201acc74105e3222e48aedc717296",
-      "line-height.xtight": "47922d67f8b5026ac9aa8ebed28cda0fab2fe6a0"
+      "font.line-height.tight": "adcbdde2e658651cb0cec9bc15e113ab80c4bff6",
+      "font.line-height.base": "418bdc0cb503f1fc89120318e4605db1f6b0582d",
+      "font.line-height.loose": "23a4644d9c7201acc74105e3222e48aedc717296",
+      "font.line-height.xtight": "47922d67f8b5026ac9aa8ebed28cda0fab2fe6a0"
     }
   }
 ]
