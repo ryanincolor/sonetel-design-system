@@ -290,11 +290,35 @@ async function loadCoreTokens() {
       displayTokenCategory(grid, "Spacing", spacingTokens, "dimension");
     }
 
-    // Display typography tokens (Core tokens use regular display, not special typography showcase)
+    // Display typography tokens organized by categories
     console.log("Typography tokens:", typographyTokens);
     if (typographyTokens) {
-      displayTokenCategory(grid, "Typography", typographyTokens, "fontFamilies");
-      console.log("Typography tokens displayed");
+      // Display font families
+      if (typographyTokens.font && typographyTokens.font.family) {
+        displayTokenCategory(grid, "Font Families", { font: { family: typographyTokens.font.family } }, "fontFamilies");
+      }
+
+      // Display font sizes
+      if (typographyTokens.font && typographyTokens.font.size) {
+        displayTokenCategory(grid, "Font Sizes", { font: { size: typographyTokens.font.size } }, "fontSizes");
+      }
+
+      // Display font weights
+      if (typographyTokens.font && typographyTokens.font.weight) {
+        displayTokenCategory(grid, "Font Weights", { font: { weight: typographyTokens.font.weight } }, "fontWeights");
+      }
+
+      // Display line heights
+      if (typographyTokens.font && typographyTokens.font["line-height"]) {
+        displayTokenCategory(grid, "Line Heights", { font: { "line-height": typographyTokens.font["line-height"] } }, "lineHeights");
+      }
+
+      // Display letter spacing
+      if (typographyTokens.font && typographyTokens.font["letter-spacing"]) {
+        displayTokenCategory(grid, "Letter Spacing", { font: { "letter-spacing": typographyTokens.font["letter-spacing"] } }, "letterSpacing");
+      }
+
+      console.log("Typography tokens displayed by category");
     }
   } catch (error) {
     console.error("Error loading core tokens:", error);
@@ -369,10 +393,64 @@ function findCoreTokenReference(tokenReference, webappTypographyTokens, coreToke
   // If we found the webapp token and it has a value that's also a reference
   if (webappToken && webappToken.value && typeof webappToken.value === 'string' &&
       webappToken.value.startsWith('{') && webappToken.value.endsWith('}')) {
-    return webappToken.value; // Return the core token reference
+    let coreRef = webappToken.value;
+    // Format line-height tokens to display properly (1_2 -> 1.2, 1_5 -> 1.5, etc.)
+    if (coreRef.includes('line-height.') && coreRef.includes('_')) {
+      coreRef = coreRef.replace(/(\d)_(\d)/g, '$1.$2');
+    }
+    return coreRef; // Return the formatted core token reference
   }
 
   return tokenReference; // Return original if we can't resolve
+}
+
+// Helper function to convert token path to CSS custom property name
+function tokenPathToCSSProperty(fullPath) {
+  // Convert token path to CSS custom property name following the generated pattern
+  let cssName = fullPath;
+
+  // Handle specific patterns seen in generated CSS
+  if (cssName === 'Display.Large') {
+    return 'display-large';
+  }
+
+  // Handle headline patterns: Headline.3x-large.Regular -> headline3xLargeRegular
+  if (cssName.startsWith('Headline.')) {
+    cssName = cssName.replace('Headline.', 'headline');
+    cssName = cssName.replace('3x-large', '3xLarge');
+    cssName = cssName.replace('2x-large', '2xLarge');
+    cssName = cssName.replace('X-large', '-x-large');
+    cssName = cssName.replace('Large', 'Large');
+    cssName = cssName.replace('Medium', 'Medium');
+    cssName = cssName.replace('Small', 'Small');
+    cssName = cssName.replace(/\./g, '');
+    return cssName;
+  }
+
+  // Handle body patterns: Body.X-Large.Regular -> body-x-largeRegular
+  if (cssName.startsWith('Body.')) {
+    cssName = cssName.replace('Body.', 'body-');
+    cssName = cssName.replace('X-Large', 'x-large');
+    cssName = cssName.replace('Large', 'large');
+    cssName = cssName.replace('Medium', 'medium');
+    cssName = cssName.replace('Small', 'small');
+    cssName = cssName.replace(/\./g, '');
+    return cssName;
+  }
+
+  // Handle label patterns: Label.X-large.Regular -> label-x-largeRegular
+  if (cssName.startsWith('Label.')) {
+    cssName = cssName.replace('Label.', 'label-');
+    cssName = cssName.replace('X-large', 'x-large');
+    cssName = cssName.replace('Large', 'large');
+    cssName = cssName.replace('Medium', 'medium');
+    cssName = cssName.replace('Small', 'small');
+    cssName = cssName.replace(/\./g, '');
+    return cssName;
+  }
+
+  // Fallback - just replace dots with dashes and lowercase
+  return cssName.replace(/\./g, '-').toLowerCase();
 }
 
 // Helper function to render typography tokens with large dedicated component
@@ -408,7 +486,7 @@ function renderTypographyToken(token, fullPath, isWebapp, coreTokens, webappToke
       <div class="typography-header">
         <h4 class="typography-title">${fullPath}</h4>
       </div>
-      <div class="typography-demo" style="font-family: ${fontFamily}; font-size: ${fontSize}; font-weight: ${fontWeight}; line-height: ${lineHeight}; letter-spacing: ${letterSpacingValue};">
+      <div class="typography-demo" style="font: var(--swa-${tokenPathToCSSProperty(fullPath)});">
         The quick brown fox jumps over the lazy dog
       </div>
       <div class="typography-details">
