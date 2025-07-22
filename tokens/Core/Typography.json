@@ -93,16 +93,16 @@
         "value": "100%",
         "type": "lineHeights"
       },
+      "110": {
+        "value": "175%",
+        "type": "lineHeights"
+      },
       "120": {
         "value": "120%",
         "type": "lineHeights"
       },
       "150": {
         "value": "150%",
-        "type": "lineHeights"
-      },
-      "175": {
-        "value": "175%",
         "type": "lineHeights"
       }
     }
