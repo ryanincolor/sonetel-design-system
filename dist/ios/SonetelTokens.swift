@@ -89,12 +89,12 @@ public class SonetelTokens {
     public static let FontLetterSpacingTight = -32.00f
     public static let FontLetterSpacingWide = 80.00f
     public static let FontLineHeight100 = 100%
-    public static let FontLineHeight110 = 175%
+    public static let FontLineHeight110 = 110%
     public static let FontLineHeight120 = 120%
     public static let FontLineHeight150 = 150%
     public static let FontLineHeightBase = 150%
     public static let FontLineHeightTight = 120%
-    public static let FontLineHeightTighter = 175%
+    public static let FontLineHeightTighter = 110%
     public static let FontLineHeightTightest = 100%
     public static let FontSize10 = 160.00f
     public static let FontSize12 = 192.00f
