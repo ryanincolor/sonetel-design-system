@@ -1,9 +1,33 @@
+const StyleDictionary = require('style-dictionary');
+
+// Register a custom transform for kebab-case CSS custom property names
+StyleDictionary.registerTransform({
+  name: 'name/cti/kebab',
+  type: 'name',
+  transformer: function(token, options) {
+    // Convert the token path to kebab-case
+    return token.path.join('-').toLowerCase().replace(/\s+/g, '-');
+  }
+});
+
+// Register a custom transform group that includes our kebab-case transform
+StyleDictionary.registerTransformGroup({
+  name: 'tokens-studio-kebab',
+  transforms: [
+    // Include all the default tokens-studio transforms
+    'attribute/cti',
+    'name/cti/kebab', // Use our custom kebab-case transform
+    'size/px',
+    'color/css'
+  ]
+});
+
 module.exports = {
   source: ["tokens/**/*.json"],
   preprocessors: ["tokens-studio"],
   platforms: {
     web: {
-      transformGroup: "tokens-studio",
+      transformGroup: "tokens-studio-kebab",
       buildPath: "dist/web/",
       files: [
         {

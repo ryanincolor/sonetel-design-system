@@ -14,6 +14,11 @@ console.log("🏗️  Building design tokens...");
 const spacingConfig = {
   source: ["tokens/Core/**/*.json", "tokens/Webapp/Spacing.json", "tokens/Webapp/Typography.json"],
   preprocessors: ["tokens-studio"],
+  expand: {
+    typesMap: {
+      typography: 'expand'
+    }
+  },
   platforms: {
     web: {
       transformGroup: "tokens-studio",
@@ -40,6 +45,11 @@ const spacingConfig = {
 const lightConfig = {
   source: ["tokens/Core/**/*.json", "tokens/Webapp/Color/Light.json"],
   preprocessors: ["tokens-studio"],
+  expand: {
+    typesMap: {
+      typography: 'expand'
+    }
+  },
   platforms: {
     web: {
       transformGroup: "tokens-studio",
@@ -66,6 +76,11 @@ const lightConfig = {
 const darkConfig = {
   source: ["tokens/Core/**/*.json", "tokens/Webapp/Color/Dark.json"],
   preprocessors: ["tokens-studio"],
+  expand: {
+    typesMap: {
+      typography: 'expand'
+    }
+  },
   platforms: {
     web: {
       transformGroup: "tokens-studio",
@@ -108,6 +123,11 @@ console.log("📱 Building other platforms...");
 const fullConfig = {
   source: ["tokens/**/*.json"],
   preprocessors: ["tokens-studio"],
+  expand: {
+    typesMap: {
+      typography: 'expand'
+    }
+  },
   platforms: {
     ios: {
       transformGroup: "ios",
@@ -243,25 +263,51 @@ combinedCss = combinedCss
   .replace(/--swa-spacingMd/g, "--swa-spacing-md")
   .replace(/--swa-spacingLg/g, "--swa-spacing-lg")
   .replace(/--swa-spacingXl/g, "--swa-spacing-xl")
-  // Fix typography variable names
+  // Fix all font-related camelCase patterns
+  .replace(/--swa-fontFamily([A-Z][a-zA-Z]*)/g, (match, p1) => `--swa-font-family-${p1.toLowerCase()}`)
+  .replace(/--swa-fontSize([A-Z][a-zA-Z]*)/g, (match, p1) => `--swa-font-size-${p1.replace(/([A-Z])/g, '-$1').toLowerCase()}`)
+  .replace(/--swa-fontWeight([A-Z][a-zA-Z]*)/g, (match, p1) => `--swa-font-weight-${p1.toLowerCase()}`)
+  .replace(/--swa-fontLetterSpacing([A-Z][a-zA-Z]*)/g, (match, p1) => `--swa-font-letter-spacing-${p1.toLowerCase()}`)
+  .replace(/--swa-fontLineHeight([A-Z][a-zA-Z]*)/g, (match, p1) => `--swa-font-line-height-${p1.toLowerCase()}`)
   .replace(/--swa-fontFamily/g, "--swa-font-family")
   .replace(/--swa-fontSize/g, "--swa-font-size")
   .replace(/--swa-fontWeight/g, "--swa-font-weight")
   .replace(/--swa-lineHeight/g, "--swa-line-height")
   .replace(/--swa-letterSpacing/g, "--swa-letter-spacing")
-  .replace(/--swa-displayLarge/g, "--swa-display-large")
-  .replace(/--swa-headlineXLarge/g, "--swa-headline-x-large")
-  .replace(/--swa-headlineLarge/g, "--swa-headline-large")
-  .replace(/--swa-headlineMedium/g, "--swa-headline-medium")
-  .replace(/--swa-headlineSmall/g, "--swa-headline-small")
-  .replace(/--swa-bodyXLarge/g, "--swa-body-x-large")
-  .replace(/--swa-bodyLarge/g, "--swa-body-large")
-  .replace(/--swa-bodyMedium/g, "--swa-body-medium")
-  .replace(/--swa-bodySmall/g, "--swa-body-small")
-  .replace(/--swa-labelXLarge/g, "--swa-label-x-large")
-  .replace(/--swa-labelLarge/g, "--swa-label-large")
-  .replace(/--swa-labelMedium/g, "--swa-label-medium")
-  .replace(/--swa-labelSmall/g, "--swa-label-small");
+  // Fix typography composite tokens (headline, body, label)
+  .replace(/--swa-([a-z]+)([A-Z][a-zA-Z]*)/g, (match, prefix, suffix) => {
+    // Convert camelCase suffix to kebab-case
+    const kebabSuffix = suffix.replace(/([A-Z])/g, '-$1').toLowerCase();
+    return `--swa-${prefix}${kebabSuffix}`;
+  });
+
+// Fix double dashes and handle specific typography patterns
+combinedCss = combinedCss
+  // Fix double dashes from previous transformations
+  .replace(/--swa-([a-z-]+)--([a-z-]+)/g, "--swa-$1-$2")
+  // Fix specific size abbreviations
+  .replace(/--swa-font-size-display-lg/g, "--swa-font-size-display-large")
+  .replace(/--swa-font-size-body-sm/g, "--swa-font-size-body-small")
+  .replace(/--swa-font-size-body-md/g, "--swa-font-size-body-medium")
+  .replace(/--swa-font-size-body-lg/g, "--swa-font-size-body-large")
+  .replace(/--swa-font-size-body-xl/g, "--swa-font-size-body-x-large")
+  .replace(/--swa-font-size-label-sm/g, "--swa-font-size-label-small")
+  .replace(/--swa-font-size-label-md/g, "--swa-font-size-label-medium")
+  .replace(/--swa-font-size-label-lg/g, "--swa-font-size-label-large")
+  .replace(/--swa-font-size-label-xl/g, "--swa-font-size-label-x-large")
+  .replace(/--swa-font-size-headline-sm/g, "--swa-font-size-headline-small")
+  .replace(/--swa-font-size-headline-md/g, "--swa-font-size-headline-medium")
+  .replace(/--swa-font-size-headline-lg/g, "--swa-font-size-headline-large")
+  .replace(/--swa-font-size-headline-xl/g, "--swa-font-size-headline-x-large")
+  // Fix remaining composite typography tokens with camelCase
+  .replace(/--swa-headline(\d*)x([A-Z][a-zA-Z]*)/g, (match, number, rest) => {
+    const kebabRest = rest.replace(/([A-Z])/g, '-$1').toLowerCase();
+    return `--swa-headline-${number ? number + 'x' : 'x'}${kebabRest}`;
+  })
+  .replace(/--swa-([a-z]+)([A-Z][a-zA-Z]*)/g, (match, prefix, suffix) => {
+    const kebabSuffix = suffix.replace(/([A-Z])/g, '-$1').toLowerCase();
+    return `--swa-${prefix}${kebabSuffix}`;
+  });
 
 // Write the combined file
 fs.writeFileSync(path.join(distPath, "tokens.css"), combinedCss);
@@ -291,6 +337,11 @@ async function generateJavaScriptTokens() {
       "tokens/Webapp/Typography.json",
     ],
     preprocessors: ["tokens-studio"],
+    expand: {
+      typesMap: {
+        typography: 'expand'
+      }
+    },
     platforms: {
       js: {
         transformGroup: "tokens-studio",
@@ -316,6 +367,11 @@ async function generateJavaScriptTokens() {
       "tokens/Webapp/Typography.json",
     ],
     preprocessors: ["tokens-studio"],
+    expand: {
+      typesMap: {
+        typography: 'expand'
+      }
+    },
     platforms: {
       js: {
         transformGroup: "tokens-studio",

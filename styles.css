@@ -2,20 +2,98 @@
   box-sizing: border-box;
 }
 
+/* Typography Token Classes */
+.typography-headline-large-regular {
+  font-family: var(--swa-headline-large-regular-font-family);
+  font-size: var(--swa-headline-large-regular-font-size);
+  font-weight: var(--swa-headline-large-regular-font-weight);
+  line-height: var(--swa-headline-large-regular-line-height);
+  letter-spacing: var(--swa-headline-large-regular-letter-spacing);
+}
+
+.typography-headline-medium-regular {
+  font-family: var(--swa-headline-medium-regular-font-family);
+  font-size: var(--swa-headline-medium-regular-font-size);
+  font-weight: var(--swa-headline-medium-regular-font-weight);
+  line-height: var(--swa-headline-medium-regular-line-height);
+  letter-spacing: var(--swa-headline-medium-regular-letter-spacing);
+}
+
+.typography-headline-x-large-regular {
+  font-family: var(--swa-headline-x-large-regular-font-family);
+  font-size: var(--swa-headline-x-large-regular-font-size);
+  font-weight: var(--swa-headline-x-large-regular-font-weight);
+  line-height: var(--swa-headline-x-large-regular-line-height);
+  letter-spacing: var(--swa-headline-x-large-regular-letter-spacing);
+}
+
+.typography-body-medium-regular {
+  font-family: var(--swa-body-medium-regular-font-family);
+  font-size: var(--swa-body-medium-regular-font-size);
+  font-weight: var(--swa-body-medium-regular-font-weight);
+  line-height: var(--swa-body-medium-regular-line-height);
+  letter-spacing: var(--swa-body-medium-regular-letter-spacing);
+}
+
+.typography-body-large-regular {
+  font-family: var(--swa-body-large-regular-font-family);
+  font-size: var(--swa-body-large-regular-font-size);
+  font-weight: var(--swa-body-large-regular-font-weight);
+  line-height: var(--swa-body-large-regular-line-height);
+  letter-spacing: var(--swa-body-large-regular-letter-spacing);
+}
+
+.typography-body-x-large-regular {
+  font-family: var(--swa-body-x-large-regular-font-family);
+  font-size: var(--swa-body-x-large-regular-font-size);
+  font-weight: var(--swa-body-x-large-regular-font-weight);
+  line-height: var(--swa-body-x-large-regular-line-height);
+  letter-spacing: var(--swa-body-x-large-regular-letter-spacing);
+}
+
+.typography-label-medium-regular {
+  font-family: var(--swa-label-medium-regular-font-family);
+  font-size: var(--swa-label-medium-regular-font-size);
+  font-weight: var(--swa-label-medium-regular-font-weight);
+  line-height: var(--swa-label-medium-regular-line-height);
+  letter-spacing: var(--swa-label-medium-regular-letter-spacing);
+}
+
+.typography-label-medium-prominent {
+  font-family: var(--swa-label-medium-prominent-font-family);
+  font-size: var(--swa-label-medium-prominent-font-size);
+  font-weight: var(--swa-label-medium-prominent-font-weight);
+  line-height: var(--swa-label-medium-prominent-line-height);
+  letter-spacing: var(--swa-label-medium-prominent-letter-spacing);
+}
+
+.typography-label-small-regular {
+  font-family: var(--swa-label-small-regular-font-family);
+  font-size: var(--swa-label-small-regular-font-size);
+  font-weight: var(--swa-label-small-regular-font-weight);
+  line-height: var(--swa-label-small-regular-line-height);
+  letter-spacing: var(--swa-label-small-regular-letter-spacing);
+}
+
 body {
-  font-family:
-    "Inter",
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Roboto,
-    sans-serif;
   margin: 0;
   padding: 0;
   background: var(--swa-elevation-solid-0);
   color: var(--swa-on-surface-primary);
-  line-height: 1.5;
-  font-size: 14px;
+}
+
+/* Apply body typography - use Body.Large.Regular */
+body {
+  font-family: var(--swa-body-large-regular-font-family, 'Inter', sans-serif) !important;
+  font-size: var(--swa-body-large-regular-font-size, 16px) !important;
+  font-weight: var(--swa-body-large-regular-font-weight, 400) !important;
+  line-height: var(--swa-body-large-regular-line-height, 1.5) !important;
+  letter-spacing: var(--swa-body-large-regular-letter-spacing, 0) !important;
+}
+
+/* Override all elements */
+* {
+  font-family: var(--swa-body-large-regular-font-family, 'Inter', sans-serif) !important;
 }
 
 .app-container {
@@ -63,9 +141,12 @@ body {
 
 .logo h1 {
   margin: 0;
-  font-size: 20px;
-  font-weight: 500;
   color: var(--swa-on-surface-primary);
+  font-family: var(--swa-headline-medium-regular-font-family, 'Inter', sans-serif) !important;
+  font-size: var(--swa-headline-medium-regular-font-size, 20px) !important;
+  font-weight: var(--swa-headline-medium-regular-font-weight, 500) !important;
+  line-height: var(--swa-headline-medium-regular-line-height, 1.2) !important;
+  letter-spacing: var(--swa-headline-medium-regular-letter-spacing, 0) !important;
 }
 
 .header-actions {
@@ -80,13 +161,16 @@ body {
   border: none;
   padding: var(--swa-spacing-md) var(--swa-spacing-2xl);
   border-radius: var(--swa-spacing-sm);
-  font-weight: 600;
-  font-size: 14px;
   cursor: pointer;
   transition: all 0.2s ease;
   margin-right: var(--swa-spacing-md);
   text-decoration: none;
   display: inline-block;
+  font-family: var(--swa-label-medium-prominent-font-family);
+  font-size: var(--swa-label-medium-prominent-font-size);
+  font-weight: var(--swa-label-medium-prominent-font-weight);
+  line-height: var(--swa-label-medium-prominent-line-height);
+  letter-spacing: var(--swa-label-medium-prominent-letter-spacing);
 }
 
 .tokens-button:hover {
@@ -99,7 +183,7 @@ body {
   padding: var(--swa-spacing-sm) var(--swa-spacing-md);
   border-radius: 6px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: var(--swa-font-size-body-medium);
   color: var(--swa-on-surface-primary);
   transition: all 0.2s ease;
 }
@@ -132,16 +216,23 @@ body {
 }
 
 .intro h2 {
-  font-size: var(--swa-spacing-4xl);
-  font-weight: 700;
   color: var(--swa-on-surface-primary);
   margin: 0 0 var(--swa-spacing-md) 0;
+  font-family: var(--swa-headline-x-large-regular-font-family);
+  font-size: var(--swa-headline-x-large-regular-font-size);
+  font-weight: var(--swa-headline-x-large-regular-font-weight);
+  line-height: var(--swa-headline-x-large-regular-line-height);
+  letter-spacing: var(--swa-headline-x-large-regular-letter-spacing);
 }
 
 .intro p {
-  font-size: 18px;
   color: var(--swa-on-surface-seconday);
   margin: 0;
+  font-family: var(--swa-body-x-large-regular-font-family);
+  font-size: var(--swa-body-x-large-regular-font-size);
+  font-weight: var(--swa-body-x-large-regular-font-weight);
+  line-height: var(--swa-body-x-large-regular-line-height);
+  letter-spacing: var(--swa-body-x-large-regular-letter-spacing);
 }
 
 .sidebar-nav {
@@ -161,8 +252,8 @@ body {
   padding: var(--swa-spacing-md) var(--swa-spacing-xl);
   border-radius: 50px;
   cursor: pointer;
-  font-weight: 500;
-  font-size: 15px;
+  font-weight: var(--swa-font-weight-medium);
+  font-size: var(--swa-font-size-body-large);
   color: var(--swa-on-surface-primary);
   transition: all 0.2s ease;
   width: 100%;
@@ -210,16 +301,20 @@ body {
 }
 
 .section-title {
-  font-size: 24px;
-  font-weight: 500;
   color: var(--swa-on-surface-primary);
   margin: 0;
+  font-family: var(--swa-headline-large-regular-font-family, 'Inter', sans-serif) !important;
+  font-size: var(--swa-headline-large-regular-font-size, 24px) !important;
+  font-weight: var(--swa-headline-large-regular-font-weight, 500) !important;
+  line-height: var(--swa-headline-large-regular-line-height, 1.2) !important;
+  letter-spacing: var(--swa-headline-large-regular-letter-spacing, -0.02em) !important;
 }
 
 .section-description {
   color: var(--swa-on-surface-seconday);
-  font-size: 16px;
-  line-height: 1.5;
+  font-size: var(--swa-font-size-body-large);
+  font-weight: var(--swa-font-weight-regular);
+  line-height: var(--swa-font-line-height-base);
   margin: var(--swa-spacing-md) 0 var(--swa-spacing-3xl) 0;
   max-width: 600px;
 }
@@ -242,8 +337,8 @@ body {
   padding: 8px 16px;
   border-radius: 6px;
   cursor: pointer;
-  font-weight: 600;
-  font-size: 14px;
+  font-weight: var(--swa-font-weight-semibold);
+  font-size: var(--swa-font-size-body-medium);
   color: var(--swa-on-surface-seconday);
   transition: all 0.2s ease;
 }
@@ -649,7 +744,7 @@ body {
   }
 
   .intro h2 {
-    font-size: 24px;
+    font-size: var(--swa-font-size-headline-large);
   }
 
   .platform-header {
@@ -780,10 +875,11 @@ body {
   margin: 0;
 }
 
-.typography-demo {
+.typography-showcase .typography-demo {
   color: var(--swa-on-surface-primary);
-  margin-bottom: 20px;
-  padding: 16px 0;
+  margin-bottom: 32px !important;
+  padding: 64px 40px 64px 40px !important;
+  min-height: 120px;
 }
 
 .typography-sample {
@@ -797,6 +893,78 @@ body {
 .typography-sample p {
   margin: 0;
   color: var(--swa-on-surface-primary);
+}
+
+.typography-css-variables {
+  margin-top: 16px;
+}
+
+.typography-css-variables:empty {
+  display: none;
+}
+
+.core-token-item {
+  margin-bottom: 12px;
+  padding: 12px;
+  background: var(--swa-elevation-solid-1);
+  border-radius: 8px;
+  border: 1px solid var(--swa-elevation-solid-2);
+}
+
+.core-token-item:last-child {
+  margin-bottom: 0;
+}
+
+.core-token-item .token-reference-item {
+  margin-bottom: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.core-token-item .token-reference-name {
+  color: var(--swa-on-surface-primary);
+  font-family: var(--swa-label-medium-regular-font-family);
+  font-size: var(--swa-label-medium-regular-font-size);
+  font-weight: var(--swa-label-medium-regular-font-weight);
+  line-height: var(--swa-label-medium-regular-line-height);
+  letter-spacing: var(--swa-label-medium-regular-letter-spacing);
+}
+
+.core-token-item .token-reference-resolved {
+  color: var(--swa-on-surface-seconday);
+  font-family: var(--swa-label-small-regular-font-family);
+  font-size: var(--swa-label-small-regular-font-size);
+  font-weight: var(--swa-label-small-regular-font-weight);
+  line-height: var(--swa-label-small-regular-line-height);
+  letter-spacing: var(--swa-label-small-regular-letter-spacing);
+}
+
+.css-variable-display {
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 13px;
+  color: var(--swa-on-surface-primary);
+  background: var(--swa-elevation-solid-0);
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid var(--swa-elevation-solid-3);
+}
+
+.token-css-variable {
+  margin-top: 6px;
+  display: none; /* Hidden by default, shown when CSS format is selected */
+}
+
+.token-css-variable .css-variable-display {
+  font-family: "Monaco", "Menlo", "Consolas", monospace;
+  font-size: 11px;
+  background: var(--swa-elevation-solid-1);
+  color: var(--color-hues-purple);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+  border: 1px solid var(--swa-elevation-solid-2);
+  margin: 0;
 }
 
 .typography-details {
@@ -836,8 +1004,9 @@ body {
 }
 
 .typography-category-title {
-  font-size: 20px;
-  font-weight: 600;
+  font-size: var(--swa-font-size-headline-medium);
+  font-weight: var(--swa-font-weight-semibold);
+  line-height: var(--swa-font-line-height-tight);
   color: var(--swa-on-surface-primary);
   margin: 0 0 24px 0;
   border-bottom: 2px solid var(--swa-elevation-solid-2);

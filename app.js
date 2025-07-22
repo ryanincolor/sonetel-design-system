@@ -118,6 +118,38 @@ function showCopyFeedback(copiedText) {
   }, 2000);
 }
 
+// Handle typography showcase CSS variable updates
+function handleTypographyShowcase(showcaseEl, format) {
+  const cssVarElements = showcaseEl.querySelectorAll('.token-css-variable');
+
+  cssVarElements.forEach(cssVarEl => {
+    const cssVarType = cssVarEl.getAttribute('data-css-var');
+    const tokenReferenceItem = cssVarEl.closest('.token-reference-item');
+    const coreTokenEl = tokenReferenceItem.querySelector('.token-reference-resolved');
+
+    if (!coreTokenEl) return;
+
+    const coreTokenName = coreTokenEl.textContent.replace(/[{}]/g, '');
+    const cssVariable = `var(--swa-${coreTokenName.replace(/\./g, '-')})`;
+
+    switch (format) {
+      case "names":
+        cssVarEl.style.display = "none";
+        break;
+      case "css":
+        cssVarEl.innerHTML = `<div class="css-variable-display">${cssVariable}</div>`;
+        cssVarEl.style.display = "block";
+        break;
+      case "js":
+      case "json":
+        cssVarEl.style.display = "none";
+        break;
+      default:
+        cssVarEl.style.display = "none";
+    }
+  });
+}
+
 // Update webapp token format for individual tokens
 async function updateWebappTokenFormat() {
   const formatElement = document.getElementById("token-format");
@@ -127,7 +159,7 @@ async function updateWebappTokenFormat() {
   }
 
   const format = formatElement.value;
-  const webappTokens = document.querySelectorAll(".token-formatted-output");
+  const webappTokens = document.querySelectorAll(".token-formatted-output, .typography-css-variables, .typography-showcase");
 
   if (webappTokens.length === 0) {
     console.log("No webapp tokens with formatted output found");
@@ -147,14 +179,21 @@ async function updateWebappTokenFormat() {
     webappTokens.forEach((tokenEl) => {
       const tokenName = tokenEl.getAttribute("data-token");
       const tokenValue = tokenEl.getAttribute("data-value");
+      const coreTokens = tokenEl.getAttribute("data-core-tokens");
 
       if (!tokenName) {
-        console.warn("Token element missing data-token attribute", tokenEl);
+        // Handle typography showcase elements specially
+        if (tokenEl.classList.contains('typography-showcase')) {
+          handleTypographyShowcase(tokenEl, format);
+        }
         return;
       }
 
       const kebabName = tokenName.replace(/\./g, "-");
       let formattedValue = "";
+
+      // Check if this is a typography token with core token references
+      const isTypographyToken = coreTokens && tokenEl.classList.contains('typography-css-variables');
 
       switch (format) {
         case "names":
@@ -162,7 +201,21 @@ async function updateWebappTokenFormat() {
           tokenEl.style.display = "none";
           return;
         case "css":
-          formattedValue = `var(--swa-${kebabName})`;
+          if (isTypographyToken) {
+            // Show individual CSS variables for each core token the typography style references
+            const tokens = JSON.parse(coreTokens);
+            formattedValue = tokens.map(token =>
+              `<div class="core-token-item">
+                <div class="token-reference-item">
+                  <span class="token-reference-name">${token.webappToken}</span>
+                  <span class="token-reference-resolved">{${token.coreToken}}</span>
+                </div>
+                <div class="css-variable-display">${token.cssVariable}</div>
+              </div>`
+            ).join('');
+          } else {
+            formattedValue = `var(--swa-${kebabName})`;
+          }
           break;
         case "js":
           const camelCaseName = kebabName
@@ -176,7 +229,7 @@ async function updateWebappTokenFormat() {
           break;
       }
 
-      tokenEl.textContent = formattedValue;
+      tokenEl.innerHTML = formattedValue;
       tokenEl.style.display = formattedValue ? "block" : "none";
     });
   } catch (error) {
@@ -406,51 +459,25 @@ function findCoreTokenReference(tokenReference, webappTypographyTokens, coreToke
 
 // Helper function to convert token path to CSS custom property name
 function tokenPathToCSSProperty(fullPath) {
-  // Convert token path to CSS custom property name following the generated pattern
+  // Convert token path to CSS custom property name following the expanded tokens pattern
   let cssName = fullPath;
 
-  // Handle specific patterns seen in generated CSS
-  if (cssName === 'Display.Large') {
-    return 'display-large';
-  }
+  // Convert dots to dashes first
+  cssName = cssName.replace(/\./g, '-');
 
-  // Handle headline patterns: Headline.3x-large.Regular -> headline3xLargeRegular
-  if (cssName.startsWith('Headline.')) {
-    cssName = cssName.replace('Headline.', 'headline');
-    cssName = cssName.replace('3x-large', '3xLarge');
-    cssName = cssName.replace('2x-large', '2xLarge');
-    cssName = cssName.replace('X-large', '-x-large');
-    cssName = cssName.replace('Large', 'Large');
-    cssName = cssName.replace('Medium', 'Medium');
-    cssName = cssName.replace('Small', 'Small');
-    cssName = cssName.replace(/\./g, '');
-    return cssName;
-  }
+  // Add dashes before uppercase letters, but be careful with existing dashes
+  cssName = cssName.replace(/([a-z])([A-Z])/g, '$1-$2');
 
-  // Handle body patterns: Body.X-Large.Regular -> body-x-largeRegular
-  if (cssName.startsWith('Body.')) {
-    cssName = cssName.replace('Body.', 'body-');
-    cssName = cssName.replace('X-Large', 'x-large');
-    cssName = cssName.replace('Large', 'large');
-    cssName = cssName.replace('Medium', 'medium');
-    cssName = cssName.replace('Small', 'small');
-    cssName = cssName.replace(/\./g, '');
-    return cssName;
-  }
+  // Convert to lowercase
+  cssName = cssName.toLowerCase();
 
-  // Handle label patterns: Label.X-large.Regular -> label-x-largeRegular
-  if (cssName.startsWith('Label.')) {
-    cssName = cssName.replace('Label.', 'label-');
-    cssName = cssName.replace('X-large', 'x-large');
-    cssName = cssName.replace('Large', 'large');
-    cssName = cssName.replace('Medium', 'medium');
-    cssName = cssName.replace('Small', 'small');
-    cssName = cssName.replace(/\./g, '');
-    return cssName;
-  }
+  // Clean up any double dashes
+  cssName = cssName.replace(/-+/g, '-');
 
-  // Fallback - just replace dots with dashes and lowercase
-  return cssName.replace(/\./g, '-').toLowerCase();
+  // Remove leading or trailing dashes
+  cssName = cssName.replace(/^-+|-+$/g, '');
+
+  return cssName;
 }
 
 // Helper function to render typography tokens with large dedicated component
@@ -477,8 +504,61 @@ function renderTypographyToken(token, fullPath, isWebapp, coreTokens, webappToke
   // Debug log
   console.log('Typography values:', { fontFamily, fontSize, fontWeight, lineHeight, letterSpacingValue });
 
+  // For typography tokens, show CSS variables for the core tokens it references
+  const coreTokenReferences = [];
+  if (typographyValue.fontFamily) {
+    const coreToken = findCoreTokenReference(typographyValue.fontFamily, webappTokens, coreTokens);
+    const cleanCoreToken = coreToken.replace(/[{}]/g, '');
+    coreTokenReferences.push({
+      property: 'Font Family',
+      webappToken: typographyValue.fontFamily.replace(/[{}]/g, ''),
+      coreToken: cleanCoreToken,
+      cssVariable: `var(--swa-${cleanCoreToken.replace(/\./g, '-')})`
+    });
+  }
+  if (typographyValue.fontSize) {
+    const coreToken = findCoreTokenReference(typographyValue.fontSize, webappTokens, coreTokens);
+    const cleanCoreToken = coreToken.replace(/[{}]/g, '');
+    coreTokenReferences.push({
+      property: 'Font Size',
+      webappToken: typographyValue.fontSize.replace(/[{}]/g, ''),
+      coreToken: cleanCoreToken,
+      cssVariable: `var(--swa-${cleanCoreToken.replace(/\./g, '-')})`
+    });
+  }
+  if (typographyValue.fontWeight) {
+    const coreToken = findCoreTokenReference(typographyValue.fontWeight, webappTokens, coreTokens);
+    const cleanCoreToken = coreToken.replace(/[{}]/g, '');
+    coreTokenReferences.push({
+      property: 'Font Weight',
+      webappToken: typographyValue.fontWeight.replace(/[{}]/g, ''),
+      coreToken: cleanCoreToken,
+      cssVariable: `var(--swa-${cleanCoreToken.replace(/\./g, '-')})`
+    });
+  }
+  if (typographyValue.lineHeight) {
+    const coreToken = findCoreTokenReference(typographyValue.lineHeight, webappTokens, coreTokens);
+    const cleanCoreToken = coreToken.replace(/[{}]/g, '');
+    coreTokenReferences.push({
+      property: 'Line Height',
+      webappToken: typographyValue.lineHeight.replace(/[{}]/g, ''),
+      coreToken: cleanCoreToken,
+      cssVariable: `var(--swa-${cleanCoreToken.replace(/\./g, '-')})`
+    });
+  }
+  if (typographyValue.letterSpacing) {
+    const coreToken = findCoreTokenReference(typographyValue.letterSpacing, webappTokens, coreTokens);
+    const cleanCoreToken = coreToken.replace(/[{}]/g, '');
+    coreTokenReferences.push({
+      property: 'Letter Spacing',
+      webappToken: typographyValue.letterSpacing.replace(/[{}]/g, ''),
+      coreToken: cleanCoreToken,
+      cssVariable: `var(--swa-${cleanCoreToken.replace(/\./g, '-')})`
+    });
+  }
+
   const formattedOutput = isWebapp
-    ? `<div class="token-formatted-output" data-token="${fullPath}" data-value="${JSON.stringify(token.value)}"></div>`
+    ? `<div class="typography-css-variables" data-token="${fullPath}" data-core-tokens='${JSON.stringify(coreTokenReferences)}'></div>`
     : "";
 
   return `
@@ -486,33 +566,49 @@ function renderTypographyToken(token, fullPath, isWebapp, coreTokens, webappToke
       <div class="typography-header">
         <h4 class="typography-title">${fullPath}</h4>
       </div>
-      <div class="typography-demo" style="font: var(--swa-${tokenPathToCSSProperty(fullPath)});">
+      <div class="typography-demo" style="
+        font-family: var(--swa-${tokenPathToCSSProperty(fullPath)}-font-family, 'Inter', sans-serif);
+        font-size: var(--swa-${tokenPathToCSSProperty(fullPath)}-font-size, 16px);
+        font-weight: var(--swa-${tokenPathToCSSProperty(fullPath)}-font-weight, 400);
+        line-height: var(--swa-${tokenPathToCSSProperty(fullPath)}-line-height, 1.5);
+        letter-spacing: var(--swa-${tokenPathToCSSProperty(fullPath)}-letter-spacing, 0);
+        /* Ensure the styles are applied */
+        margin: 0;
+        padding: 0;
+      ">
         The quick brown fox jumps over the lazy dog
+        <!-- DEBUG: ${fullPath} -> ${tokenPathToCSSProperty(fullPath)}
+             CSS: --swa-${tokenPathToCSSProperty(fullPath)}-font-size
+             Expected: 24px for Headline.Large.Light -->
       </div>
       <div class="typography-details">
         <div class="typography-token-references">
           <div class="token-reference-item">
             <span class="token-reference-name">${typographyValue.fontFamily.replace(/[{}]/g, '')}</span>
             <span class="token-reference-resolved">${findCoreTokenReference(typographyValue.fontFamily, webappTokens, coreTokens)}</span>
+            <div class="token-css-variable" data-css-var="font-family"></div>
           </div>
           <div class="token-reference-item">
             <span class="token-reference-name">${typographyValue.fontSize.replace(/[{}]/g, '')}</span>
             <span class="token-reference-resolved">${findCoreTokenReference(typographyValue.fontSize, webappTokens, coreTokens)}</span>
+            <div class="token-css-variable" data-css-var="font-size"></div>
           </div>
           <div class="token-reference-item">
             <span class="token-reference-name">${typographyValue.fontWeight.replace(/[{}]/g, '')}</span>
             <span class="token-reference-resolved">${findCoreTokenReference(typographyValue.fontWeight, webappTokens, coreTokens)}</span>
+            <div class="token-css-variable" data-css-var="font-weight"></div>
           </div>
           <div class="token-reference-item">
             <span class="token-reference-name">${typographyValue.lineHeight.replace(/[{}]/g, '')}</span>
             <span class="token-reference-resolved">${findCoreTokenReference(typographyValue.lineHeight, webappTokens, coreTokens)}</span>
+            <div class="token-css-variable" data-css-var="line-height"></div>
           </div>
           <div class="token-reference-item">
             <span class="token-reference-name">${typographyValue.letterSpacing.replace(/[{}]/g, '')}</span>
             <span class="token-reference-resolved">${findCoreTokenReference(typographyValue.letterSpacing, webappTokens, coreTokens)}</span>
+            <div class="token-css-variable" data-css-var="letter-spacing"></div>
           </div>
         </div>
-        ${formattedOutput}
       </div>
     </div>
   `;
