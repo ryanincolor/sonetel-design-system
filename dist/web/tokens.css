@@ -45,8 +45,8 @@
   --swa-fontLetterSpacingWide: 0.05em;
   --swa-fontLineHeightTight: 1.2;
   --swa-fontLineHeightBase: 1.5;
-  --swa-fontLineHeightLoose: 1.75;
-  --swa-fontLineHeightXtight: 1;
+  --swa-fontLineHeightTigher: 1;
+  --swa-fontLineHeightTightest: 1;
   --swa-display-large: 700 96px/1.2 'Inter', sans-serif;
   --swa-headline3xLargeLight: 400 40px/1.2 'Inter', sans-serif;
   --swa-headline3xLargeRegular: 500 40px/1.2 'Inter', sans-serif;
