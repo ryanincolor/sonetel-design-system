@@ -9,6 +9,14 @@
 import SwiftUI
 
 public class SonetelTokens {
+    public static let ActionAlphaSecondary = [UIColor colorWithRed:0.000f green:0.000f blue:0.000f alpha:0.039f]
+    public static let ActionOnDark = [UIColor colorWithRed:1.000f green:1.000f blue:1.000f alpha:1.000f]
+    public static let ActionOnLight = [UIColor colorWithRed:0.039f green:0.039f blue:0.039f alpha:1.000f]
+    public static let ActionOnPrimary = [UIColor colorWithRed:1.000f green:1.000f blue:1.000f alpha:1.000f]
+    public static let ActionOnSecondary = [UIColor colorWithRed:0.039f green:0.039f blue:0.039f alpha:1.000f]
+    public static let ActionPrimary = [UIColor colorWithRed:0.039f green:0.039f blue:0.039f alpha:1.000f]
+    public static let ActionSecondary = [UIColor colorWithRed:0.961f green:0.961f blue:0.961f alpha:1.000f]
+    public static let ActionTertiary = [UIColor colorWithRed:0.878f green:0.878f blue:0.878f alpha:1.000f]
     public static let BodyLargeProminentFontFamily = 'Inter', sans-serif
     public static let BodyLargeProminentFontSize = 256.00f
     public static let BodyLargeProminentFontWeight = 500
@@ -49,6 +57,7 @@ public class SonetelTokens {
     public static let BodyXLargeRegularFontWeight = 400
     public static let BodyXLargeRegularLetterSpacing = -32.00f
     public static let BodyXLargeRegularLineHeight = 150%
+    public static let BrandYello = [UIColor colorWithRed:1.000f green:0.937f blue:0.384f alpha:1.000f]
     public static let BrandYellow = [UIColor colorWithRed:1.000f green:0.937f blue:0.384f alpha:1.000f]
     public static let ColorAlphaDark10 = [UIColor colorWithRed:1.000f green:1.000f blue:1.000f alpha:0.078f]
     public static let ColorAlphaDark100 = [UIColor colorWithRed:1.000f green:1.000f blue:1.000f alpha:1.000f]
@@ -297,12 +306,8 @@ public class SonetelTokens {
     public static let LabelXLargeRegularFontWeight = 500
     public static let LabelXLargeRegularLetterSpacing = -32.00f
     public static let LabelXLargeRegularLineHeight = 100%
-    public static let OnSurfaceInverse = [UIColor colorWithRed:1.000f green:1.000f blue:1.000f alpha:1.000f]
-    public static let OnSurfaceOnDark = [UIColor colorWithRed:1.000f green:1.000f blue:1.000f alpha:1.000f]
-    public static let OnSurfaceOnLight = [UIColor colorWithRed:0.039f green:0.039f blue:0.039f alpha:1.000f]
     public static let OnSurfacePrimary = [UIColor colorWithRed:0.039f green:0.039f blue:0.039f alpha:1.000f]
-    public static let OnSurfaceSeconday = [UIColor colorWithRed:0.400f green:0.400f blue:0.400f alpha:1.000f]
-    public static let OnSurfaceTertiary = [UIColor colorWithRed:0.878f green:0.878f blue:0.878f alpha:1.000f]
+    public static let OnSurfaceSecondary = [UIColor colorWithRed:0.400f green:0.400f blue:0.400f alpha:1.000f]
     public static let Spacing10xl = 1280.00f
     public static let Spacing11xl = 1536.00f
     public static let Spacing12 = 192.00f
