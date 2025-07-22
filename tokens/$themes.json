@@ -229,8 +229,8 @@
       "font.size.headline.3xl": "0717cd8e3aaa7816561678b37b29fb58e15c23ee",
       "font.line-height.tight": "70aa67ffa33a04bd78a299b8240be8e5352a282d",
       "font.line-height.base": "da4896b76bfdae9e84e66cf7698077c8358d2170",
-      "font.line-height.loose": "5232e4b7fd9e579577a822b5a413c7edf3526656",
-      "font.line-height.xtight": "aa73b2f9b718ab1eb5b8cd85a7fbd15f37e59cab"
+      "font.line-height.tigher": "5232e4b7fd9e579577a822b5a413c7edf3526656",
+      "font.line-height.tightest": "aa73b2f9b718ab1eb5b8cd85a7fbd15f37e59cab"
     },
     "$figmaCollectionId": "VariableCollectionId:5693:2192",
     "$figmaModeId": "5693:0"
