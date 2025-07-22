@@ -65,12 +65,17 @@
   <color name="elevation_alpha_5">#99000000</color>
   <color name="elevation_alpha_6">#d6000000</color>
   <color name="elevation_alpha_7">#ff000000</color>
-  <color name="on_surface_inverse">#ffffffff</color>
-  <color name="on_surface_seconday">#ff666666</color>
-  <color name="on_surface_tertiary">#ffe0e0e0</color>
-  <color name="on_surface_primary">#ff0a0a0a</color>
-  <color name="on_surface_on_dark">#ffffffff</color>
-  <color name="on_surface_on_light">#ff0a0a0a</color>
+  <color name="action_on_primary">#ffffffff</color>
+  <color name="action_secondary">#fff5f5f5</color>
+  <color name="action_tertiary">#ffe0e0e0</color>
+  <color name="action_primary">#ff0a0a0a</color>
+  <color name="action_on_dark">#ffffffff</color>
+  <color name="action_on_light">#ff0a0a0a</color>
+  <color name="action_on_secondary">#ff0a0a0a</color>
+  <color name="action_alpha_secondary">#0a000000</color>
   <color name="status_critical">#ffff0000</color>
+  <color name="brand_yello">#ffffef62</color>
   <color name="brand_yellow">#ffffef62</color>
+  <color name="on_surface_primary">#ff0a0a0a</color>
+  <color name="on_surface_secondary">#ff666666</color>
 </resources>
