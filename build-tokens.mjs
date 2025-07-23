@@ -8,6 +8,28 @@ import path from "path";
 // Register the tokens-studio transforms
 register(StyleDictionary);
 
+// Register a custom name transform for kebab-case with SWA prefix
+StyleDictionary.registerTransform({
+  name: 'name/swa/kebab',
+  type: 'name',
+  transform: function(token, options) {
+    // Convert the token path to kebab-case with swa prefix
+    const kebabName = token.path.join('-').toLowerCase().replace(/\s+/g, '-');
+    return `swa-${kebabName}`;
+  }
+});
+
+// Register a custom transform group that includes our kebab-case transform
+StyleDictionary.registerTransformGroup({
+  name: 'tokens-studio-swa',
+  transforms: [
+    'attribute/cti',
+    'name/swa/kebab',
+    'size/px',
+    'color/css'
+  ]
+});
+
 console.log("🏗️  Building design tokens...");
 
 // Configuration for mode-independent tokens (spacing and typography)
@@ -21,7 +43,7 @@ const spacingConfig = {
   },
   platforms: {
     web: {
-      transformGroup: "tokens-studio",
+      transformGroup: "tokens-studio-swa",
       buildPath: "dist/web/",
       files: [
         {
@@ -52,7 +74,7 @@ const lightConfig = {
   },
   platforms: {
     web: {
-      transformGroup: "tokens-studio",
+      transformGroup: "tokens-studio-swa",
       buildPath: "dist/web/",
       files: [
         {
@@ -83,7 +105,7 @@ const darkConfig = {
   },
   platforms: {
     web: {
-      transformGroup: "tokens-studio",
+      transformGroup: "tokens-studio-swa",
       buildPath: "dist/web/",
       files: [
         {
@@ -170,7 +192,7 @@ const fullConfig = {
       ],
     },
     "web-other": {
-      transformGroup: "tokens-studio",
+      transformGroup: "tokens-studio-swa",
       buildPath: "dist/web/",
       files: [
         {
@@ -344,7 +366,7 @@ async function generateJavaScriptTokens() {
     },
     platforms: {
       js: {
-        transformGroup: "tokens-studio",
+        transformGroup: "tokens-studio-swa",
         buildPath: "dist/web/",
         files: [
           {
@@ -374,7 +396,7 @@ async function generateJavaScriptTokens() {
     },
     platforms: {
       js: {
-        transformGroup: "tokens-studio",
+        transformGroup: "tokens-studio-swa",
         buildPath: "dist/web/",
         files: [
           {
