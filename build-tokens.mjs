@@ -5,8 +5,10 @@ import { register } from "@tokens-studio/sd-transforms";
 import fs from "fs";
 import path from "path";
 
-// Register all @tokens-studio/sd-transforms
-register(StyleDictionary);
+// ✅ Register all built-in Token Studio transforms with expand
+register(StyleDictionary, {
+  expand: true
+});
 
 // Register a custom name transform for kebab-case with SWA prefix
 StyleDictionary.registerTransform({
@@ -27,6 +29,9 @@ StyleDictionary.registerTransform({
     return `swa-${kebabName}`;
   }
 });
+
+// For now, let's focus on post-processing optimization
+// The token pipeline is complex, so we'll optimize after generation
 
 // Register a custom transform to keep letter spacing as percentages
 StyleDictionary.registerTransform({
@@ -76,7 +81,26 @@ StyleDictionary.registerTransform({
   }
 });
 
-// Create custom transform groups for different builds
+// ✅ Format: Output flattened CSS variables (handles longform typography)
+StyleDictionary.registerFormat({
+  name: 'css/variables/combined',
+  format: function ({ dictionary }) {
+    const lines = [':root {'];
+    dictionary.allTokens.forEach(token => {
+      if (typeof token.value === 'object') {
+        Object.entries(token.value).forEach(([varName, value]) => {
+          lines.push(`  ${varName}: ${value};`);
+        });
+      } else {
+        lines.push(`  --${token.name}: ${token.value};`);
+      }
+    });
+    lines.push('}');
+    return lines.join('\n');
+  }
+});
+
+// Create custom transform group
 StyleDictionary.registerTransformGroup({
   name: 'tokens-studio-swa',
   transforms: [
@@ -197,9 +221,66 @@ const darkPath = path.join(distPath, "tokens-dark.css");
 
 let combinedCss = "";
 
-// Add webapp layout tokens (non-mode specific)
+// Add webapp layout tokens (non-mode specific) with optimization
 if (fs.existsSync(layoutPath)) {
-  combinedCss = fs.readFileSync(layoutPath, "utf8");
+  let layoutCss = fs.readFileSync(layoutPath, "utf8");
+
+  // Optimize typography tokens - remove Light and Prominent variants, keep only Regular
+  console.log("🎯 Optimizing typography tokens - removing duplicate variants...");
+
+  // Extract Regular typography tokens and convert to optimized format
+  const typographyOptimizations = new Map();
+  const lines = layoutCss.split('\n');
+  const optimizedLines = [];
+
+  lines.forEach(line => {
+    const trimmed = line.trim();
+
+    // Check if this is a typography token line
+    if (trimmed.startsWith('--swa-') && (
+      trimmed.includes('headline-') ||
+      trimmed.includes('body-') ||
+      trimmed.includes('label-') ||
+      trimmed.includes('display-')
+    )) {
+
+      // If it's a Light or Prominent variant, skip it
+      if (trimmed.includes('-light-') || trimmed.includes('-prominent-')) {
+        console.log(`Removing duplicate: ${trimmed.split(':')[0]}`);
+        return; // Skip this line
+      }
+
+      // If it's a Regular variant, convert to optimized format
+      if (trimmed.includes('-regular-')) {
+        const match = trimmed.match(/--swa-(.+?)-regular-(.+?):\s*(.+?);/);
+        if (match) {
+          const [, baseName, property, value] = match;
+
+          // Add font-weight variants for this base instead of the original font-weight
+          if (property === 'font-weight') {
+            if (!typographyOptimizations.has(baseName)) {
+              typographyOptimizations.set(baseName, true);
+              optimizedLines.push(`  --swa-${baseName}-font-weight-light: 400;`);
+              optimizedLines.push(`  --swa-${baseName}-font-weight-regular: 500;`);
+              optimizedLines.push(`  --swa-${baseName}-font-weight-prominent: 600;`);
+            }
+            return; // Skip adding the original font-weight variable
+          }
+
+          // For non-font-weight properties, add the optimized variable
+          const optimizedVarName = `--swa-${baseName}-${property}`;
+          optimizedLines.push(`  ${optimizedVarName}: ${value};`);
+          return;
+        }
+      }
+    }
+
+    // Keep all non-typography lines as-is
+    optimizedLines.push(line);
+  });
+
+  combinedCss = optimizedLines.join('\n');
+  console.log(`✅ Typography optimization complete - removed ${lines.length - optimizedLines.length} duplicate variables`);
 }
 
 // Add light theme color tokens (as second :root)

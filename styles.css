@@ -12,19 +12,19 @@
 
 /* Specific typography token classes */
 .typography-headline-large-regular {
-  font-family: var(--swa-headline-large-regular-font-family);
-  font-size: var(--swa-headline-large-regular-font-size);
-  font-weight: var(--swa-headline-large-regular-font-weight);
-  line-height: var(--swa-headline-large-regular-line-height);
-  letter-spacing: var(--swa-headline-large-regular-letter-spacing);
+  font-family: var(--swa-headline-large-font-family) !important;
+  font-size: var(--swa-headline-large-font-size) !important;
+  font-weight: var(--swa-headline-large-font-weight-regular) !important;
+  line-height: var(--swa-headline-large-line-height) !important;
+  letter-spacing: var(--swa-headline-large-letter-spacing) !important;
 }
 
 .typography-headline-medium-regular {
-  font-family: var(--swa-headline-medium-regular-font-family);
-  font-size: var(--swa-headline-medium-regular-font-size);
-  font-weight: var(--swa-headline-medium-regular-font-weight);
-  line-height: var(--swa-headline-medium-regular-line-height);
-  letter-spacing: var(--swa-headline-medium-regular-letter-spacing);
+  font-family: var(--swa-headline-medium-font-family) !important;
+  font-size: var(--swa-headline-medium-font-size) !important;
+  font-weight: var(--swa-headline-medium-font-weight-regular) !important;
+  line-height: var(--swa-headline-medium-line-height) !important;
+  letter-spacing: var(--swa-headline-medium-letter-spacing) !important;
 }
 
 .typography-headline-x-large-regular {
@@ -43,12 +43,76 @@
   letter-spacing: var(--swa-body-medium-regular-letter-spacing);
 }
 
+.typography-body-x-large-regular {
+  font-family: var(--swa-body-x-large-font-family) !important;
+  font-size: var(--swa-body-x-large-font-size) !important;
+  font-weight: var(--swa-body-x-large-font-weight-regular) !important;
+  line-height: var(--swa-body-x-large-line-height) !important;
+  letter-spacing: var(--swa-body-x-large-letter-spacing) !important;
+}
+
 .typography-body-large-regular {
-  font-family: var(--swa-body-large-regular-font-family);
-  font-size: var(--swa-body-large-regular-font-size);
-  font-weight: var(--swa-body-large-regular-font-weight);
-  line-height: var(--swa-body-large-regular-line-height);
-  letter-spacing: var(--swa-body-large-regular-letter-spacing);
+  font-family: var(--swa-body-large-font-family) !important;
+  font-size: var(--swa-body-large-font-size) !important;
+  font-weight: var(--swa-body-large-font-weight-regular) !important;
+  line-height: var(--swa-body-large-line-height) !important;
+  letter-spacing: var(--swa-body-large-letter-spacing) !important;
+}
+
+.typography-body-medium-regular {
+  font-family: var(--swa-body-medium-font-family) !important;
+  font-size: var(--swa-body-medium-font-size) !important;
+  font-weight: var(--swa-body-medium-font-weight-regular) !important;
+  line-height: var(--swa-body-medium-line-height) !important;
+  letter-spacing: var(--swa-body-medium-letter-spacing) !important;
+}
+
+.typography-body-small-regular {
+  font-family: var(--swa-body-small-font-family) !important;
+  font-size: var(--swa-body-small-font-size) !important;
+  font-weight: var(--swa-body-small-font-weight-regular) !important;
+  line-height: var(--swa-body-small-line-height) !important;
+  letter-spacing: var(--swa-body-small-letter-spacing) !important;
+}
+
+.typography-body-small-prominent {
+  font-family: var(--swa-body-small-font-family) !important;
+  font-size: var(--swa-body-small-font-size) !important;
+  font-weight: var(--swa-body-small-font-weight-prominent) !important;
+  line-height: var(--swa-body-small-line-height) !important;
+  letter-spacing: var(--swa-body-small-letter-spacing) !important;
+}
+
+.typography-label-medium-regular {
+  font-family: var(--swa-label-medium-font-family) !important;
+  font-size: var(--swa-label-medium-font-size) !important;
+  font-weight: var(--swa-label-medium-font-weight-regular) !important;
+  line-height: var(--swa-label-medium-line-height) !important;
+  letter-spacing: var(--swa-label-medium-letter-spacing) !important;
+}
+
+.typography-label-medium-prominent {
+  font-family: var(--swa-label-medium-font-family) !important;
+  font-size: var(--swa-label-medium-font-size) !important;
+  font-weight: var(--swa-label-medium-font-weight-prominent) !important;
+  line-height: var(--swa-label-medium-line-height) !important;
+  letter-spacing: var(--swa-label-medium-letter-spacing) !important;
+}
+
+.typography-label-small-regular {
+  font-family: var(--swa-label-small-font-family) !important;
+  font-size: var(--swa-label-small-font-size) !important;
+  font-weight: var(--swa-label-small-font-weight-regular) !important;
+  line-height: var(--swa-label-small-line-height) !important;
+  letter-spacing: var(--swa-label-small-letter-spacing) !important;
+}
+
+.typography-label-small-prominent {
+  font-family: var(--swa-label-small-font-family) !important;
+  font-size: var(--swa-label-small-font-size) !important;
+  font-weight: var(--swa-label-small-font-weight-prominent) !important;
+  line-height: var(--swa-label-small-line-height) !important;
+  letter-spacing: var(--swa-label-small-letter-spacing) !important;
 }
 
 .typography-body-x-large-regular {
@@ -91,125 +155,125 @@
   letter-spacing: var(--swa-label-small-prominent-letter-spacing);
 }
 
-/* ALL Typography Token Classes */
+/* ALL Typography Token Classes - Optimized structure with font-weight variants */
 .typography-display-large {
   font-family: var(--swa-display-large-font-family) !important;
   font-size: var(--swa-display-large-font-size) !important;
-  font-weight: var(--swa-display-large-font-weight) !important;
+  font-weight: var(--swa-display-large-font-weight-regular) !important;
   line-height: var(--swa-display-large-line-height) !important;
   letter-spacing: var(--swa-display-large-letter-spacing) !important;
 }
 
 .typography-headline-3x-large-light {
-  font-family: var(--swa-headline-3x-large-light-font-family) !important;
-  font-size: var(--swa-headline-3x-large-light-font-size) !important;
-  font-weight: var(--swa-headline-3x-large-light-font-weight) !important;
-  line-height: var(--swa-headline-3x-large-light-line-height) !important;
-  letter-spacing: var(--swa-headline-3x-large-light-letter-spacing) !important;
+  font-family: var(--swa-headline-3x-large-font-family) !important;
+  font-size: var(--swa-headline-3x-large-font-size) !important;
+  font-weight: var(--swa-headline-3x-large-font-weight-light) !important;
+  line-height: var(--swa-headline-3x-large-line-height) !important;
+  letter-spacing: var(--swa-headline-3x-large-letter-spacing) !important;
 }
 
 .typography-headline-3x-large-regular {
-  font-family: var(--swa-headline-3x-large-regular-font-family) !important;
-  font-size: var(--swa-headline-3x-large-regular-font-size) !important;
-  font-weight: var(--swa-headline-3x-large-regular-font-weight) !important;
-  line-height: var(--swa-headline-3x-large-regular-line-height) !important;
-  letter-spacing: var(--swa-headline-3x-large-regular-letter-spacing) !important;
+  font-family: var(--swa-headline-3x-large-font-family) !important;
+  font-size: var(--swa-headline-3x-large-font-size) !important;
+  font-weight: var(--swa-headline-3x-large-font-weight-regular) !important;
+  line-height: var(--swa-headline-3x-large-line-height) !important;
+  letter-spacing: var(--swa-headline-3x-large-letter-spacing) !important;
 }
 
 .typography-headline-3x-large-prominent {
-  font-family: var(--swa-headline-3x-large-prominent-font-family) !important;
-  font-size: var(--swa-headline-3x-large-prominent-font-size) !important;
-  font-weight: var(--swa-headline-3x-large-prominent-font-weight) !important;
-  line-height: var(--swa-headline-3x-large-prominent-line-height) !important;
-  letter-spacing: var(--swa-headline-3x-large-prominent-letter-spacing) !important;
+  font-family: var(--swa-headline-3x-large-font-family) !important;
+  font-size: var(--swa-headline-3x-large-font-size) !important;
+  font-weight: var(--swa-headline-3x-large-font-weight-prominent) !important;
+  line-height: var(--swa-headline-3x-large-line-height) !important;
+  letter-spacing: var(--swa-headline-3x-large-letter-spacing) !important;
 }
 
 .typography-headline-2x-large-light {
-  font-family: var(--swa-headline-2x-large-light-font-family) !important;
-  font-size: var(--swa-headline-2x-large-light-font-size) !important;
-  font-weight: var(--swa-headline-2x-large-light-font-weight) !important;
-  line-height: var(--swa-headline-2x-large-light-line-height) !important;
-  letter-spacing: var(--swa-headline-2x-large-light-letter-spacing) !important;
+  font-family: var(--swa-headline-2x-large-font-family) !important;
+  font-size: var(--swa-headline-2x-large-font-size) !important;
+  font-weight: var(--swa-headline-2x-large-font-weight-light) !important;
+  line-height: var(--swa-headline-2x-large-line-height) !important;
+  letter-spacing: var(--swa-headline-2x-large-letter-spacing) !important;
 }
 
 .typography-headline-2x-large-regular {
-  font-family: var(--swa-headline-2x-large-regular-font-family) !important;
-  font-size: var(--swa-headline-2x-large-regular-font-size) !important;
-  font-weight: var(--swa-headline-2x-large-regular-font-weight) !important;
-  line-height: var(--swa-headline-2x-large-regular-line-height) !important;
-  letter-spacing: var(--swa-headline-2x-large-regular-letter-spacing) !important;
+  font-family: var(--swa-headline-2x-large-font-family) !important;
+  font-size: var(--swa-headline-2x-large-font-size) !important;
+  font-weight: var(--swa-headline-2x-large-font-weight-regular) !important;
+  line-height: var(--swa-headline-2x-large-line-height) !important;
+  letter-spacing: var(--swa-headline-2x-large-letter-spacing) !important;
 }
 
 .typography-headline-2x-large-prominent {
-  font-family: var(--swa-headline-2x-large-prominent-font-family) !important;
-  font-size: var(--swa-headline-2x-large-prominent-font-size) !important;
-  font-weight: var(--swa-headline-2x-large-prominent-font-weight) !important;
-  line-height: var(--swa-headline-2x-large-prominent-line-height) !important;
-  letter-spacing: var(--swa-headline-2x-large-prominent-letter-spacing) !important;
+  font-family: var(--swa-headline-2x-large-font-family) !important;
+  font-size: var(--swa-headline-2x-large-font-size) !important;
+  font-weight: var(--swa-headline-2x-large-font-weight-prominent) !important;
+  line-height: var(--swa-headline-2x-large-line-height) !important;
+  letter-spacing: var(--swa-headline-2x-large-letter-spacing) !important;
 }
 
 .typography-headline-x-large-light {
-  font-family: var(--swa-headline-x-large-light-font-family) !important;
-  font-size: var(--swa-headline-x-large-light-font-size) !important;
-  font-weight: var(--swa-headline-x-large-light-font-weight) !important;
-  line-height: var(--swa-headline-x-large-light-line-height) !important;
-  letter-spacing: var(--swa-headline-x-large-light-letter-spacing) !important;
+  font-family: var(--swa-headline-x-large-font-family) !important;
+  font-size: var(--swa-headline-x-large-font-size) !important;
+  font-weight: var(--swa-headline-x-large-font-weight-light) !important;
+  line-height: var(--swa-headline-x-large-line-height) !important;
+  letter-spacing: var(--swa-headline-x-large-letter-spacing) !important;
 }
 
 .typography-headline-x-large-prominent {
-  font-family: var(--swa-headline-x-large-prominent-font-family) !important;
-  font-size: var(--swa-headline-x-large-prominent-font-size) !important;
-  font-weight: var(--swa-headline-x-large-prominent-font-weight) !important;
-  line-height: var(--swa-headline-x-large-prominent-line-height) !important;
-  letter-spacing: var(--swa-headline-x-large-prominent-letter-spacing) !important;
+  font-family: var(--swa-headline-x-large-font-family) !important;
+  font-size: var(--swa-headline-x-large-font-size) !important;
+  font-weight: var(--swa-headline-x-large-font-weight-prominent) !important;
+  line-height: var(--swa-headline-x-large-line-height) !important;
+  letter-spacing: var(--swa-headline-x-large-letter-spacing) !important;
 }
 
 .typography-headline-large-light {
-  font-family: var(--swa-headline-large-light-font-family) !important;
-  font-size: var(--swa-headline-large-light-font-size) !important;
-  font-weight: var(--swa-headline-large-light-font-weight) !important;
-  line-height: var(--swa-headline-large-light-line-height) !important;
-  letter-spacing: var(--swa-headline-large-light-letter-spacing) !important;
+  font-family: var(--swa-headline-large-font-family) !important;
+  font-size: var(--swa-headline-large-font-size) !important;
+  font-weight: var(--swa-headline-large-font-weight-light) !important;
+  line-height: var(--swa-headline-large-line-height) !important;
+  letter-spacing: var(--swa-headline-large-letter-spacing) !important;
 }
 
 .typography-headline-large-prominent {
-  font-family: var(--swa-headline-large-prominent-font-family) !important;
-  font-size: var(--swa-headline-large-prominent-font-size) !important;
-  font-weight: var(--swa-headline-large-prominent-font-weight) !important;
-  line-height: var(--swa-headline-large-prominent-line-height) !important;
-  letter-spacing: var(--swa-headline-large-prominent-letter-spacing) !important;
+  font-family: var(--swa-headline-large-font-family) !important;
+  font-size: var(--swa-headline-large-font-size) !important;
+  font-weight: var(--swa-headline-large-font-weight-prominent) !important;
+  line-height: var(--swa-headline-large-line-height) !important;
+  letter-spacing: var(--swa-headline-large-letter-spacing) !important;
 }
 
 .typography-headline-medium-light {
-  font-family: var(--swa-headline-medium-light-font-family) !important;
-  font-size: var(--swa-headline-medium-light-font-size) !important;
-  font-weight: var(--swa-headline-medium-light-font-weight) !important;
-  line-height: var(--swa-headline-medium-light-line-height) !important;
-  letter-spacing: var(--swa-headline-medium-light-letter-spacing) !important;
+  font-family: var(--swa-headline-medium-font-family) !important;
+  font-size: var(--swa-headline-medium-font-size) !important;
+  font-weight: var(--swa-headline-medium-font-weight-light) !important;
+  line-height: var(--swa-headline-medium-line-height) !important;
+  letter-spacing: var(--swa-headline-medium-letter-spacing) !important;
 }
 
 .typography-headline-medium-prominent {
-  font-family: var(--swa-headline-medium-prominent-font-family) !important;
-  font-size: var(--swa-headline-medium-prominent-font-size) !important;
-  font-weight: var(--swa-headline-medium-prominent-font-weight) !important;
-  line-height: var(--swa-headline-medium-prominent-line-height) !important;
-  letter-spacing: var(--swa-headline-medium-prominent-letter-spacing) !important;
+  font-family: var(--swa-headline-medium-font-family) !important;
+  font-size: var(--swa-headline-medium-font-size) !important;
+  font-weight: var(--swa-headline-medium-font-weight-prominent) !important;
+  line-height: var(--swa-headline-medium-line-height) !important;
+  letter-spacing: var(--swa-headline-medium-letter-spacing) !important;
 }
 
 .typography-headline-small-light {
-  font-family: var(--swa-headline-small-light-font-family) !important;
-  font-size: var(--swa-headline-small-light-font-size) !important;
-  font-weight: var(--swa-headline-small-light-font-weight) !important;
-  line-height: var(--swa-headline-small-light-line-height) !important;
-  letter-spacing: var(--swa-headline-small-light-letter-spacing) !important;
+  font-family: var(--swa-headline-small-font-family) !important;
+  font-size: var(--swa-headline-small-font-size) !important;
+  font-weight: var(--swa-headline-small-font-weight-light) !important;
+  line-height: var(--swa-headline-small-line-height) !important;
+  letter-spacing: var(--swa-headline-small-letter-spacing) !important;
 }
 
 .typography-headline-small-regular {
-  font-family: var(--swa-headline-small-regular-font-family) !important;
-  font-size: var(--swa-headline-small-regular-font-size) !important;
-  font-weight: var(--swa-headline-small-regular-font-weight) !important;
-  line-height: var(--swa-headline-small-regular-line-height) !important;
-  letter-spacing: var(--swa-headline-small-regular-letter-spacing) !important;
+  font-family: var(--swa-headline-small-font-family) !important;
+  font-size: var(--swa-headline-small-font-size) !important;
+  font-weight: var(--swa-headline-small-font-weight-regular) !important;
+  line-height: var(--swa-headline-small-line-height) !important;
+  letter-spacing: var(--swa-headline-small-letter-spacing) !important;
 }
 
 .typography-headline-small-prominant {
@@ -221,27 +285,27 @@
 }
 
 .typography-body-x-large-prominent {
-  font-family: var(--swa-body-x-large-prominent-font-family) !important;
-  font-size: var(--swa-body-x-large-prominent-font-size) !important;
-  font-weight: var(--swa-body-x-large-prominent-font-weight) !important;
-  line-height: var(--swa-body-x-large-prominent-line-height) !important;
-  letter-spacing: var(--swa-body-x-large-prominent-letter-spacing) !important;
+  font-family: var(--swa-body-x-large-font-family) !important;
+  font-size: var(--swa-body-x-large-font-size) !important;
+  font-weight: var(--swa-body-x-large-font-weight-prominent) !important;
+  line-height: var(--swa-body-x-large-line-height) !important;
+  letter-spacing: var(--swa-body-x-large-letter-spacing) !important;
 }
 
 .typography-body-large-prominent {
-  font-family: var(--swa-body-large-prominent-font-family) !important;
-  font-size: var(--swa-body-large-prominent-font-size) !important;
-  font-weight: var(--swa-body-large-prominent-font-weight) !important;
-  line-height: var(--swa-body-large-prominent-line-height) !important;
-  letter-spacing: var(--swa-body-large-prominent-letter-spacing) !important;
+  font-family: var(--swa-body-large-font-family) !important;
+  font-size: var(--swa-body-large-font-size) !important;
+  font-weight: var(--swa-body-large-font-weight-prominent) !important;
+  line-height: var(--swa-body-large-line-height) !important;
+  letter-spacing: var(--swa-body-large-letter-spacing) !important;
 }
 
 .typography-body-medium-prominent {
-  font-family: var(--swa-body-medium-prominent-font-family) !important;
-  font-size: var(--swa-body-medium-prominent-font-size) !important;
-  font-weight: var(--swa-body-medium-prominent-font-weight) !important;
-  line-height: var(--swa-body-medium-prominent-line-height) !important;
-  letter-spacing: var(--swa-body-medium-prominent-letter-spacing) !important;
+  font-family: var(--swa-body-medium-font-family) !important;
+  font-size: var(--swa-body-medium-font-size) !important;
+  font-weight: var(--swa-body-medium-font-weight-prominent) !important;
+  line-height: var(--swa-body-medium-line-height) !important;
+  letter-spacing: var(--swa-body-medium-letter-spacing) !important;
 }
 
 .typography-body-small-regular {
