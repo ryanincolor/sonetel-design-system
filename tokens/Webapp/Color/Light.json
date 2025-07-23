@@ -70,21 +70,31 @@
     }
   },
   "action": {
-    "on-primary": {
-      "value": "{elevation.solid.0}",
-      "type": "color"
+    "primary": {
+      "enabled": {
+        "value": "{elevation.solid.7}",
+        "type": "color"
+      },
+      "on-primary": {
+        "value": "{elevation.solid.0}",
+        "type": "color"
+      }
     },
     "secondary": {
-      "value": "{elevation.solid.1}",
-      "type": "color"
+      "enabled": {
+        "value": "{elevation.solid.1}",
+        "type": "color"
+      },
+      "on-secondary": {
+        "value": "{elevation.solid.7}",
+        "type": "color"
+      }
     },
     "tertiary": {
-      "value": "{elevation.solid.3}",
-      "type": "color"
-    },
-    "primary": {
-      "value": "{elevation.solid.7}",
-      "type": "color"
+      "enabled": {
+        "value": "{elevation.solid.3}",
+        "type": "color"
+      }
     },
     "on-dark": {
       "value": "{elevation.solid.0}",
@@ -94,14 +104,20 @@
       "value": "{elevation.solid.7}",
       "type": "color"
     },
-    "on-secondary": {
-      "value": "{elevation.solid.7}",
-      "type": "color"
-    },
     "alpha": {
       "secondary": {
-        "value": "{elevation.alpha.1}",
-        "type": "color"
+        "enabled": {
+          "value": "{elevation.alpha.1}",
+          "type": "color"
+        },
+        "hover": {
+          "value": "{elevation.alpha.2}",
+          "type": "color"
+        },
+        "active": {
+          "value": "{elevation.alpha.3}",
+          "type": "color"
+        }
       }
     }
   },
