@@ -226,6 +226,139 @@ if (fs.existsSync(layoutPath)) {
   // Optimize typography tokens - remove Light and Prominent variants, keep only Regular
   console.log("🎯 Optimizing typography tokens - removing duplicate variants...");
 
+  // Load all core typography tokens for dynamic mapping
+  const coreTypographyPath = "tokens/Core/Typography.json";
+  let coreTokenMaps = {
+    fontFamily: {
+      web: "'Inter', sans-serif"
+    },
+    fontWeight: {
+      light: '400',
+      regular: '500',
+      prominent: '600'
+    },
+    fontSize: {
+      'display-lg': '96px',
+      'headline-3xl': '40px',
+      'headline-2xl': '34px',
+      'headline-xl': '28px',
+      'headline-lg': '24px',
+      'headline-md': '20px',
+      'headline-sm': '18px',
+      'body-xl': '20px',
+      'body-lg': '16px',
+      'body-md': '14px',
+      'body-sm': '12px',
+      'label-xl': '18px',
+      'label-lg': '16px',
+      'label-md': '14px',
+      'label-sm': '12px'
+    },
+    lineHeight: {
+      tightest: '100%',
+      tighter: '110%',
+      tight: '120%',
+      base: '150%'
+    },
+    letterSpacing: {
+      tight: '-2%',
+      normal: '0%',
+      wide: '5%'
+    }
+  };
+
+  if (fs.existsSync(coreTypographyPath)) {
+    try {
+      const coreTypography = JSON.parse(fs.readFileSync(coreTypographyPath, "utf8"));
+
+      if (coreTypography.font) {
+        // Map font families
+        if (coreTypography.font.family?.sans?.value) {
+          coreTokenMaps.fontFamily.web = coreTypography.font.family.sans.value;
+        }
+
+        // Map font weights
+        if (coreTypography.font.weight) {
+          const weights = coreTypography.font.weight;
+          coreTokenMaps.fontWeight = {
+            light: weights['400']?.value || '400',
+            regular: weights['500']?.value || '500',
+            prominent: weights['600']?.value || '600'
+          };
+        }
+
+        // Map font sizes
+        if (coreTypography.font.size) {
+          const sizes = coreTypography.font.size;
+          Object.entries(sizes).forEach(([key, token]) => {
+            const value = token.value + 'px';
+            // Map common size values to semantic names
+            switch(key) {
+              case '96': coreTokenMaps.fontSize['display-lg'] = value; break;
+              case '40': coreTokenMaps.fontSize['headline-3xl'] = value; break;
+              case '34': coreTokenMaps.fontSize['headline-2xl'] = value; break;
+              case '28': coreTokenMaps.fontSize['headline-xl'] = value; break;
+              case '24': coreTokenMaps.fontSize['headline-lg'] = value; break;
+              case '20':
+                coreTokenMaps.fontSize['headline-md'] = value;
+                coreTokenMaps.fontSize['body-xl'] = value;
+                break;
+              case '18':
+                coreTokenMaps.fontSize['headline-sm'] = value;
+                coreTokenMaps.fontSize['label-xl'] = value;
+                break;
+              case '16':
+                coreTokenMaps.fontSize['body-lg'] = value;
+                coreTokenMaps.fontSize['label-lg'] = value;
+                break;
+              case '14':
+                coreTokenMaps.fontSize['body-md'] = value;
+                coreTokenMaps.fontSize['label-md'] = value;
+                break;
+              case '12':
+                coreTokenMaps.fontSize['body-sm'] = value;
+                coreTokenMaps.fontSize['label-sm'] = value;
+                break;
+            }
+          });
+        }
+
+        // Map line heights
+        if (coreTypography.font['line-height']) {
+          const lineHeights = coreTypography.font['line-height'];
+          Object.entries(lineHeights).forEach(([key, token]) => {
+            switch(key) {
+              case '100': coreTokenMaps.lineHeight.tightest = token.value; break;
+              case '110': coreTokenMaps.lineHeight.tighter = token.value; break;
+              case '120': coreTokenMaps.lineHeight.tight = token.value; break;
+              case '150': coreTokenMaps.lineHeight.base = token.value; break;
+            }
+          });
+        }
+
+        // Map letter spacing
+        if (coreTypography.font['letter-spacing']) {
+          const letterSpacings = coreTypography.font['letter-spacing'];
+          Object.entries(letterSpacings).forEach(([key, token]) => {
+            switch(key) {
+              case '-2': coreTokenMaps.letterSpacing.tight = token.value; break;
+              case '0': coreTokenMaps.letterSpacing.normal = token.value; break;
+              case '5': coreTokenMaps.letterSpacing.wide = token.value; break;
+            }
+          });
+        }
+
+        console.log("📊 Using dynamic typography mapping from core tokens:");
+        console.log("   Font weights:", coreTokenMaps.fontWeight);
+        console.log("   Font family:", coreTokenMaps.fontFamily);
+        console.log("   Line heights:", coreTokenMaps.lineHeight);
+        console.log("   Letter spacing:", coreTokenMaps.letterSpacing);
+      }
+    } catch (error) {
+      console.log("⚠️  Could not load core typography tokens, using fallback values");
+    }
+  }
+
   // Extract Regular typography tokens and convert to optimized format
   const typographyOptimizations = new Map();
   const lines = layoutCss.split('\n');
@@ -258,16 +391,56 @@ if (fs.existsSync(layoutPath)) {
           if (property === 'font-weight') {
             if (!typographyOptimizations.has(baseName)) {
               typographyOptimizations.set(baseName, true);
-              optimizedLines.push(`  --swa-${baseName}-font-weight-light: 400;`);
-              optimizedLines.push(`  --swa-${baseName}-font-weight-regular: 500;`);
-              optimizedLines.push(`  --swa-${baseName}-font-weight-prominent: 600;`);
+              optimizedLines.push(`  --swa-${baseName}-font-weight-light: ${coreTokenMaps.fontWeight.light};`);
+              optimizedLines.push(`  --swa-${baseName}-font-weight-regular: ${coreTokenMaps.fontWeight.regular};`);
+              optimizedLines.push(`  --swa-${baseName}-font-weight-prominent: ${coreTokenMaps.fontWeight.prominent};`);
             }
             return; // Skip adding the original font-weight variable
           }
 
           // For non-font-weight properties, add the optimized variable
+          // Try to map to core tokens when possible
+          let optimizedValue = value;
+
+          // Map font-family to core token
+          if (property === 'font-family' && value.includes('Inter')) {
+            optimizedValue = coreTokenMaps.fontFamily.web;
+          }
+
+          // Map line-height to core tokens
+          if (property === 'line-height') {
+            switch(value) {
+              case '100%': optimizedValue = coreTokenMaps.lineHeight.tightest; break;
+              case '110%': optimizedValue = coreTokenMaps.lineHeight.tighter; break;
+              case '120%': optimizedValue = coreTokenMaps.lineHeight.tight; break;
+              case '150%': optimizedValue = coreTokenMaps.lineHeight.base; break;
+            }
+          }
+
+          // Map letter-spacing to core tokens
+          if (property === 'letter-spacing') {
+            switch(value) {
+              case '-2%': optimizedValue = coreTokenMaps.letterSpacing.tight; break;
+              case '0%': optimizedValue = coreTokenMaps.letterSpacing.normal; break;
+              case '5%': optimizedValue = coreTokenMaps.letterSpacing.wide; break;
+            }
+          }
+
+          // Map font-size to core tokens where applicable
+          if (property === 'font-size') {
+            // Extract the type and size from baseName to map to core tokens
+            const typeMatch = baseName.match(/(display|headline|body|label)-(.+)/);
+            if (typeMatch) {
+              const [, type, size] = typeMatch;
+              const semanticKey = `${type}-${size}`;
+              if (coreTokenMaps.fontSize[semanticKey]) {
+                optimizedValue = coreTokenMaps.fontSize[semanticKey];
+              }
+            }
+          }
+
           const optimizedVarName = `--swa-${baseName}-${property}`;
-          optimizedLines.push(`  ${optimizedVarName}: ${value};`);
+          optimizedLines.push(`  ${optimizedVarName}: ${optimizedValue};`);
           return;
         }
       }

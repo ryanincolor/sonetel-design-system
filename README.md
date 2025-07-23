@@ -5,13 +5,14 @@ This repository contains the design tokens and Style Dictionary configuration fo
 ## Structure
 
 ```
-├── tokens/           # Design tokens (Token Studio format)
-├── dist/            # Generated files (auto-generated)
-│   ├── web/         # CSS, SCSS, JS files
-│   ├── ios/         # Swift files
-│   └── android/     # XML resource files
-├── style-dictionary.config.js  # Style Dictionary configuration
-└── package.json     # Dependencies and scripts
+├── tokens/                    # Design tokens (Token Studio format)
+├── dist/                     # Generated files (auto-generated)
+│   ├── web/                 # Optimized CSS and JSON files
+│   ├── ios/                 # Swift files
+│   └── android/             # XML resource files
+├── build-tokens.mjs         # Main build system (optimized, core token mapping)
+├── style-dictionary.config.js  # Minimal fallback configuration
+└── package.json             # Dependencies and scripts
 ```
 
 ## Usage
@@ -26,10 +27,17 @@ npm install
 npm run build-tokens
 ```
 
-This will generate platform-specific files in the `dist/` directory:
+This runs the **optimized build system** (`build-tokens.mjs`) which provides:
 
-- **Web**: CSS custom properties, SCSS variables, JavaScript tokens
-- **iOS**: Swift constants and UIColor extensions  
+- **Typography optimization**: Removes redundant font variants, uses core token mapping
+- **Dynamic core token references**: All values reference single source of truth
+- **Theme-aware CSS generation**: Separate light/dark theme handling
+- **Comprehensive platform support**: Web, iOS, Android
+
+Generated files in the `dist/` directory:
+
+- **Web**: Optimized CSS custom properties (`tokens.css`), JSON tokens
+- **iOS**: Swift constants and UIColor extensions
 - **Android**: XML resource files for colors and dimensions
 
 ### Automatic Builds
