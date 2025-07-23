@@ -9,14 +9,16 @@
 import SwiftUI
 
 public class SonetelTokens {
-    public static let ActionAlphaSecondary = [UIColor colorWithRed:0.000f green:0.000f blue:0.000f alpha:0.039f]
+    public static let ActionAlphaSecondaryActive = [UIColor colorWithRed:0.000f green:0.000f blue:0.000f alpha:0.122f]
+    public static let ActionAlphaSecondaryEnabled = [UIColor colorWithRed:0.000f green:0.000f blue:0.000f alpha:0.039f]
+    public static let ActionAlphaSecondaryHover = [UIColor colorWithRed:0.000f green:0.000f blue:0.000f alpha:0.059f]
     public static let ActionOnDark = [UIColor colorWithRed:1.000f green:1.000f blue:1.000f alpha:1.000f]
     public static let ActionOnLight = [UIColor colorWithRed:0.039f green:0.039f blue:0.039f alpha:1.000f]
-    public static let ActionOnPrimary = [UIColor colorWithRed:1.000f green:1.000f blue:1.000f alpha:1.000f]
-    public static let ActionOnSecondary = [UIColor colorWithRed:0.039f green:0.039f blue:0.039f alpha:1.000f]
-    public static let ActionPrimary = [UIColor colorWithRed:0.039f green:0.039f blue:0.039f alpha:1.000f]
-    public static let ActionSecondary = [UIColor colorWithRed:0.961f green:0.961f blue:0.961f alpha:1.000f]
-    public static let ActionTertiary = [UIColor colorWithRed:0.878f green:0.878f blue:0.878f alpha:1.000f]
+    public static let ActionPrimaryEnabled = [UIColor colorWithRed:0.039f green:0.039f blue:0.039f alpha:1.000f]
+    public static let ActionPrimaryOnPrimary = [UIColor colorWithRed:1.000f green:1.000f blue:1.000f alpha:1.000f]
+    public static let ActionSecondaryEnabled = [UIColor colorWithRed:0.961f green:0.961f blue:0.961f alpha:1.000f]
+    public static let ActionSecondaryOnSecondary = [UIColor colorWithRed:0.039f green:0.039f blue:0.039f alpha:1.000f]
+    public static let ActionTertiaryEnabled = [UIColor colorWithRed:0.878f green:0.878f blue:0.878f alpha:1.000f]
     public static let BodyLargeProminentFontFamily = 'Inter', sans-serif
     public static let BodyLargeProminentFontSize = 256.00f
     public static let BodyLargeProminentFontWeight = 500
