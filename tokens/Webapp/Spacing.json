@@ -33,15 +33,15 @@
       "type": "spacing"
     },
     "4xl": {
-      "value": "{spacing.32}",
+      "value": "{spacing.36}",
       "type": "spacing"
     },
     "5xl": {
-      "value": "{spacing.48}",
+      "value": "{spacing.40}",
       "type": "spacing"
     },
     "6xl": {
-      "value": "{spacing.50}",
+      "value": "{spacing.48}",
       "type": "spacing"
     },
     "7xl": {

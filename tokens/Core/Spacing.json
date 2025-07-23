@@ -36,12 +36,20 @@
       "value": "32px",
       "type": "dimension"
     },
-    "48": {
-      "value": "48px",
+    "36": {
+      "value": "36px",
       "type": "dimension"
     },
-    "50": {
+    "40": {
       "value": "40px",
+      "type": "dimension"
+    },
+    "44": {
+      "value": "44px",
+      "type": "dimension"
+    },
+    "48": {
+      "value": "48px",
       "type": "dimension"
     },
     "56": {
