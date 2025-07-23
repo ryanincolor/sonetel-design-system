@@ -5,14 +5,20 @@ This repository contains the design tokens and Style Dictionary configuration fo
 ## Structure
 
 ```
-├── tokens/                    # Design tokens (Token Studio format)
-├── dist/                     # Generated files (auto-generated)
-│   ├── web/                 # Optimized CSS and JSON files
-│   ├── ios/                 # Swift files
-│   └── android/             # XML resource files
-├── build-tokens.mjs         # Main build system (optimized, core token mapping)
-├── style-dictionary.config.js  # Minimal fallback configuration
-└── package.json             # Dependencies and scripts
+├── tokens/                      # Design tokens (Token Studio format)
+│   ├── Core/                   # Core design tokens (typography, colors, spacing)
+│   └── Webapp/                 # Platform-specific tokens
+├── dist/                       # Generated files (auto-generated)
+│   ├── web/                   # Optimized CSS and JSON files
+│   ├── ios/                   # Swift files
+│   └── android/               # XML resource files
+├── build-tokens.mjs           # Main build system (optimized, core token mapping)
+├── style-dictionary.config.js # Minimal fallback configuration
+├── app.js                     # Design system UI application
+├── index.html                 # Design system showcase
+├── styles.css                 # UI styles and typography classes
+├── theme.js                   # Theme switching functionality
+└── package.json               # Dependencies and scripts
 ```
 
 ## Usage
