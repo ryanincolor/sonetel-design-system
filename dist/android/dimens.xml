@@ -13,8 +13,10 @@
   <dimen name="spacing_24">384.00dp</dimen>
   <dimen name="spacing_28">448.00dp</dimen>
   <dimen name="spacing_32">512.00dp</dimen>
+  <dimen name="spacing_36">576.00dp</dimen>
+  <dimen name="spacing_40">640.00dp</dimen>
+  <dimen name="spacing_44">704.00dp</dimen>
   <dimen name="spacing_48">768.00dp</dimen>
-  <dimen name="spacing_50">640.00dp</dimen>
   <dimen name="spacing_56">896.00dp</dimen>
   <dimen name="spacing_64">1024.00dp</dimen>
   <dimen name="spacing_72">1152.00dp</dimen>
@@ -29,9 +31,9 @@
   <dimen name="spacing_xl">320.00dp</dimen>
   <dimen name="spacing_2xl">384.00dp</dimen>
   <dimen name="spacing_3xl">448.00dp</dimen>
-  <dimen name="spacing_4xl">512.00dp</dimen>
-  <dimen name="spacing_5xl">768.00dp</dimen>
-  <dimen name="spacing_6xl">640.00dp</dimen>
+  <dimen name="spacing_4xl">576.00dp</dimen>
+  <dimen name="spacing_5xl">640.00dp</dimen>
+  <dimen name="spacing_6xl">768.00dp</dimen>
   <dimen name="spacing_7xl">896.00dp</dimen>
   <dimen name="spacing_8xl">1024.00dp</dimen>
   <dimen name="spacing_9xl">1152.00dp</dimen>
