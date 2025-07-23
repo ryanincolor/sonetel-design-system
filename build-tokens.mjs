@@ -100,15 +100,13 @@ StyleDictionary.registerFormat({
   }
 });
 
-// Create custom transform group
+// Create custom transform group - only our custom transforms, tokens-studio handles the rest
 StyleDictionary.registerTransformGroup({
   name: 'tokens-studio-swa',
   transforms: [
-    'attribute/cti',
-    'name/swa/kebab',
+    'name/swa/kebab',                 // Our custom SWA namespace transform
     'size/letterspacing-percent',     // Keep letter spacing as % FIRST
     'ts/size/px-no-letterspacing',    // Custom ts/size/px that excludes letter spacing
-    'color/css'
   ]
 });
 

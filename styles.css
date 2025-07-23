@@ -159,7 +159,7 @@
 .typography-display-large {
   font-family: var(--swa-display-large-font-family) !important;
   font-size: var(--swa-display-large-font-size) !important;
-  font-weight: var(--swa-display-large-font-weight-regular) !important;
+  font-weight: var(--swa-display-large-font-weight) !important;
   line-height: var(--swa-display-large-line-height) !important;
   letter-spacing: var(--swa-display-large-letter-spacing) !important;
 }
