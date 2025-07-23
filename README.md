@@ -28,7 +28,23 @@ This repository contains the design tokens and Style Dictionary configuration fo
 npm install
 ```
 
-### Build Tokens
+### Development with Automatic Rebuilding
+```bash
+npm run dev
+```
+
+Starts the development server with **automatic token rebuilding**:
+- 🔍 **File watcher**: Monitors all `.json` files in `tokens/` directory
+- 🔄 **Auto-rebuild**: Automatically runs `build-tokens` when files change
+- 📱 **Live updates**: UI refreshes automatically to show changes
+- ⚡ **Debounced**: Waits 500ms after last change to avoid multiple rebuilds
+
+**Development workflow:**
+1. Edit any token file in `tokens/` directory
+2. File watcher detects changes and rebuilds automatically
+3. Refresh browser to see updated tokens in UI
+
+### Manual Build
 ```bash
 npm run build-tokens
 ```
@@ -39,6 +55,12 @@ This runs the **optimized build system** (`build-tokens.mjs`) which provides:
 - **Dynamic core token references**: All values reference single source of truth
 - **Theme-aware CSS generation**: Separate light/dark theme handling
 - **Comprehensive platform support**: Web, iOS, Android
+
+### Alternative Commands
+```bash
+npm run watch        # Just the file watcher (for manual use)
+npm run dev:simple   # Just the HTTP server (no auto-rebuilding)
+```
 
 Generated files in the `dist/` directory:
 

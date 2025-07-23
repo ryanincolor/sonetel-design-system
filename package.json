@@ -6,13 +6,16 @@
     "build-tokens": "node build-tokens.mjs",
     "clean": "rm -rf dist/",
     "build": "npm run clean && npm run build-tokens",
-    "dev": "python3 -m http.server 8000",
-    "start": "npm run build && npm run dev",
+    "watch": "node watch-tokens.mjs",
+    "dev": "npm run build && concurrently \"npm run watch\" \"python3 -m http.server 8000\"",
+    "dev:simple": "python3 -m http.server 8000",
+    "start": "npm run dev",
     "update": "git pull && npm run build && echo '✅ Tokens updated! Restart dev server to see changes.'"
   },
   "devDependencies": {
     "@tokens-studio/sd-transforms": "^1.0.0",
-    "style-dictionary": "^4.0.0"
+    "style-dictionary": "^4.0.0",
+    "concurrently": "^8.2.2"
   },
   "keywords": [
     "design-tokens",
