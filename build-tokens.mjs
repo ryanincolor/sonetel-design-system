@@ -5,7 +5,7 @@ import { register } from "@tokens-studio/sd-transforms";
 import fs from "fs";
 import path from "path";
 
-// Register the tokens-studio transforms
+// Register all @tokens-studio/sd-transforms
 register(StyleDictionary);
 
 // Register a custom name transform for kebab-case with SWA prefix
@@ -14,26 +14,84 @@ StyleDictionary.registerTransform({
   type: 'name',
   transform: function(token, options) {
     // Convert the token path to kebab-case with swa prefix
-    const kebabName = token.path.join('-').toLowerCase().replace(/\s+/g, '-');
+    let kebabName = token.path.join('-').toLowerCase().replace(/\s+/g, '-');
+    
+    // Fix compound words (fontFamily -> font-family, fontSize -> font-size, etc.)
+    kebabName = kebabName
+      .replace(/fontfamily/g, 'font-family')
+      .replace(/fontsize/g, 'font-size')
+      .replace(/fontweight/g, 'font-weight')
+      .replace(/lineheight/g, 'line-height')
+      .replace(/letterspacing/g, 'letter-spacing');
+    
     return `swa-${kebabName}`;
   }
 });
 
-// Register a custom transform group that includes our kebab-case transform
+// Register a custom transform to keep letter spacing as percentages
+StyleDictionary.registerTransform({
+  name: 'size/letterspacing-percent',
+  type: 'value',
+  filter: function(token) {
+    return token.type === 'letterSpacing' ||
+           (token.attributes && token.attributes.category === 'letter-spacing') ||
+           token.path.includes('letter-spacing') ||
+           token.path.includes('letterSpacing');
+  },
+  transform: function(token, options) {
+    // Keep letter spacing as percentages, don't convert
+    if (typeof token.value === 'string' && token.value.includes('%')) {
+      // Mark as transformed to prevent further processing
+      token._letterSpacingTransformed = true;
+      return token.value; // Keep as percentage
+    }
+    return token.value;
+  }
+});
+
+// Register a custom ts/size/px transform that excludes letter spacing
+StyleDictionary.registerTransform({
+  name: 'ts/size/px-no-letterspacing',
+  type: 'value',
+  filter: function(token) {
+    // Apply ts/size/px logic but exclude letterSpacing and already transformed tokens
+    return !token._letterSpacingTransformed &&
+           token.type !== 'letterSpacing' &&
+           !token.path.includes('letter-spacing') &&
+           !token.path.includes('letterSpacing') &&
+           (token.type === 'dimension' ||
+            token.type === 'fontSizes' ||
+            token.type === 'spacing' ||
+            token.path.includes('font-size') ||
+            token.path.includes('fontSize') ||
+            token.name.includes('font-size') ||
+            token.name.includes('fontSize') ||
+            (token.attributes && (token.attributes.category === 'size' || token.attributes.type === 'fontSizes')) ||
+            (typeof token.value === 'number' && !token.value.toString().includes('%')));
+  },
+  transform: function(token, options) {
+    const value = parseFloat(token.value);
+    if (isNaN(value)) return token.value;
+    return value + 'px';
+  }
+});
+
+// Create custom transform groups for different builds
 StyleDictionary.registerTransformGroup({
   name: 'tokens-studio-swa',
   transforms: [
     'attribute/cti',
     'name/swa/kebab',
-    'size/px',
+    'size/letterspacing-percent',     // Keep letter spacing as % FIRST
+    'ts/size/px-no-letterspacing',    // Custom ts/size/px that excludes letter spacing
     'color/css'
   ]
 });
 
 console.log("🏗️  Building design tokens...");
 
-// Configuration for mode-independent tokens (spacing and typography)
-const spacingConfig = {
+// Configuration for webapp layout tokens (spacing and typography - non-color)
+const layoutConfig = {
   source: ["tokens/Core/**/*.json", "tokens/Webapp/Spacing.json", "tokens/Webapp/Typography.json"],
   preprocessors: ["tokens-studio"],
   expand: {
@@ -49,9 +107,9 @@ const spacingConfig = {
         {
           destination: "tokens-layout.css",
           format: "css/variables",
-          filter: function (token) {
-            // Only include webapp spacing and typography tokens, not core tokens
-            return token.filePath.includes("Webapp/Spacing") || token.filePath.includes("Webapp/Typography");
+          filter: function(token) {
+            // Only include webapp tokens, exclude core tokens
+            return token.filePath.includes("Webapp/");
           },
           options: {
             showFileHeader: true,
@@ -63,15 +121,10 @@ const spacingConfig = {
   },
 };
 
-// Configuration for light theme (default)
+// Configuration for light theme webapp color tokens
 const lightConfig = {
   source: ["tokens/Core/**/*.json", "tokens/Webapp/Color/Light.json"],
   preprocessors: ["tokens-studio"],
-  expand: {
-    typesMap: {
-      typography: 'expand'
-    }
-  },
   platforms: {
     web: {
       transformGroup: "tokens-studio-swa",
@@ -80,8 +133,8 @@ const lightConfig = {
         {
           destination: "tokens-light.css",
           format: "css/variables",
-          filter: function (token) {
-            // Only include webapp light theme tokens, not core tokens
+          filter: function(token) {
+            // Only include webapp color tokens
             return token.filePath.includes("Webapp/Color/Light");
           },
           options: {
@@ -94,15 +147,10 @@ const lightConfig = {
   },
 };
 
-// Configuration for dark theme webapp tokens
+// Configuration for dark theme webapp color tokens
 const darkConfig = {
   source: ["tokens/Core/**/*.json", "tokens/Webapp/Color/Dark.json"],
   preprocessors: ["tokens-studio"],
-  expand: {
-    typesMap: {
-      typography: 'expand'
-    }
-  },
   platforms: {
     web: {
       transformGroup: "tokens-studio-swa",
@@ -111,8 +159,8 @@ const darkConfig = {
         {
           destination: "tokens-dark.css",
           format: "css/variables",
-          filter: function (token) {
-            // Only include webapp color tokens, not core tokens
+          filter: function(token) {
+            // Only include webapp color tokens
             return token.filePath.includes("Webapp/Color/Dark");
           },
           options: {
@@ -125,31 +173,62 @@ const darkConfig = {
   },
 };
 
-// Build layout tokens (spacing and typography - mode-independent)
-console.log("📏 Building layout tokens (spacing and typography - mode-independent)...");
-const spacingSd = new StyleDictionary(spacingConfig);
-await spacingSd.buildAllPlatforms();
+// Build webapp layout tokens (spacing, typography - non-mode specific)
+console.log("📏 Building webapp layout tokens (spacing, typography)...");
+const layoutSd = new StyleDictionary(layoutConfig);
+await layoutSd.buildPlatform("web");
 
-// Build light theme tokens (default)
-console.log("☀️  Building light theme tokens (default)...");
+// Build light theme color tokens
+console.log("☀️  Building webapp light theme color tokens...");
 const lightSd = new StyleDictionary(lightConfig);
-await lightSd.buildAllPlatforms();
+await lightSd.buildPlatform("web");
 
-// Build dark theme tokens
-console.log("🌙 Building dark theme tokens...");
+// Build dark theme color tokens
+console.log("🌙 Building webapp dark theme color tokens...");
 const darkSd = new StyleDictionary(darkConfig);
-await darkSd.buildAllPlatforms();
+await darkSd.buildPlatform("web");
 
-// Also build other platforms with full config for completeness
+// Combine all CSS files into single tokens.css
+console.log("🔄 Combining webapp tokens into single CSS file...");
+const distPath = "dist/web/";
+const layoutPath = path.join(distPath, "tokens-layout.css");
+const lightPath = path.join(distPath, "tokens-light.css");
+const darkPath = path.join(distPath, "tokens-dark.css");
+
+let combinedCss = "";
+
+// Add webapp layout tokens (non-mode specific)
+if (fs.existsSync(layoutPath)) {
+  combinedCss = fs.readFileSync(layoutPath, "utf8");
+}
+
+// Add light theme color tokens (as second :root)
+if (fs.existsSync(lightPath)) {
+  const lightCss = fs.readFileSync(lightPath, "utf8");
+  combinedCss += `\n\n${lightCss}`;
+}
+
+// Add dark theme color tokens
+if (fs.existsSync(darkPath)) {
+  const darkCss = fs.readFileSync(darkPath, "utf8");
+  combinedCss += `\n\n${darkCss}`;
+}
+
+// Write combined CSS file
+fs.writeFileSync(path.join(distPath, "tokens.css"), combinedCss);
+
+// Clean up separate files
+[layoutPath, lightPath, darkPath].forEach(filePath => {
+  if (fs.existsSync(filePath)) {
+    fs.unlinkSync(filePath);
+  }
+});
+
+// Build other platforms
 console.log("📱 Building other platforms...");
-const fullConfig = {
+const otherConfig = {
   source: ["tokens/**/*.json"],
   preprocessors: ["tokens-studio"],
-  expand: {
-    typesMap: {
-      typography: 'expand'
-    }
-  },
   platforms: {
     ios: {
       transformGroup: "ios",
@@ -191,17 +270,10 @@ const fullConfig = {
         },
       ],
     },
-    "web-other": {
+    "web-json": {
       transformGroup: "tokens-studio-swa",
       buildPath: "dist/web/",
       files: [
-        {
-          destination: "tokens.js",
-          format: "javascript/es6",
-          options: {
-            showFileHeader: true,
-          },
-        },
         {
           destination: "tokens.json",
           format: "json/nested",
@@ -214,268 +286,18 @@ const fullConfig = {
   },
 };
 
-const fullSd = new StyleDictionary(fullConfig);
-await fullSd.buildAllPlatforms();
-
-console.log("🔄 Combining CSS files...");
-
-// Read the separate CSS files
-const distPath = "dist/web/";
-let spacingCss = "";
-let lightCss = "";
-let darkCss = "";
-
-// Read layout tokens file (spacing and typography - mode-independent)
-const spacingPath = path.join(distPath, "tokens-layout.css");
-if (fs.existsSync(spacingPath)) {
-  spacingCss = fs.readFileSync(spacingPath, "utf8");
-}
-
-// Read light theme file (default)
-const lightPath = path.join(distPath, "tokens-light.css");
-if (fs.existsSync(lightPath)) {
-  lightCss = fs.readFileSync(lightPath, "utf8");
-}
-
-// Read dark theme file
-const darkPath = path.join(distPath, "tokens-dark.css");
-if (fs.existsSync(darkPath)) {
-  darkCss = fs.readFileSync(darkPath, "utf8");
-}
-
-// Combine them into one file with proper swa prefix
-let combinedCss = spacingCss;
-if (lightCss) {
-  combinedCss += `\n\n${lightCss}`;
-}
-if (darkCss) {
-  combinedCss += `\n\n${darkCss}`;
-}
-
-// Convert variable names to use --swa- prefix and kebab-case
-combinedCss = combinedCss
-  .replace(/--elevation/g, "--swa-elevation")
-  .replace(/--onSurface/g, "--swa-on-surface")
-  .replace(/--status/g, "--swa-status")
-  .replace(/--brand/g, "--swa-brand")
-  .replace(/--spacing/g, "--swa-spacing")
-  .replace(/--font/g, "--swa-font")
-  .replace(/--display/g, "--swa-display")
-  .replace(/--headline/g, "--swa-headline")
-  .replace(/--body/g, "--swa-body")
-  .replace(/--label/g, "--swa-label")
-  // Convert camelCase to kebab-case for better matching
-  .replace(/--swa-elevationSolid/g, "--swa-elevation-solid")
-  .replace(/--swa-elevationAlpha/g, "--swa-elevation-alpha")
-  .replace(/--swa-on-surfaceInverse/g, "--swa-on-surface-inverse")
-  .replace(/--swa-on-surfaceSeconday/g, "--swa-on-surface-seconday")
-  .replace(/--swa-on-surfaceTertiary/g, "--swa-on-surface-tertiary")
-  .replace(/--swa-on-surfacePrimary/g, "--swa-on-surface-primary")
-  .replace(/--swa-on-surfaceOnDark/g, "--swa-on-surface-on-dark")
-  .replace(/--swa-on-surfaceOnLight/g, "--swa-on-surface-on-light")
-  .replace(/--swa-statusCritical/g, "--swa-status-critical")
-  .replace(/--swa-brandYellow/g, "--swa-brand-yellow")
-  // Add hyphens before numbers
-  .replace(/--swa-elevation-solid(\d)/g, "--swa-elevation-solid-$1")
-  .replace(/--swa-elevation-alpha(\d)/g, "--swa-elevation-alpha-$1")
-  .replace(/--swa-spacing(\d)/g, "--swa-spacing-$1")
-  // Fix spacing variable names to use consistent hyphen formatting
-  .replace(/--swa-spacingXs/g, "--swa-spacing-xs")
-  .replace(/--swa-spacingSm/g, "--swa-spacing-sm")
-  .replace(/--swa-spacingMd/g, "--swa-spacing-md")
-  .replace(/--swa-spacingLg/g, "--swa-spacing-lg")
-  .replace(/--swa-spacingXl/g, "--swa-spacing-xl")
-  // Fix all font-related camelCase patterns
-  .replace(/--swa-fontFamily([A-Z][a-zA-Z]*)/g, (match, p1) => `--swa-font-family-${p1.toLowerCase()}`)
-  .replace(/--swa-fontSize([A-Z][a-zA-Z]*)/g, (match, p1) => `--swa-font-size-${p1.replace(/([A-Z])/g, '-$1').toLowerCase()}`)
-  .replace(/--swa-fontWeight([A-Z][a-zA-Z]*)/g, (match, p1) => `--swa-font-weight-${p1.toLowerCase()}`)
-  .replace(/--swa-fontLetterSpacing([A-Z][a-zA-Z]*)/g, (match, p1) => `--swa-font-letter-spacing-${p1.toLowerCase()}`)
-  .replace(/--swa-fontLineHeight([A-Z][a-zA-Z]*)/g, (match, p1) => `--swa-font-line-height-${p1.toLowerCase()}`)
-  .replace(/--swa-fontFamily/g, "--swa-font-family")
-  .replace(/--swa-fontSize/g, "--swa-font-size")
-  .replace(/--swa-fontWeight/g, "--swa-font-weight")
-  .replace(/--swa-lineHeight/g, "--swa-line-height")
-  .replace(/--swa-letterSpacing/g, "--swa-letter-spacing")
-  // Fix typography composite tokens (headline, body, label)
-  .replace(/--swa-([a-z]+)([A-Z][a-zA-Z]*)/g, (match, prefix, suffix) => {
-    // Convert camelCase suffix to kebab-case
-    const kebabSuffix = suffix.replace(/([A-Z])/g, '-$1').toLowerCase();
-    return `--swa-${prefix}${kebabSuffix}`;
-  });
-
-// Fix double dashes and handle specific typography patterns
-combinedCss = combinedCss
-  // Fix double dashes from previous transformations
-  .replace(/--swa-([a-z-]+)--([a-z-]+)/g, "--swa-$1-$2")
-  // Fix specific size abbreviations
-  .replace(/--swa-font-size-display-lg/g, "--swa-font-size-display-large")
-  .replace(/--swa-font-size-body-sm/g, "--swa-font-size-body-small")
-  .replace(/--swa-font-size-body-md/g, "--swa-font-size-body-medium")
-  .replace(/--swa-font-size-body-lg/g, "--swa-font-size-body-large")
-  .replace(/--swa-font-size-body-xl/g, "--swa-font-size-body-x-large")
-  .replace(/--swa-font-size-label-sm/g, "--swa-font-size-label-small")
-  .replace(/--swa-font-size-label-md/g, "--swa-font-size-label-medium")
-  .replace(/--swa-font-size-label-lg/g, "--swa-font-size-label-large")
-  .replace(/--swa-font-size-label-xl/g, "--swa-font-size-label-x-large")
-  .replace(/--swa-font-size-headline-sm/g, "--swa-font-size-headline-small")
-  .replace(/--swa-font-size-headline-md/g, "--swa-font-size-headline-medium")
-  .replace(/--swa-font-size-headline-lg/g, "--swa-font-size-headline-large")
-  .replace(/--swa-font-size-headline-xl/g, "--swa-font-size-headline-x-large")
-  // Fix remaining composite typography tokens with camelCase
-  .replace(/--swa-headline(\d*)x([A-Z][a-zA-Z]*)/g, (match, number, rest) => {
-    const kebabRest = rest.replace(/([A-Z])/g, '-$1').toLowerCase();
-    return `--swa-headline-${number ? number + 'x' : 'x'}${kebabRest}`;
-  })
-  .replace(/--swa-([a-z]+)([A-Z][a-zA-Z]*)/g, (match, prefix, suffix) => {
-    const kebabSuffix = suffix.replace(/([A-Z])/g, '-$1').toLowerCase();
-    return `--swa-${prefix}${kebabSuffix}`;
-  });
-
-// Write the combined file
-fs.writeFileSync(path.join(distPath, "tokens.css"), combinedCss);
-
-// Generate custom JavaScript exports for webapp tokens
-console.log("🔧 Generating JavaScript exports...");
-await generateJavaScriptTokens();
-
-// Clean up the separate files
-if (fs.existsSync(spacingPath)) {
-  fs.unlinkSync(spacingPath);
-}
-if (fs.existsSync(lightPath)) {
-  fs.unlinkSync(lightPath);
-}
-if (fs.existsSync(darkPath)) {
-  fs.unlinkSync(darkPath);
-}
-
-// Function to generate JavaScript exports for webapp tokens
-async function generateJavaScriptTokens() {
-  const lightConfig = {
-    source: [
-      "tokens/Core/**/*.json",
-      "tokens/Webapp/Color/Light.json",
-      "tokens/Webapp/Spacing.json",
-      "tokens/Webapp/Typography.json",
-    ],
-    preprocessors: ["tokens-studio"],
-    expand: {
-      typesMap: {
-        typography: 'expand'
-      }
-    },
-    platforms: {
-      js: {
-        transformGroup: "tokens-studio-swa",
-        buildPath: "dist/web/",
-        files: [
-          {
-            destination: "tokens-light.json",
-            format: "json/flat",
-            filter: function (token) {
-              return token.filePath.includes("Webapp/");
-            },
-          },
-        ],
-      },
-    },
-  };
-
-  const darkConfig = {
-    source: [
-      "tokens/Core/**/*.json",
-      "tokens/Webapp/Color/Dark.json",
-      "tokens/Webapp/Spacing.json",
-      "tokens/Webapp/Typography.json",
-    ],
-    preprocessors: ["tokens-studio"],
-    expand: {
-      typesMap: {
-        typography: 'expand'
-      }
-    },
-    platforms: {
-      js: {
-        transformGroup: "tokens-studio-swa",
-        buildPath: "dist/web/",
-        files: [
-          {
-            destination: "tokens-dark.json",
-            format: "json/flat",
-            filter: function (token) {
-              return token.filePath.includes("Webapp/");
-            },
-          },
-        ],
-      },
-    },
-  };
-
-  // Build light and dark tokens for JS
-  const lightJsSd = new StyleDictionary(lightConfig);
-  const darkJsSd = new StyleDictionary(darkConfig);
-
-  await lightJsSd.buildAllPlatforms();
-  await darkJsSd.buildAllPlatforms();
-
-  // Read the generated JSON files
-  const lightTokensPath = path.join(distPath, "tokens-light.json");
-  const darkTokensPath = path.join(distPath, "tokens-dark.json");
-
-  let lightTokens = {};
-  let darkTokens = {};
-
-  if (fs.existsSync(lightTokensPath)) {
-    lightTokens = JSON.parse(fs.readFileSync(lightTokensPath, "utf8"));
-  }
-
-  if (fs.existsSync(darkTokensPath)) {
-    darkTokens = JSON.parse(fs.readFileSync(darkTokensPath, "utf8"));
-  }
-
-  // Convert to JavaScript exports
-  let jsContent = `/**
- * Do not edit directly, this file was auto-generated.
- */
-
-// Light theme tokens (default)
-`;
-
-  // Add light theme exports
-  for (const [key, value] of Object.entries(lightTokens)) {
-    const camelCaseKey = key
-      .replace(/-([a-z])/g, (g) => g[1].toUpperCase())
-      .replace(/-/g, "");
-    jsContent += `export const swa${camelCaseKey.charAt(0).toUpperCase() + camelCaseKey.slice(1)} = "${value}";\n`;
-  }
-
-  jsContent += `\n// Dark theme tokens\n`;
-
-  // Add dark theme exports
-  for (const [key, value] of Object.entries(darkTokens)) {
-    const camelCaseKey = key
-      .replace(/-([a-z])/g, (g) => g[1].toUpperCase())
-      .replace(/-/g, "");
-    jsContent += `export const swa${camelCaseKey.charAt(0).toUpperCase() + camelCaseKey.slice(1)}Dark = "${value}";\n`;
-  }
-
-  // Write the JavaScript file
-  fs.writeFileSync(path.join(distPath, "tokens.js"), jsContent);
-
-  // Clean up temporary files
-  if (fs.existsSync(lightTokensPath)) {
-    fs.unlinkSync(lightTokensPath);
-  }
-  if (fs.existsSync(darkTokensPath)) {
-    fs.unlinkSync(darkTokensPath);
-  }
-}
+const otherSd = new StyleDictionary(otherConfig);
+await otherSd.buildAllPlatforms();
 
 console.log("✅ Design tokens built successfully!");
 console.log("📝 Generated files:");
-console.log("   - dist/web/tokens.css (webapp only with --swa- prefix)");
-console.log("   - dist/web/tokens.js (webapp only with swa prefix)");
+console.log("   - dist/web/tokens.css (webapp tokens only - no core tokens)");
 console.log("   - dist/web/tokens.json");
 console.log("   - dist/android/colors.xml");
 console.log("   - dist/android/dimens.xml");
 console.log("   - dist/ios/SonetelTokens.swift");
+console.log("");
+console.log("📋 CSS structure (webapp tokens only):");
+console.log("   - :root { /* webapp spacing + typography */ }");
+console.log("   - :root { /* webapp light theme colors */ }");
+console.log("   - [data-theme=\"dark\"] { /* webapp dark theme colors */ }");

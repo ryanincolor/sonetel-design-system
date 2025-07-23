@@ -3,6 +3,14 @@
 }
 
 /* Typography Token Classes */
+
+/* General typography demo styling */
+.typography-demo {
+  padding: 16px !important;
+  margin: 8px 0 !important;
+}
+
+/* Specific typography token classes */
 .typography-headline-large-regular {
   font-family: var(--swa-headline-large-regular-font-family);
   font-size: var(--swa-headline-large-regular-font-size);
@@ -73,6 +81,215 @@
   font-weight: var(--swa-label-small-regular-font-weight);
   line-height: var(--swa-label-small-regular-line-height);
   letter-spacing: var(--swa-label-small-regular-letter-spacing);
+}
+
+.typography-label-small-prominent {
+  font-family: var(--swa-label-small-prominent-font-family);
+  font-size: var(--swa-label-small-prominent-font-size);
+  font-weight: var(--swa-label-small-prominent-font-weight);
+  line-height: var(--swa-label-small-prominent-line-height);
+  letter-spacing: var(--swa-label-small-prominent-letter-spacing);
+}
+
+/* ALL Typography Token Classes */
+.typography-display-large {
+  font-family: var(--swa-display-large-font-family) !important;
+  font-size: var(--swa-display-large-font-size) !important;
+  font-weight: var(--swa-display-large-font-weight) !important;
+  line-height: var(--swa-display-large-line-height) !important;
+  letter-spacing: var(--swa-display-large-letter-spacing) !important;
+}
+
+.typography-headline-3x-large-light {
+  font-family: var(--swa-headline-3x-large-light-font-family) !important;
+  font-size: var(--swa-headline-3x-large-light-font-size) !important;
+  font-weight: var(--swa-headline-3x-large-light-font-weight) !important;
+  line-height: var(--swa-headline-3x-large-light-line-height) !important;
+  letter-spacing: var(--swa-headline-3x-large-light-letter-spacing) !important;
+}
+
+.typography-headline-3x-large-regular {
+  font-family: var(--swa-headline-3x-large-regular-font-family) !important;
+  font-size: var(--swa-headline-3x-large-regular-font-size) !important;
+  font-weight: var(--swa-headline-3x-large-regular-font-weight) !important;
+  line-height: var(--swa-headline-3x-large-regular-line-height) !important;
+  letter-spacing: var(--swa-headline-3x-large-regular-letter-spacing) !important;
+}
+
+.typography-headline-3x-large-prominent {
+  font-family: var(--swa-headline-3x-large-prominent-font-family) !important;
+  font-size: var(--swa-headline-3x-large-prominent-font-size) !important;
+  font-weight: var(--swa-headline-3x-large-prominent-font-weight) !important;
+  line-height: var(--swa-headline-3x-large-prominent-line-height) !important;
+  letter-spacing: var(--swa-headline-3x-large-prominent-letter-spacing) !important;
+}
+
+.typography-headline-2x-large-light {
+  font-family: var(--swa-headline-2x-large-light-font-family) !important;
+  font-size: var(--swa-headline-2x-large-light-font-size) !important;
+  font-weight: var(--swa-headline-2x-large-light-font-weight) !important;
+  line-height: var(--swa-headline-2x-large-light-line-height) !important;
+  letter-spacing: var(--swa-headline-2x-large-light-letter-spacing) !important;
+}
+
+.typography-headline-2x-large-regular {
+  font-family: var(--swa-headline-2x-large-regular-font-family) !important;
+  font-size: var(--swa-headline-2x-large-regular-font-size) !important;
+  font-weight: var(--swa-headline-2x-large-regular-font-weight) !important;
+  line-height: var(--swa-headline-2x-large-regular-line-height) !important;
+  letter-spacing: var(--swa-headline-2x-large-regular-letter-spacing) !important;
+}
+
+.typography-headline-2x-large-prominent {
+  font-family: var(--swa-headline-2x-large-prominent-font-family) !important;
+  font-size: var(--swa-headline-2x-large-prominent-font-size) !important;
+  font-weight: var(--swa-headline-2x-large-prominent-font-weight) !important;
+  line-height: var(--swa-headline-2x-large-prominent-line-height) !important;
+  letter-spacing: var(--swa-headline-2x-large-prominent-letter-spacing) !important;
+}
+
+.typography-headline-x-large-light {
+  font-family: var(--swa-headline-x-large-light-font-family) !important;
+  font-size: var(--swa-headline-x-large-light-font-size) !important;
+  font-weight: var(--swa-headline-x-large-light-font-weight) !important;
+  line-height: var(--swa-headline-x-large-light-line-height) !important;
+  letter-spacing: var(--swa-headline-x-large-light-letter-spacing) !important;
+}
+
+.typography-headline-x-large-prominent {
+  font-family: var(--swa-headline-x-large-prominent-font-family) !important;
+  font-size: var(--swa-headline-x-large-prominent-font-size) !important;
+  font-weight: var(--swa-headline-x-large-prominent-font-weight) !important;
+  line-height: var(--swa-headline-x-large-prominent-line-height) !important;
+  letter-spacing: var(--swa-headline-x-large-prominent-letter-spacing) !important;
+}
+
+.typography-headline-large-light {
+  font-family: var(--swa-headline-large-light-font-family) !important;
+  font-size: var(--swa-headline-large-light-font-size) !important;
+  font-weight: var(--swa-headline-large-light-font-weight) !important;
+  line-height: var(--swa-headline-large-light-line-height) !important;
+  letter-spacing: var(--swa-headline-large-light-letter-spacing) !important;
+}
+
+.typography-headline-large-prominent {
+  font-family: var(--swa-headline-large-prominent-font-family) !important;
+  font-size: var(--swa-headline-large-prominent-font-size) !important;
+  font-weight: var(--swa-headline-large-prominent-font-weight) !important;
+  line-height: var(--swa-headline-large-prominent-line-height) !important;
+  letter-spacing: var(--swa-headline-large-prominent-letter-spacing) !important;
+}
+
+.typography-headline-medium-light {
+  font-family: var(--swa-headline-medium-light-font-family) !important;
+  font-size: var(--swa-headline-medium-light-font-size) !important;
+  font-weight: var(--swa-headline-medium-light-font-weight) !important;
+  line-height: var(--swa-headline-medium-light-line-height) !important;
+  letter-spacing: var(--swa-headline-medium-light-letter-spacing) !important;
+}
+
+.typography-headline-medium-prominent {
+  font-family: var(--swa-headline-medium-prominent-font-family) !important;
+  font-size: var(--swa-headline-medium-prominent-font-size) !important;
+  font-weight: var(--swa-headline-medium-prominent-font-weight) !important;
+  line-height: var(--swa-headline-medium-prominent-line-height) !important;
+  letter-spacing: var(--swa-headline-medium-prominent-letter-spacing) !important;
+}
+
+.typography-headline-small-light {
+  font-family: var(--swa-headline-small-light-font-family) !important;
+  font-size: var(--swa-headline-small-light-font-size) !important;
+  font-weight: var(--swa-headline-small-light-font-weight) !important;
+  line-height: var(--swa-headline-small-light-line-height) !important;
+  letter-spacing: var(--swa-headline-small-light-letter-spacing) !important;
+}
+
+.typography-headline-small-regular {
+  font-family: var(--swa-headline-small-regular-font-family) !important;
+  font-size: var(--swa-headline-small-regular-font-size) !important;
+  font-weight: var(--swa-headline-small-regular-font-weight) !important;
+  line-height: var(--swa-headline-small-regular-line-height) !important;
+  letter-spacing: var(--swa-headline-small-regular-letter-spacing) !important;
+}
+
+.typography-headline-small-prominant {
+  font-family: var(--swa-headline-small-prominant-font-family) !important;
+  font-size: var(--swa-headline-small-prominant-font-size) !important;
+  font-weight: var(--swa-headline-small-prominant-font-weight) !important;
+  line-height: var(--swa-headline-small-prominant-line-height) !important;
+  letter-spacing: var(--swa-headline-small-prominant-letter-spacing) !important;
+}
+
+.typography-body-x-large-prominent {
+  font-family: var(--swa-body-x-large-prominent-font-family) !important;
+  font-size: var(--swa-body-x-large-prominent-font-size) !important;
+  font-weight: var(--swa-body-x-large-prominent-font-weight) !important;
+  line-height: var(--swa-body-x-large-prominent-line-height) !important;
+  letter-spacing: var(--swa-body-x-large-prominent-letter-spacing) !important;
+}
+
+.typography-body-large-prominent {
+  font-family: var(--swa-body-large-prominent-font-family) !important;
+  font-size: var(--swa-body-large-prominent-font-size) !important;
+  font-weight: var(--swa-body-large-prominent-font-weight) !important;
+  line-height: var(--swa-body-large-prominent-line-height) !important;
+  letter-spacing: var(--swa-body-large-prominent-letter-spacing) !important;
+}
+
+.typography-body-medium-prominent {
+  font-family: var(--swa-body-medium-prominent-font-family) !important;
+  font-size: var(--swa-body-medium-prominent-font-size) !important;
+  font-weight: var(--swa-body-medium-prominent-font-weight) !important;
+  line-height: var(--swa-body-medium-prominent-line-height) !important;
+  letter-spacing: var(--swa-body-medium-prominent-letter-spacing) !important;
+}
+
+.typography-body-small-regular {
+  font-family: var(--swa-body-small-regular-font-family) !important;
+  font-size: var(--swa-body-small-regular-font-size) !important;
+  font-weight: var(--swa-body-small-regular-font-weight) !important;
+  line-height: var(--swa-body-small-regular-line-height) !important;
+  letter-spacing: var(--swa-body-small-regular-letter-spacing) !important;
+}
+
+.typography-body-small-prominent {
+  font-family: var(--swa-body-small-prominent-font-family) !important;
+  font-size: var(--swa-body-small-prominent-font-size) !important;
+  font-weight: var(--swa-body-small-prominent-font-weight) !important;
+  line-height: var(--swa-body-small-prominent-line-height) !important;
+  letter-spacing: var(--swa-body-small-prominent-letter-spacing) !important;
+}
+
+.typography-label-x-large-regular {
+  font-family: var(--swa-label-x-large-regular-font-family) !important;
+  font-size: var(--swa-label-x-large-regular-font-size) !important;
+  font-weight: var(--swa-label-x-large-regular-font-weight) !important;
+  line-height: var(--swa-label-x-large-regular-line-height) !important;
+  letter-spacing: var(--swa-label-x-large-regular-letter-spacing) !important;
+}
+
+.typography-label-x-large-prominent {
+  font-family: var(--swa-label-x-large-prominent-font-family) !important;
+  font-size: var(--swa-label-x-large-prominent-font-size) !important;
+  font-weight: var(--swa-label-x-large-prominent-font-weight) !important;
+  line-height: var(--swa-label-x-large-prominent-line-height) !important;
+  letter-spacing: var(--swa-label-x-large-prominent-letter-spacing) !important;
+}
+
+.typography-label-large-regular {
+  font-family: var(--swa-label-large-regular-font-family) !important;
+  font-size: var(--swa-label-large-regular-font-size) !important;
+  font-weight: var(--swa-label-large-regular-font-weight) !important;
+  line-height: var(--swa-label-large-regular-line-height) !important;
+  letter-spacing: var(--swa-label-large-regular-letter-spacing) !important;
+}
+
+.typography-label-large-prominent {
+  font-family: var(--swa-label-large-prominent-font-family) !important;
+  font-size: var(--swa-label-large-prominent-font-size) !important;
+  font-weight: var(--swa-label-large-prominent-font-weight) !important;
+  line-height: var(--swa-label-large-prominent-line-height) !important;
+  letter-spacing: var(--swa-label-large-prominent-letter-spacing) !important;
 }
 
 body {
@@ -226,7 +443,7 @@ body {
 }
 
 .intro p {
-  color: var(--swa-on-surface-seconday);
+  color: var(--swa-on-surface-secondary);
   margin: 0;
   font-family: var(--swa-body-x-large-regular-font-family);
   font-size: var(--swa-body-x-large-regular-font-size);
@@ -262,15 +479,20 @@ body {
   display: block;
 }
 
+/* Ensure nav button text styling is not overridden by typography rules */
+.sidebar-nav .nav-button {
+  font-family: var(--swa-body-large-regular-font-family, 'Inter', sans-serif) !important;
+}
+
 .nav-button.active {
-  background: var(--swa-on-surface-primary);
-  color: var(--swa-on-surface-inverse);
+  background: var(--swa-action-primary-enabled, #0a0a0a) !important;
+  color: var(--swa-action-on-action-primary, #ffffff) !important;
   box-shadow: 0 1px 3px var(--swa-elevation-alpha-2);
 }
 
 .nav-button:hover:not(.active) {
   color: var(--swa-on-surface-primary);
-  background: var(--swa-elevation-solid-2);
+  background: var(--swa-action-secondary-hover);
 }
 
 .section {
@@ -311,7 +533,7 @@ body {
 }
 
 .section-description {
-  color: var(--swa-on-surface-seconday);
+  color: var(--swa-on-surface-secondary);
   font-size: var(--swa-font-size-body-large);
   font-weight: var(--swa-font-weight-regular);
   line-height: var(--swa-font-line-height-base);
@@ -339,7 +561,7 @@ body {
   cursor: pointer;
   font-weight: var(--swa-font-weight-semibold);
   font-size: var(--swa-font-size-body-medium);
-  color: var(--swa-on-surface-seconday);
+  color: var(--swa-on-surface-secondary);
   transition: all 0.2s ease;
 }
 
@@ -389,7 +611,7 @@ body {
 
 .token-type {
   background: var(--swa-elevation-solid-1);
-  color: var(--swa-on-surface-seconday);
+  color: var(--swa-on-surface-secondary);
   padding: 4px 8px;
   border-radius: 4px;
   font-size: 11px;
@@ -456,7 +678,7 @@ body {
 .value-text {
   font-family: "Monaco", "Menlo", "Consolas", monospace;
   font-size: 14px;
-  color: var(--swa-on-surface-seconday);
+  color: var(--swa-on-surface-secondary);
   font-weight: 500;
   flex: 1;
 }
@@ -471,7 +693,7 @@ body {
 
 .reference-label {
   font-size: 11px;
-  color: var(--swa-on-surface-seconday);
+  color: var(--swa-on-surface-secondary);
   text-transform: uppercase;
   font-weight: 600;
   letter-spacing: 0.5px;
@@ -492,7 +714,7 @@ body {
   opacity: 0;
   transition: opacity 0.2s ease;
   font-size: 12px;
-  color: var(--swa-on-surface-seconday);
+  color: var(--swa-on-surface-secondary);
 }
 
 .token-card:hover .copy-indicator {
@@ -515,7 +737,7 @@ body {
 .format-label {
   font-size: 14px;
   font-weight: 600;
-  color: var(--swa-on-surface-seconday);
+  color: var(--swa-on-surface-secondary);
 }
 
 .format-dropdown {
@@ -549,7 +771,7 @@ body {
   margin-top: var(--swa-spacing-sm);
   font-family: "Monaco", "Menlo", "Consolas", monospace;
   font-size: 12px;
-  color: var(--swa-on-surface-seconday);
+  color: var(--swa-on-surface-secondary);
   overflow-x: auto;
   white-space: pre;
 }
@@ -653,7 +875,7 @@ body {
   border: none;
   font-size: 24px;
   cursor: pointer;
-  color: var(--swa-on-surface-seconday);
+  color: var(--swa-on-surface-secondary);
   padding: 0;
   width: 32px;
   height: 32px;
@@ -826,7 +1048,7 @@ body {
 }
 
 .token-value {
-  color: var(--swa-on-surface-seconday);
+  color: var(--swa-on-surface-secondary);
   font-size: 12px;
   font-family: "Monaco", "Menlo", monospace;
   word-break: break-all;
@@ -869,7 +1091,7 @@ body {
 }
 
 .typography-title {
-  color: var(--swa-on-surface-seconday);
+  color: var(--swa-on-surface-secondary);
   font-size: 16px;
   font-weight: 600;
   margin: 0;
@@ -932,7 +1154,7 @@ body {
 }
 
 .core-token-item .token-reference-resolved {
-  color: var(--swa-on-surface-seconday);
+  color: var(--swa-on-surface-secondary);
   font-family: var(--swa-label-small-regular-font-family);
   font-size: var(--swa-label-small-regular-font-size);
   font-weight: var(--swa-label-small-regular-font-weight);
@@ -993,7 +1215,7 @@ body {
 }
 
 .token-reference-resolved {
-  color: var(--swa-on-surface-seconday);
+  color: var(--swa-on-surface-secondary);
   font-size: 12px;
   font-family: "Monaco", "Menlo", monospace;
   word-break: break-all;
@@ -1043,7 +1265,7 @@ body {
 }
 
 .empty-state-description {
-  color: var(--swa-on-surface-seconday);
+  color: var(--swa-on-surface-secondary);
   margin: 0;
   line-height: 1.5;
 }

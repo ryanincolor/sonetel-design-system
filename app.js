@@ -244,6 +244,8 @@ async function loadSectionContent(sectionId) {
   if (sectionId === "core") {
     await loadCoreTokens();
   } else if (sectionId === "webapp") {
+    // Force refresh of modification times when entering webapp section
+    fileModificationTimes.clear();
     await loadWebTokens();
   } else if (sectionId === "android") {
     await loadAndroidTokens();
@@ -566,20 +568,8 @@ function renderTypographyToken(token, fullPath, isWebapp, coreTokens, webappToke
       <div class="typography-header">
         <h4 class="typography-title">${fullPath}</h4>
       </div>
-      <div class="typography-demo" style="
-        font-family: var(--swa-${tokenPathToCSSProperty(fullPath)}-font-family, 'Inter', sans-serif);
-        font-size: var(--swa-${tokenPathToCSSProperty(fullPath)}-font-size, 16px);
-        font-weight: var(--swa-${tokenPathToCSSProperty(fullPath)}-font-weight, 400);
-        line-height: var(--swa-${tokenPathToCSSProperty(fullPath)}-line-height, 1.5);
-        letter-spacing: var(--swa-${tokenPathToCSSProperty(fullPath)}-letter-spacing, 0);
-        /* Ensure the styles are applied */
-        margin: 0;
-        padding: 0;
-      ">
+      <div class="typography-demo typography-${tokenPathToCSSProperty(fullPath)}">
         The quick brown fox jumps over the lazy dog
-        <!-- DEBUG: ${fullPath} -> ${tokenPathToCSSProperty(fullPath)}
-             CSS: --swa-${tokenPathToCSSProperty(fullPath)}-font-size
-             Expected: 24px for Headline.Large.Light -->
       </div>
       <div class="typography-details">
         <div class="typography-token-references">
@@ -881,6 +871,17 @@ async function loadWebTokens() {
 
     // Group and display webapp tokens by type for current theme
     if (themeTokens) {
+      if (themeTokens.action) {
+        displayTokenCategory(
+          webappGrid,
+          `Action Colors (${themeLabel})`,
+          { action: themeTokens.action },
+          "color",
+          true,
+          coreTokens,
+          themeTokens,
+        );
+      }
       if (themeTokens.elevation && themeTokens.elevation.solid) {
         displayTokenCategory(
           webappGrid,
@@ -1081,7 +1082,7 @@ async function loadWebTokens() {
       if (webappSpacingTokens || webappTypographyTokens) {
         const message = document.createElement("div");
         message.innerHTML = `
-          <p style="text-align: center; color: var(--swa-on-surface-seconday); margin-bottom: 24px; font-style: italic;">
+          <p style="text-align: center; color: var(--swa-on-surface-secondary); margin-bottom: 24px; font-style: italic;">
             ⚠️ Webapp color tokens temporarily unavailable due to build issue
           </p>
         `;
@@ -1111,6 +1112,7 @@ async function loadIOSTokens() {
 // Store last modification times for file watching
 let fileModificationTimes = new Map();
 let fileWatchInterval = null;
+let tokenWatchInterval = null;
 
 // Load output files
 async function loadOutputFiles() {
@@ -1331,8 +1333,64 @@ function viewTokenFiles() {
     .classList.add("active");
 }
 
+// Start watching for token file changes
+function startTokenWatching() {
+  // Clear existing interval if any
+  if (tokenWatchInterval) {
+    clearInterval(tokenWatchInterval);
+  }
+
+  // Check for token file updates every 3 seconds
+  tokenWatchInterval = setInterval(async () => {
+    // Only check if we're viewing webapp tokens
+    const webappSection = document.getElementById("webapp");
+    if (!webappSection || !webappSection.classList.contains("active")) {
+      return;
+    }
+
+    const tokenFiles = [
+      "tokens/Webapp/Color/Light.json",
+      "tokens/Webapp/Color/Dark.json",
+      "tokens/Webapp/Spacing.json",
+      "tokens/Webapp/Typography.json"
+    ];
+
+    let hasChanges = false;
+
+    for (const filePath of tokenFiles) {
+      try {
+        const response = await fetch(filePath, { method: "HEAD" });
+        if (response.ok) {
+          const lastModified = response.headers.get("Last-Modified");
+          const currentTime = new Date(lastModified).getTime();
+          const storedTime = fileModificationTimes.get(filePath);
+
+          if (storedTime && currentTime > storedTime) {
+            hasChanges = true;
+            console.log(`🔄 Token file changed: ${filePath}`);
+          }
+          fileModificationTimes.set(filePath, currentTime);
+        }
+      } catch (error) {
+        // File might not exist, ignore
+      }
+    }
+
+    if (hasChanges) {
+      console.log("🔄 Detected token changes, refreshing webapp tokens...");
+      await loadWebTokens();
+    }
+  }, 3000);
+}
+
 // Initialize application when DOM is loaded
 document.addEventListener("DOMContentLoaded", function () {
   updateThemeButton();
   loadSectionContent("core");
+  startTokenWatching(); // Start watching for token changes
+
+  // Force reload webapp tokens to ensure action tokens are loaded
+  setTimeout(() => {
+    loadWebTokens();
+  }, 1000);
 });
