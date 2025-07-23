@@ -42,9 +42,19 @@ This runs the **optimized build system** (`build-tokens.mjs`) which provides:
 
 Generated files in the `dist/` directory:
 
-- **Web**: Optimized CSS custom properties (`tokens.css`), JSON tokens
+- **Web**: Optimized CSS custom properties (`tokens.css`), JavaScript ES6 module (`tokens.js`), JSON tokens
 - **iOS**: Swift constants and UIColor extensions
 - **Android**: XML resource files for colors and dimensions
+
+### File Architecture
+
+**Clean separation between design tokens and UI styling:**
+
+- `dist/web/tokens.css` - **Design tokens only** (auto-generated CSS custom properties)
+- `styles.css` - **UI styling only** (manually maintained, references design tokens)
+- `index.html` - Loads both files with proper separation
+
+**Key principle**: Never edit `dist/web/tokens.css` directly. All styling goes in `styles.css` using design token references like `var(--swa-color-primary)`.
 
 ### Automatic Builds
 

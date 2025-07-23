@@ -535,6 +535,20 @@ const otherConfig = {
         },
       ],
     },
+    "web-js": {
+      transformGroup: "tokens-studio",
+      buildPath: "dist/web/",
+      files: [
+        {
+          destination: "tokens.js",
+          format: "javascript/es6",
+          filter: () => true, // export everything, including typography variants
+          options: {
+            showFileHeader: true,
+          },
+        },
+      ],
+    },
   },
 };
 

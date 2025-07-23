@@ -10,6 +10,12 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
+    <!--
+      File separation:
+      - dist/web/tokens.css: Design tokens (CSS custom properties only)
+      - styles.css: UI styling that references the design tokens
+      Keep these separate: tokens.css is auto-generated, styles.css is manually maintained
+    -->
     <link rel="stylesheet" href="dist/web/tokens.css?v=80" />
     <link rel="stylesheet" href="styles.css?v=80" />
     <script src="theme.js"></script>

@@ -1124,6 +1124,7 @@ async function loadOutputFiles() {
       type: "CSS",
       description: "CSS Custom Properties",
     },
+
     {
       path: "dist/web/tokens.js",
       type: "JS",
