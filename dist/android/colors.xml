@@ -54,17 +54,19 @@
   <color name="elevation_solid_2">#fff0f0f0</color>
   <color name="elevation_solid_3">#ffe0e0e0</color>
   <color name="elevation_solid_4">#ffb8b8b8</color>
-  <color name="elevation_solid_5">#ff666666</color>
-  <color name="elevation_solid_6">#ff292929</color>
-  <color name="elevation_solid_7">#ff0a0a0a</color>
+  <color name="elevation_solid_5">#ff8f8f8f</color>
+  <color name="elevation_solid_6">#ff666666</color>
+  <color name="elevation_solid_7">#ff292929</color>
+  <color name="elevation_solid_8">#ff0a0a0a</color>
   <color name="elevation_alpha_0">#00000000</color>
   <color name="elevation_alpha_1">#0a000000</color>
   <color name="elevation_alpha_2">#0f000000</color>
   <color name="elevation_alpha_3">#1f000000</color>
   <color name="elevation_alpha_4">#47000000</color>
-  <color name="elevation_alpha_5">#99000000</color>
-  <color name="elevation_alpha_6">#d6000000</color>
-  <color name="elevation_alpha_7">#ff000000</color>
+  <color name="elevation_alpha_5">#70000000</color>
+  <color name="elevation_alpha_6">#99000000</color>
+  <color name="elevation_alpha_7">#d6000000</color>
+  <color name="elevation_alpha_8">#ff000000</color>
   <color name="action_primary_enabled">#ff0a0a0a</color>
   <color name="action_primary_hover">#ff292929</color>
   <color name="action_primary_active">#ff666666</color>
@@ -86,5 +88,5 @@
   <color name="brand_yello">#ffffef62</color>
   <color name="brand_yellow">#ffffef62</color>
   <color name="on_surface_primary">#ff0a0a0a</color>
-  <color name="on_surface_secondary">#ff666666</color>
+  <color name="on_surface_secondary">#ff292929</color>
 </resources>

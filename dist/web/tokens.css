@@ -168,17 +168,19 @@
   --swa-elevation-solid-2: #f0f0f0;
   --swa-elevation-solid-3: #e0e0e0;
   --swa-elevation-solid-4: #b8b8b8;
-  --swa-elevation-solid-5: #666666;
-  --swa-elevation-solid-6: #292929;
-  --swa-elevation-solid-7: #0a0a0a;
+  --swa-elevation-solid-5: #8f8f8f;
+  --swa-elevation-solid-6: #666666;
+  --swa-elevation-solid-7: #292929;
+  --swa-elevation-solid-8: #0a0a0a;
   --swa-elevation-alpha-0: #00000000;
   --swa-elevation-alpha-1: #0000000a;
   --swa-elevation-alpha-2: #0000000f;
   --swa-elevation-alpha-3: #0000001f;
   --swa-elevation-alpha-4: #00000047;
-  --swa-elevation-alpha-5: #00000099;
-  --swa-elevation-alpha-6: #000000d6;
-  --swa-elevation-alpha-7: #000000;
+  --swa-elevation-alpha-5: #00000070;
+  --swa-elevation-alpha-6: #00000099;
+  --swa-elevation-alpha-7: #000000d6;
+  --swa-elevation-alpha-8: #000000;
   --swa-action-primary-enabled: #0a0a0a;
   --swa-action-primary-hover: #292929;
   --swa-action-primary-active: #666666;
@@ -199,7 +201,7 @@
   --swa-status-critical: #ff0000;
   --swa-brand-yellow: #ffef62;
   --swa-on-surface-primary: #0a0a0a;
-  --swa-on-surface-secondary: #666666;
+  --swa-on-surface-secondary: #292929;
 }
 
 
@@ -211,28 +213,30 @@
   --swa-elevation-solid-0: #0a0a0a;
   --swa-elevation-solid-1: #141414;
   --swa-elevation-solid-2: #1f1f1f;
-  --swa-elevation-solid-3: #333333;
+  --swa-elevation-solid-3: #292929;
   --swa-elevation-solid-4: #3d3d3d;
-  --swa-elevation-solid-5: #808080;
-  --swa-elevation-solid-6: #b2b2b2;
-  --swa-elevation-solid-7: #ffffff;
+  --swa-elevation-solid-5: #333333;
+  --swa-elevation-solid-6: #808080;
+  --swa-elevation-solid-7: #b2b2b2;
+  --swa-elevation-solid-8: #ffffff;
   --swa-elevation-alpha-0: #ffffff0a;
   --swa-elevation-alpha-1: #ffffff14;
   --swa-elevation-alpha-2: #ffffff1f;
   --swa-elevation-alpha-3: #ffffff29;
   --swa-elevation-alpha-4: #ffffff29;
-  --swa-elevation-alpha-5: #ffffff80;
-  --swa-elevation-alpha-6: #ffffffb3;
-  --swa-elevation-alpha-7: #ffffff;
+  --swa-elevation-alpha-5: #ffffff33;
+  --swa-elevation-alpha-6: #ffffff80;
+  --swa-elevation-alpha-7: #ffffffb3;
+  --swa-elevation-alpha-8: #ffffff;
   --swa-action-primary-enabled: #ffffff;
   --swa-action-primary-hover: #b2b2b2;
   --swa-action-primary-active: #808080;
   --swa-action-primary-disabled: #ffffff1f;
   --swa-action-secondary-enabled: #1f1f1f;
-  --swa-action-secondary-hover: #333333;
+  --swa-action-secondary-hover: #292929;
   --swa-action-secondary-active: #3d3d3d;
   --swa-action-secondary-disabled: #ffffff1f;
-  --swa-action-tertiary-enabled: #333333;
+  --swa-action-tertiary-enabled: #292929;
   --swa-action-alpha-secondary-enabled: #ffffff1f;
   --swa-action-alpha-secondary-hover: #ffffff29;
   --swa-action-alpha-secondary-active: #ffffff29;
@@ -244,5 +248,5 @@
   --swa-status-critical: #ff0000;
   --swa-brand-yello: #ffef62;
   --swa-on-surface-primary: #ffffff;
-  --swa-on-surface-secondary: #ffffff80;
+  --swa-on-surface-secondary: #ffffffb3;
 }
