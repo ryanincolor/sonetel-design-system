@@ -178,7 +178,8 @@ public class SonetelTokens {
     public static let LabelXLargeProminent = [object Object]
     public static let LabelXLargeRegular = [object Object]
     public static let OnSurfacePrimary = [UIColor colorWithRed:0.039f green:0.039f blue:0.039f alpha:1.000f]
-    public static let OnSurfaceSecondary = [UIColor colorWithRed:0.161f green:0.161f blue:0.161f alpha:1.000f]
+    public static let OnSurfaceSecondary = [UIColor colorWithRed:0.400f green:0.400f blue:0.400f alpha:1.000f]
+    public static let OnSurfaceTertiary = [UIColor colorWithRed:0.561f green:0.561f blue:0.561f alpha:1.000f]
     public static let Spacing10xl = 1280.00f
     public static let Spacing11xl = 1536.00f
     public static let Spacing12 = 192.00f

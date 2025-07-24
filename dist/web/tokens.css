@@ -201,7 +201,8 @@
   --swa-status-critical: #ff0000;
   --swa-brand-yellow: #ffef62;
   --swa-on-surface-primary: #0a0a0a;
-  --swa-on-surface-secondary: #292929;
+  --swa-on-surface-secondary: #666666;
+  --swa-on-surface-tertiary: #8f8f8f;
 }
 
 
@@ -248,5 +249,6 @@
   --swa-status-critical: #ff0000;
   --swa-brand-yello: #ffef62;
   --swa-on-surface-primary: #ffffff;
-  --swa-on-surface-secondary: #ffffffb3;
+  --swa-on-surface-secondary: #808080;
+  --swa-on-surface-tertiary: #333333;
 }
