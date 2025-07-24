@@ -161,7 +161,8 @@
       "action.on-action.disabled": "S:84493ff26e550a196da56a3ab8b2ff8f2ed67896,",
       "brand.yellow": "S:a91273f661bfb117c33e6f052193acc55f2901bc,",
       "elevation.solid.8": "S:a2d77aed288d8ca676f6ca546b052e47feb03776,",
-      "elevation.alpha.8": "S:7ea6795d51f88894ee82cf663705717870238bad,"
+      "elevation.alpha.8": "S:7ea6795d51f88894ee82cf663705717870238bad,",
+      "on-surface.tertiary": "S:8552a36de810d8330a4eec87ef84a4c80cdf34b3,"
     },
     "selectedTokenSets": {
       "Core/Color": "source",
@@ -208,7 +209,8 @@
       "action.primary.disabled": "8c650dd502fa3ce8b6bdb9d034e30dc311f9af69",
       "action.secondary.disabled": "39403db0940f07956b24896c394bd795b98a89af",
       "action.on-action.disabled": "ca08bdf051c8e21c59c5f037365bde1cba372b04",
-      "brand.yellow": "5e60cc38f9960f70c5d0076440ca65eec65bef0d"
+      "on-surface.tertiary": "f40108746f09821ff3fbcce6facb25f02ce59172",
+      "brand.yellow": "4d1cafb48ccfd2a3bb1421e46da9ec390c5ff1f1"
     },
     "group": "Webapp/Color"
   },
@@ -254,7 +256,9 @@
       "action.on-action.disabled": "S:84493ff26e550a196da56a3ab8b2ff8f2ed67896,",
       "brand.yello": "S:0bea45948c5b8c55ce1a42c24eb3ca0c7e23524f,",
       "elevation.solid.8": "S:a2d77aed288d8ca676f6ca546b052e47feb03776,",
-      "elevation.alpha.8": "S:7ea6795d51f88894ee82cf663705717870238bad,"
+      "elevation.alpha.8": "S:7ea6795d51f88894ee82cf663705717870238bad,",
+      "on-surface.tertiart": "S:c8f9001b2265397a400d4c6374435024272308c3,",
+      "on-surface.tertiary": "S:8552a36de810d8330a4eec87ef84a4c80cdf34b3,"
     },
     "selectedTokenSets": {
       "Core/Color": "source",
@@ -298,10 +302,11 @@
       "status.critical": "38bcde7b0d2cb4f65a166d55baf4b675da05d47c",
       "on-surface.primary": "7c4b1ce5d09be84c4e1dc7756898f288be1c1f2a",
       "on-surface.secondary": "404618154e1ac0e636219c5c40e133927683f14b",
+      "on-surface.tertiary": "f40108746f09821ff3fbcce6facb25f02ce59172",
       "action.primary.disabled": "8c650dd502fa3ce8b6bdb9d034e30dc311f9af69",
       "action.secondary.disabled": "39403db0940f07956b24896c394bd795b98a89af",
       "action.on-action.disabled": "ca08bdf051c8e21c59c5f037365bde1cba372b04",
-      "brand.yello": "d31a159a8f2c22e834ddd6ea354cee9533c73868"
+      "brand.yello": "8f80b79a4c745f9be02420cfe1332b7a9733cea8"
     },
     "group": "Webapp/Color"
   },

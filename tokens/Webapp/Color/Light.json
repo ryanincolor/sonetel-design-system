@@ -177,7 +177,11 @@
       "type": "color"
     },
     "secondary": {
-      "value": "{elevation.solid.7}",
+      "value": "{elevation.solid.6}",
+      "type": "color"
+    },
+    "tertiary": {
+      "value": "{elevation.solid.5}",
       "type": "color"
     }
   }
