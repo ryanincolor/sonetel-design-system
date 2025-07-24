@@ -68,9 +68,11 @@
   <color name="action_primary_enabled">#ff0a0a0a</color>
   <color name="action_primary_hover">#ff292929</color>
   <color name="action_primary_active">#ff666666</color>
+  <color name="action_primary_disabled">#0f000000</color>
   <color name="action_secondary_enabled">#fff5f5f5</color>
   <color name="action_secondary_hover">#fff0f0f0</color>
   <color name="action_secondary_active">#ffe0e0e0</color>
+  <color name="action_secondary_disabled">#0f000000</color>
   <color name="action_tertiary_enabled">#ffe0e0e0</color>
   <color name="action_alpha_secondary_enabled">#0a000000</color>
   <color name="action_alpha_secondary_hover">#0f000000</color>
@@ -79,6 +81,7 @@
   <color name="action_on_action_secondary">#ff0a0a0a</color>
   <color name="action_on_action_dark">#ffffffff</color>
   <color name="action_on_action_light">#ff0a0a0a</color>
+  <color name="action_on_action_disabled">#47000000</color>
   <color name="status_critical">#ffff0000</color>
   <color name="brand_yello">#ffffef62</color>
   <color name="brand_yellow">#ffffef62</color>
