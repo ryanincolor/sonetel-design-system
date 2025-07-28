@@ -7,8 +7,9 @@
     "Webapp/Color/Light",
     "Webapp/Color/Dark",
     "Webapp/Spacing",
-    "Mobile",
     "Mobile/Color/Light",
-    "Mobile/Color/Dark"
+    "Mobile/Color/Dark",
+    "Mobile/Typography",
+    "Mobile/Spacing"
   ]
 }
