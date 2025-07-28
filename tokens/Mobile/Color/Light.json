@@ -1,0 +1,208 @@
+{
+  "elevation": {
+    "solid": {
+      "0": {
+        "value": "{color.solid.light.0}",
+        "type": "color"
+      },
+      "1": {
+        "value": "{color.solid.light.5}",
+        "type": "color"
+      },
+      "2": {
+        "value": "{color.solid.light.10}",
+        "type": "color"
+      },
+      "3": {
+        "value": "{color.solid.light.20}",
+        "type": "color"
+      },
+      "4": {
+        "value": "{color.solid.light.30}",
+        "type": "color"
+      },
+      "5": {
+        "value": "{color.solid.light.40}",
+        "type": "color"
+      },
+      "6": {
+        "value": "{color.solid.light.50}",
+        "type": "color"
+      },
+      "7": {
+        "value": "{color.solid.light.60}",
+        "type": "color"
+      },
+      "8": {
+        "value": "{color.solid.light.70}",
+        "type": "color"
+      }
+    },
+    "alpha": {
+      "0": {
+        "value": "{color.alpha.light.0}",
+        "type": "color"
+      },
+      "1": {
+        "value": "{color.alpha.light.5}",
+        "type": "color"
+      },
+      "2": {
+        "value": "{color.alpha.light.10}",
+        "type": "color"
+      },
+      "3": {
+        "value": "{color.alpha.light.20}",
+        "type": "color"
+      },
+      "4": {
+        "value": "{color.alpha.light.30}",
+        "type": "color"
+      },
+      "5": {
+        "value": "{color.alpha.light.40}",
+        "type": "color"
+      },
+      "6": {
+        "value": "{color.alpha.light.50}",
+        "type": "color"
+      },
+      "7": {
+        "value": "{color.alpha.light.60}",
+        "type": "color"
+      },
+      "8": {
+        "value": "{color.alpha.light.100}",
+        "type": "color"
+      }
+    }
+  },
+  "action": {
+    "primary": {
+      "enabled": {
+        "value": "{elevation.solid.8}",
+        "type": "color"
+      },
+      "hover": {
+        "value": "{elevation.solid.7}",
+        "type": "color"
+      },
+      "active": {
+        "value": "{elevation.solid.6}",
+        "type": "color"
+      },
+      "disabled": {
+        "value": "{elevation.alpha.2}",
+        "type": "color"
+      }
+    },
+    "secondary": {
+      "enabled": {
+        "value": "{elevation.solid.1}",
+        "type": "color"
+      },
+      "hover": {
+        "value": "{elevation.solid.2}",
+        "type": "color"
+      },
+      "active": {
+        "value": "{elevation.solid.3}",
+        "type": "color"
+      },
+      "disabled": {
+        "value": "{elevation.alpha.2}",
+        "type": "color"
+      }
+    },
+    "tertiary": {
+      "enabled": {
+        "value": "{elevation.solid.3}",
+        "type": "color"
+      }
+    },
+    "alpha": {
+      "secondary": {
+        "enabled": {
+          "value": "{elevation.alpha.1}",
+          "type": "color"
+        },
+        "hover": {
+          "value": "{elevation.alpha.2}",
+          "type": "color"
+        },
+        "active": {
+          "value": "{elevation.alpha.3}",
+          "type": "color"
+        }
+      }
+    },
+    "on-action": {
+      "primary": {
+        "value": "{elevation.solid.0}",
+        "type": "color"
+      },
+      "secondary": {
+        "value": "{elevation.solid.8}",
+        "type": "color"
+      },
+      "dark": {
+        "value": "{elevation.solid.0}",
+        "type": "color"
+      },
+      "light": {
+        "value": "{elevation.solid.8}",
+        "type": "color"
+      },
+      "disabled": {
+        "value": "{elevation.alpha.4}",
+        "type": "color"
+      }
+    }
+  },
+  "status": {
+    "critical": {
+      "value": "{color.hues.red}",
+      "type": "color"
+    }
+  },
+  "brand": {
+    "yellow": {
+      "value": "{color.hues.yellow}",
+      "type": "color"
+    },
+    "green": {
+      "value": "{color.hues.green}",
+      "type": "color"
+    },
+    "blue": {
+      "value": "{color.hues.blue}",
+      "type": "color"
+    },
+    "purple": {
+      "value": "{color.hues.purple}",
+      "type": "color"
+    },
+    "pink": {
+      "value": "{color.hues.pink}",
+      "type": "color"
+    },
+    "orange": {
+      "value": "{color.hues.orange}",
+      "type": "color"
+    }
+  },
+  "on-surface": {
+    "primary": {
+      "value": "{elevation.solid.8}",
+      "type": "color"
+    },
+    "secondary": {
+      "value": "{elevation.solid.6}",
+      "type": "color"
+    },
+    "tertiary": {
+      "value": "{elevation.solid.5}",
+      "type": "color"
+    }
+  }
+}
