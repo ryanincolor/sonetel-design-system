@@ -481,7 +481,6 @@
       "Core/Color": "source",
       "Mobile/Color/Dark": "enabled"
     },
-    "group": "Mobile/Color",
     "$figmaCollectionId": "VariableCollectionId:5680:546",
     "$figmaModeId": "5685:0",
     "$figmaVariableReferences": {
@@ -530,7 +529,8 @@
       "brand.purple": "0d3c3d0953198bb0042f3676653950ee3926853d",
       "brand.pink": "a20711f5df367e58cd5cdbde8c6f4052ffcc3a79",
       "brand.orange": "351236db0e1312d1607184873a2ba4c70150afaa"
-    }
+    },
+    "group": "Mobile/Color"
   },
   {
     "id": "26abbfde8dfc0de153092334e055a1e43037fb9a",
@@ -538,10 +538,8 @@
     "$figmaStyleReferences": {},
     "selectedTokenSets": {
       "Core/Spacing": "source",
-      "Mobile/Color/Light": "enabled",
       "Mobile/Spacing": "enabled"
     },
-    "group": "Mobile/Spacing",
     "$figmaCollectionId": "VariableCollectionId:5680:44",
     "$figmaModeId": "5788:2",
     "$figmaVariableReferences": {
@@ -562,7 +560,8 @@
       "spacing.10xl": "bb0604c6d53df760fe82f882d3ce1d4a3d6b36a1",
       "spacing.11xl": "bab5426166524dfac70847c8770840a1e3f664a3",
       "spacing.12xl": "0baccb9c08a139d042056f4c328ff0f5f264625c"
-    }
+    },
+    "group": "Mobile/Spacing"
   },
   {
     "id": "7741fadfb210e10f3d0ecabe58fe1b2d326541cc",
@@ -613,7 +612,7 @@
     },
     "group": "Mobile/Typography",
     "$figmaCollectionId": "VariableCollectionId:5693:2192",
-    "$figmaModeId": "7863:2",
+    "$figmaModeId": "5693:0",
     "$figmaVariableReferences": {
       "font.weight.regular": "b7c37ce0a9e6d05823588c41988cfd782261d6c3",
       "font.weight.medium": "1a90cd5c2d2592f61580faf44cad0369927a3eab",
@@ -628,14 +627,14 @@
       "font.size.label.md": "ff351a3057bb82aaed3a2c004228594544781dcc",
       "font.size.label.lg": "226f3f2474fe076261e0e63acf7ccb7900f46bc6",
       "font.size.label.xl": "e28df01f26c63a4efc25fa0c4f39d88ee48dadf3",
-      "font.size.headline.sm": "5225ba43d739f375d4eaa7ffea69143c997133f1",
-      "font.size.headline.md": "ab7d5752c9b0d7aa0910a92ff973f46b4a3efd7f",
-      "font.size.headline.lg": "4a848f75e04b5c8535d9150398c3dab08019c31f",
-      "font.size.headline.xl": "3e3aa4cbdead4ddc7e495626a1187ba673005005",
-      "font.size.headline.2xl": "ea7be435641086da300e9027f15f39ec6f1e5e1b",
+      "font.size.headline.sm": "e47e3357984727f45b7b2219e80bddecbee7cde0",
+      "font.size.headline.md": "618b46819ff9bd458b852796825ea6698eea207f",
+      "font.size.headline.lg": "02e9a46034cf918c33551f135202ed1907a40e97",
+      "font.size.headline.xl": "1ea49c42684f19b759577f249538d6b171f8c3b3",
+      "font.size.headline.2xl": "00fbfe620c3bc1ccb0519a08155b78ffde74f04f",
       "font.size.headline.3xl": "a6ef18169b2a07c56cbf2862bab0f37dd2694d57",
       "font.family.mobile": "509eb5a837ae5d0a582e8aea16912946ec4c05ae",
-      "font.size.display.xl": "1054c38b8bdbbea8864c4d542273603806e9fb03",
+      "font.size.display.xl": "1beb7a4754a9b8fa5a60d5794d9d552454579f9c",
       "font.size.display.md": "d3ff92444d17b6dccf65f83b9a1effbb72c2c2a3",
       "font.size.display.sm": "6bbf49a5b9593c8015791e0d0426f3add42e9202"
     }
