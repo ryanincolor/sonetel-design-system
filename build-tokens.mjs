@@ -42,7 +42,7 @@ StyleDictionary.registerTransform({
           : segment.charAt(0).toUpperCase() + segment.slice(1)
       )
       .join("");
-    return `sma${camelCased.charAt(0).toUpperCase()}${camelCased.slice(1)}`;
+    return camelCased;
   },
 });
 
@@ -159,6 +159,41 @@ StyleDictionary.registerTransform({
     const value = parseFloat(token.value);
     return isNaN(value) ? token.value : value;
   }
+});
+
+// Register custom typography formatter
+StyleDictionary.registerFormat({
+  name: "ios-swift/typography.swift",
+  format: ({ dictionary, options }) => {
+    const className = options.className || "TypographyTokens";
+
+    const body = dictionary.allTokens
+      .map((token) => {
+        const { fontFamily, fontWeight, fontSize, lineHeight, letterSpacing } = token.value;
+        return `  public static let ${token.name} = TypographyToken(
+    fontFamily: "${fontFamily}",
+    fontSize: ${parseFloat(fontSize)},
+    fontWeight: ${parseInt(fontWeight)},
+    lineHeight: ${parseFloat(lineHeight)},
+    letterSpacing: ${parseFloat(letterSpacing)}
+  )`;
+      })
+      .join("\n\n");
+
+    return `import UIKit
+
+struct TypographyToken {
+  let fontFamily: String
+  let fontSize: CGFloat
+  let fontWeight: Int
+  let lineHeight: CGFloat
+  let letterSpacing: CGFloat
+}
+
+class ${className} {
+${body}
+}`;
+  },
 });
 
 // Create iOS transform group with SMA naming
@@ -674,11 +709,6 @@ const otherConfig = {
     "tokens/Mobile/**/*.json"
   ],
   preprocessors: ["tokens-studio"],
-  expand: {
-    typesMap: {
-      typography: 'expand'
-    }
-  },
   platforms: {
     ios: {
       transformGroup: "ios-sma",
@@ -692,11 +722,25 @@ const otherConfig = {
             showFileHeader: true
           },
           filter: token => {
-            // Include Mobile tokens but exclude complex typography objects
+            // Include Mobile tokens but exclude color and typography tokens
             const isMobile = token.filePath && token.filePath.includes("Mobile/");
-            const isTypographyObject = token.type === 'typography' && typeof token.value === 'object';
-            return isMobile && !isTypographyObject;
+            const isColorToken = token.type === 'color';
+            const isTypographyToken = token.type === 'typography' ||
+                                     token.type === 'fontFamily' ||
+                                     token.type === 'fontSize' ||
+                                     token.type === 'fontWeight' ||
+                                     token.type === 'lineHeight' ||
+                                     token.type === 'letterSpacing';
+            return isMobile && !isColorToken && !isTypographyToken;
           }
+        },
+        {
+          destination: "SmaTypography.swift",
+          format: "ios-swift/typography.swift",
+          options: {
+            className: "SmaTypography"
+          },
+          filter: token => token.type === "typography"
         },
       ],
     },
@@ -765,9 +809,7 @@ console.log("☀️  Building iOS Light theme...");
 const iosLightConfig = {
   source: [
     "tokens/Core/**/*.json",
-    "tokens/Mobile/Color/Light.json",
-    "tokens/Mobile/Spacing.json",
-    "tokens/Mobile/Typography.json"
+    "tokens/Mobile/Color/Light.json"
   ],
   preprocessors: ["tokens-studio"],
   expand: {
@@ -790,7 +832,8 @@ const iosLightConfig = {
           filter: token => {
             const isMobile = token.filePath && token.filePath.includes("Mobile/");
             const isTypographyObject = token.type === 'typography' && typeof token.value === 'object';
-            return isMobile && !isTypographyObject;
+            const isColorToken = token.type === 'color';
+            return isMobile && !isTypographyObject && isColorToken;
           }
         },
       ],
@@ -806,9 +849,7 @@ console.log("🌙 Building iOS Dark theme...");
 const iosDarkConfig = {
   source: [
     "tokens/Core/**/*.json",
-    "tokens/Mobile/Color/Dark.json",
-    "tokens/Mobile/Spacing.json",
-    "tokens/Mobile/Typography.json"
+    "tokens/Mobile/Color/Dark.json"
   ],
   preprocessors: ["tokens-studio"],
   expand: {
@@ -831,7 +872,8 @@ const iosDarkConfig = {
           filter: token => {
             const isMobile = token.filePath && token.filePath.includes("Mobile/");
             const isTypographyObject = token.type === 'typography' && typeof token.value === 'object';
-            return isMobile && !isTypographyObject;
+            const isColorToken = token.type === 'color';
+            return isMobile && !isTypographyObject && isColorToken;
           }
         },
       ],
