@@ -355,7 +355,6 @@
       "Webapp/Typography": "enabled"
     },
     "$figmaVariableReferences": {
-      "font.family.web": "0e43150c3c97f08ce789004d27784c1d9770b36f",
       "font.weight.regular": "1d64872ffa9c812bb9d96e41664250e9718a03b4",
       "font.weight.medium": "7d7690a2135cc02cdaa4f308cee3ef011490567f",
       "font.weight.semibold": "268018e5dccf1e163f68c7c4fcb41498642f7718",
@@ -374,7 +373,8 @@
       "font.size.headline.lg": "2711b0a089512e137c05acf84c3a23dfb8033848",
       "font.size.headline.xl": "6648374b810a02487c3985efc0b3af1f357fb9a3",
       "font.size.headline.2xl": "1078ea216e584db96a19219e7161132c5896b6ea",
-      "font.size.headline.3xl": "0717cd8e3aaa7816561678b37b29fb58e15c23ee"
+      "font.size.headline.3xl": "0717cd8e3aaa7816561678b37b29fb58e15c23ee",
+      "font.family.mobile": "0e43150c3c97f08ce789004d27784c1d9770b36f"
     },
     "$figmaCollectionId": "VariableCollectionId:5693:2192",
     "$figmaModeId": "5693:0",
