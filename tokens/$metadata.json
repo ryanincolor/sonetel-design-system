@@ -6,6 +6,10 @@
     "Webapp/Typography",
     "Webapp/Color/Light",
     "Webapp/Color/Dark",
-    "Webapp/Spacing"
+    "Webapp/Spacing",
+    "Mobile/Color/Light",
+    "Mobile/Color/Dark",
+    "Mobile/Typography",
+    "Mobile/Spacing"
   ]
 }
