@@ -85,8 +85,13 @@
   <color name="action_on_action_light">#ff0a0a0a</color>
   <color name="action_on_action_disabled">#47000000</color>
   <color name="status_critical">#ffff0000</color>
-  <color name="brand_yello">#ffffef62</color>
   <color name="brand_yellow">#ffffef62</color>
+  <color name="brand_green">#ff7ad085</color>
+  <color name="brand_blue">#ff638eff</color>
+  <color name="brand_purple">#ffaaa1f1</color>
+  <color name="brand_pink">#ffff68b0</color>
+  <color name="brand_orange">#ffff9e9e</color>
+  <color name="brand_yello">#ffffef62</color>
   <color name="on_surface_primary">#ff0a0a0a</color>
   <color name="on_surface_secondary">#ff666666</color>
   <color name="on_surface_tertiary">#ff8f8f8f</color>
