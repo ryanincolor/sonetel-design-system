@@ -31,10 +31,15 @@ function toggleTheme() {
     localStorage.setItem("theme", "light");
   }
 
-  // Only reload webapp tokens since core tokens never change
+  // Only reload webapp and iOS tokens since core tokens never change
   const webappSection = document.getElementById("webapp");
   if (webappSection && webappSection.classList.contains("active")) {
     loadWebTokens();
+  }
+
+  const iOSSection = document.getElementById("ios");
+  if (iOSSection && iOSSection.classList.contains("active")) {
+    loadIOSTokens();
   }
 }
 

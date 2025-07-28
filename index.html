@@ -99,7 +99,7 @@
 
         <main class="main-content">
           <!-- Core Tokens Section -->
-          <section id="core" class="section active">
+          <section id="core" class="section">
             <h3 class="section-title">Core tokens</h3>
             <p class="section-description">
               Primitive tokens for spacing, colors, and base values. These
@@ -153,14 +153,28 @@
 
           <!-- iOS Section -->
           <section id="ios" class="section">
-            <h3 class="section-title">iOS tokens</h3>
-            <div class="empty-state">
-              <div class="empty-state-icon">🍎</div>
-              <h4 class="empty-state-title">iOS tokens coming soon</h4>
-              <p class="empty-state-description">
-                iOS Swift constants and token formats will be available in a
-                future update.
-              </p>
+            <div class="platform-header">
+              <h3 class="section-title">iOS tokens 🍎</h3>
+              <div class="format-toggle">
+                <select
+                  id="ios-token-format"
+                  class="format-dropdown"
+                  onchange="updateIOSTokenFormat()"
+                >
+                  <option value="names">Token names only</option>
+                  <option value="swift" selected>Swift Constants</option>
+                  <option value="json">JSON</option>
+                  <option value="plist">Property List</option>
+                </select>
+              </div>
+            </div>
+            <p class="section-description">
+              Platform-specific tokens optimized for iOS applications. These
+              tokens include theme-aware colors, typography, and spacing values
+              formatted for use in Swift/Objective-C projects. Click any token to copy it to your clipboard.
+            </p>
+            <div class="token-grid">
+              <!-- iOS tokens will be loaded dynamically -->
             </div>
           </section>
 
@@ -175,6 +189,6 @@
       </div>
     </div>
 
-    <script src="app.js?v=61"></script>
+    <script src="app.js?v=65"></script>
   </body>
 </html>

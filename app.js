@@ -3,8 +3,11 @@
 
 // Navigation switching
 function switchSection(sectionId, event) {
+  console.log(`🔄 Switching to section: ${sectionId}`);
+
   // Hide all sections
   const sections = document.querySelectorAll(".section");
+  console.log(`🔄 Hiding ${sections.length} sections`);
   sections.forEach((section) => section.classList.remove("active"));
 
   // Remove active class from all nav buttons
@@ -12,7 +15,13 @@ function switchSection(sectionId, event) {
   navButtons.forEach((button) => button.classList.remove("active"));
 
   // Show selected section
-  document.getElementById(sectionId).classList.add("active");
+  const targetSection = document.getElementById(sectionId);
+  if (targetSection) {
+    targetSection.classList.add("active");
+    console.log(`✅ Section ${sectionId} activated`);
+  } else {
+    console.error(`❌ Section ${sectionId} not found!`);
+  }
 
   // Add active class to clicked button (if called from UI)
   if (event && event.target) {
@@ -41,8 +50,118 @@ async function updateTokenFormat() {
   }
 }
 
+// iOS token format updating
+async function updateIOSTokenFormat() {
+  try {
+    // Update individual iOS tokens
+    updateIOSTokenFormatDisplay();
+  } catch (error) {
+    console.error("Error loading iOS token format:", error);
+  }
+}
+
+// Update iOS token format for individual tokens
+async function updateIOSTokenFormatDisplay() {
+  const formatElement = document.getElementById("ios-token-format");
+  if (!formatElement) {
+    console.warn("iOS token format dropdown not found");
+    return;
+  }
+
+  const format = formatElement.value;
+  const iOSTokens = document.querySelectorAll("#ios .token-formatted-output, #ios .typography-css-variables, #ios .typography-showcase");
+
+  if (iOSTokens.length === 0) {
+    console.log("No iOS tokens with formatted output found");
+    return;
+  }
+
+  try {
+    let tokensData = {};
+
+    if (format !== "names") {
+      // For now, we'll use the webapp tokens.json as a reference
+      // In a real implementation, you might want to generate iOS-specific tokens
+      const response = await fetch("dist/web/tokens.json");
+      if (response.ok) {
+        tokensData = await response.json();
+      }
+    }
+
+    iOSTokens.forEach((tokenEl) => {
+      const tokenName = tokenEl.getAttribute("data-token");
+      const tokenValue = tokenEl.getAttribute("data-value");
+      const coreTokens = tokenEl.getAttribute("data-core-tokens");
+
+      if (!tokenName) {
+        // Handle typography showcase elements specially
+        if (tokenEl.classList.contains('typography-showcase')) {
+          handleTypographyShowcase(tokenEl, format);
+        }
+        return;
+      }
+
+      const kebabName = tokenName.replace(/\./g, "-");
+      // Match the SMA transform logic from build-tokens.mjs
+      const tokenPath = tokenName.split('.');
+      const camelCased = tokenPath
+        .map((segment, index) =>
+          index === 0
+            ? segment
+            : segment.charAt(0).toUpperCase() + segment.slice(1)
+        )
+        .join("");
+      const swiftName = `sma${camelCased.charAt(0).toUpperCase()}${camelCased.slice(1)}`;
+      let formattedValue = "";
+
+      // Check if this is a typography token with core token references
+      const isTypographyToken = coreTokens && tokenEl.classList.contains('typography-css-variables');
+
+      switch (format) {
+        case "names":
+          // Hide the formatted output section for "names only"
+          tokenEl.style.display = "none";
+          return;
+        case "swift":
+          if (isTypographyToken) {
+            // Show individual Swift constants for each core token the typography style references
+            const tokens = JSON.parse(coreTokens);
+            formattedValue = tokens.map(token => {
+              const coreTokenName = token.coreToken.replace(/[{}]/g, '');
+              const tokenPath = coreTokenName.split('.');
+              const camelCased = tokenPath
+                .map((segment, index) =>
+                  index === 0
+                    ? segment
+                    : segment.charAt(0).toUpperCase() + segment.slice(1)
+                )
+                .join("");
+              const swiftTokenName = `sma${camelCased.charAt(0).toUpperCase()}${camelCased.slice(1)}`;
+              return `SmaTokens.${swiftTokenName}`;
+            }).join('<br>');
+          } else {
+            formattedValue = `SmaTokens.${swiftName}`;
+          }
+          break;
+        case "json":
+          const finalValue = tokensData[kebabName] || tokenValue;
+          formattedValue = `"${kebabName}": "${finalValue}"`;
+          break;
+        case "plist":
+          formattedValue = `<key>${kebabName}</key>\n<string>${tokenValue}</string>`;
+          break;
+      }
+
+      tokenEl.innerHTML = formattedValue;
+      tokenEl.style.display = formattedValue ? "block" : "none";
+    });
+  } catch (error) {
+    console.error("Error updating iOS token format:", error);
+  }
+}
+
 // Copy token in current format
-function copyToken(tokenName, tokenValue, isWebapp) {
+function copyToken(tokenName, tokenValue, isWebapp, isIOS) {
   let textToCopy = tokenName; // fallback to token name
 
   if (isWebapp) {
@@ -67,6 +186,40 @@ function copyToken(tokenName, tokenValue, isWebapp) {
           break;
         case "json":
           textToCopy = `"${kebabName}": "${tokenValue}"`;
+          break;
+        default:
+          textToCopy = tokenName;
+      }
+    }
+  } else if (isIOS) {
+    // Check iOS format selection
+    const formatElement = document.getElementById("ios-token-format");
+    if (formatElement) {
+      const format = formatElement.value;
+      const kebabName = tokenName.replace(/\./g, "-");
+      // Match the SMA transform logic from build-tokens.mjs
+      const tokenPath = tokenName.split('.');
+      const camelCased = tokenPath
+        .map((segment, index) =>
+          index === 0
+            ? segment
+            : segment.charAt(0).toUpperCase() + segment.slice(1)
+        )
+        .join("");
+      const swiftName = `sma${camelCased.charAt(0).toUpperCase()}${camelCased.slice(1)}`;
+
+      switch (format) {
+        case "names":
+          textToCopy = tokenName;
+          break;
+        case "swift":
+          textToCopy = `SmaTokens.${swiftName}`;
+          break;
+        case "json":
+          textToCopy = `"${kebabName}": "${tokenValue}"`;
+          break;
+        case "plist":
+          textToCopy = `<key>${kebabName}</key>\n<string>${tokenValue}</string>`;
           break;
         default:
           textToCopy = tokenName;
@@ -526,7 +679,7 @@ function tokenPathToCSSProperty(fullPath) {
 }
 
 // Helper function to render typography tokens with large dedicated component
-function renderTypographyToken(token, fullPath, isWebapp, coreTokens, webappTokens) {
+function renderTypographyToken(token, fullPath, isWebapp, coreTokens, webappTokens, isIOS) {
   const typographyValue = token.value;
   const fontFamily = resolveTokenReference(typographyValue.fontFamily || "'Inter', sans-serif", coreTokens, webappTokens);
   let fontSize = resolveTokenReference(typographyValue.fontSize || "16", coreTokens, webappTokens);
@@ -602,12 +755,12 @@ function renderTypographyToken(token, fullPath, isWebapp, coreTokens, webappToke
     });
   }
 
-  const formattedOutput = isWebapp
+  const formattedOutput = (isWebapp || isIOS)
     ? `<div class="typography-css-variables" data-token="${fullPath}" data-core-tokens='${JSON.stringify(coreTokenReferences)}'></div>`
     : "";
 
   return `
-    <div class="typography-showcase${isWebapp ? " webapp-token" : ""}" onclick="copyToken('${fullPath}', '${JSON.stringify(token.value)}', ${isWebapp})">
+    <div class="typography-showcase${isWebapp ? " webapp-token" : ""}${isIOS ? " ios-token" : ""}" onclick="copyToken('${fullPath}', '${JSON.stringify(token.value)}', ${isWebapp}, ${isIOS})">
       <div class="typography-header">
         <h4 class="typography-title">${fullPath}</h4>
       </div>
@@ -655,6 +808,7 @@ function displayTypographyCategory(
   isWebapp = false,
   coreTokens = null,
   fullWebappTypographyTokens = null,
+  isIOS = false,
 ) {
   const categoryDiv = document.createElement("div");
   categoryDiv.className = "typography-category";
@@ -669,7 +823,7 @@ function displayTypographyCategory(
       if (token && typeof token === "object") {
         if (token.value !== undefined && token.type === "typography" && typeof token.value === "object") {
           // This is a typography token
-          categoryHtml += renderTypographyToken(token, fullPath, isWebapp, coreTokens, fullWebappTypographyTokens);
+          categoryHtml += renderTypographyToken(token, fullPath, isWebapp, coreTokens, fullWebappTypographyTokens, isIOS);
         } else if (token.value === undefined) {
           // This is a nested object
           renderTypographyTokens(token, fullPath);
@@ -693,6 +847,7 @@ function displayTokenCategory(
   isWebapp = false,
   coreTokens = null,
   webappTokens = null,
+  isIOS = false,
 ) {
   const categoryDiv = document.createElement("div");
   categoryDiv.className = "token-category";
@@ -712,15 +867,15 @@ function displayTokenCategory(
 
           // Handle typography tokens with dedicated function
           if (tokenType === "typography" && typeof token.value === "object") {
-            categoryHtml += renderTypographyToken(token, fullPath, isWebapp, coreTokens, webappTokens);
+            categoryHtml += renderTypographyToken(token, fullPath, isWebapp, coreTokens, webappTokens, isIOS);
             return;
           }
 
           if (tokenType === "color") {
             let colorValue;
 
-            if (isWebapp && coreTokens) {
-              // For webapp tokens, resolve references to actual color values
+            if ((isWebapp || isIOS) && coreTokens) {
+              // For webapp and iOS tokens, resolve references to actual color values
               colorValue = resolveTokenReference(
                 token.value,
                 coreTokens,
@@ -814,12 +969,12 @@ function displayTokenCategory(
 
           }
 
-          const formattedOutput = isWebapp
+          const formattedOutput = (isWebapp || isIOS)
             ? `<div class="token-formatted-output" data-token="${fullPath}" data-value="${token.value}"></div>`
             : "";
 
           categoryHtml += `
-            <div class="token-item${isWebapp ? " webapp-token" : ""}" onclick="copyToken('${fullPath}', '${token.value}', ${isWebapp})">
+            <div class="token-item${isWebapp ? " webapp-token" : ""}${isIOS ? " ios-token" : ""}" onclick="copyToken('${fullPath}', '${token.value}', ${isWebapp}, ${isIOS})">
               ${preview}
               <div class="token-info">
                 <div class="token-name">${fullPath}</div>
@@ -1142,6 +1297,8 @@ async function loadWebTokens() {
   }
 }
 
+
+
 // Load Android tokens
 async function loadAndroidTokens() {
   // Android section shows empty state by default
@@ -1149,12 +1306,170 @@ async function loadAndroidTokens() {
 
 // Load iOS tokens
 async function loadIOSTokens() {
-  // iOS section shows empty state by default
+  console.log("🍎 Loading iOS tokens...");
+
+  // Clear previous content and show loading
+  const tokenGrid = document.querySelector("#ios .token-grid");
+  console.log("📱 iOS token grid found:", !!tokenGrid);
+  if (!tokenGrid) {
+    console.error("❌ iOS token grid not found!");
+    return;
+  }
+
+  // Show loading message
+  tokenGrid.innerHTML = `
+    <div class="loading-state">
+      <div class="loading-icon">⏳</div>
+      <h4>Loading iOS tokens...</h4>
+      <p>Fetching mobile tokens for iOS platform</p>
+    </div>
+  `;
+
+  try {
+    // Get current theme
+    const html = document.documentElement;
+    const currentTheme = html.getAttribute("data-theme") || "light";
+    const themeFile = currentTheme.charAt(0).toUpperCase() + currentTheme.slice(1);
+
+    console.log("📥 Fetching iOS token files...");
+
+    // Load theme-specific color tokens
+    console.log(`📁 Loading iOS ${currentTheme} theme colors...`);
+    const colorResponse = await fetch(`tokens/Mobile/Color/${themeFile}.json`);
+    if (!colorResponse.ok) {
+      throw new Error(`Failed to fetch iOS ${currentTheme} theme colors (${colorResponse.status})`);
+    }
+    const iOSColorTokens = await colorResponse.json();
+    console.log("✅ iOS color tokens loaded:", Object.keys(iOSColorTokens).length, "categories");
+
+    // Load iOS spacing tokens
+    console.log("📁 Loading iOS spacing tokens...");
+    const spacingResponse = await fetch(`tokens/Mobile/Spacing.json`);
+    if (!spacingResponse.ok) {
+      throw new Error(`Failed to fetch iOS spacing tokens (${spacingResponse.status})`);
+    }
+    const iOSSpacingTokens = await spacingResponse.json();
+    console.log("✅ iOS spacing tokens loaded:", Object.keys(iOSSpacingTokens).length, "categories");
+
+    // Load iOS typography tokens
+    console.log("📁 Loading iOS typography tokens...");
+    const typographyResponse = await fetch(`tokens/Mobile/Typography.json`);
+    if (!typographyResponse.ok) {
+      throw new Error(`Failed to fetch iOS typography tokens (${typographyResponse.status})`);
+    }
+    const iOSTypographyTokens = await typographyResponse.json();
+    console.log("✅ iOS typography tokens loaded:", Object.keys(iOSTypographyTokens).length, "categories");
+
+    // Load core tokens for reference resolution
+    console.log("📁 Loading core tokens for reference resolution...");
+    const coreColorResponse = await fetch(`tokens/Core/Color.json`);
+    const coreTypographyResponse = await fetch(`tokens/Core/Typography.json`);
+    const coreSpacingResponse = await fetch(`tokens/Core/Spacing.json`);
+
+    const coreTokens = {};
+    if (coreColorResponse.ok) {
+      coreTokens.color = await coreColorResponse.json();
+    }
+    if (coreTypographyResponse.ok) {
+      coreTokens.font = await coreTypographyResponse.json();
+    }
+    if (coreSpacingResponse.ok) {
+      coreTokens.spacing = await coreSpacingResponse.json();
+    }
+
+    // Clear loading and display tokens
+    console.log("🎨 Displaying iOS tokens...");
+    tokenGrid.innerHTML = "";
+
+    // Display color tokens with proper segmentation
+    if (iOSColorTokens && Object.keys(iOSColorTokens).length > 0) {
+      console.log("🎨 Adding iOS color tokens to display");
+
+      // Segment colors into categories
+      if (iOSColorTokens.elevation) {
+        if (iOSColorTokens.elevation.solid) {
+          displayTokenCategory(tokenGrid, "iOS Elevation Solid", { elevation: { solid: iOSColorTokens.elevation.solid } }, "color", false, coreTokens, null, true);
+        }
+        if (iOSColorTokens.elevation.alpha) {
+          displayTokenCategory(tokenGrid, "iOS Elevation Alpha", { elevation: { alpha: iOSColorTokens.elevation.alpha } }, "color", false, coreTokens, null, true);
+        }
+      }
+
+      if (iOSColorTokens.action) {
+        const actionTokens = { ...iOSColorTokens.action };
+        // Separate on-action from regular action tokens
+        if (actionTokens['on-action']) {
+          displayTokenCategory(tokenGrid, "iOS On-Action Colors", { action: { 'on-action': actionTokens['on-action'] } }, "color", false, coreTokens, null, true);
+          delete actionTokens['on-action'];
+        }
+        // Display remaining action tokens
+        if (Object.keys(actionTokens).length > 0) {
+          displayTokenCategory(tokenGrid, "iOS Action Colors", { action: actionTokens }, "color", false, coreTokens, null, true);
+        }
+      }
+
+      if (iOSColorTokens.brand) {
+        displayTokenCategory(tokenGrid, "iOS Brand Colors", { brand: iOSColorTokens.brand }, "color", false, coreTokens, null, true);
+      }
+
+      if (iOSColorTokens.status) {
+        displayTokenCategory(tokenGrid, "iOS Status Colors", { status: iOSColorTokens.status }, "color", false, coreTokens, null, true);
+      }
+
+      if (iOSColorTokens['on-surface']) {
+        displayTokenCategory(tokenGrid, "iOS On-Surface Colors", { 'on-surface': iOSColorTokens['on-surface'] }, "color", false, coreTokens, null, true);
+      }
+    }
+
+    // Display spacing tokens with proper segmentation
+    if (iOSSpacingTokens && Object.keys(iOSSpacingTokens).length > 0) {
+      console.log("📏 Adding iOS spacing tokens to display");
+      displayTokenCategory(tokenGrid, "iOS Spacing", iOSSpacingTokens, "spacing", false, coreTokens, null, true);
+    }
+
+    // Display typography tokens with proper segmentation
+    if (iOSTypographyTokens && Object.keys(iOSTypographyTokens).length > 0) {
+      console.log("📝 Adding iOS typography tokens to display");
+      displayTypographyCategory(tokenGrid, "iOS Typography", iOSTypographyTokens, false, coreTokens, null, true);
+    }
+
+    console.log("✅ iOS tokens loaded and displayed successfully");
+
+    // Apply current format
+    console.log("🔧 Applying iOS token format...");
+    updateIOSTokenFormat();
+  } catch (error) {
+    console.error("❌ Error loading iOS tokens:", error);
+
+    // Show error state
+    tokenGrid.innerHTML = `
+      <div class="error-state">
+        <div class="error-icon">⚠️</div>
+        <h4>Error loading iOS tokens</h4>
+        <p>${error.message}</p>
+      </div>
+    `;
+  }
 }
 
 // Store last modification times for file watching
 let fileModificationTimes = new Map();
 let fileWatchInterval = null;
+
+// Initialize page on load
+document.addEventListener('DOMContentLoaded', function() {
+  // Set initial active section based on which nav button has active class
+  const activeButton = document.querySelector('.nav-button.active');
+  if (activeButton) {
+    const sectionId = activeButton.getAttribute('onclick').match(/switchSection\('([^']+)'/)[1];
+    console.log(`🏠 Initializing page with section: ${sectionId}`);
+    switchSection(sectionId);
+  } else {
+    // Fallback to core if no active button found
+    console.log('🏠 No active button found, defaulting to core');
+    switchSection('core');
+  }
+});
 let tokenWatchInterval = null;
 
 // Load output files
