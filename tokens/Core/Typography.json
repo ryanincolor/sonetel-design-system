@@ -4,6 +4,14 @@
       "sans": {
         "value": "'Inter', sans-serif",
         "type": "fontFamilies"
+      },
+      "mobile": {
+        "value": "'Inter', sans-serif",
+        "type": "fontFamilies"
+      },
+      "web": {
+        "value": "'Inter', sans-serif",
+        "type": "fontFamilies"
       }
     },
     "size": {

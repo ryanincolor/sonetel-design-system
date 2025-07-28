@@ -1,6 +1,25 @@
 // Main application functionality
 // This file contains all the token browsing and UI functionality
 
+// Helper function to clean iOS token names
+function cleanIOSTokenName(tokenName) {
+  const tokenPath = tokenName.split('.');
+  const camelCased = tokenPath
+    .map((segment, index) => {
+      // Clean up special characters, hyphens, and handle common patterns
+      let cleanSegment = segment
+        .replace(/[^a-zA-Z0-9]/g, '') // Remove all non-alphanumeric
+        .replace(/^on/i, 'On') // Handle 'on-action' -> 'OnAction' pattern
+        .replace(/^x/i, 'X'); // Handle 'x-large' -> 'XLarge' pattern
+
+      return index === 0
+        ? cleanSegment
+        : cleanSegment.charAt(0).toUpperCase() + cleanSegment.slice(1);
+    })
+    .join("");
+  return camelCased;
+}
+
 // Navigation switching
 function switchSection(sectionId, event) {
   console.log(`🔄 Switching to section: ${sectionId}`);
@@ -102,16 +121,8 @@ async function updateIOSTokenFormatDisplay() {
       }
 
       const kebabName = tokenName.replace(/\./g, "-");
-      // Match the SMA transform logic from build-tokens.mjs
-      const tokenPath = tokenName.split('.');
-      const camelCased = tokenPath
-        .map((segment, index) =>
-          index === 0
-            ? segment
-            : segment.charAt(0).toUpperCase() + segment.slice(1)
-        )
-        .join("");
-      const swiftName = `sma${camelCased.charAt(0).toUpperCase()}${camelCased.slice(1)}`;
+      // Use helper function for iOS token name cleaning
+      const swiftName = cleanIOSTokenName(tokenName);
       let formattedValue = "";
 
       // Check if this is a typography token with core token references
@@ -128,15 +139,7 @@ async function updateIOSTokenFormatDisplay() {
             const tokens = JSON.parse(coreTokens);
             formattedValue = tokens.map(token => {
               const coreTokenName = token.coreToken.replace(/[{}]/g, '');
-              const tokenPath = coreTokenName.split('.');
-              const camelCased = tokenPath
-                .map((segment, index) =>
-                  index === 0
-                    ? segment
-                    : segment.charAt(0).toUpperCase() + segment.slice(1)
-                )
-                .join("");
-              const swiftTokenName = `sma${camelCased.charAt(0).toUpperCase()}${camelCased.slice(1)}`;
+              const swiftTokenName = cleanIOSTokenName(coreTokenName);
               return `SmaTokens.${swiftTokenName}`;
             }).join('<br>');
           } else {
@@ -197,16 +200,8 @@ function copyToken(tokenName, tokenValue, isWebapp, isIOS) {
     if (formatElement) {
       const format = formatElement.value;
       const kebabName = tokenName.replace(/\./g, "-");
-      // Match the SMA transform logic from build-tokens.mjs
-      const tokenPath = tokenName.split('.');
-      const camelCased = tokenPath
-        .map((segment, index) =>
-          index === 0
-            ? segment
-            : segment.charAt(0).toUpperCase() + segment.slice(1)
-        )
-        .join("");
-      const swiftName = `sma${camelCased.charAt(0).toUpperCase()}${camelCased.slice(1)}`;
+      // Use helper function for iOS token name cleaning
+      const swiftName = cleanIOSTokenName(tokenName);
 
       switch (format) {
         case "names":
@@ -578,6 +573,52 @@ async function loadCoreTokens() {
   }
 }
 
+// Helper function to transform token structure with resolved values
+function transformTokensWithResolvedValues(tokenStructure, resolvedTokens) {
+  function transformObject(obj, path = []) {
+    const result = {};
+
+    for (const [key, value] of Object.entries(obj)) {
+      const currentPath = [...path, key];
+
+      if (value && typeof value === 'object') {
+        if (value.value !== undefined) {
+          // This is a token with a value - try to find resolved value
+          const tokenPath = currentPath.join('.');
+
+          // Try to find in resolved tokens by following the path
+          let resolvedValue = resolvedTokens;
+          for (const segment of currentPath) {
+            if (resolvedValue && resolvedValue[segment] !== undefined) {
+              resolvedValue = resolvedValue[segment];
+            } else {
+              resolvedValue = null;
+              break;
+            }
+          }
+
+          // If we found a resolved value, use it; otherwise keep original
+          const finalValue = (typeof resolvedValue === 'string') ? resolvedValue : value.value;
+
+          result[key] = {
+            ...value,
+            value: finalValue
+          };
+        } else {
+          // This is a nested object
+          result[key] = transformObject(value, currentPath);
+        }
+      } else {
+        result[key] = value;
+      }
+    }
+
+    return result;
+  }
+
+  return transformObject(tokenStructure);
+}
+
 // Helper function to resolve token references
 function resolveTokenReference(value, coreTokens, webappTokens = null) {
   if (
@@ -681,11 +722,64 @@ function tokenPathToCSSProperty(fullPath) {
 // Helper function to render typography tokens with large dedicated component
 function renderTypographyToken(token, fullPath, isWebapp, coreTokens, webappTokens, isIOS) {
   const typographyValue = token.value;
-  const fontFamily = resolveTokenReference(typographyValue.fontFamily || "'Inter', sans-serif", coreTokens, webappTokens);
+
+  // Resolve with better fallbacks
+  let fontFamily = resolveTokenReference(typographyValue.fontFamily || "'Inter', sans-serif", coreTokens, webappTokens);
   let fontSize = resolveTokenReference(typographyValue.fontSize || "16", coreTokens, webappTokens);
-  const fontWeight = resolveTokenReference(typographyValue.fontWeight || "400", coreTokens, webappTokens);
-  const lineHeight = resolveTokenReference(typographyValue.lineHeight || "1.5", coreTokens, webappTokens);
-  const letterSpacing = resolveTokenReference(typographyValue.letterSpacing || "0%", coreTokens, webappTokens);
+  let fontWeight = resolveTokenReference(typographyValue.fontWeight || "400", coreTokens, webappTokens);
+  let lineHeight = resolveTokenReference(typographyValue.lineHeight || "1.5", coreTokens, webappTokens);
+  let letterSpacing = resolveTokenReference(typographyValue.letterSpacing || "0%", coreTokens, webappTokens);
+
+  // Map common token references to actual values
+  const tokenMappings = {
+    '{font.family.mobile}': "'Inter', sans-serif",
+    '{font.family.web}': "'Inter', sans-serif",
+    '{font.family.sans}': "'Inter', sans-serif",
+    '{font.weight.regular}': "400",
+    '{font.weight.medium}': "500",
+    '{font.weight.semibold}': "600",
+    '{font.weight.bold}': "700",
+    '{font.line-height.tighter}': "1.1",
+    '{font.line-height.tight}': "1.2",
+    '{font.line-height.normal}': "1.5",
+    '{font.letter-spacing.tight}': "-0.02em",
+    '{font.letter-spacing.normal}': "0",
+    '{font.size.display.xl}': "96",
+    '{font.size.display.lg}': "80",
+    '{font.size.display.md}': "64",
+    '{font.size.display.sm}': "48",
+    '{font.size.headline.3xl}': "40",
+    '{font.size.headline.2xl}': "34",
+    '{font.size.headline.xl}': "28",
+    '{font.size.headline.lg}': "24",
+    '{font.size.headline.md}': "20",
+    '{font.size.headline.sm}': "18",
+    '{font.size.body.xl}': "20",
+    '{font.size.body.lg}': "16",
+    '{font.size.body.md}': "14",
+    '{font.size.body.sm}': "12",
+    '{font.size.label.xl}': "18",
+    '{font.size.label.lg}': "16",
+    '{font.size.label.md}': "14",
+    '{font.size.label.sm}': "12"
+  };
+
+  // Apply mappings if resolution failed
+  if (fontFamily.includes('{')) {
+    fontFamily = tokenMappings[fontFamily] || "'Inter', sans-serif";
+  }
+  if (fontSize.includes('{')) {
+    fontSize = tokenMappings[fontSize] || "16";
+  }
+  if (fontWeight.includes('{')) {
+    fontWeight = tokenMappings[fontWeight] || "400";
+  }
+  if (lineHeight.includes('{')) {
+    lineHeight = tokenMappings[lineHeight] || "1.5";
+  }
+  if (letterSpacing.includes('{')) {
+    letterSpacing = tokenMappings[letterSpacing] || "0%";
+  }
 
   // Ensure fontSize has units
   if (!isNaN(fontSize) && !fontSize.toString().includes('px')) {
@@ -764,8 +858,11 @@ function renderTypographyToken(token, fullPath, isWebapp, coreTokens, webappToke
       <div class="typography-header">
         <h4 class="typography-title">${fullPath}</h4>
       </div>
-      <div class="typography-demo typography-${tokenPathToCSSProperty(fullPath)}">
+      <div class="typography-demo typography-${tokenPathToCSSProperty(fullPath)}" data-debug-path="${fullPath}" data-debug-css="typography-${tokenPathToCSSProperty(fullPath)}" style="font-family: ${fontFamily}; font-size: ${fontSize}; font-weight: ${fontWeight}; line-height: ${lineHeight}; letter-spacing: ${letterSpacingValue};">
         The quick brown fox jumps over the lazy dog
+        <small style="display: block; font-size: 10px; color: #999; margin-top: 5px;">
+          Debug: family=${fontFamily}, size=${fontSize}, weight=${fontWeight}, line=${lineHeight}, spacing=${letterSpacingValue}
+        </small>
       </div>
       <div class="typography-details">
         <div class="typography-token-references">
@@ -910,31 +1007,52 @@ function displayTokenCategory(
             // Parse the dimension value and create preview
             const numericValue = parseFloat(dimensionValue.replace("px", ""));
             const width = Math.max(2, numericValue) + "px"; // Minimum 2px width for visibility
-            preview = `<div class="dimension-preview" style="width: ${width}; height: 8px; background: #007aff !important;"></div>`;
+            preview = `<div class="dimension-preview" style="width: ${width}; height: 8px; background: #333 !important;"></div>`;
 
           } else if (tokenType === "typography") {
             // Handle typography tokens
             let typographyValue = token.value;
             if (typeof typographyValue === "object") {
               // For composite typography tokens, show sample text with applied styles
-              const fontFamily = resolveTokenReference(typographyValue.fontFamily || "'Inter', sans-serif", coreTokens, webappTokens);
-              let fontSize = resolveTokenReference(typographyValue.fontSize || "16", coreTokens, webappTokens);
+              const fontFamily = resolveTokenReference(typographyValue.fontFamily || "'Inter', sans-serif", coreTokens, webappTokens || tokens);
+              let fontSize = resolveTokenReference(typographyValue.fontSize || "16", coreTokens, webappTokens || tokens);
               // Ensure fontSize has units
               if (!isNaN(fontSize) && !fontSize.toString().includes('px')) {
                 fontSize = fontSize + 'px';
               }
-              const fontWeight = resolveTokenReference(typographyValue.fontWeight || "400", coreTokens, webappTokens);
-              const lineHeight = resolveTokenReference(typographyValue.lineHeight || "1.5", coreTokens, webappTokens);
-              const letterSpacing = resolveTokenReference(typographyValue.letterSpacing || "0%", coreTokens, webappTokens);
+              const fontWeight = resolveTokenReference(typographyValue.fontWeight || "400", coreTokens, webappTokens || tokens);
+              let lineHeight = resolveTokenReference(typographyValue.lineHeight || "1.5", coreTokens, webappTokens || tokens);
+              const letterSpacing = resolveTokenReference(typographyValue.letterSpacing || "0%", coreTokens, webappTokens || tokens);
+
+              // Debug typography values for iOS tokens
+              if (isIOS) {
+                console.log(`🎨 Typography debug for ${fullPath}:`, {
+                  fontFamily,
+                  fontSize,
+                  fontWeight,
+                  lineHeight,
+                  letterSpacing,
+                  originalValue: typographyValue
+                });
+              }
+
+              // Convert percentage line-height to unitless value
+              if (typeof lineHeight === 'string' && lineHeight.includes("%")) {
+                const percentage = parseFloat(lineHeight.replace("%", ""));
+                lineHeight = (percentage / 100).toString();
+              }
 
               // Convert percentage letter-spacing to em
               let letterSpacingValue = letterSpacing;
-              if (letterSpacing.includes("%")) {
+              if (typeof letterSpacing === 'string' && letterSpacing.includes("%")) {
                 const percentage = parseFloat(letterSpacing.replace("%", ""));
                 letterSpacingValue = `${percentage / 100}em`;
+              } else if (typeof letterSpacing === 'number') {
+                // Handle numeric letter spacing values
+                letterSpacingValue = `${letterSpacing / 100}em`;
               }
 
-              preview = `<div class="typography-preview" style="font-family: ${fontFamily}; font-size: ${fontSize}px; font-weight: ${fontWeight}; line-height: ${lineHeight}; letter-spacing: ${letterSpacingValue}; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 200px;">The quick brown fox</div>`;
+              preview = `<div class="typography-preview" style="font-family: ${fontFamily}; font-size: ${fontSize}; font-weight: ${fontWeight}; line-height: ${lineHeight}; letter-spacing: ${letterSpacingValue}; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 200px;">The quick brown fox</div>`;
             } else {
               // For primitive typography tokens, just show the value
               preview = `<div class="typography-preview">"${typographyValue}"</div>`;
@@ -1329,38 +1447,53 @@ async function loadIOSTokens() {
     // Get current theme
     const html = document.documentElement;
     const currentTheme = html.getAttribute("data-theme") || "light";
+
+    console.log("📥 Fetching resolved iOS token values...");
+
+    // Load the resolved token values from the built files
+    console.log("📁 Loading resolved tokens for iOS...");
+    const tokensResponse = await fetch(`dist/web/tokens.json`);
+    if (!tokensResponse.ok) {
+      throw new Error(`Failed to fetch resolved tokens (${tokensResponse.status})`);
+    }
+    const resolvedTokens = await tokensResponse.json();
+    console.log("✅ Resolved tokens loaded:", Object.keys(resolvedTokens).length, "tokens");
+
+    // Load theme-specific iOS structure to know which tokens to show
     const themeFile = currentTheme.charAt(0).toUpperCase() + currentTheme.slice(1);
-
-    console.log("📥 Fetching iOS token files...");
-
-    // Load theme-specific color tokens
-    console.log(`📁 Loading iOS ${currentTheme} theme colors...`);
+    console.log(`📁 Loading iOS ${currentTheme} theme structure...`);
     const colorResponse = await fetch(`tokens/Mobile/Color/${themeFile}.json`);
     if (!colorResponse.ok) {
-      throw new Error(`Failed to fetch iOS ${currentTheme} theme colors (${colorResponse.status})`);
+      throw new Error(`Failed to fetch iOS ${currentTheme} theme structure (${colorResponse.status})`);
     }
-    const iOSColorTokens = await colorResponse.json();
-    console.log("✅ iOS color tokens loaded:", Object.keys(iOSColorTokens).length, "categories");
+    const iOSColorStructure = await colorResponse.json();
+    console.log("✅ iOS color structure loaded");
 
-    // Load iOS spacing tokens
-    console.log("📁 Loading iOS spacing tokens...");
+    // Load iOS spacing structure
+    console.log("📁 Loading iOS spacing structure...");
     const spacingResponse = await fetch(`tokens/Mobile/Spacing.json`);
     if (!spacingResponse.ok) {
-      throw new Error(`Failed to fetch iOS spacing tokens (${spacingResponse.status})`);
+      throw new Error(`Failed to fetch iOS spacing structure (${spacingResponse.status})`);
     }
-    const iOSSpacingTokens = await spacingResponse.json();
-    console.log("✅ iOS spacing tokens loaded:", Object.keys(iOSSpacingTokens).length, "categories");
+    const iOSSpacingStructure = await spacingResponse.json();
+    console.log("✅ iOS spacing structure loaded");
 
-    // Load iOS typography tokens
-    console.log("📁 Loading iOS typography tokens...");
+    // Load iOS typography structure
+    console.log("📁 Loading iOS typography structure...");
     const typographyResponse = await fetch(`tokens/Mobile/Typography.json`);
     if (!typographyResponse.ok) {
-      throw new Error(`Failed to fetch iOS typography tokens (${typographyResponse.status})`);
+      throw new Error(`Failed to fetch iOS typography structure (${typographyResponse.status})`);
     }
-    const iOSTypographyTokens = await typographyResponse.json();
-    console.log("✅ iOS typography tokens loaded:", Object.keys(iOSTypographyTokens).length, "categories");
+    const iOSTypographyStructure = await typographyResponse.json();
+    console.log("✅ iOS typography structure loaded");
 
-    // Load core tokens for reference resolution
+    // Transform structure to use resolved values
+    console.log("🔄 Transforming iOS tokens with resolved values...");
+    const iOSColorTokens = transformTokensWithResolvedValues(iOSColorStructure, resolvedTokens);
+    const iOSSpacingTokens = transformTokensWithResolvedValues(iOSSpacingStructure, resolvedTokens);
+    const iOSTypographyTokens = transformTokensWithResolvedValues(iOSTypographyStructure, resolvedTokens);
+
+    // For reference resolution, we still need core tokens
     console.log("📁 Loading core tokens for reference resolution...");
     const coreColorResponse = await fetch(`tokens/Core/Color.json`);
     const coreTypographyResponse = await fetch(`tokens/Core/Typography.json`);
@@ -1504,9 +1637,24 @@ async function loadOutputFiles() {
       description: "Android Dimension Resources",
     },
     {
-      path: "dist/ios/SonetelTokens.swift",
+      path: "dist/ios/SmaTokens.swift",
       type: "Swift",
-      description: "iOS Swift Constants",
+      description: "iOS Spacing & Base Tokens",
+    },
+    {
+      path: "dist/ios/SmaTokensLight.swift",
+      type: "Swift",
+      description: "iOS Light Theme Colors",
+    },
+    {
+      path: "dist/ios/SmaTokensDark.swift",
+      type: "Swift",
+      description: "iOS Dark Theme Colors",
+    },
+    {
+      path: "dist/ios/SmaTypography.swift",
+      type: "Swift",
+      description: "iOS Typography Objects",
     },
   ];
 
@@ -1581,7 +1729,10 @@ function startFileWatching() {
       "dist/web/tokens.json",
       "dist/android/colors.xml",
       "dist/android/dimens.xml",
-      "dist/ios/SonetelTokens.swift",
+      "dist/ios/SmaTokens.swift",
+      "dist/ios/SmaTokensLight.swift",
+      "dist/ios/SmaTokensDark.swift",
+      "dist/ios/SmaTypography.swift",
     ];
 
     for (const filePath of outputFiles) {

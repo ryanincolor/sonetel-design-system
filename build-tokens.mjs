@@ -36,11 +36,17 @@ StyleDictionary.registerTransform({
   type: "name",
   transform: (token) => {
     const camelCased = token.path
-      .map((segment, index) =>
-        index === 0
-          ? segment
-          : segment.charAt(0).toUpperCase() + segment.slice(1)
-      )
+      .map((segment, index) => {
+        // Clean up special characters, hyphens, and handle common patterns
+        let cleanSegment = segment
+          .replace(/[^a-zA-Z0-9]/g, '') // Remove all non-alphanumeric
+          .replace(/^on/i, 'On') // Handle 'on-action' -> 'OnAction' pattern
+          .replace(/^x/i, 'X'); // Handle 'x-large' -> 'XLarge' pattern
+
+        return index === 0
+          ? cleanSegment
+          : cleanSegment.charAt(0).toUpperCase() + cleanSegment.slice(1);
+      })
       .join("");
     return camelCased;
   },

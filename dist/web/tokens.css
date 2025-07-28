@@ -1,11 +1,8 @@
-/* Fallback Design Tokens - Generated due to build errors */
-:root {
-  /* Basic Colors */
-  --swa-color-white: #fff;
-  --swa-color-black: #000;
-  --swa-color-primary: #0066cc;
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
 
-  /* Basic Spacing */
+:root {
   --swa-spacing-2xs: 2px;
   --swa-spacing-xs: 4px;
   --swa-spacing-sm: 8px;
@@ -23,36 +20,143 @@
   --swa-spacing-10xl: 80px;
   --swa-spacing-11xl: 96px;
   --swa-spacing-12xl: 128px;
-
-  /* Basic Typography */
   --swa-font-family-web: 'Inter', sans-serif;
   --swa-font-size-display-lg: 96px;
-  --swa-font-size-headline-3xl: 40px;
-  --swa-font-size-headline-2xl: 34px;
-  --swa-font-size-headline-xl: 28px;
-  --swa-font-size-headline-lg: 24px;
-  --swa-font-size-headline-md: 20px;
-  --swa-font-size-headline-sm: 18px;
-  --swa-font-size-body-xl: 20px;
-  --swa-font-size-body-lg: 16px;
-  --swa-font-size-body-md: 14px;
   --swa-font-size-body-sm: 12px;
-  --swa-font-size-label-xl: 18px;
-  --swa-font-size-label-lg: 16px;
-  --swa-font-size-label-md: 14px;
+  --swa-font-size-body-md: 14px;
+  --swa-font-size-body-lg: 16px;
+  --swa-font-size-body-xl: 20px;
   --swa-font-size-label-sm: 12px;
+  --swa-font-size-label-md: 14px;
+  --swa-font-size-label-lg: 16px;
+  --swa-font-size-label-xl: 18px;
+  --swa-font-size-headline-sm: 18px;
+  --swa-font-size-headline-md: 20px;
+  --swa-font-size-headline-lg: 24px;
+  --swa-font-size-headline-xl: 28px;
+  --swa-font-size-headline-2xl: 34px;
+  --swa-font-size-headline-3xl: 40px;
   --swa-font-weight-regular: 400;
   --swa-font-weight-medium: 500;
   --swa-font-weight-semibold: 600;
   --swa-font-weight-bold: 700;
-  --swa-line-height-tightest: 100%;
-  --swa-line-height-tighter: 110%;
-  --swa-line-height-tight: 120%;
-  --swa-line-height-base: 150%;
-  --swa-letter-spacing-tight: -2%;
-  --swa-letter-spacing-normal: 0%;
-  --swa-letter-spacing-wide: 5%;
+  --swa-font-letter-spacing-tight: -2%;
+  --swa-font-letter-spacing-normal: 0%;
+  --swa-font-letter-spacing-wide: 5%;
+  --swa-font-line-height-tight: 120%;
+  --swa-font-line-height-base: 150%;
+  --swa-font-line-height-tighter: 110%;
+  --swa-font-line-height-tightest: 100%;
+  --swa-display-large-font-family: 'Inter', sans-serif;
+  --swa-display-large-font-weight: 700;
+  --swa-display-large-line-height: 110%;
+  --swa-display-large-font-size: 96px;
+  --swa-display-large-letter-spacing: -2%;
+  --swa-headline-3x-large-font-family: 'Inter', sans-serif;
+  --swa-headline-3x-large-font-weight-light: 400;
+  --swa-headline-3x-large-font-weight-regular: 500;
+  --swa-headline-3x-large-font-weight-prominent: 600;
+  --swa-headline-3x-large-line-height: 110%;
+  --swa-headline-3x-large-font-size: 40px;
+  --swa-headline-3x-large-letter-spacing: -2%;
+  --swa-headline-2x-large-font-family: 'Inter', sans-serif;
+  --swa-headline-2x-large-font-weight-light: 400;
+  --swa-headline-2x-large-font-weight-regular: 500;
+  --swa-headline-2x-large-font-weight-prominent: 600;
+  --swa-headline-2x-large-line-height: 110%;
+  --swa-headline-2x-large-font-size: 34px;
+  --swa-headline-2x-large-letter-spacing: -2%;
+  --swa-headline-x-large-font-family: 'Inter', sans-serif;
+  --swa-headline-x-large-font-weight-light: 400;
+  --swa-headline-x-large-font-weight-regular: 500;
+  --swa-headline-x-large-font-weight-prominent: 600;
+  --swa-headline-x-large-line-height: 110%;
+  --swa-headline-x-large-font-size: 28px;
+  --swa-headline-x-large-letter-spacing: -2%;
+  --swa-headline-large-font-family: 'Inter', sans-serif;
+  --swa-headline-large-font-weight-light: 400;
+  --swa-headline-large-font-weight-regular: 500;
+  --swa-headline-large-font-weight-prominent: 600;
+  --swa-headline-large-line-height: 120%;
+  --swa-headline-large-font-size: 24px;
+  --swa-headline-large-letter-spacing: -2%;
+  --swa-headline-medium-font-family: 'Inter', sans-serif;
+  --swa-headline-medium-font-weight-light: 400;
+  --swa-headline-medium-font-weight-regular: 500;
+  --swa-headline-medium-font-weight-prominent: 600;
+  --swa-headline-medium-line-height: 120%;
+  --swa-headline-medium-font-size: 20px;
+  --swa-headline-medium-letter-spacing: -2%;
+  --swa-headline-small-font-family: 'Inter', sans-serif;
+  --swa-headline-small-font-weight-light: 400;
+  --swa-headline-small-font-weight-regular: 500;
+  --swa-headline-small-font-weight-prominent: 600;
+  --swa-headline-small-line-height: 120%;
+  --swa-headline-small-font-size: 18px;
+  --swa-headline-small-letter-spacing: -2%;
+  --swa-headline-small-prominant-font-family: 'Inter', sans-serif;
+  --swa-headline-small-prominant-font-weight: 600;
+  --swa-headline-small-prominant-line-height: 120%;
+  --swa-headline-small-prominant-font-size: 18px;
+  --swa-headline-small-prominant-letter-spacing: -2%;
+  --swa-body-x-large-font-family: 'Inter', sans-serif;
+  --swa-body-x-large-font-weight-light: 400;
+  --swa-body-x-large-font-weight-regular: 500;
+  --swa-body-x-large-font-weight-prominent: 600;
+  --swa-body-x-large-line-height: 150%;
+  --swa-body-x-large-font-size: 20px;
+  --swa-body-x-large-letter-spacing: -2%;
+  --swa-body-large-font-family: 'Inter', sans-serif;
+  --swa-body-large-font-weight-light: 400;
+  --swa-body-large-font-weight-regular: 500;
+  --swa-body-large-font-weight-prominent: 600;
+  --swa-body-large-line-height: 150%;
+  --swa-body-large-font-size: 16px;
+  --swa-body-large-letter-spacing: -2%;
+  --swa-body-medium-font-family: 'Inter', sans-serif;
+  --swa-body-medium-font-weight-light: 400;
+  --swa-body-medium-font-weight-regular: 500;
+  --swa-body-medium-font-weight-prominent: 600;
+  --swa-body-medium-line-height: 150%;
+  --swa-body-medium-font-size: 14px;
+  --swa-body-medium-letter-spacing: -2%;
+  --swa-body-small-font-family: 'Inter', sans-serif;
+  --swa-body-small-font-weight-light: 400;
+  --swa-body-small-font-weight-regular: 500;
+  --swa-body-small-font-weight-prominent: 600;
+  --swa-body-small-line-height: 150%;
+  --swa-body-small-font-size: 12px;
+  --swa-body-small-letter-spacing: -2%;
+  --swa-label-x-large-font-family: 'Inter', sans-serif;
+  --swa-label-x-large-font-weight-light: 400;
+  --swa-label-x-large-font-weight-regular: 500;
+  --swa-label-x-large-font-weight-prominent: 600;
+  --swa-label-x-large-line-height: 100%;
+  --swa-label-x-large-font-size: 18px;
+  --swa-label-x-large-letter-spacing: -2%;
+  --swa-label-large-font-family: 'Inter', sans-serif;
+  --swa-label-large-font-weight-light: 400;
+  --swa-label-large-font-weight-regular: 500;
+  --swa-label-large-font-weight-prominent: 600;
+  --swa-label-large-line-height: 100%;
+  --swa-label-large-font-size: 16px;
+  --swa-label-large-letter-spacing: -2%;
+  --swa-label-medium-font-family: 'Inter', sans-serif;
+  --swa-label-medium-font-weight-light: 400;
+  --swa-label-medium-font-weight-regular: 500;
+  --swa-label-medium-font-weight-prominent: 600;
+  --swa-label-medium-line-height: 100%;
+  --swa-label-medium-font-size: 14px;
+  --swa-label-medium-letter-spacing: -2%;
+  --swa-label-small-font-family: 'Inter', sans-serif;
+  --swa-label-small-font-weight-light: 400;
+  --swa-label-small-font-weight-regular: 500;
+  --swa-label-small-font-weight-prominent: 600;
+  --swa-label-small-line-height: 100%;
+  --swa-label-small-font-size: 12px;
+  --swa-label-small-letter-spacing: -2%;
 }
+
 
 /**
  * Do not edit directly, this file was auto-generated.

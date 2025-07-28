@@ -9,14 +9,17 @@
 import SwiftUI
 
 public class SmaTokensDark {
+    public static let OnsurfacePrimary = [UIColor colorWithRed:1.000f green:1.000f blue:1.000f alpha:1.000f]
+    public static let OnsurfaceSecondary = [UIColor colorWithRed:0.502f green:0.502f blue:0.502f alpha:1.000f]
+    public static let OnsurfaceTertiary = [UIColor colorWithRed:0.200f green:0.200f blue:0.200f alpha:1.000f]
     public static let actionAlphaSecondaryActive = [UIColor colorWithRed:1.000f green:1.000f blue:1.000f alpha:0.161f]
     public static let actionAlphaSecondaryEnabled = [UIColor colorWithRed:1.000f green:1.000f blue:1.000f alpha:0.122f]
     public static let actionAlphaSecondaryHover = [UIColor colorWithRed:1.000f green:1.000f blue:1.000f alpha:0.161f]
-    public static let actionOn-actionDark = [UIColor colorWithRed:1.000f green:1.000f blue:1.000f alpha:1.000f]
-    public static let actionOn-actionDisabled = [UIColor colorWithRed:1.000f green:1.000f blue:1.000f alpha:0.161f]
-    public static let actionOn-actionLight = [UIColor colorWithRed:0.039f green:0.039f blue:0.039f alpha:1.000f]
-    public static let actionOn-actionPrimary = [UIColor colorWithRed:0.078f green:0.078f blue:0.078f alpha:1.000f]
-    public static let actionOn-actionSecondary = [UIColor colorWithRed:1.000f green:1.000f blue:1.000f alpha:1.000f]
+    public static let actionOnactionDark = [UIColor colorWithRed:1.000f green:1.000f blue:1.000f alpha:1.000f]
+    public static let actionOnactionDisabled = [UIColor colorWithRed:1.000f green:1.000f blue:1.000f alpha:0.161f]
+    public static let actionOnactionLight = [UIColor colorWithRed:0.039f green:0.039f blue:0.039f alpha:1.000f]
+    public static let actionOnactionPrimary = [UIColor colorWithRed:0.078f green:0.078f blue:0.078f alpha:1.000f]
+    public static let actionOnactionSecondary = [UIColor colorWithRed:1.000f green:1.000f blue:1.000f alpha:1.000f]
     public static let actionPrimaryActive = [UIColor colorWithRed:0.502f green:0.502f blue:0.502f alpha:1.000f]
     public static let actionPrimaryDisabled = [UIColor colorWithRed:1.000f green:1.000f blue:1.000f alpha:0.122f]
     public static let actionPrimaryEnabled = [UIColor colorWithRed:1.000f green:1.000f blue:1.000f alpha:1.000f]
@@ -50,8 +53,5 @@ public class SmaTokensDark {
     public static let elevationSolid6 = [UIColor colorWithRed:0.502f green:0.502f blue:0.502f alpha:1.000f]
     public static let elevationSolid7 = [UIColor colorWithRed:0.698f green:0.698f blue:0.698f alpha:1.000f]
     public static let elevationSolid8 = [UIColor colorWithRed:1.000f green:1.000f blue:1.000f alpha:1.000f]
-    public static let on-surfacePrimary = [UIColor colorWithRed:1.000f green:1.000f blue:1.000f alpha:1.000f]
-    public static let on-surfaceSecondary = [UIColor colorWithRed:0.502f green:0.502f blue:0.502f alpha:1.000f]
-    public static let on-surfaceTertiary = [UIColor colorWithRed:0.200f green:0.200f blue:0.200f alpha:1.000f]
     public static let statusCritical = [UIColor colorWithRed:1.000f green:0.000f blue:0.000f alpha:1.000f]
 }

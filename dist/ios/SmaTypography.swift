@@ -9,7 +9,7 @@ struct TypographyToken {
 }
 
 class SmaTypography {
-  public static let DisplayX-large = TypographyToken(
+  public static let DisplayXlarge = TypographyToken(
     fontFamily: "'Inter', sans-serif",
     fontSize: 96,
     fontWeight: 700,
@@ -41,7 +41,7 @@ class SmaTypography {
     letterSpacing: -2
   )
 
-  public static let Headline3x-largeLight = TypographyToken(
+  public static let Headline3xlargeLight = TypographyToken(
     fontFamily: "'Inter', sans-serif",
     fontSize: 40,
     fontWeight: 400,
@@ -49,7 +49,7 @@ class SmaTypography {
     letterSpacing: -2
   )
 
-  public static let Headline3x-largeRegular = TypographyToken(
+  public static let Headline3xlargeRegular = TypographyToken(
     fontFamily: "'Inter', sans-serif",
     fontSize: 40,
     fontWeight: 500,
@@ -57,7 +57,7 @@ class SmaTypography {
     letterSpacing: -2
   )
 
-  public static let Headline3x-largeProminent = TypographyToken(
+  public static let Headline3xlargeProminent = TypographyToken(
     fontFamily: "'Inter', sans-serif",
     fontSize: 40,
     fontWeight: 600,
@@ -65,7 +65,7 @@ class SmaTypography {
     letterSpacing: -2
   )
 
-  public static let Headline2x-largeLight = TypographyToken(
+  public static let Headline2xlargeLight = TypographyToken(
     fontFamily: "'Inter', sans-serif",
     fontSize: 34,
     fontWeight: 400,
@@ -73,7 +73,7 @@ class SmaTypography {
     letterSpacing: -2
   )
 
-  public static let Headline2x-largeRegular = TypographyToken(
+  public static let Headline2xlargeRegular = TypographyToken(
     fontFamily: "'Inter', sans-serif",
     fontSize: 34,
     fontWeight: 500,
@@ -81,7 +81,7 @@ class SmaTypography {
     letterSpacing: -2
   )
 
-  public static let Headline2x-largeProminent = TypographyToken(
+  public static let Headline2xlargeProminent = TypographyToken(
     fontFamily: "'Inter', sans-serif",
     fontSize: 34,
     fontWeight: 600,
@@ -89,7 +89,7 @@ class SmaTypography {
     letterSpacing: -2
   )
 
-  public static let HeadlineX-largeLight = TypographyToken(
+  public static let HeadlineXlargeLight = TypographyToken(
     fontFamily: "'Inter', sans-serif",
     fontSize: 28,
     fontWeight: 400,
@@ -97,7 +97,7 @@ class SmaTypography {
     letterSpacing: -2
   )
 
-  public static let HeadlineX-largeRegular = TypographyToken(
+  public static let HeadlineXlargeRegular = TypographyToken(
     fontFamily: "'Inter', sans-serif",
     fontSize: 28,
     fontWeight: 500,
@@ -105,7 +105,7 @@ class SmaTypography {
     letterSpacing: -2
   )
 
-  public static let HeadlineX-largeProminent = TypographyToken(
+  public static let HeadlineXlargeProminent = TypographyToken(
     fontFamily: "'Inter', sans-serif",
     fontSize: 28,
     fontWeight: 600,
@@ -185,7 +185,7 @@ class SmaTypography {
     letterSpacing: -2
   )
 
-  public static let BodyX-LargeRegular = TypographyToken(
+  public static let BodyXLargeRegular = TypographyToken(
     fontFamily: "'Inter', sans-serif",
     fontSize: 20,
     fontWeight: 400,
@@ -193,7 +193,7 @@ class SmaTypography {
     letterSpacing: -2
   )
 
-  public static let BodyX-LargeProminent = TypographyToken(
+  public static let BodyXLargeProminent = TypographyToken(
     fontFamily: "'Inter', sans-serif",
     fontSize: 20,
     fontWeight: 500,
@@ -249,7 +249,7 @@ class SmaTypography {
     letterSpacing: -2
   )
 
-  public static let LabelX-largeRegular = TypographyToken(
+  public static let LabelXlargeRegular = TypographyToken(
     fontFamily: "'Inter', sans-serif",
     fontSize: 18,
     fontWeight: 500,
@@ -257,7 +257,7 @@ class SmaTypography {
     letterSpacing: -2
   )
 
-  public static let LabelX-largeProminent = TypographyToken(
+  public static let LabelXlargeProminent = TypographyToken(
     fontFamily: "'Inter', sans-serif",
     fontSize: 18,
     fontWeight: 600,

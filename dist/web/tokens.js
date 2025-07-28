@@ -85,6 +85,7 @@ export const spacing11xl = "96px";
 export const spacing12xl = "128px";
 export const fontFamilySans = "'Inter', sans-serif";
 export const fontFamilyMobile = "'Inter', sans-serif";
+export const fontFamilyWeb = "'Inter', sans-serif";
 export const fontSize10 = "10px";
 export const fontSize12 = "12px";
 export const fontSize14 = "14px";
