@@ -1357,6 +1357,21 @@ body {
   font-size: 13px;
 }
 
+.copy-error {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: var(--swa-status-error);
+  color: white;
+  padding: var(--swa-spacing-md) var(--swa-spacing-lg);
+  border-radius: var(--swa-spacing-sm);
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  animation: slideInFade 0.3s ease-out;
+}
+
 @keyframes slideInFade {
   from {
     transform: translateX(100%);

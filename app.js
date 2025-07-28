@@ -74,34 +74,57 @@ function copyToken(tokenName, tokenValue, isWebapp) {
     }
   }
 
-  // Copy to clipboard
-  navigator.clipboard
-    .writeText(textToCopy)
-    .then(() => {
-      // Show visual feedback
-      showCopyFeedback(textToCopy);
-    })
-    .catch((err) => {
-      console.error("Failed to copy: ", err);
-      // Fallback for older browsers
-      const textArea = document.createElement("textarea");
-      textArea.value = textToCopy;
-      document.body.appendChild(textArea);
-      textArea.select();
-      try {
-        document.execCommand("copy");
+  // Copy to clipboard with improved fallback
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard
+      .writeText(textToCopy)
+      .then(() => {
         showCopyFeedback(textToCopy);
-      } catch (err) {
-        console.error("Fallback copy failed: ", err);
-      }
-      document.body.removeChild(textArea);
-    });
+      })
+      .catch((err) => {
+        console.error("Clipboard API failed: ", err);
+        fallbackCopyToClipboard(textToCopy);
+      });
+  } else {
+    // Use fallback immediately if clipboard API is not available
+    fallbackCopyToClipboard(textToCopy);
+  }
+}
+
+// Improved fallback copy function
+function fallbackCopyToClipboard(text) {
+  const textArea = document.createElement("textarea");
+  textArea.value = text;
+  textArea.style.position = "fixed";
+  textArea.style.left = "-9999px";
+  textArea.style.top = "-9999px";
+  textArea.setAttribute('readonly', '');
+  textArea.setAttribute('contenteditable', 'true');
+  document.body.appendChild(textArea);
+
+  try {
+    textArea.focus();
+    textArea.select();
+    textArea.setSelectionRange(0, 99999); // For mobile devices
+    const successful = document.execCommand("copy");
+    if (successful) {
+      showCopyFeedback(text);
+    } else {
+      console.error("Fallback copy failed");
+      showCopyError();
+    }
+  } catch (err) {
+    console.error("Fallback copy failed: ", err);
+    showCopyError();
+  } finally {
+    document.body.removeChild(textArea);
+  }
 }
 
 // Show copy feedback
 function showCopyFeedback(copiedText) {
   // Remove any existing feedback
-  const existingFeedback = document.querySelector(".copy-feedback");
+  const existingFeedback = document.querySelector(".copy-feedback, .copy-error");
   if (existingFeedback) {
     existingFeedback.remove();
   }
@@ -116,6 +139,26 @@ function showCopyFeedback(copiedText) {
   setTimeout(() => {
     feedback.remove();
   }, 2000);
+}
+
+// Show copy error feedback
+function showCopyError() {
+  // Remove any existing feedback
+  const existingFeedback = document.querySelector(".copy-feedback, .copy-error");
+  if (existingFeedback) {
+    existingFeedback.remove();
+  }
+
+  // Create and show error feedback
+  const feedback = document.createElement("div");
+  feedback.className = "copy-error";
+  feedback.innerHTML = `Copy failed - clipboard not available`;
+  document.body.appendChild(feedback);
+
+  // Remove after 3 seconds
+  setTimeout(() => {
+    feedback.remove();
+  }, 3000);
 }
 
 // Handle typography showcase CSS variable updates
