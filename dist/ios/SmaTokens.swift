@@ -9,6 +9,10 @@
 import SwiftUI
 
 public class SmaTokens {
+    public static let borderradiusLg = 20
+    public static let borderradiusMd = 12
+    public static let borderradiusSm = 8
+    public static let borderradiusXl = 28
     public static let fontLetterspacingNormal = 0
     public static let fontLetterspacingTight = -2
     public static let fontLetterspacingWide = 5

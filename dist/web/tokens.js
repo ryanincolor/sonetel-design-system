@@ -2,6 +2,18 @@
  * Do not edit directly, this file was auto-generated.
  */
 
+export const borderRadius8 = "8px";
+export const borderRadius12 = "12px";
+export const borderRadius16 = "16px";
+export const borderRadius20 = "20px";
+export const borderRadius24 = "24px";
+export const borderRadius28 = "28px";
+export const borderRadius36 = "36px";
+export const borderRadius40 = "40px";
+export const borderRadiusSm = "8px";
+export const borderRadiusMd = "12px";
+export const borderRadiusLg = "20px";
+export const borderRadiusXl = "28px";
 export const colorSolidLight0 = "#ffffff";
 export const colorSolidLight5 = "#f5f5f5";
 export const colorSolidLight10 = "#f0f0f0";
