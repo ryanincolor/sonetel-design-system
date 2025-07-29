@@ -491,7 +491,7 @@
           "type": "fontSizes"
         },
         "xl": {
-          "value": "{font.size.18}",
+          "value": "{font.size.20}",
           "type": "fontSizes"
         }
       },
