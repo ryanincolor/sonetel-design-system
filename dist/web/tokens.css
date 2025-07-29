@@ -200,7 +200,7 @@
   --swa-action-on-action-primary: #fff;
   --swa-action-on-action-secondary: #0a0a0a;
   --swa-action-on-action-disabled: #00000047;
-  --swa-action-on-action-inverse: #0a0a0a;
+  --swa-action-on-action-overlay: #0a0a0a;
   --swa-on-surface-overlay: #fff;
   --swa-on-surface-primary: #0a0a0a;
   --swa-on-surface-secondary: #666666;
@@ -252,7 +252,7 @@
   --swa-action-on-action-primary: #141414;
   --swa-action-on-action-secondary: #ffffff;
   --swa-action-on-action-disabled: #ffffff29;
-  --swa-action-on-action-inverse: #0a0a0a;
+  --swa-action-on-action-overlay: #0a0a0a;
   --swa-on-surface-overlay: #ffffff;
   --swa-on-surface-primary: #ffffff;
   --swa-on-surface-secondary: #808080;
