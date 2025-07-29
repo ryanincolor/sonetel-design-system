@@ -6,7 +6,7 @@
         "fontWeight": "{font.weight.bold}",
         "lineHeight": "{font.line-height.tighter}",
         "fontSize": "{font.size.display.xl}",
-        "letterSpacing": "{font.letter-spacing.tight}"
+        "letterSpacing": "{font.letter-spacing.tighter}"
       },
       "type": "typography"
     },
@@ -16,7 +16,7 @@
         "fontWeight": "{font.weight.bold}",
         "lineHeight": "{font.line-height.tighter}",
         "fontSize": "{font.size.display.lg}",
-        "letterSpacing": "{font.letter-spacing.tight}"
+        "letterSpacing": "{font.letter-spacing.tighter}"
       },
       "type": "typography"
     },
@@ -26,7 +26,7 @@
         "fontWeight": "{font.weight.bold}",
         "lineHeight": "{font.line-height.tighter}",
         "fontSize": "{font.size.display.md}",
-        "letterSpacing": "{font.letter-spacing.tight}"
+        "letterSpacing": "{font.letter-spacing.tighter}"
       },
       "type": "typography"
     },
@@ -36,7 +36,7 @@
         "fontWeight": "{font.weight.bold}",
         "lineHeight": "{font.line-height.tighter}",
         "fontSize": "{font.size.display.sm}",
-        "letterSpacing": "{font.letter-spacing.tight}"
+        "letterSpacing": "{font.letter-spacing.tighter}"
       },
       "type": "typography"
     }
@@ -49,7 +49,7 @@
           "fontWeight": "{font.weight.regular}",
           "lineHeight": "{font.line-height.tighter}",
           "fontSize": "{font.size.headline.3xl}",
-          "letterSpacing": "{font.letter-spacing.tight}"
+          "letterSpacing": "{font.letter-spacing.tighter}"
         },
         "type": "typography"
       },
@@ -59,7 +59,7 @@
           "fontWeight": "{font.weight.medium}",
           "lineHeight": "{font.line-height.tighter}",
           "fontSize": "{font.size.headline.3xl}",
-          "letterSpacing": "{font.letter-spacing.tight}"
+          "letterSpacing": "{font.letter-spacing.tighter}"
         },
         "type": "typography"
       },
@@ -69,7 +69,7 @@
           "fontWeight": "{font.weight.semibold}",
           "lineHeight": "{font.line-height.tighter}",
           "fontSize": "{font.size.headline.3xl}",
-          "letterSpacing": "{font.letter-spacing.tight}"
+          "letterSpacing": "{font.letter-spacing.tighter}"
         },
         "type": "typography"
       }
@@ -81,7 +81,7 @@
           "fontWeight": "{font.weight.regular}",
           "lineHeight": "{font.line-height.tighter}",
           "fontSize": "{font.size.headline.2xl}",
-          "letterSpacing": "{font.letter-spacing.tight}"
+          "letterSpacing": "{font.letter-spacing.tighter}"
         },
         "type": "typography"
       },
@@ -91,7 +91,7 @@
           "fontWeight": "{font.weight.medium}",
           "lineHeight": "{font.line-height.tighter}",
           "fontSize": "{font.size.headline.2xl}",
-          "letterSpacing": "{font.letter-spacing.tight}"
+          "letterSpacing": "{font.letter-spacing.tighter}"
         },
         "type": "typography"
       },
@@ -101,7 +101,7 @@
           "fontWeight": "{font.weight.semibold}",
           "lineHeight": "{font.line-height.tighter}",
           "fontSize": "{font.size.headline.2xl}",
-          "letterSpacing": "{font.letter-spacing.tight}"
+          "letterSpacing": "{font.letter-spacing.tighter}"
         },
         "type": "typography"
       }
@@ -113,7 +113,7 @@
           "fontWeight": "{font.weight.regular}",
           "lineHeight": "{font.line-height.tighter}",
           "fontSize": "{font.size.headline.xl}",
-          "letterSpacing": "{font.letter-spacing.tight}"
+          "letterSpacing": "{font.letter-spacing.tighter}"
         },
         "type": "typography"
       },
@@ -123,7 +123,7 @@
           "fontWeight": "{font.weight.medium}",
           "lineHeight": "{font.line-height.tighter}",
           "fontSize": "{font.size.headline.xl}",
-          "letterSpacing": "{font.letter-spacing.tight}"
+          "letterSpacing": "{font.letter-spacing.tighter}"
         },
         "type": "typography"
       },
@@ -133,7 +133,7 @@
           "fontWeight": "{font.weight.semibold}",
           "lineHeight": "{font.line-height.tighter}",
           "fontSize": "{font.size.headline.xl}",
-          "letterSpacing": "{font.letter-spacing.tight}"
+          "letterSpacing": "{font.letter-spacing.tighter}"
         },
         "type": "typography"
       }
@@ -145,7 +145,7 @@
           "fontWeight": "{font.weight.regular}",
           "lineHeight": "{font.line-height.tight}",
           "fontSize": "{font.size.headline.lg}",
-          "letterSpacing": "{font.letter-spacing.tight}"
+          "letterSpacing": "{font.letter-spacing.tighter}"
         },
         "type": "typography"
       },
@@ -155,7 +155,7 @@
           "fontWeight": "{font.weight.medium}",
           "lineHeight": "{font.line-height.tight}",
           "fontSize": "{font.size.headline.lg}",
-          "letterSpacing": "{font.letter-spacing.tight}"
+          "letterSpacing": "{font.letter-spacing.tighter}"
         },
         "type": "typography"
       },
@@ -165,7 +165,7 @@
           "fontWeight": "{font.weight.semibold}",
           "lineHeight": "{font.line-height.tight}",
           "fontSize": "{font.size.headline.lg}",
-          "letterSpacing": "{font.letter-spacing.tight}"
+          "letterSpacing": "{font.letter-spacing.tighter}"
         },
         "type": "typography"
       }
@@ -177,7 +177,7 @@
           "fontWeight": "{font.weight.regular}",
           "lineHeight": "{font.line-height.tight}",
           "fontSize": "{font.size.headline.md}",
-          "letterSpacing": "{font.letter-spacing.tight}"
+          "letterSpacing": "{font.letter-spacing.tighter}"
         },
         "type": "typography"
       },
@@ -187,7 +187,7 @@
           "fontWeight": "{font.weight.medium}",
           "lineHeight": "{font.line-height.tight}",
           "fontSize": "{font.size.headline.md}",
-          "letterSpacing": "{font.letter-spacing.tight}"
+          "letterSpacing": "{font.letter-spacing.tighter}"
         },
         "type": "typography"
       },
@@ -197,7 +197,7 @@
           "fontWeight": "{font.weight.semibold}",
           "lineHeight": "{font.line-height.tight}",
           "fontSize": "{font.size.headline.md}",
-          "letterSpacing": "{font.letter-spacing.tight}"
+          "letterSpacing": "{font.letter-spacing.tighter}"
         },
         "type": "typography"
       }
@@ -209,7 +209,7 @@
           "fontWeight": "{font.weight.regular}",
           "lineHeight": "{font.line-height.tight}",
           "fontSize": "{font.size.headline.sm}",
-          "letterSpacing": "{font.letter-spacing.tight}"
+          "letterSpacing": "{font.letter-spacing.tighter}"
         },
         "type": "typography"
       },
@@ -219,7 +219,7 @@
           "fontWeight": "{font.weight.medium}",
           "lineHeight": "{font.line-height.tight}",
           "fontSize": "{font.size.headline.sm}",
-          "letterSpacing": "{font.letter-spacing.tight}"
+          "letterSpacing": "{font.letter-spacing.tighter}"
         },
         "type": "typography"
       },
@@ -229,7 +229,7 @@
           "fontWeight": "{font.weight.semibold}",
           "lineHeight": "{font.line-height.tight}",
           "fontSize": "{font.size.headline.sm}",
-          "letterSpacing": "{font.letter-spacing.tight}"
+          "letterSpacing": "{font.letter-spacing.tighter}"
         },
         "type": "typography"
       }
@@ -523,8 +523,12 @@
       }
     },
     "letter-spacing": {
-      "tight": {
+      "tighter": {
         "value": "{font.letter-spacing.-2}",
+        "type": "letterSpacing"
+      },
+      "tight": {
+        "value": "{font.letter-spacing.-1}",
         "type": "letterSpacing"
       },
       "normal": {
