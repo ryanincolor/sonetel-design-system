@@ -251,7 +251,7 @@ class SmaTypography {
 
   public static let LabelXlargeRegular = TypographyToken(
     fontFamily: "'Inter', sans-serif",
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: 500,
     lineHeight: 100,
     letterSpacing: -1
@@ -259,7 +259,7 @@ class SmaTypography {
 
   public static let LabelXlargeProminent = TypographyToken(
     fontFamily: "'Inter', sans-serif",
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: 600,
     lineHeight: 100,
     letterSpacing: -1
