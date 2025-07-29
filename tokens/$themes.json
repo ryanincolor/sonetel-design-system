@@ -4,9 +4,7 @@
     "name": "Primitives",
     "$figmaStyleReferences": {},
     "selectedTokenSets": {
-      "Core/Color": "enabled",
-      "Webapp/Border-radius": "disabled",
-      "Core/Border-radius": "disabled"
+      "Core/Color": "enabled"
     },
     "$figmaCollectionId": "VariableCollectionId:265:4507",
     "$figmaModeId": "265:1",
@@ -64,9 +62,7 @@
     "name": "Primitives",
     "$figmaStyleReferences": {},
     "selectedTokenSets": {
-      "Core/Typography": "enabled",
-      "Webapp/Border-radius": "disabled",
-      "Core/Border-radius": "disabled"
+      "Core/Typography": "enabled"
     },
     "$figmaCollectionId": "VariableCollectionId:5616:205",
     "$figmaModeId": "5616:0",
@@ -99,9 +95,7 @@
     "name": "Primitives",
     "$figmaStyleReferences": {},
     "selectedTokenSets": {
-      "Core/Spacing": "enabled",
-      "Webapp/Border-radius": "disabled",
-      "Core/Border-radius": "disabled"
+      "Core/Spacing": "enabled"
     },
     "$figmaCollectionId": "VariableCollectionId:6024:384",
     "$figmaModeId": "6024:2",
@@ -175,9 +169,7 @@
     },
     "selectedTokenSets": {
       "Core/Color": "source",
-      "Webapp/Color/Light": "enabled",
-      "Webapp/Border-radius": "disabled",
-      "Core/Border-radius": "disabled"
+      "Webapp/Color/Light": "enabled"
     },
     "$figmaCollectionId": "VariableCollectionId:5680:546",
     "$figmaModeId": "5680:2",
@@ -277,9 +269,7 @@
     },
     "selectedTokenSets": {
       "Core/Color": "source",
-      "Webapp/Color/Dark": "enabled",
-      "Webapp/Border-radius": "disabled",
-      "Core/Border-radius": "disabled"
+      "Webapp/Color/Dark": "enabled"
     },
     "$figmaCollectionId": "VariableCollectionId:5680:546",
     "$figmaModeId": "5685:0",
@@ -373,9 +363,7 @@
     },
     "selectedTokenSets": {
       "Core/Typography": "source",
-      "Webapp/Typography": "enabled",
-      "Webapp/Border-radius": "disabled",
-      "Core/Border-radius": "disabled"
+      "Webapp/Typography": "enabled"
     },
     "$figmaVariableReferences": {
       "font.weight.regular": "1d64872ffa9c812bb9d96e41664250e9718a03b4",
@@ -409,9 +397,7 @@
     "$figmaStyleReferences": {},
     "selectedTokenSets": {
       "Core/Spacing": "source",
-      "Webapp/Spacing": "enabled",
-      "Webapp/Border-radius": "disabled",
-      "Core/Border-radius": "disabled"
+      "Webapp/Spacing": "enabled"
     },
     "group": "Webapp/Spacing",
     "$figmaCollectionId": "VariableCollectionId:5680:44",
@@ -442,9 +428,7 @@
     "$figmaStyleReferences": {},
     "selectedTokenSets": {
       "Mobile/Color/Light": "enabled",
-      "Core/Color": "source",
-      "Webapp/Border-radius": "disabled",
-      "Core/Border-radius": "disabled"
+      "Core/Color": "source"
     },
     "$figmaCollectionId": "VariableCollectionId:5680:546",
     "$figmaModeId": "5680:2",
@@ -502,9 +486,7 @@
     "$figmaStyleReferences": {},
     "selectedTokenSets": {
       "Core/Color": "source",
-      "Mobile/Color/Dark": "enabled",
-      "Webapp/Border-radius": "disabled",
-      "Core/Border-radius": "disabled"
+      "Mobile/Color/Dark": "enabled"
     },
     "$figmaCollectionId": "VariableCollectionId:5680:546",
     "$figmaModeId": "5685:0",
@@ -562,9 +544,7 @@
     "$figmaStyleReferences": {},
     "selectedTokenSets": {
       "Core/Spacing": "source",
-      "Mobile/Spacing": "enabled",
-      "Webapp/Border-radius": "disabled",
-      "Core/Border-radius": "disabled"
+      "Mobile/Spacing": "enabled"
     },
     "$figmaCollectionId": "VariableCollectionId:5680:44",
     "$figmaModeId": "5788:2",
@@ -634,9 +614,7 @@
     },
     "selectedTokenSets": {
       "Mobile/Typography": "enabled",
-      "Core/Typography": "source",
-      "Webapp/Border-radius": "disabled",
-      "Core/Border-radius": "disabled"
+      "Core/Typography": "source"
     },
     "group": "Mobile/Typography",
     "$figmaCollectionId": "VariableCollectionId:5693:2192",
@@ -666,5 +644,15 @@
       "font.size.display.md": "d3ff92444d17b6dccf65f83b9a1effbb72c2c2a3",
       "font.size.display.sm": "6bbf49a5b9593c8015791e0d0426f3add42e9202"
     }
+  },
+  {
+    "id": "dd62cc2f631db3ab679d4077a4a94587a664f476",
+    "name": "Semantic",
+    "$figmaStyleReferences": {},
+    "selectedTokenSets": {
+      "Core/Border-radius": "source",
+      "Mobile/Border-radius": "enabled"
+    },
+    "group": "Webapp/Border Radius"
   }
 ]
