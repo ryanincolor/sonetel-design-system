@@ -106,6 +106,10 @@
       "-2": {
         "value": "-2%",
         "type": "letterSpacing"
+      },
+      "-1": {
+        "value": "-1%",
+        "type": "letterSpacing"
       }
     },
     "line-height": {
