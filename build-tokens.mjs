@@ -160,7 +160,7 @@ StyleDictionary.registerTransform({
 StyleDictionary.registerTransform({
   name: 'size/ios-points',
   type: 'value',
-  filter: token => token.type === 'dimension' || token.type === 'spacing' || token.type === 'fontSizes',
+  filter: token => token.type === 'dimension' || token.type === 'spacing' || token.type === 'fontSizes' || token.type === 'borderRadius',
   transform: token => {
     const value = parseFloat(token.value);
     return isNaN(value) ? token.value : value;
@@ -216,9 +216,9 @@ StyleDictionary.registerTransformGroup({
 
 console.log("🏗️  Building design tokens...");
 
-// Configuration for webapp layout tokens (spacing and typography - non-color)
+// Configuration for webapp layout tokens (spacing, typography, and border-radius - non-color)
 const layoutConfig = {
-  source: ["tokens/Core/**/*.json", "tokens/Webapp/Spacing.json", "tokens/Webapp/Typography.json"],
+  source: ["tokens/Core/**/*.json", "tokens/Webapp/Spacing.json", "tokens/Webapp/Typography.json", "tokens/Webapp/Border-radius.json"],
   preprocessors: ["tokens-studio"],
   expand: {
     typesMap: {
@@ -737,7 +737,8 @@ const otherConfig = {
                                      token.type === 'fontWeight' ||
                                      token.type === 'lineHeight' ||
                                      token.type === 'letterSpacing';
-            return isMobile && !isColorToken && !isTypographyToken;
+            const isBorderRadiusToken = token.type === 'borderRadius';
+            return isMobile && !isColorToken && !isTypographyToken && (isBorderRadiusToken || token.type === 'spacing' || token.type === 'dimension');
           }
         },
         {

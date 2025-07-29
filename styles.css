@@ -1027,6 +1027,12 @@ body {
   flex-shrink: 0;
 }
 
+.border-radius-preview {
+  border: 1px solid var(--swa-elevation-solid-2);
+  flex-shrink: 0;
+  position: relative;
+}
+
 .typography-preview {
   min-width: 60px;
   min-height: 40px;

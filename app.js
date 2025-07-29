@@ -462,6 +462,10 @@ async function loadCoreTokens() {
     const typographyResponse = await fetch("tokens/Core/Typography.json");
     const typographyTokens = await typographyResponse.json();
 
+    // Load core border radius tokens
+    const borderRadiusResponse = await fetch("tokens/Core/Border-radius.json");
+    const borderRadiusTokens = await borderRadiusResponse.json();
+
     const grid = document.querySelector("#core .token-grid");
     grid.innerHTML = "";
 
@@ -534,6 +538,11 @@ async function loadCoreTokens() {
     // Display spacing tokens
     if (spacingTokens) {
       displayTokenCategory(grid, "Spacing", spacingTokens, "dimension");
+    }
+
+    // Display border radius tokens
+    if (borderRadiusTokens) {
+      displayTokenCategory(grid, "Border Radius", borderRadiusTokens, "borderRadius");
     }
 
     // Display typography tokens organized by categories
@@ -1009,6 +1018,23 @@ function displayTokenCategory(
             const width = Math.max(2, numericValue) + "px"; // Minimum 2px width for visibility
             preview = `<div class="dimension-preview" style="width: ${width}; height: 8px; background: #333 !important;"></div>`;
 
+          } else if (tokenType === "borderRadius") {
+            let borderRadiusValue = token.value;
+
+            // For webapp tokens, resolve references to actual border radius values
+            if (isWebapp && coreTokens) {
+              borderRadiusValue = resolveTokenReference(
+                token.value,
+                coreTokens,
+                webappTokens || tokens,
+              );
+            }
+
+            // Parse the border radius value and create preview
+            const numericValue = parseFloat(borderRadiusValue.replace("px", ""));
+            const borderRadiusValueWithUnit = Math.max(0, numericValue) + "px";
+            preview = `<div class="border-radius-preview" style="width: 40px; height: 40px; background: var(--swa-action-primary-enabled, #333); border-radius: ${borderRadiusValueWithUnit};"></div>`;
+
           } else if (tokenType === "typography") {
             // Handle typography tokens
             let typographyValue = token.value;
@@ -1160,6 +1186,17 @@ async function loadWebTokens() {
       console.log("No webapp typography tokens found");
     }
 
+    // Load webapp border radius tokens
+    let webappBorderRadiusTokens = null;
+    try {
+      const borderRadiusResponse = await fetch("tokens/Webapp/Border-radius.json");
+      if (borderRadiusResponse.ok) {
+        webappBorderRadiusTokens = await borderRadiusResponse.json();
+      }
+    } catch (error) {
+      console.log("No webapp border radius tokens found");
+    }
+
     // Load core tokens for reference resolution (both color and spacing)
     const coreColorResponse = await fetch("tokens/Core/Color.json");
     const coreColorTokens = await coreColorResponse.json();
@@ -1167,10 +1204,15 @@ async function loadWebTokens() {
     const coreSpacingResponse = await fetch("tokens/Core/Spacing.json");
     const coreSpacingTokens = await coreSpacingResponse.json();
 
+    // Load core border radius tokens for reference resolution
+    const coreBorderRadiusResponse = await fetch("tokens/Core/Border-radius.json");
+    const coreBorderRadiusTokens = await coreBorderRadiusResponse.json();
+
     // Combine core tokens for reference resolution
     const coreTokens = {
       ...coreColorTokens,
       ...coreSpacingTokens,
+      ...coreBorderRadiusTokens,
     };
 
     const grid = document.querySelector("#webapp .token-grid");
@@ -1262,6 +1304,18 @@ async function loadWebTokens() {
         "Webapp Spacing",
         webappSpacingTokens,
         "spacing",
+        true,
+        coreTokens,
+      );
+    }
+
+    // Display webapp border radius tokens (theme-independent)
+    if (webappBorderRadiusTokens) {
+      displayTokenCategory(
+        webappGrid,
+        "Webapp Border Radius",
+        webappBorderRadiusTokens,
+        "borderRadius",
         true,
         coreTokens,
       );
@@ -1487,11 +1541,21 @@ async function loadIOSTokens() {
     const iOSTypographyStructure = await typographyResponse.json();
     console.log("✅ iOS typography structure loaded");
 
+    // Load iOS border radius structure
+    console.log("📁 Loading iOS border radius structure...");
+    const borderRadiusResponse = await fetch(`tokens/Mobile/Border-radius.json`);
+    if (!borderRadiusResponse.ok) {
+      throw new Error(`Failed to fetch iOS border radius structure (${borderRadiusResponse.status})`);
+    }
+    const iOSBorderRadiusStructure = await borderRadiusResponse.json();
+    console.log("✅ iOS border radius structure loaded");
+
     // Transform structure to use resolved values
     console.log("🔄 Transforming iOS tokens with resolved values...");
     const iOSColorTokens = transformTokensWithResolvedValues(iOSColorStructure, resolvedTokens);
     const iOSSpacingTokens = transformTokensWithResolvedValues(iOSSpacingStructure, resolvedTokens);
     const iOSTypographyTokens = transformTokensWithResolvedValues(iOSTypographyStructure, resolvedTokens);
+    const iOSBorderRadiusTokens = transformTokensWithResolvedValues(iOSBorderRadiusStructure, resolvedTokens);
 
     // For reference resolution, we still need core tokens
     console.log("📁 Loading core tokens for reference resolution...");
@@ -1558,6 +1622,12 @@ async function loadIOSTokens() {
     if (iOSSpacingTokens && Object.keys(iOSSpacingTokens).length > 0) {
       console.log("📏 Adding iOS spacing tokens to display");
       displayTokenCategory(tokenGrid, "iOS Spacing", iOSSpacingTokens, "spacing", false, coreTokens, null, true);
+    }
+
+    // Display border radius tokens with proper segmentation (after spacing)
+    if (iOSBorderRadiusTokens && Object.keys(iOSBorderRadiusTokens).length > 0) {
+      console.log("📐 Adding iOS border radius tokens to display");
+      displayTokenCategory(tokenGrid, "iOS Border Radius", iOSBorderRadiusTokens, "borderRadius", false, coreTokens, null, true);
     }
 
     // Display typography tokens with proper segmentation

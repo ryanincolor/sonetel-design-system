@@ -3,6 +3,11 @@
  */
 
 :root {
+  --swa-border-radius-xs: 8px;
+  --swa-border-radius-sm: 12px;
+  --swa-border-radius-md: 16px;
+  --swa-border-radius-lg: 20px;
+  --swa-border-radius-xl: 28px;
   --swa-spacing-2xs: 2px;
   --swa-spacing-xs: 4px;
   --swa-spacing-sm: 8px;
