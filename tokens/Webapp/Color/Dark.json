@@ -120,7 +120,7 @@
         "type": "color"
       }
     },
-    "overlay": {
+    "on-dark": {
       "enabled": {
         "value": "{color.solid.light.0}",
         "type": "color"
@@ -167,7 +167,7 @@
         "value": "{elevation.alpha.4}",
         "type": "color"
       },
-      "inverse": {
+      "on-dark": {
         "value": "{elevation.solid.0}",
         "type": "color"
       }
@@ -175,8 +175,10 @@
   },
   "on-surface": {
     "overlay": {
-      "value": "{elevation.solid.8}",
-      "type": "color"
+      "on-dark": {
+        "value": "{elevation.solid.8}",
+        "type": "color"
+      }
     },
     "primary": {
       "value": "{elevation.solid.8}",

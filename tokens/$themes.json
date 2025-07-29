@@ -211,12 +211,12 @@
       "on-surface.primary": "7c4b1ce5d09be84c4e1dc7756898f288be1c1f2a",
       "on-surface.secondary": "404618154e1ac0e636219c5c40e133927683f14b",
       "on-surface.tertiary": "f40108746f09821ff3fbcce6facb25f02ce59172",
-      "action.overlay.enabled": "71d52c1f0b37e9c9c060b2333f760510ae7111b2",
-      "action.overlay.hover": "a37e277dcf0294b96c64818e28f0a938b186d1f5",
-      "action.overlay.active": "e153ccc293645a332a3095b1ac3b2209cd768556",
-      "action.overlay.disabled": "c7227dbadf34410ae69c8b5162bb8f1d19baf550",
-      "on-surface.overlay": "2139e2cbc2c03e29c231927e81bd51afa4022ab1",
-      "action.on-action.inverse": "7976246a896689f9776ad5ed9868a76dedeaad77"
+      "action.on-dark.enabled": "71d52c1f0b37e9c9c060b2333f760510ae7111b2",
+      "action.on-dark.hover": "a37e277dcf0294b96c64818e28f0a938b186d1f5",
+      "action.on-dark.active": "e153ccc293645a332a3095b1ac3b2209cd768556",
+      "action.on-dark.disabled": "c7227dbadf34410ae69c8b5162bb8f1d19baf550",
+      "action.on-action.on-dark": "7976246a896689f9776ad5ed9868a76dedeaad77",
+      "on-surface.on-dark": "2139e2cbc2c03e29c231927e81bd51afa4022ab1"
     },
     "group": "Webapp/Color"
   },
@@ -310,13 +310,13 @@
       "on-surface.primary": "7c4b1ce5d09be84c4e1dc7756898f288be1c1f2a",
       "on-surface.secondary": "404618154e1ac0e636219c5c40e133927683f14b",
       "on-surface.tertiary": "f40108746f09821ff3fbcce6facb25f02ce59172",
-      "action.overlay.enabled": "71d52c1f0b37e9c9c060b2333f760510ae7111b2",
-      "action.overlay.hover": "a37e277dcf0294b96c64818e28f0a938b186d1f5",
-      "action.overlay.active": "e153ccc293645a332a3095b1ac3b2209cd768556",
-      "action.overlay.disabled": "c7227dbadf34410ae69c8b5162bb8f1d19baf550",
-      "action.on-action.inverse": "7976246a896689f9776ad5ed9868a76dedeaad77",
-      "on-surface.overlay": "2139e2cbc2c03e29c231927e81bd51afa4022ab1",
-      "brand.yello": "dc4bbd378fae03dbe8e3fcd2bfdb186984232993"
+      "brand.yello": "dc4bbd378fae03dbe8e3fcd2bfdb186984232993",
+      "action.on-dark.enabled": "71d52c1f0b37e9c9c060b2333f760510ae7111b2",
+      "action.on-dark.hover": "a37e277dcf0294b96c64818e28f0a938b186d1f5",
+      "action.on-dark.active": "e153ccc293645a332a3095b1ac3b2209cd768556",
+      "action.on-dark.disabled": "c7227dbadf34410ae69c8b5162bb8f1d19baf550",
+      "action.on-action.on-dark": "7976246a896689f9776ad5ed9868a76dedeaad77",
+      "on-surface.on-dark": "2139e2cbc2c03e29c231927e81bd51afa4022ab1"
     },
     "group": "Webapp/Color"
   },
@@ -475,7 +475,7 @@
       "brand.purple": "0d3c3d0953198bb0042f3676653950ee3926853d",
       "brand.pink": "a20711f5df367e58cd5cdbde8c6f4052ffcc3a79",
       "brand.orange": "351236db0e1312d1607184873a2ba4c70150afaa",
-      "on-surface.overlay": "8054a94576d8d16b5f2af4e6514098fa0ba81a0d"
+      "on-surface.on-dark": "8054a94576d8d16b5f2af4e6514098fa0ba81a0d"
     },
     "group": "Mobile/Color"
   },
@@ -533,7 +533,7 @@
       "brand.purple": "0d3c3d0953198bb0042f3676653950ee3926853d",
       "brand.pink": "a20711f5df367e58cd5cdbde8c6f4052ffcc3a79",
       "brand.orange": "351236db0e1312d1607184873a2ba4c70150afaa",
-      "on-surface.overlay": "8054a94576d8d16b5f2af4e6514098fa0ba81a0d"
+      "on-surface.on-dark": "8054a94576d8d16b5f2af4e6514098fa0ba81a0d"
     },
     "group": "Mobile/Color"
   },
