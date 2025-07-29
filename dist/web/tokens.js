@@ -143,6 +143,7 @@ export const fontWeightBold = "700";
 export const fontLetterSpacing0 = "0em";
 export const fontLetterSpacing5 = "0.05em";
 export const fontLetterSpacing2 = "-0.02em";
+export const fontLetterSpacing1 = "-0.01em";
 export const fontLetterSpacingTight = "-0.02em";
 export const fontLetterSpacingNormal = "0em";
 export const fontLetterSpacingWide = "0.05em";
