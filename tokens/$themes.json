@@ -206,9 +206,10 @@
       "action.alpha.secondary.active": "4477829edb60844eee19bae284678bf8e565c298",
       "action.on-action.primary": "ee5b5a67c94b242533b2488c855d4b6179af5888",
       "action.on-action.secondary": "169edd0d5bc827381ef4e80e3b9cf074e0757309",
+      "action.on-action.light": "7976246a896689f9776ad5ed9868a76dedeaad77",
       "action.on-action.disabled": "ca08bdf051c8e21c59c5f037365bde1cba372b04",
       "status.critical": "38bcde7b0d2cb4f65a166d55baf4b675da05d47c",
-      "brand.yellow": "958faf0b4ad7d960453ceb0a5429c6e57a1c9292",
+      "brand.yellow": "8d6eb291d7c91c6e81ab17a6e73a8de081563040",
       "on-surface.primary": "7c4b1ce5d09be84c4e1dc7756898f288be1c1f2a",
       "on-surface.secondary": "404618154e1ac0e636219c5c40e133927683f14b",
       "on-surface.tertiary": "f40108746f09821ff3fbcce6facb25f02ce59172",
@@ -216,7 +217,6 @@
       "action.light.hover": "a37e277dcf0294b96c64818e28f0a938b186d1f5",
       "action.light.active": "e153ccc293645a332a3095b1ac3b2209cd768556",
       "action.light.disabled": "c7227dbadf34410ae69c8b5162bb8f1d19baf550",
-      "action.on-action.light": "7976246a896689f9776ad5ed9868a76dedeaad77",
       "on-surface.light": "2139e2cbc2c03e29c231927e81bd51afa4022ab1"
     },
     "group": "Webapp/Color"
@@ -306,18 +306,18 @@
       "action.alpha.secondary.active": "4477829edb60844eee19bae284678bf8e565c298",
       "action.on-action.primary": "ee5b5a67c94b242533b2488c855d4b6179af5888",
       "action.on-action.secondary": "169edd0d5bc827381ef4e80e3b9cf074e0757309",
+      "action.on-action.light": "7976246a896689f9776ad5ed9868a76dedeaad77",
       "action.on-action.disabled": "ca08bdf051c8e21c59c5f037365bde1cba372b04",
       "status.critical": "38bcde7b0d2cb4f65a166d55baf4b675da05d47c",
       "on-surface.primary": "7c4b1ce5d09be84c4e1dc7756898f288be1c1f2a",
       "on-surface.secondary": "404618154e1ac0e636219c5c40e133927683f14b",
       "on-surface.tertiary": "f40108746f09821ff3fbcce6facb25f02ce59172",
-      "brand.yello": "dc4bbd378fae03dbe8e3fcd2bfdb186984232993",
       "action.light.enabled": "71d52c1f0b37e9c9c060b2333f760510ae7111b2",
       "action.light.hover": "a37e277dcf0294b96c64818e28f0a938b186d1f5",
       "action.light.active": "e153ccc293645a332a3095b1ac3b2209cd768556",
       "action.light.disabled": "c7227dbadf34410ae69c8b5162bb8f1d19baf550",
-      "action.on-action.light": "7976246a896689f9776ad5ed9868a76dedeaad77",
-      "on-surface.light": "2139e2cbc2c03e29c231927e81bd51afa4022ab1"
+      "on-surface.light": "2139e2cbc2c03e29c231927e81bd51afa4022ab1",
+      "brand.yello": "6b1ad141ea117f48c9b6265c4ac7a66dbf848e68"
     },
     "group": "Webapp/Color"
   },
