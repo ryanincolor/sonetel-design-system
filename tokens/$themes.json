@@ -654,5 +654,26 @@
       "Mobile/Border-radius": "enabled"
     },
     "group": "Webapp/Border Radius"
+  },
+  {
+    "id": "3c333e79c975984d92ef245514946f33cd81413a",
+    "name": "Primitives",
+    "$figmaStyleReferences": {},
+    "selectedTokenSets": {
+      "Core/Border-radius": "enabled"
+    },
+    "group": "Core/Border Radius",
+    "$figmaCollectionId": "VariableCollectionId:6092:12",
+    "$figmaModeId": "6092:0",
+    "$figmaVariableReferences": {
+      "border-radius.8": "5246fcbb8fca92dd7e817457a2029cc806fb9677",
+      "border-radius.12": "c8917f295a6f7685c3afad587d9b6c653d996e9d",
+      "border-radius.16": "11269aee35ab876bd6dee7ec05eaa5d71f635475",
+      "border-radius.20": "d3c5cc0ad62110ca660a20723c7ba40ec4c274c8",
+      "border-radius.24": "9985554a8048189e2788a252b68e0ff202a11912",
+      "border-radius.28": "2abb18fa07fe3c9da8b713799cea62b713964505",
+      "border-radius.36": "c7d51fc2179d3ceb789e179759f89854a2b66ae1",
+      "border-radius.40": "32ac7683594a6d41c5f6020e3c5ef9b174f1c498"
+    }
   }
 ]
