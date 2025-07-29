@@ -869,9 +869,7 @@ function renderTypographyToken(token, fullPath, isWebapp, coreTokens, webappToke
       </div>
       <div class="typography-demo typography-${tokenPathToCSSProperty(fullPath)}" data-debug-path="${fullPath}" data-debug-css="typography-${tokenPathToCSSProperty(fullPath)}" style="font-family: ${fontFamily}; font-size: ${fontSize}; font-weight: ${fontWeight}; line-height: ${lineHeight}; letter-spacing: ${letterSpacingValue};">
         The quick brown fox jumps over the lazy dog
-        <small style="display: block; font-size: 10px; color: #999; margin-top: 5px;">
-          Debug: family=${fontFamily}, size=${fontSize}, weight=${fontWeight}, line=${lineHeight}, spacing=${letterSpacingValue}
-        </small>
+
       </div>
       <div class="typography-details">
         <div class="typography-token-references">
