@@ -190,7 +190,7 @@ class SmaTypography {
     fontSize: 20,
     fontWeight: 400,
     lineHeight: 150,
-    letterSpacing: -2
+    letterSpacing: -1
   )
 
   public static let BodyXLargeProminent = TypographyToken(
@@ -198,7 +198,7 @@ class SmaTypography {
     fontSize: 20,
     fontWeight: 500,
     lineHeight: 150,
-    letterSpacing: -2
+    letterSpacing: -1
   )
 
   public static let BodyLargeRegular = TypographyToken(
@@ -206,7 +206,7 @@ class SmaTypography {
     fontSize: 16,
     fontWeight: 400,
     lineHeight: 150,
-    letterSpacing: -2
+    letterSpacing: -1
   )
 
   public static let BodyLargeProminent = TypographyToken(
@@ -214,7 +214,7 @@ class SmaTypography {
     fontSize: 16,
     fontWeight: 500,
     lineHeight: 150,
-    letterSpacing: -2
+    letterSpacing: -1
   )
 
   public static let BodyMediumRegular = TypographyToken(
@@ -222,7 +222,7 @@ class SmaTypography {
     fontSize: 14,
     fontWeight: 400,
     lineHeight: 150,
-    letterSpacing: -2
+    letterSpacing: -1
   )
 
   public static let BodyMediumProminent = TypographyToken(
@@ -230,7 +230,7 @@ class SmaTypography {
     fontSize: 14,
     fontWeight: 500,
     lineHeight: 150,
-    letterSpacing: -2
+    letterSpacing: -1
   )
 
   public static let BodySmallRegular = TypographyToken(
@@ -238,7 +238,7 @@ class SmaTypography {
     fontSize: 12,
     fontWeight: 400,
     lineHeight: 150,
-    letterSpacing: -2
+    letterSpacing: -1
   )
 
   public static let BodySmallProminent = TypographyToken(
@@ -246,7 +246,7 @@ class SmaTypography {
     fontSize: 12,
     fontWeight: 500,
     lineHeight: 150,
-    letterSpacing: -2
+    letterSpacing: -1
   )
 
   public static let LabelXlargeRegular = TypographyToken(
@@ -254,7 +254,7 @@ class SmaTypography {
     fontSize: 18,
     fontWeight: 500,
     lineHeight: 100,
-    letterSpacing: -2
+    letterSpacing: -1
   )
 
   public static let LabelXlargeProminent = TypographyToken(
@@ -262,7 +262,7 @@ class SmaTypography {
     fontSize: 18,
     fontWeight: 600,
     lineHeight: 100,
-    letterSpacing: -2
+    letterSpacing: -1
   )
 
   public static let LabelLargeRegular = TypographyToken(
@@ -270,7 +270,7 @@ class SmaTypography {
     fontSize: 16,
     fontWeight: 500,
     lineHeight: 100,
-    letterSpacing: -2
+    letterSpacing: -1
   )
 
   public static let LabelLargeProminent = TypographyToken(
@@ -278,7 +278,7 @@ class SmaTypography {
     fontSize: 16,
     fontWeight: 600,
     lineHeight: 100,
-    letterSpacing: -2
+    letterSpacing: -1
   )
 
   public static let LabelMediumRegular = TypographyToken(
@@ -286,7 +286,7 @@ class SmaTypography {
     fontSize: 14,
     fontWeight: 500,
     lineHeight: 100,
-    letterSpacing: -2
+    letterSpacing: -1
   )
 
   public static let LabelMediumProminent = TypographyToken(
@@ -294,7 +294,7 @@ class SmaTypography {
     fontSize: 14,
     fontWeight: 600,
     lineHeight: 100,
-    letterSpacing: -2
+    letterSpacing: -1
   )
 
   public static let LabelSmallRegular = TypographyToken(
@@ -302,7 +302,7 @@ class SmaTypography {
     fontSize: 12,
     fontWeight: 500,
     lineHeight: 100,
-    letterSpacing: -2
+    letterSpacing: -1
   )
 
   public static let LabelSmallProminent = TypographyToken(
@@ -310,6 +310,6 @@ class SmaTypography {
     fontSize: 12,
     fontWeight: 600,
     lineHeight: 100,
-    letterSpacing: -2
+    letterSpacing: -1
   )
 }

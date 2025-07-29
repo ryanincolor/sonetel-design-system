@@ -57,7 +57,8 @@
   <dimen name="font_letter_spacing_5">80.00dp</dimen>
   <dimen name="font_letter_spacing_2">-32.00dp</dimen>
   <dimen name="font_letter_spacing_1">-16.00dp</dimen>
-  <dimen name="font_letter_spacing_tight">-32.00dp</dimen>
+  <dimen name="font_letter_spacing_tighter">-32.00dp</dimen>
+  <dimen name="font_letter_spacing_tight">-16.00dp</dimen>
   <dimen name="font_letter_spacing_normal">0.00dp</dimen>
   <dimen name="font_letter_spacing_wide">80.00dp</dimen>
 </resources>

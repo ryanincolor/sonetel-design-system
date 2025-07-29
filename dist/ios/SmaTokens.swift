@@ -15,7 +15,8 @@ public class SmaTokens {
     public static let borderradiusXl = 28
     public static let borderradiusXs = 8
     public static let fontLetterspacingNormal = 0
-    public static let fontLetterspacingTight = -2
+    public static let fontLetterspacingTight = -1
+    public static let fontLetterspacingTighter = -2
     public static let fontLetterspacingWide = 5
     public static let spacing10xl = 80
     public static let spacing11xl = 96
