@@ -217,7 +217,7 @@
       "action.overlay.active": "e153ccc293645a332a3095b1ac3b2209cd768556",
       "action.overlay.disabled": "c7227dbadf34410ae69c8b5162bb8f1d19baf550",
       "on-surface.overlay": "2139e2cbc2c03e29c231927e81bd51afa4022ab1",
-      "action.on-action.inverse": "7976246a896689f9776ad5ed9868a76dedeaad77"
+      "action.on-action.overlay": "7976246a896689f9776ad5ed9868a76dedeaad77"
     },
     "group": "Webapp/Color"
   },
@@ -315,9 +315,9 @@
       "action.overlay.hover": "a37e277dcf0294b96c64818e28f0a938b186d1f5",
       "action.overlay.active": "e153ccc293645a332a3095b1ac3b2209cd768556",
       "action.overlay.disabled": "c7227dbadf34410ae69c8b5162bb8f1d19baf550",
-      "action.on-action.inverse": "7976246a896689f9776ad5ed9868a76dedeaad77",
       "on-surface.overlay": "2139e2cbc2c03e29c231927e81bd51afa4022ab1",
-      "brand.yello": "dc4bbd378fae03dbe8e3fcd2bfdb186984232993"
+      "brand.yello": "dc4bbd378fae03dbe8e3fcd2bfdb186984232993",
+      "action.on-action.overlay": "7976246a896689f9776ad5ed9868a76dedeaad77"
     },
     "group": "Webapp/Color"
   },

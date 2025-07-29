@@ -167,7 +167,7 @@
         "value": "{elevation.alpha.4}",
         "type": "color"
       },
-      "inverse": {
+      "overlay": {
         "value": "{elevation.solid.0}",
         "type": "color"
       }
