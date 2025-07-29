@@ -190,19 +190,22 @@
   --swa-action-secondary-active: #e0e0e0;
   --swa-action-secondary-disabled: #0000000f;
   --swa-action-tertiary-enabled: #e0e0e0;
+  --swa-action-inverse-enabled: #fff;
+  --swa-action-inverse-hover: #f0f0f0;
+  --swa-action-inverse-active: #e0e0e0;
+  --swa-action-inverse-disabled: #b8b8b8;
   --swa-action-alpha-secondary-enabled: #0000000a;
   --swa-action-alpha-secondary-hover: #0000000f;
   --swa-action-alpha-secondary-active: #0000001f;
   --swa-action-on-action-primary: #fff;
   --swa-action-on-action-secondary: #0a0a0a;
-  --swa-action-on-action-dark: #fff;
-  --swa-action-on-action-light: #0a0a0a;
   --swa-action-on-action-disabled: #00000047;
-  --swa-status-critical: #ff0000;
-  --swa-brand-yellow: #ffef62;
+  --swa-on-surface-inverse: #fff;
   --swa-on-surface-primary: #0a0a0a;
   --swa-on-surface-secondary: #666666;
   --swa-on-surface-tertiary: #8f8f8f;
+  --swa-status-critical: #ff0000;
+  --swa-brand-yellow: #ffef62;
 }
 
 
@@ -238,17 +241,20 @@
   --swa-action-secondary-active: #3d3d3d;
   --swa-action-secondary-disabled: #ffffff1f;
   --swa-action-tertiary-enabled: #292929;
+  --swa-action-inverse-enabled: #0a0a0a;
+  --swa-action-inverse-hover: #141414;
+  --swa-action-inverse-active: #292929;
+  --swa-action-inverse-disabled: #3d3d3d;
   --swa-action-alpha-secondary-enabled: #ffffff1f;
   --swa-action-alpha-secondary-hover: #ffffff29;
   --swa-action-alpha-secondary-active: #ffffff29;
   --swa-action-on-action-primary: #141414;
   --swa-action-on-action-secondary: #ffffff;
-  --swa-action-on-action-dark: #ffffff;
-  --swa-action-on-action-light: #0a0a0a;
   --swa-action-on-action-disabled: #ffffff29;
-  --swa-status-critical: #ff0000;
-  --swa-brand-yello: #ffef62;
+  --swa-on-surface-inverse: #0a0a0a;
   --swa-on-surface-primary: #ffffff;
   --swa-on-surface-secondary: #808080;
   --swa-on-surface-tertiary: #333333;
+  --swa-status-critical: #ff0000;
+  --swa-brand-yello: #ffef62;
 }
