@@ -12,8 +12,9 @@
   <dimen name="border_radius_28">448.00dp</dimen>
   <dimen name="border_radius_36">576.00dp</dimen>
   <dimen name="border_radius_40">640.00dp</dimen>
-  <dimen name="border_radius_sm">128.00dp</dimen>
-  <dimen name="border_radius_md">192.00dp</dimen>
+  <dimen name="border_radius_xs">128.00dp</dimen>
+  <dimen name="border_radius_sm">192.00dp</dimen>
+  <dimen name="border_radius_md">256.00dp</dimen>
   <dimen name="border_radius_lg">320.00dp</dimen>
   <dimen name="border_radius_xl">448.00dp</dimen>
   <dimen name="spacing_2">32.00dp</dimen>
