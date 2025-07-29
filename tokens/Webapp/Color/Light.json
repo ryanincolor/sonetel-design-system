@@ -120,7 +120,7 @@
         "type": "color"
       }
     },
-    "overlay": {
+    "light": {
       "enabled": {
         "value": "{color.solid.light.0}",
         "type": "color"
@@ -167,14 +167,14 @@
         "value": "{elevation.alpha.4}",
         "type": "color"
       },
-      "overlay": {
+      "light": {
         "value": "{elevation.solid.8}",
         "type": "color"
       }
     }
   },
   "on-surface": {
-    "overlay": {
+    "light": {
       "value": "{elevation.solid.0}",
       "type": "color"
     },
