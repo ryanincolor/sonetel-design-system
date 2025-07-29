@@ -1,0 +1,36 @@
+{
+  "border-radius": {
+    "8": {
+      "value": "8",
+      "type": "borderRadius"
+    },
+    "12": {
+      "value": "12",
+      "type": "borderRadius"
+    },
+    "16": {
+      "value": "16",
+      "type": "borderRadius"
+    },
+    "20": {
+      "value": "20",
+      "type": "borderRadius"
+    },
+    "24": {
+      "value": "24",
+      "type": "borderRadius"
+    },
+    "28": {
+      "value": "28",
+      "type": "borderRadius"
+    },
+    "36": {
+      "value": "36",
+      "type": "borderRadius"
+    },
+    "40": {
+      "value": "40",
+      "type": "borderRadius"
+    }
+  }
+}

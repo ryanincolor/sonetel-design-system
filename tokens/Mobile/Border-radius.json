@@ -1,0 +1,20 @@
+{
+  "border-radius": {
+    "sm": {
+      "value": "{border-radius.8}",
+      "type": "borderRadius"
+    },
+    "md": {
+      "value": "{border-radius.12}",
+      "type": "borderRadius"
+    },
+    "lg": {
+      "value": "{border-radius.20}",
+      "type": "borderRadius"
+    },
+    "xl": {
+      "value": "{border-radius.28}",
+      "type": "borderRadius"
+    }
+  }
+}

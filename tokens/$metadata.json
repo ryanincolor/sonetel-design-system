@@ -3,13 +3,16 @@
     "Core/Color",
     "Core/Spacing",
     "Core/Typography",
+    "Core/Border-radius",
     "Webapp/Typography",
     "Webapp/Color/Light",
     "Webapp/Color/Dark",
+    "Webapp/Border-radius",
     "Webapp/Spacing",
     "Mobile/Color/Light",
     "Mobile/Color/Dark",
     "Mobile/Typography",
+    "Mobile/Border-radius",
     "Mobile/Spacing"
   ]
 }
