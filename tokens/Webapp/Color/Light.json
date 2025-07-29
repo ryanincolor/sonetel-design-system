@@ -120,6 +120,24 @@
         "type": "color"
       }
     },
+    "inverse": {
+      "enabled": {
+        "value": "{elevation.solid.0}",
+        "type": "color"
+      },
+      "hover": {
+        "value": "{elevation.solid.2}",
+        "type": "color"
+      },
+      "active": {
+        "value": "{elevation.solid.3}",
+        "type": "color"
+      },
+      "disabled": {
+        "value": "{elevation.solid.4}",
+        "type": "color"
+      }
+    },
     "alpha": {
       "secondary": {
         "enabled": {
@@ -145,18 +163,28 @@
         "value": "{elevation.solid.8}",
         "type": "color"
       },
-      "dark": {
-        "value": "{elevation.solid.0}",
-        "type": "color"
-      },
-      "light": {
-        "value": "{elevation.solid.8}",
-        "type": "color"
-      },
       "disabled": {
         "value": "{elevation.alpha.4}",
         "type": "color"
       }
+    }
+  },
+  "on-surface": {
+    "inverse": {
+      "value": "{elevation.solid.0}",
+      "type": "color"
+    },
+    "primary": {
+      "value": "{elevation.solid.8}",
+      "type": "color"
+    },
+    "secondary": {
+      "value": "{elevation.solid.6}",
+      "type": "color"
+    },
+    "tertiary": {
+      "value": "{elevation.solid.5}",
+      "type": "color"
     }
   },
   "status": {
@@ -168,20 +196,6 @@
   "brand": {
     "yellow": {
       "value": "{color.hues.yellow}",
-      "type": "color"
-    }
-  },
-  "on-surface": {
-    "primary": {
-      "value": "{elevation.solid.8}",
-      "type": "color"
-    },
-    "secondary": {
-      "value": "{elevation.solid.6}",
-      "type": "color"
-    },
-    "tertiary": {
-      "value": "{elevation.solid.5}",
       "type": "color"
     }
   }

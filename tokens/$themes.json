@@ -204,8 +204,6 @@
       "action.alpha.secondary.active": "4477829edb60844eee19bae284678bf8e565c298",
       "action.on-action.primary": "ee5b5a67c94b242533b2488c855d4b6179af5888",
       "action.on-action.secondary": "169edd0d5bc827381ef4e80e3b9cf074e0757309",
-      "action.on-action.dark": "2139e2cbc2c03e29c231927e81bd51afa4022ab1",
-      "action.on-action.light": "55c92a4e725cc8150df3f0f751dc3420bde98772",
       "status.critical": "38bcde7b0d2cb4f65a166d55baf4b675da05d47c",
       "on-surface.primary": "7c4b1ce5d09be84c4e1dc7756898f288be1c1f2a",
       "on-surface.secondary": "404618154e1ac0e636219c5c40e133927683f14b",
@@ -213,7 +211,8 @@
       "action.secondary.disabled": "39403db0940f07956b24896c394bd795b98a89af",
       "action.on-action.disabled": "ca08bdf051c8e21c59c5f037365bde1cba372b04",
       "on-surface.tertiary": "f40108746f09821ff3fbcce6facb25f02ce59172",
-      "brand.yellow": "4d1cafb48ccfd2a3bb1421e46da9ec390c5ff1f1"
+      "brand.yellow": "4d1cafb48ccfd2a3bb1421e46da9ec390c5ff1f1",
+      "on-surface.inverse": "2139e2cbc2c03e29c231927e81bd51afa4022ab1"
     },
     "group": "Webapp/Color"
   },
@@ -300,8 +299,6 @@
       "action.alpha.secondary.active": "4477829edb60844eee19bae284678bf8e565c298",
       "action.on-action.primary": "ee5b5a67c94b242533b2488c855d4b6179af5888",
       "action.on-action.secondary": "169edd0d5bc827381ef4e80e3b9cf074e0757309",
-      "action.on-action.dark": "2139e2cbc2c03e29c231927e81bd51afa4022ab1",
-      "action.on-action.light": "55c92a4e725cc8150df3f0f751dc3420bde98772",
       "status.critical": "38bcde7b0d2cb4f65a166d55baf4b675da05d47c",
       "on-surface.primary": "7c4b1ce5d09be84c4e1dc7756898f288be1c1f2a",
       "on-surface.secondary": "404618154e1ac0e636219c5c40e133927683f14b",
@@ -309,7 +306,8 @@
       "action.primary.disabled": "8c650dd502fa3ce8b6bdb9d034e30dc311f9af69",
       "action.secondary.disabled": "39403db0940f07956b24896c394bd795b98a89af",
       "action.on-action.disabled": "ca08bdf051c8e21c59c5f037365bde1cba372b04",
-      "brand.yello": "8f80b79a4c745f9be02420cfe1332b7a9733cea8"
+      "brand.yello": "8f80b79a4c745f9be02420cfe1332b7a9733cea8",
+      "on-surface.inverse": "2139e2cbc2c03e29c231927e81bd51afa4022ab1"
     },
     "group": "Webapp/Color"
   },
@@ -457,8 +455,6 @@
       "action.alpha.secondary.active": "a65f07e1bf1f8fccfab9b8ea314023d947592b33",
       "action.on-action.primary": "e917f1f563b103fc7fdbe68cdf85efbe0c4fa017",
       "action.on-action.secondary": "eb175c5a87be51ca352fb0579c45d61025f91c70",
-      "action.on-action.dark": "8054a94576d8d16b5f2af4e6514098fa0ba81a0d",
-      "action.on-action.light": "e3c407ce9e6ebcb44c695d479638d3f4ae8fc22b",
       "action.on-action.disabled": "8545acaab6a3b6c882d6c01a7e62c2e765fbae36",
       "status.critical": "5adc907c0e675086364c747d2144eb6e3112940f",
       "brand.yellow": "7895faa987b56ab7a43d4beee8509a768851512f",
@@ -469,7 +465,8 @@
       "brand.blue": "2c5c7e174fb81e6ab3e088516af0fba06b1b8d18",
       "brand.purple": "0d3c3d0953198bb0042f3676653950ee3926853d",
       "brand.pink": "a20711f5df367e58cd5cdbde8c6f4052ffcc3a79",
-      "brand.orange": "351236db0e1312d1607184873a2ba4c70150afaa"
+      "brand.orange": "351236db0e1312d1607184873a2ba4c70150afaa",
+      "on-surface.inverse": "8054a94576d8d16b5f2af4e6514098fa0ba81a0d"
     },
     "group": "Mobile/Color"
   },
@@ -516,8 +513,6 @@
       "action.alpha.secondary.active": "a65f07e1bf1f8fccfab9b8ea314023d947592b33",
       "action.on-action.primary": "e917f1f563b103fc7fdbe68cdf85efbe0c4fa017",
       "action.on-action.secondary": "eb175c5a87be51ca352fb0579c45d61025f91c70",
-      "action.on-action.dark": "8054a94576d8d16b5f2af4e6514098fa0ba81a0d",
-      "action.on-action.light": "e3c407ce9e6ebcb44c695d479638d3f4ae8fc22b",
       "action.on-action.disabled": "8545acaab6a3b6c882d6c01a7e62c2e765fbae36",
       "status.critical": "5adc907c0e675086364c747d2144eb6e3112940f",
       "brand.yellow": "7895faa987b56ab7a43d4beee8509a768851512f",
@@ -528,7 +523,8 @@
       "brand.blue": "2c5c7e174fb81e6ab3e088516af0fba06b1b8d18",
       "brand.purple": "0d3c3d0953198bb0042f3676653950ee3926853d",
       "brand.pink": "a20711f5df367e58cd5cdbde8c6f4052ffcc3a79",
-      "brand.orange": "351236db0e1312d1607184873a2ba4c70150afaa"
+      "brand.orange": "351236db0e1312d1607184873a2ba4c70150afaa",
+      "on-surface.inverse": "8054a94576d8d16b5f2af4e6514098fa0ba81a0d"
     },
     "group": "Mobile/Color"
   },
