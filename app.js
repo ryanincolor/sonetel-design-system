@@ -1562,6 +1562,7 @@ async function loadIOSTokens() {
     const coreColorResponse = await fetch(`tokens/Core/Color.json`);
     const coreTypographyResponse = await fetch(`tokens/Core/Typography.json`);
     const coreSpacingResponse = await fetch(`tokens/Core/Spacing.json`);
+    const coreBorderRadiusResponse = await fetch(`tokens/Core/Border-radius.json`);
 
     const coreTokens = {};
     if (coreColorResponse.ok) {
@@ -1572,6 +1573,9 @@ async function loadIOSTokens() {
     }
     if (coreSpacingResponse.ok) {
       coreTokens.spacing = await coreSpacingResponse.json();
+    }
+    if (coreBorderRadiusResponse.ok) {
+      coreTokens.borderRadius = await coreBorderRadiusResponse.json();
     }
 
     // Clear loading and display tokens
