@@ -1922,7 +1922,33 @@ function startTokenWatching() {
     clearInterval(tokenWatchInterval);
   }
 
-  // Check for token file updates every 3 seconds
+  // Initialize file modification times first
+  const initializeModificationTimes = async () => {
+    const tokenFiles = [
+      "tokens/Webapp/Color/Light.json",
+      "tokens/Webapp/Color/Dark.json",
+      "tokens/Webapp/Spacing.json",
+      "tokens/Webapp/Typography.json"
+    ];
+
+    for (const filePath of tokenFiles) {
+      try {
+        const response = await fetch(filePath, { method: "HEAD" });
+        if (response.ok) {
+          const lastModified = response.headers.get("Last-Modified");
+          const currentTime = new Date(lastModified).getTime();
+          fileModificationTimes.set(filePath, currentTime);
+        }
+      } catch (error) {
+        // File might not exist, ignore
+      }
+    }
+  };
+
+  // Initialize modification times first
+  initializeModificationTimes();
+
+  // Check for token file updates every 5 seconds (increased interval to reduce load)
   tokenWatchInterval = setInterval(async () => {
     // Only check if we're viewing webapp tokens
     const webappSection = document.getElementById("webapp");
@@ -1944,14 +1970,20 @@ function startTokenWatching() {
         const response = await fetch(filePath, { method: "HEAD" });
         if (response.ok) {
           const lastModified = response.headers.get("Last-Modified");
-          const currentTime = new Date(lastModified).getTime();
-          const storedTime = fileModificationTimes.get(filePath);
+          if (lastModified) {
+            const currentTime = new Date(lastModified).getTime();
+            const storedTime = fileModificationTimes.get(filePath);
 
-          if (storedTime && currentTime > storedTime) {
-            hasChanges = true;
-            console.log(`🔄 Token file changed: ${filePath}`);
+            // Only trigger if we have a stored time AND the current time is significantly newer (more than 1 second)
+            if (storedTime && currentTime > storedTime + 1000) {
+              hasChanges = true;
+              console.log(`🔄 Token file changed: ${filePath}, old: ${new Date(storedTime)}, new: ${new Date(currentTime)}`);
+              fileModificationTimes.set(filePath, currentTime);
+            } else if (!storedTime) {
+              // First time seeing this file, just store the time
+              fileModificationTimes.set(filePath, currentTime);
+            }
           }
-          fileModificationTimes.set(filePath, currentTime);
         }
       } catch (error) {
         // File might not exist, ignore
@@ -1962,14 +1994,18 @@ function startTokenWatching() {
       console.log("🔄 Detected token changes, refreshing webapp tokens...");
       await loadWebTokens();
     }
-  }, 3000);
+  }, 5000);
 }
 
 // Initialize application when DOM is loaded
 document.addEventListener("DOMContentLoaded", function () {
   updateThemeButton();
   loadSectionContent("core");
-  startTokenWatching(); // Start watching for token changes
+
+  // Start token watching with improved logic to prevent refresh loops
+  setTimeout(() => {
+    startTokenWatching();
+  }, 2000); // Delay start to allow initial load to complete
 
   // Force reload webapp tokens to ensure action tokens are loaded
   setTimeout(() => {
