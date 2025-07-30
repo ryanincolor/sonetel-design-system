@@ -249,11 +249,11 @@ ${body}
   },
 });
 
-// Register custom typography formatter that works with expanded tokens
+// Register namespaced SwiftUI typography formatter
 StyleDictionary.registerFormat({
   name: "ios-swift/typography.swift",
   format: ({ dictionary, options }) => {
-    const className = options.className || "TypographyTokens";
+    const className = options.className || "SmaTypography";
 
     // Group typography tokens by base name
     const typographyGroups = {};
@@ -280,7 +280,7 @@ StyleDictionary.registerFormat({
       // Store the value based on token type
       switch(token.type) {
         case 'fontFamily':
-          typographyGroups[baseName].fontFamily = token.value.replace(/"/g, '\\"');
+          typographyGroups[baseName].fontFamily = token.value.replace(/"/g, '').replace(/'/g, '');
           break;
         case 'fontWeight':
           typographyGroups[baseName].fontWeight = parseInt(token.value) || 400;
@@ -294,12 +294,17 @@ StyleDictionary.registerFormat({
           typographyGroups[baseName].fontSize = parseFloat(fontSize) || 16;
           break;
         case 'lineHeight':
-          // Handle percentage values like "110%"
+          // Convert to absolute points (lineHeight multiplier * fontSize)
           let lineHeight = token.value;
           if (typeof lineHeight === 'string' && lineHeight.includes('%')) {
-            lineHeight = lineHeight.replace('%', '');
+            lineHeight = parseFloat(lineHeight.replace('%', '')) / 100;
+          } else if (typeof lineHeight === 'number' && lineHeight > 10) {
+            // If it's a large number like 150, convert to multiplier
+            lineHeight = lineHeight / 100;
+          } else {
+            lineHeight = parseFloat(lineHeight) || 1.5;
           }
-          typographyGroups[baseName].lineHeight = parseFloat(lineHeight) || 150;
+          typographyGroups[baseName].lineHeightMultiplier = lineHeight;
           break;
         case 'letterSpacing':
           // Handle CGFloat(value) format from iOS transforms
@@ -312,31 +317,103 @@ StyleDictionary.registerFormat({
       }
     });
 
-    const body = Object.entries(typographyGroups)
-      .filter(([name, props]) => props.fontFamily && props.fontSize) // Only include complete groups
-      .map(([name, props]) => {
-        return `  public static let ${name} = TypographyToken(
-    fontFamily: "${props.fontFamily || "'Inter', sans-serif"}",
-    fontSize: ${props.fontSize || 16},
-    fontWeight: ${props.fontWeight || 400},
-    lineHeight: ${props.lineHeight || 150},
-    letterSpacing: ${props.letterSpacing || 0}
-  )`;
-      })
-      .join("\n\n");
+    // Helper function to convert font weight to SwiftUI Font.Weight
+    const getFontWeight = (weight) => {
+      switch(weight) {
+        case 300: return '.light';
+        case 400: return '.regular';
+        case 500: return '.medium';
+        case 600: return '.semibold';
+        case 700: return '.bold';
+        case 800: return '.heavy';
+        case 900: return '.black';
+        default: return '.regular';
+      }
+    };
 
-    return `import UIKit
+    // Group tokens by category for better organization
+    const categories = {
+      display: [],
+      headline: [],
+      body: [],
+      label: []
+    };
 
-struct TypographyToken {
-  let fontFamily: String
-  let fontSize: CGFloat
-  let fontWeight: Int
-  let lineHeight: CGFloat
-  let letterSpacing: CGFloat
+    Object.entries(typographyGroups)
+      .filter(([name, props]) => props.fontFamily && props.fontSize)
+      .forEach(([name, props]) => {
+        if (name.toLowerCase().startsWith('display')) {
+          categories.display.push([name, props]);
+        } else if (name.toLowerCase().startsWith('headline')) {
+          categories.headline.push([name, props]);
+        } else if (name.toLowerCase().startsWith('body')) {
+          categories.body.push([name, props]);
+        } else if (name.toLowerCase().startsWith('label')) {
+          categories.label.push([name, props]);
+        }
+      });
+
+    // Generate category sections
+    const generateCategorySection = (categoryName, tokens) => {
+      if (tokens.length === 0) return '';
+
+      const structs = tokens.map(([name, props]) => {
+        const fontName = props.fontFamily === 'Inter, sans-serif' || props.fontFamily === 'Inter'
+          ? 'Inter'
+          : props.fontFamily;
+        const weight = getFontWeight(props.fontWeight || 400);
+        const fontSize = props.fontSize || 16;
+        const lineHeight = props.lineHeightMultiplier ? Math.round(props.lineHeightMultiplier * fontSize) : Math.round(fontSize * 1.2);
+        const letterSpacing = props.letterSpacing || 0;
+
+        return `  public struct ${name}: SmaTypographyProtocol {
+    public static let font: Font = .custom("${fontName}", size: ${fontSize})${weight !== '.regular' ? `.weight(${weight})` : ''}
+    public static let fontSize: CGFloat = ${fontSize}
+    public static let lineHeight: CGFloat = ${lineHeight}
+    public static let letterSpacing: CGFloat = ${letterSpacing}
+  }`;
+      }).join('\n\n');
+
+      return `  // MARK: - ${categoryName.charAt(0).toUpperCase() + categoryName.slice(1)}
+
+${structs}`;
+    };
+
+    const displaySection = generateCategorySection('display', categories.display);
+    const headlineSection = generateCategorySection('headline', categories.headline);
+    const bodySection = generateCategorySection('body', categories.body);
+    const labelSection = generateCategorySection('label', categories.label);
+
+    return `import SwiftUI
+
+// MARK: - Typography Protocol
+public protocol SmaTypographyProtocol {
+  static var font: Font { get }
+  static var fontSize: CGFloat { get }
+  static var lineHeight: CGFloat { get }
+  static var letterSpacing: CGFloat { get }
 }
 
-class ${className} {
-${body}
+// MARK: - Typography ViewModifier
+public struct TypographyStyle<Style>: ViewModifier where Style: SmaTypographyProtocol {
+  public func body(content: Content) -> some View {
+    content
+      .font(Style.font)
+      .kerning(Style.letterSpacing)
+      .lineSpacing(Style.lineHeight - Style.fontSize)
+  }
+}
+
+// MARK: - View Extension
+public extension View {
+  func typography<Style: SmaTypographyProtocol>(_ style: Style.Type) -> some View {
+    modifier(TypographyStyle<Style>())
+  }
+}
+
+// MARK: - Typography Tokens
+public struct ${className} {
+${displaySection}${headlineSection ? '\n\n' + headlineSection : ''}${bodySection ? '\n\n' + bodySection : ''}${labelSection ? '\n\n' + labelSection : ''}
 }`;
   },
 });

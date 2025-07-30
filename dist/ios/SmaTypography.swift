@@ -1,315 +1,303 @@
-import UIKit
+import SwiftUI
 
-struct TypographyToken {
-  let fontFamily: String
-  let fontSize: CGFloat
-  let fontWeight: Int
-  let lineHeight: CGFloat
-  let letterSpacing: CGFloat
+// MARK: - Typography Protocol
+public protocol SmaTypographyProtocol {
+  static var font: Font { get }
+  static var fontSize: CGFloat { get }
+  static var lineHeight: CGFloat { get }
+  static var letterSpacing: CGFloat { get }
 }
 
-class SmaTypography {
-  public static let displayXLarge = TypographyToken(
-    fontFamily: "'Inter', sans-serif",
-    fontSize: 96,
-    fontWeight: 700,
-    lineHeight: 1.1,
-    letterSpacing: -2
-  )
+// MARK: - Typography ViewModifier
+public struct TypographyStyle<Style>: ViewModifier where Style: SmaTypographyProtocol {
+  public func body(content: Content) -> some View {
+    content
+      .font(Style.font)
+      .kerning(Style.letterSpacing)
+      .lineSpacing(Style.lineHeight - Style.fontSize)
+  }
+}
 
-  public static let displayLarge = TypographyToken(
-    fontFamily: "'Inter', sans-serif",
-    fontSize: 72,
-    fontWeight: 700,
-    lineHeight: 1.1,
-    letterSpacing: -2
-  )
+// MARK: - View Extension
+public extension View {
+  func typography<Style: SmaTypographyProtocol>(_ style: Style.Type) -> some View {
+    modifier(TypographyStyle<Style>())
+  }
+}
 
-  public static let displayMedium = TypographyToken(
-    fontFamily: "'Inter', sans-serif",
-    fontSize: 64,
-    fontWeight: 700,
-    lineHeight: 1.1,
-    letterSpacing: -2
-  )
+// MARK: - Typography Tokens
+public struct SmaTypography {
+  // MARK: - Display
 
-  public static let displaySmall = TypographyToken(
-    fontFamily: "'Inter', sans-serif",
-    fontSize: 56,
-    fontWeight: 700,
-    lineHeight: 1.1,
-    letterSpacing: -2
-  )
+  public struct displayXLarge: SmaTypographyProtocol {
+    public static let font: Font = .custom("Inter", size: 96).weight(.bold)
+    public static let fontSize: CGFloat = 96
+    public static let lineHeight: CGFloat = 106
+    public static let letterSpacing: CGFloat = -2
+  }
 
-  public static let headline3xLargeLight = TypographyToken(
-    fontFamily: "'Inter', sans-serif",
-    fontSize: 40,
-    fontWeight: 400,
-    lineHeight: 1.1,
-    letterSpacing: -2
-  )
+  public struct displayLarge: SmaTypographyProtocol {
+    public static let font: Font = .custom("Inter", size: 72).weight(.bold)
+    public static let fontSize: CGFloat = 72
+    public static let lineHeight: CGFloat = 79
+    public static let letterSpacing: CGFloat = -2
+  }
 
-  public static let headline3xLargeRegular = TypographyToken(
-    fontFamily: "'Inter', sans-serif",
-    fontSize: 40,
-    fontWeight: 500,
-    lineHeight: 1.1,
-    letterSpacing: -2
-  )
+  public struct displayMedium: SmaTypographyProtocol {
+    public static let font: Font = .custom("Inter", size: 64).weight(.bold)
+    public static let fontSize: CGFloat = 64
+    public static let lineHeight: CGFloat = 70
+    public static let letterSpacing: CGFloat = -2
+  }
 
-  public static let headline3xLargeProminent = TypographyToken(
-    fontFamily: "'Inter', sans-serif",
-    fontSize: 40,
-    fontWeight: 600,
-    lineHeight: 1.1,
-    letterSpacing: -2
-  )
+  public struct displaySmall: SmaTypographyProtocol {
+    public static let font: Font = .custom("Inter", size: 56).weight(.bold)
+    public static let fontSize: CGFloat = 56
+    public static let lineHeight: CGFloat = 62
+    public static let letterSpacing: CGFloat = -2
+  }
 
-  public static let headline2xLargeLight = TypographyToken(
-    fontFamily: "'Inter', sans-serif",
-    fontSize: 34,
-    fontWeight: 400,
-    lineHeight: 1.1,
-    letterSpacing: -2
-  )
+  // MARK: - Headline
 
-  public static let headline2xLargeRegular = TypographyToken(
-    fontFamily: "'Inter', sans-serif",
-    fontSize: 34,
-    fontWeight: 500,
-    lineHeight: 1.1,
-    letterSpacing: -2
-  )
+  public struct headline3xLargeLight: SmaTypographyProtocol {
+    public static let font: Font = .custom("Inter", size: 40)
+    public static let fontSize: CGFloat = 40
+    public static let lineHeight: CGFloat = 44
+    public static let letterSpacing: CGFloat = -2
+  }
 
-  public static let headline2xLargeProminent = TypographyToken(
-    fontFamily: "'Inter', sans-serif",
-    fontSize: 34,
-    fontWeight: 600,
-    lineHeight: 1.1,
-    letterSpacing: -2
-  )
+  public struct headline3xLargeRegular: SmaTypographyProtocol {
+    public static let font: Font = .custom("Inter", size: 40).weight(.medium)
+    public static let fontSize: CGFloat = 40
+    public static let lineHeight: CGFloat = 44
+    public static let letterSpacing: CGFloat = -2
+  }
 
-  public static let headlineXLargeLight = TypographyToken(
-    fontFamily: "'Inter', sans-serif",
-    fontSize: 28,
-    fontWeight: 400,
-    lineHeight: 1.1,
-    letterSpacing: -2
-  )
+  public struct headline3xLargeProminent: SmaTypographyProtocol {
+    public static let font: Font = .custom("Inter", size: 40).weight(.semibold)
+    public static let fontSize: CGFloat = 40
+    public static let lineHeight: CGFloat = 44
+    public static let letterSpacing: CGFloat = -2
+  }
 
-  public static let headlineXLargeRegular = TypographyToken(
-    fontFamily: "'Inter', sans-serif",
-    fontSize: 28,
-    fontWeight: 500,
-    lineHeight: 1.1,
-    letterSpacing: -2
-  )
+  public struct headline2xLargeLight: SmaTypographyProtocol {
+    public static let font: Font = .custom("Inter", size: 34)
+    public static let fontSize: CGFloat = 34
+    public static let lineHeight: CGFloat = 37
+    public static let letterSpacing: CGFloat = -2
+  }
 
-  public static let headlineXLargeProminent = TypographyToken(
-    fontFamily: "'Inter', sans-serif",
-    fontSize: 28,
-    fontWeight: 600,
-    lineHeight: 1.1,
-    letterSpacing: -2
-  )
+  public struct headline2xLargeRegular: SmaTypographyProtocol {
+    public static let font: Font = .custom("Inter", size: 34).weight(.medium)
+    public static let fontSize: CGFloat = 34
+    public static let lineHeight: CGFloat = 37
+    public static let letterSpacing: CGFloat = -2
+  }
 
-  public static let headlineLargeLight = TypographyToken(
-    fontFamily: "'Inter', sans-serif",
-    fontSize: 24,
-    fontWeight: 400,
-    lineHeight: 1.2,
-    letterSpacing: -2
-  )
+  public struct headline2xLargeProminent: SmaTypographyProtocol {
+    public static let font: Font = .custom("Inter", size: 34).weight(.semibold)
+    public static let fontSize: CGFloat = 34
+    public static let lineHeight: CGFloat = 37
+    public static let letterSpacing: CGFloat = -2
+  }
 
-  public static let headlineLargeRegular = TypographyToken(
-    fontFamily: "'Inter', sans-serif",
-    fontSize: 24,
-    fontWeight: 500,
-    lineHeight: 1.2,
-    letterSpacing: -2
-  )
+  public struct headlineXLargeLight: SmaTypographyProtocol {
+    public static let font: Font = .custom("Inter", size: 28)
+    public static let fontSize: CGFloat = 28
+    public static let lineHeight: CGFloat = 31
+    public static let letterSpacing: CGFloat = -2
+  }
 
-  public static let headlineLargeProminent = TypographyToken(
-    fontFamily: "'Inter', sans-serif",
-    fontSize: 24,
-    fontWeight: 600,
-    lineHeight: 1.2,
-    letterSpacing: -2
-  )
+  public struct headlineXLargeRegular: SmaTypographyProtocol {
+    public static let font: Font = .custom("Inter", size: 28).weight(.medium)
+    public static let fontSize: CGFloat = 28
+    public static let lineHeight: CGFloat = 31
+    public static let letterSpacing: CGFloat = -2
+  }
 
-  public static let headlineMediumLight = TypographyToken(
-    fontFamily: "'Inter', sans-serif",
-    fontSize: 20,
-    fontWeight: 400,
-    lineHeight: 1.2,
-    letterSpacing: -2
-  )
+  public struct headlineXLargeProminent: SmaTypographyProtocol {
+    public static let font: Font = .custom("Inter", size: 28).weight(.semibold)
+    public static let fontSize: CGFloat = 28
+    public static let lineHeight: CGFloat = 31
+    public static let letterSpacing: CGFloat = -2
+  }
 
-  public static let headlineMediumRegular = TypographyToken(
-    fontFamily: "'Inter', sans-serif",
-    fontSize: 20,
-    fontWeight: 500,
-    lineHeight: 1.2,
-    letterSpacing: -2
-  )
+  public struct headlineLargeLight: SmaTypographyProtocol {
+    public static let font: Font = .custom("Inter", size: 24)
+    public static let fontSize: CGFloat = 24
+    public static let lineHeight: CGFloat = 29
+    public static let letterSpacing: CGFloat = -2
+  }
 
-  public static let headlineMediumProminent = TypographyToken(
-    fontFamily: "'Inter', sans-serif",
-    fontSize: 20,
-    fontWeight: 600,
-    lineHeight: 1.2,
-    letterSpacing: -2
-  )
+  public struct headlineLargeRegular: SmaTypographyProtocol {
+    public static let font: Font = .custom("Inter", size: 24).weight(.medium)
+    public static let fontSize: CGFloat = 24
+    public static let lineHeight: CGFloat = 29
+    public static let letterSpacing: CGFloat = -2
+  }
 
-  public static let headlineSmallLight = TypographyToken(
-    fontFamily: "'Inter', sans-serif",
-    fontSize: 18,
-    fontWeight: 400,
-    lineHeight: 1.2,
-    letterSpacing: -2
-  )
+  public struct headlineLargeProminent: SmaTypographyProtocol {
+    public static let font: Font = .custom("Inter", size: 24).weight(.semibold)
+    public static let fontSize: CGFloat = 24
+    public static let lineHeight: CGFloat = 29
+    public static let letterSpacing: CGFloat = -2
+  }
 
-  public static let headlineSmallRegular = TypographyToken(
-    fontFamily: "'Inter', sans-serif",
-    fontSize: 18,
-    fontWeight: 500,
-    lineHeight: 1.2,
-    letterSpacing: -2
-  )
+  public struct headlineMediumLight: SmaTypographyProtocol {
+    public static let font: Font = .custom("Inter", size: 20)
+    public static let fontSize: CGFloat = 20
+    public static let lineHeight: CGFloat = 24
+    public static let letterSpacing: CGFloat = -2
+  }
 
-  public static let headlineSmallProminant = TypographyToken(
-    fontFamily: "'Inter', sans-serif",
-    fontSize: 18,
-    fontWeight: 600,
-    lineHeight: 1.2,
-    letterSpacing: -2
-  )
+  public struct headlineMediumRegular: SmaTypographyProtocol {
+    public static let font: Font = .custom("Inter", size: 20).weight(.medium)
+    public static let fontSize: CGFloat = 20
+    public static let lineHeight: CGFloat = 24
+    public static let letterSpacing: CGFloat = -2
+  }
 
-  public static let bodyXLargeRegular = TypographyToken(
-    fontFamily: "'Inter', sans-serif",
-    fontSize: 20,
-    fontWeight: 400,
-    lineHeight: 1.5,
-    letterSpacing: -1
-  )
+  public struct headlineMediumProminent: SmaTypographyProtocol {
+    public static let font: Font = .custom("Inter", size: 20).weight(.semibold)
+    public static let fontSize: CGFloat = 20
+    public static let lineHeight: CGFloat = 24
+    public static let letterSpacing: CGFloat = -2
+  }
 
-  public static let bodyXLargeProminent = TypographyToken(
-    fontFamily: "'Inter', sans-serif",
-    fontSize: 20,
-    fontWeight: 500,
-    lineHeight: 1.5,
-    letterSpacing: -1
-  )
+  public struct headlineSmallLight: SmaTypographyProtocol {
+    public static let font: Font = .custom("Inter", size: 18)
+    public static let fontSize: CGFloat = 18
+    public static let lineHeight: CGFloat = 22
+    public static let letterSpacing: CGFloat = -2
+  }
 
-  public static let bodyLargeRegular = TypographyToken(
-    fontFamily: "'Inter', sans-serif",
-    fontSize: 16,
-    fontWeight: 400,
-    lineHeight: 1.5,
-    letterSpacing: -1
-  )
+  public struct headlineSmallRegular: SmaTypographyProtocol {
+    public static let font: Font = .custom("Inter", size: 18).weight(.medium)
+    public static let fontSize: CGFloat = 18
+    public static let lineHeight: CGFloat = 22
+    public static let letterSpacing: CGFloat = -2
+  }
 
-  public static let bodyLargeProminent = TypographyToken(
-    fontFamily: "'Inter', sans-serif",
-    fontSize: 16,
-    fontWeight: 500,
-    lineHeight: 1.5,
-    letterSpacing: -1
-  )
+  public struct headlineSmallProminant: SmaTypographyProtocol {
+    public static let font: Font = .custom("Inter", size: 18).weight(.semibold)
+    public static let fontSize: CGFloat = 18
+    public static let lineHeight: CGFloat = 22
+    public static let letterSpacing: CGFloat = -2
+  }
 
-  public static let bodyMediumRegular = TypographyToken(
-    fontFamily: "'Inter', sans-serif",
-    fontSize: 14,
-    fontWeight: 400,
-    lineHeight: 1.5,
-    letterSpacing: -1
-  )
+  // MARK: - Body
 
-  public static let bodyMediumProminent = TypographyToken(
-    fontFamily: "'Inter', sans-serif",
-    fontSize: 14,
-    fontWeight: 500,
-    lineHeight: 1.5,
-    letterSpacing: -1
-  )
+  public struct bodyXLargeRegular: SmaTypographyProtocol {
+    public static let font: Font = .custom("Inter", size: 20)
+    public static let fontSize: CGFloat = 20
+    public static let lineHeight: CGFloat = 30
+    public static let letterSpacing: CGFloat = -1
+  }
 
-  public static let bodySmallRegular = TypographyToken(
-    fontFamily: "'Inter', sans-serif",
-    fontSize: 12,
-    fontWeight: 400,
-    lineHeight: 1.5,
-    letterSpacing: -1
-  )
+  public struct bodyXLargeProminent: SmaTypographyProtocol {
+    public static let font: Font = .custom("Inter", size: 20).weight(.medium)
+    public static let fontSize: CGFloat = 20
+    public static let lineHeight: CGFloat = 30
+    public static let letterSpacing: CGFloat = -1
+  }
 
-  public static let bodySmallProminent = TypographyToken(
-    fontFamily: "'Inter', sans-serif",
-    fontSize: 12,
-    fontWeight: 500,
-    lineHeight: 1.5,
-    letterSpacing: -1
-  )
+  public struct bodyLargeRegular: SmaTypographyProtocol {
+    public static let font: Font = .custom("Inter", size: 16)
+    public static let fontSize: CGFloat = 16
+    public static let lineHeight: CGFloat = 24
+    public static let letterSpacing: CGFloat = -1
+  }
 
-  public static let labelXLargeRegular = TypographyToken(
-    fontFamily: "'Inter', sans-serif",
-    fontSize: 20,
-    fontWeight: 500,
-    lineHeight: 1,
-    letterSpacing: -1
-  )
+  public struct bodyLargeProminent: SmaTypographyProtocol {
+    public static let font: Font = .custom("Inter", size: 16).weight(.medium)
+    public static let fontSize: CGFloat = 16
+    public static let lineHeight: CGFloat = 24
+    public static let letterSpacing: CGFloat = -1
+  }
 
-  public static let labelXLargeProminent = TypographyToken(
-    fontFamily: "'Inter', sans-serif",
-    fontSize: 20,
-    fontWeight: 600,
-    lineHeight: 1,
-    letterSpacing: -1
-  )
+  public struct bodyMediumRegular: SmaTypographyProtocol {
+    public static let font: Font = .custom("Inter", size: 14)
+    public static let fontSize: CGFloat = 14
+    public static let lineHeight: CGFloat = 21
+    public static let letterSpacing: CGFloat = -1
+  }
 
-  public static let labelLargeRegular = TypographyToken(
-    fontFamily: "'Inter', sans-serif",
-    fontSize: 16,
-    fontWeight: 500,
-    lineHeight: 1,
-    letterSpacing: -1
-  )
+  public struct bodyMediumProminent: SmaTypographyProtocol {
+    public static let font: Font = .custom("Inter", size: 14).weight(.medium)
+    public static let fontSize: CGFloat = 14
+    public static let lineHeight: CGFloat = 21
+    public static let letterSpacing: CGFloat = -1
+  }
 
-  public static let labelLargeProminent = TypographyToken(
-    fontFamily: "'Inter', sans-serif",
-    fontSize: 16,
-    fontWeight: 600,
-    lineHeight: 1,
-    letterSpacing: -1
-  )
+  public struct bodySmallRegular: SmaTypographyProtocol {
+    public static let font: Font = .custom("Inter", size: 12)
+    public static let fontSize: CGFloat = 12
+    public static let lineHeight: CGFloat = 18
+    public static let letterSpacing: CGFloat = -1
+  }
 
-  public static let labelMediumRegular = TypographyToken(
-    fontFamily: "'Inter', sans-serif",
-    fontSize: 14,
-    fontWeight: 500,
-    lineHeight: 1,
-    letterSpacing: -1
-  )
+  public struct bodySmallProminent: SmaTypographyProtocol {
+    public static let font: Font = .custom("Inter", size: 12).weight(.medium)
+    public static let fontSize: CGFloat = 12
+    public static let lineHeight: CGFloat = 18
+    public static let letterSpacing: CGFloat = -1
+  }
 
-  public static let labelMediumProminent = TypographyToken(
-    fontFamily: "'Inter', sans-serif",
-    fontSize: 14,
-    fontWeight: 600,
-    lineHeight: 1,
-    letterSpacing: -1
-  )
+  // MARK: - Label
 
-  public static let labelSmallRegular = TypographyToken(
-    fontFamily: "'Inter', sans-serif",
-    fontSize: 12,
-    fontWeight: 500,
-    lineHeight: 1,
-    letterSpacing: -1
-  )
+  public struct labelXLargeRegular: SmaTypographyProtocol {
+    public static let font: Font = .custom("Inter", size: 20).weight(.medium)
+    public static let fontSize: CGFloat = 20
+    public static let lineHeight: CGFloat = 20
+    public static let letterSpacing: CGFloat = -1
+  }
 
-  public static let labelSmallProminent = TypographyToken(
-    fontFamily: "'Inter', sans-serif",
-    fontSize: 12,
-    fontWeight: 600,
-    lineHeight: 1,
-    letterSpacing: -1
-  )
+  public struct labelXLargeProminent: SmaTypographyProtocol {
+    public static let font: Font = .custom("Inter", size: 20).weight(.semibold)
+    public static let fontSize: CGFloat = 20
+    public static let lineHeight: CGFloat = 20
+    public static let letterSpacing: CGFloat = -1
+  }
+
+  public struct labelLargeRegular: SmaTypographyProtocol {
+    public static let font: Font = .custom("Inter", size: 16).weight(.medium)
+    public static let fontSize: CGFloat = 16
+    public static let lineHeight: CGFloat = 16
+    public static let letterSpacing: CGFloat = -1
+  }
+
+  public struct labelLargeProminent: SmaTypographyProtocol {
+    public static let font: Font = .custom("Inter", size: 16).weight(.semibold)
+    public static let fontSize: CGFloat = 16
+    public static let lineHeight: CGFloat = 16
+    public static let letterSpacing: CGFloat = -1
+  }
+
+  public struct labelMediumRegular: SmaTypographyProtocol {
+    public static let font: Font = .custom("Inter", size: 14).weight(.medium)
+    public static let fontSize: CGFloat = 14
+    public static let lineHeight: CGFloat = 14
+    public static let letterSpacing: CGFloat = -1
+  }
+
+  public struct labelMediumProminent: SmaTypographyProtocol {
+    public static let font: Font = .custom("Inter", size: 14).weight(.semibold)
+    public static let fontSize: CGFloat = 14
+    public static let lineHeight: CGFloat = 14
+    public static let letterSpacing: CGFloat = -1
+  }
+
+  public struct labelSmallRegular: SmaTypographyProtocol {
+    public static let font: Font = .custom("Inter", size: 12).weight(.medium)
+    public static let fontSize: CGFloat = 12
+    public static let lineHeight: CGFloat = 12
+    public static let letterSpacing: CGFloat = -1
+  }
+
+  public struct labelSmallProminent: SmaTypographyProtocol {
+    public static let font: Font = .custom("Inter", size: 12).weight(.semibold)
+    public static let fontSize: CGFloat = 12
+    public static let lineHeight: CGFloat = 12
+    public static let letterSpacing: CGFloat = -1
+  }
 }
