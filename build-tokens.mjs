@@ -132,22 +132,7 @@ StyleDictionary.registerTransformGroup({
   ]
 });
 
-// Register iOS-specific transforms
-StyleDictionary.registerTransform({
-  name: 'color/UIColor',
-  type: 'value',
-  filter: token => token.type === 'color',
-  transform: token => {
-    const hex = token.value;
-    if (hex && hex.startsWith('#')) {
-      const r = parseInt(hex.substring(1, 3), 16) / 255;
-      const g = parseInt(hex.substring(3, 5), 16) / 255;
-      const b = parseInt(hex.substring(5, 7), 16) / 255;
-      return `UIColor(red: ${r.toFixed(3)}, green: ${g.toFixed(3)}, blue: ${b.toFixed(3)}, alpha: 1.0)`;
-    }
-    return hex;
-  }
-});
+
 
 // Transform to skip complex typography objects
 StyleDictionary.registerTransform({
@@ -165,6 +150,33 @@ StyleDictionary.registerTransform({
     const value = parseFloat(token.value);
     return isNaN(value) ? token.value : value;
   }
+});
+
+// Register custom iOS Swift format for colors with proper syntax
+StyleDictionary.registerFormat({
+  name: "ios-swift/class-colors.swift",
+  format: ({ dictionary, options }) => {
+    const className = options.className || "TokenColors";
+
+    const body = dictionary.allTokens
+      .map((token) => {
+        return `    public static let ${token.name} = ${token.value}`;
+      })
+      .join("\n");
+
+    return `
+//
+// ${className}.swift
+//
+
+// Do not edit directly, this file was auto-generated.
+
+import SwiftUI
+
+public class ${className} {
+${body}
+}`;
+  },
 });
 
 // Register custom typography formatter
@@ -202,17 +214,7 @@ ${body}
   },
 });
 
-// Create iOS transform group with SMA naming
-StyleDictionary.registerTransformGroup({
-  name: "ios-sma",
-  transforms: [
-    "attribute/cti",
-    "name/sma/camel",
-    "skip/typography-objects",
-    "size/ios-points",
-    "color/UIColor"
-  ],
-});
+
 
 console.log("🏗️  Building design tokens...");
 
@@ -717,7 +719,7 @@ const otherConfig = {
   preprocessors: ["tokens-studio"],
   platforms: {
     ios: {
-      transformGroup: "ios-sma",
+      transformGroup: "ios-swift",
       buildPath: "dist/ios/",
       files: [
         {
@@ -826,7 +828,7 @@ const iosLightConfig = {
   },
   platforms: {
     ios: {
-      transformGroup: "ios-sma",
+      transformGroup: "ios-swift",
       buildPath: "dist/ios/",
       files: [
         {
@@ -866,7 +868,7 @@ const iosDarkConfig = {
   },
   platforms: {
     ios: {
-      transformGroup: "ios-sma",
+      transformGroup: "ios-swift",
       buildPath: "dist/ios/",
       files: [
         {

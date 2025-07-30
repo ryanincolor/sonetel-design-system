@@ -9,307 +9,307 @@ struct TypographyToken {
 }
 
 class SmaTypography {
-  public static let DisplayXlarge = TypographyToken(
+  public static let displayXLarge = TypographyToken(
     fontFamily: "'Inter', sans-serif",
-    fontSize: 96,
+    fontSize: NaN,
     fontWeight: 700,
     lineHeight: 110,
-    letterSpacing: -2
+    letterSpacing: NaN
   )
 
-  public static let DisplayLarge = TypographyToken(
+  public static let displayLarge = TypographyToken(
     fontFamily: "'Inter', sans-serif",
-    fontSize: 72,
+    fontSize: NaN,
     fontWeight: 700,
     lineHeight: 110,
-    letterSpacing: -2
+    letterSpacing: NaN
   )
 
-  public static let DisplayMedium = TypographyToken(
+  public static let displayMedium = TypographyToken(
     fontFamily: "'Inter', sans-serif",
-    fontSize: 64,
+    fontSize: NaN,
     fontWeight: 700,
     lineHeight: 110,
-    letterSpacing: -2
+    letterSpacing: NaN
   )
 
-  public static let DisplaySmall = TypographyToken(
+  public static let displaySmall = TypographyToken(
     fontFamily: "'Inter', sans-serif",
-    fontSize: 56,
+    fontSize: NaN,
     fontWeight: 700,
     lineHeight: 110,
-    letterSpacing: -2
+    letterSpacing: NaN
   )
 
-  public static let Headline3xlargeLight = TypographyToken(
+  public static let headline3xLargeLight = TypographyToken(
     fontFamily: "'Inter', sans-serif",
-    fontSize: 40,
+    fontSize: NaN,
     fontWeight: 400,
     lineHeight: 110,
-    letterSpacing: -2
+    letterSpacing: NaN
   )
 
-  public static let Headline3xlargeRegular = TypographyToken(
+  public static let headline3xLargeRegular = TypographyToken(
     fontFamily: "'Inter', sans-serif",
-    fontSize: 40,
+    fontSize: NaN,
     fontWeight: 500,
     lineHeight: 110,
-    letterSpacing: -2
+    letterSpacing: NaN
   )
 
-  public static let Headline3xlargeProminent = TypographyToken(
+  public static let headline3xLargeProminent = TypographyToken(
     fontFamily: "'Inter', sans-serif",
-    fontSize: 40,
+    fontSize: NaN,
     fontWeight: 600,
     lineHeight: 110,
-    letterSpacing: -2
+    letterSpacing: NaN
   )
 
-  public static let Headline2xlargeLight = TypographyToken(
+  public static let headline2xLargeLight = TypographyToken(
     fontFamily: "'Inter', sans-serif",
-    fontSize: 34,
+    fontSize: NaN,
     fontWeight: 400,
     lineHeight: 110,
-    letterSpacing: -2
+    letterSpacing: NaN
   )
 
-  public static let Headline2xlargeRegular = TypographyToken(
+  public static let headline2xLargeRegular = TypographyToken(
     fontFamily: "'Inter', sans-serif",
-    fontSize: 34,
+    fontSize: NaN,
     fontWeight: 500,
     lineHeight: 110,
-    letterSpacing: -2
+    letterSpacing: NaN
   )
 
-  public static let Headline2xlargeProminent = TypographyToken(
+  public static let headline2xLargeProminent = TypographyToken(
     fontFamily: "'Inter', sans-serif",
-    fontSize: 34,
+    fontSize: NaN,
     fontWeight: 600,
     lineHeight: 110,
-    letterSpacing: -2
+    letterSpacing: NaN
   )
 
-  public static let HeadlineXlargeLight = TypographyToken(
+  public static let headlineXLargeLight = TypographyToken(
     fontFamily: "'Inter', sans-serif",
-    fontSize: 28,
+    fontSize: NaN,
     fontWeight: 400,
     lineHeight: 110,
-    letterSpacing: -2
+    letterSpacing: NaN
   )
 
-  public static let HeadlineXlargeRegular = TypographyToken(
+  public static let headlineXLargeRegular = TypographyToken(
     fontFamily: "'Inter', sans-serif",
-    fontSize: 28,
+    fontSize: NaN,
     fontWeight: 500,
     lineHeight: 110,
-    letterSpacing: -2
+    letterSpacing: NaN
   )
 
-  public static let HeadlineXlargeProminent = TypographyToken(
+  public static let headlineXLargeProminent = TypographyToken(
     fontFamily: "'Inter', sans-serif",
-    fontSize: 28,
+    fontSize: NaN,
     fontWeight: 600,
     lineHeight: 110,
-    letterSpacing: -2
+    letterSpacing: NaN
   )
 
-  public static let HeadlineLargeLight = TypographyToken(
+  public static let headlineLargeLight = TypographyToken(
     fontFamily: "'Inter', sans-serif",
-    fontSize: 24,
+    fontSize: NaN,
     fontWeight: 400,
     lineHeight: 120,
-    letterSpacing: -2
+    letterSpacing: NaN
   )
 
-  public static let HeadlineLargeRegular = TypographyToken(
+  public static let headlineLargeRegular = TypographyToken(
     fontFamily: "'Inter', sans-serif",
-    fontSize: 24,
+    fontSize: NaN,
     fontWeight: 500,
     lineHeight: 120,
-    letterSpacing: -2
+    letterSpacing: NaN
   )
 
-  public static let HeadlineLargeProminent = TypographyToken(
+  public static let headlineLargeProminent = TypographyToken(
     fontFamily: "'Inter', sans-serif",
-    fontSize: 24,
+    fontSize: NaN,
     fontWeight: 600,
     lineHeight: 120,
-    letterSpacing: -2
+    letterSpacing: NaN
   )
 
-  public static let HeadlineMediumLight = TypographyToken(
+  public static let headlineMediumLight = TypographyToken(
     fontFamily: "'Inter', sans-serif",
-    fontSize: 20,
+    fontSize: NaN,
     fontWeight: 400,
     lineHeight: 120,
-    letterSpacing: -2
+    letterSpacing: NaN
   )
 
-  public static let HeadlineMediumRegular = TypographyToken(
+  public static let headlineMediumRegular = TypographyToken(
     fontFamily: "'Inter', sans-serif",
-    fontSize: 20,
+    fontSize: NaN,
     fontWeight: 500,
     lineHeight: 120,
-    letterSpacing: -2
+    letterSpacing: NaN
   )
 
-  public static let HeadlineMediumProminent = TypographyToken(
+  public static let headlineMediumProminent = TypographyToken(
     fontFamily: "'Inter', sans-serif",
-    fontSize: 20,
+    fontSize: NaN,
     fontWeight: 600,
     lineHeight: 120,
-    letterSpacing: -2
+    letterSpacing: NaN
   )
 
-  public static let HeadlineSmallLight = TypographyToken(
+  public static let headlineSmallLight = TypographyToken(
     fontFamily: "'Inter', sans-serif",
-    fontSize: 18,
+    fontSize: NaN,
     fontWeight: 400,
     lineHeight: 120,
-    letterSpacing: -2
+    letterSpacing: NaN
   )
 
-  public static let HeadlineSmallRegular = TypographyToken(
+  public static let headlineSmallRegular = TypographyToken(
     fontFamily: "'Inter', sans-serif",
-    fontSize: 18,
+    fontSize: NaN,
     fontWeight: 500,
     lineHeight: 120,
-    letterSpacing: -2
+    letterSpacing: NaN
   )
 
-  public static let HeadlineSmallProminant = TypographyToken(
+  public static let headlineSmallProminant = TypographyToken(
     fontFamily: "'Inter', sans-serif",
-    fontSize: 18,
+    fontSize: NaN,
     fontWeight: 600,
     lineHeight: 120,
-    letterSpacing: -2
+    letterSpacing: NaN
   )
 
-  public static let BodyXLargeRegular = TypographyToken(
+  public static let bodyXLargeRegular = TypographyToken(
     fontFamily: "'Inter', sans-serif",
-    fontSize: 20,
+    fontSize: NaN,
     fontWeight: 400,
     lineHeight: 150,
-    letterSpacing: -1
+    letterSpacing: NaN
   )
 
-  public static let BodyXLargeProminent = TypographyToken(
+  public static let bodyXLargeProminent = TypographyToken(
     fontFamily: "'Inter', sans-serif",
-    fontSize: 20,
+    fontSize: NaN,
     fontWeight: 500,
     lineHeight: 150,
-    letterSpacing: -1
+    letterSpacing: NaN
   )
 
-  public static let BodyLargeRegular = TypographyToken(
+  public static let bodyLargeRegular = TypographyToken(
     fontFamily: "'Inter', sans-serif",
-    fontSize: 16,
+    fontSize: NaN,
     fontWeight: 400,
     lineHeight: 150,
-    letterSpacing: -1
+    letterSpacing: NaN
   )
 
-  public static let BodyLargeProminent = TypographyToken(
+  public static let bodyLargeProminent = TypographyToken(
     fontFamily: "'Inter', sans-serif",
-    fontSize: 16,
+    fontSize: NaN,
     fontWeight: 500,
     lineHeight: 150,
-    letterSpacing: -1
+    letterSpacing: NaN
   )
 
-  public static let BodyMediumRegular = TypographyToken(
+  public static let bodyMediumRegular = TypographyToken(
     fontFamily: "'Inter', sans-serif",
-    fontSize: 14,
+    fontSize: NaN,
     fontWeight: 400,
     lineHeight: 150,
-    letterSpacing: -1
+    letterSpacing: NaN
   )
 
-  public static let BodyMediumProminent = TypographyToken(
+  public static let bodyMediumProminent = TypographyToken(
     fontFamily: "'Inter', sans-serif",
-    fontSize: 14,
+    fontSize: NaN,
     fontWeight: 500,
     lineHeight: 150,
-    letterSpacing: -1
+    letterSpacing: NaN
   )
 
-  public static let BodySmallRegular = TypographyToken(
+  public static let bodySmallRegular = TypographyToken(
     fontFamily: "'Inter', sans-serif",
-    fontSize: 12,
+    fontSize: NaN,
     fontWeight: 400,
     lineHeight: 150,
-    letterSpacing: -1
+    letterSpacing: NaN
   )
 
-  public static let BodySmallProminent = TypographyToken(
+  public static let bodySmallProminent = TypographyToken(
     fontFamily: "'Inter', sans-serif",
-    fontSize: 12,
+    fontSize: NaN,
     fontWeight: 500,
     lineHeight: 150,
-    letterSpacing: -1
+    letterSpacing: NaN
   )
 
-  public static let LabelXlargeRegular = TypographyToken(
+  public static let labelXLargeRegular = TypographyToken(
     fontFamily: "'Inter', sans-serif",
-    fontSize: 20,
+    fontSize: NaN,
     fontWeight: 500,
     lineHeight: 100,
-    letterSpacing: -1
+    letterSpacing: NaN
   )
 
-  public static let LabelXlargeProminent = TypographyToken(
+  public static let labelXLargeProminent = TypographyToken(
     fontFamily: "'Inter', sans-serif",
-    fontSize: 20,
+    fontSize: NaN,
     fontWeight: 600,
     lineHeight: 100,
-    letterSpacing: -1
+    letterSpacing: NaN
   )
 
-  public static let LabelLargeRegular = TypographyToken(
+  public static let labelLargeRegular = TypographyToken(
     fontFamily: "'Inter', sans-serif",
-    fontSize: 16,
+    fontSize: NaN,
     fontWeight: 500,
     lineHeight: 100,
-    letterSpacing: -1
+    letterSpacing: NaN
   )
 
-  public static let LabelLargeProminent = TypographyToken(
+  public static let labelLargeProminent = TypographyToken(
     fontFamily: "'Inter', sans-serif",
-    fontSize: 16,
+    fontSize: NaN,
     fontWeight: 600,
     lineHeight: 100,
-    letterSpacing: -1
+    letterSpacing: NaN
   )
 
-  public static let LabelMediumRegular = TypographyToken(
+  public static let labelMediumRegular = TypographyToken(
     fontFamily: "'Inter', sans-serif",
-    fontSize: 14,
+    fontSize: NaN,
     fontWeight: 500,
     lineHeight: 100,
-    letterSpacing: -1
+    letterSpacing: NaN
   )
 
-  public static let LabelMediumProminent = TypographyToken(
+  public static let labelMediumProminent = TypographyToken(
     fontFamily: "'Inter', sans-serif",
-    fontSize: 14,
+    fontSize: NaN,
     fontWeight: 600,
     lineHeight: 100,
-    letterSpacing: -1
+    letterSpacing: NaN
   )
 
-  public static let LabelSmallRegular = TypographyToken(
+  public static let labelSmallRegular = TypographyToken(
     fontFamily: "'Inter', sans-serif",
-    fontSize: 12,
+    fontSize: NaN,
     fontWeight: 500,
     lineHeight: 100,
-    letterSpacing: -1
+    letterSpacing: NaN
   )
 
-  public static let LabelSmallProminent = TypographyToken(
+  public static let labelSmallProminent = TypographyToken(
     fontFamily: "'Inter', sans-serif",
-    fontSize: 12,
+    fontSize: NaN,
     fontWeight: 600,
     lineHeight: 100,
-    letterSpacing: -1
+    letterSpacing: NaN
   )
 }
