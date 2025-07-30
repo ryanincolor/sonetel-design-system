@@ -178,12 +178,31 @@ StyleDictionary.registerTransform({
   transform: token => {
     let value = token.value;
 
+
+
     // Handle hex colors
     if (value && typeof value === 'string' && value.startsWith('#')) {
-      const r = parseInt(value.substring(1, 3), 16) / 255;
-      const g = parseInt(value.substring(3, 5), 16) / 255;
-      const b = parseInt(value.substring(5, 7), 16) / 255;
-      return `UIColor(red: ${r.toFixed(3)}, green: ${g.toFixed(3)}, blue: ${b.toFixed(3)}, alpha: 1.0)`;
+      const hexValue = value.replace('#', '');
+      if (hexValue.length === 3) {
+        // Convert 3-digit hex to 6-digit
+        const expandedHex = hexValue.split('').map(char => char + char).join('');
+        const r = parseInt(expandedHex.substring(0, 2), 16) / 255;
+        const g = parseInt(expandedHex.substring(2, 4), 16) / 255;
+        const b = parseInt(expandedHex.substring(4, 6), 16) / 255;
+        return `UIColor(red: ${r.toFixed(3)}, green: ${g.toFixed(3)}, blue: ${b.toFixed(3)}, alpha: 1.0)`;
+      } else if (hexValue.length === 6) {
+        const r = parseInt(hexValue.substring(0, 2), 16) / 255;
+        const g = parseInt(hexValue.substring(2, 4), 16) / 255;
+        const b = parseInt(hexValue.substring(4, 6), 16) / 255;
+        return `UIColor(red: ${r.toFixed(3)}, green: ${g.toFixed(3)}, blue: ${b.toFixed(3)}, alpha: 1.0)`;
+      } else if (hexValue.length === 8) {
+        // Handle 8-digit hex with alpha channel (RRGGBBAA)
+        const r = parseInt(hexValue.substring(0, 2), 16) / 255;
+        const g = parseInt(hexValue.substring(2, 4), 16) / 255;
+        const b = parseInt(hexValue.substring(4, 6), 16) / 255;
+        const a = parseInt(hexValue.substring(6, 8), 16) / 255;
+        return `UIColor(red: ${r.toFixed(3)}, green: ${g.toFixed(3)}, blue: ${b.toFixed(3)}, alpha: ${a.toFixed(3)})`;
+      }
     }
 
     // Handle rgba colors
@@ -200,6 +219,8 @@ StyleDictionary.registerTransform({
         }
       }
     }
+
+
 
     return value;
   }

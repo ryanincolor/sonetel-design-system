@@ -16,7 +16,7 @@ export const borderRadiusMd = 16;
 export const borderRadiusLg = 20;
 export const borderRadiusXL = 28;
 export const colorSolidLight0 =
-  "UIColor(red: 1.000, green: 0.059, blue: NaN, alpha: 1.0)";
+  "UIColor(red: 1.000, green: 1.000, blue: 1.000, alpha: 1.0)";
 export const colorSolidLight5 =
   "UIColor(red: 0.961, green: 0.961, blue: 0.961, alpha: 1.0)";
 export const colorSolidLight10 =
@@ -54,41 +54,41 @@ export const colorSolidDark70 =
 export const colorSolidDark100 =
   "UIColor(red: 1.000, green: 1.000, blue: 1.000, alpha: 1.0)";
 export const colorAlphaLight0 =
-  "UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 1.0)";
+  "UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 0.000)";
 export const colorAlphaLight5 =
-  "UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 1.0)";
+  "UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 0.039)";
 export const colorAlphaLight10 =
-  "UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 1.0)";
+  "UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 0.059)";
 export const colorAlphaLight20 =
-  "UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 1.0)";
+  "UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 0.122)";
 export const colorAlphaLight30 =
-  "UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 1.0)";
+  "UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 0.278)";
 export const colorAlphaLight40 =
-  "UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 1.0)";
+  "UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 0.439)";
 export const colorAlphaLight50 =
-  "UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 1.0)";
+  "UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 0.600)";
 export const colorAlphaLight60 =
-  "UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 1.0)";
+  "UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 0.839)";
 export const colorAlphaLight70 =
-  "UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 1.0)";
+  "UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 0.961)";
 export const colorAlphaLight100 =
   "UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 1.0)";
 export const colorAlphaDark5 =
-  "UIColor(red: 1.000, green: 1.000, blue: 1.000, alpha: 1.0)";
+  "UIColor(red: 1.000, green: 1.000, blue: 1.000, alpha: 0.039)";
 export const colorAlphaDark10 =
-  "UIColor(red: 1.000, green: 1.000, blue: 1.000, alpha: 1.0)";
+  "UIColor(red: 1.000, green: 1.000, blue: 1.000, alpha: 0.078)";
 export const colorAlphaDark20 =
-  "UIColor(red: 1.000, green: 1.000, blue: 1.000, alpha: 1.0)";
+  "UIColor(red: 1.000, green: 1.000, blue: 1.000, alpha: 0.122)";
 export const colorAlphaDark30 =
-  "UIColor(red: 1.000, green: 1.000, blue: 1.000, alpha: 1.0)";
+  "UIColor(red: 1.000, green: 1.000, blue: 1.000, alpha: 0.161)";
 export const colorAlphaDark40 =
-  "UIColor(red: 1.000, green: 1.000, blue: 1.000, alpha: 1.0)";
+  "UIColor(red: 1.000, green: 1.000, blue: 1.000, alpha: 0.200)";
 export const colorAlphaDark50 =
-  "UIColor(red: 0.941, green: 0.941, blue: 0.941, alpha: 1.0)";
+  "UIColor(red: 0.941, green: 0.941, blue: 0.941, alpha: 0.251)";
 export const colorAlphaDark60 =
-  "UIColor(red: 1.000, green: 1.000, blue: 1.000, alpha: 1.0)";
+  "UIColor(red: 1.000, green: 1.000, blue: 1.000, alpha: 0.502)";
 export const colorAlphaDark70 =
-  "UIColor(red: 1.000, green: 1.000, blue: 1.000, alpha: 1.0)";
+  "UIColor(red: 1.000, green: 1.000, blue: 1.000, alpha: 0.702)";
 export const colorAlphaDark100 =
   "UIColor(red: 1.000, green: 1.000, blue: 1.000, alpha: 1.0)";
 export const colorHuesRed =
@@ -202,7 +202,7 @@ export const fontLineHeightBase = 1.5;
 export const fontLineHeightTighter = 1.1;
 export const fontLineHeightTightest = 1;
 export const elevationSolid0 =
-  "UIColor(red: 1.000, green: 0.059, blue: NaN, alpha: 1.0)";
+  "UIColor(red: 1.000, green: 1.000, blue: 1.000, alpha: 1.0)";
 export const elevationSolid1 =
   "UIColor(red: 0.961, green: 0.961, blue: 0.961, alpha: 1.0)";
 export const elevationSolid2 =
@@ -220,21 +220,21 @@ export const elevationSolid7 =
 export const elevationSolid8 =
   "UIColor(red: 0.039, green: 0.039, blue: 0.039, alpha: 1.0)";
 export const elevationAlpha0 =
-  "UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 1.0)";
+  "UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 0.000)";
 export const elevationAlpha1 =
-  "UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 1.0)";
+  "UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 0.039)";
 export const elevationAlpha2 =
-  "UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 1.0)";
+  "UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 0.059)";
 export const elevationAlpha3 =
-  "UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 1.0)";
+  "UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 0.122)";
 export const elevationAlpha4 =
-  "UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 1.0)";
+  "UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 0.278)";
 export const elevationAlpha5 =
-  "UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 1.0)";
+  "UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 0.439)";
 export const elevationAlpha6 =
-  "UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 1.0)";
+  "UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 0.600)";
 export const elevationAlpha7 =
-  "UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 1.0)";
+  "UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 0.839)";
 export const elevationAlpha8 =
   "UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 1.0)";
 export const actionPrimaryEnabled =
@@ -244,7 +244,7 @@ export const actionPrimaryHover =
 export const actionPrimaryActive =
   "UIColor(red: 0.400, green: 0.400, blue: 0.400, alpha: 1.0)";
 export const actionPrimaryDisabled =
-  "UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 1.0)";
+  "UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 0.059)";
 export const actionSecondaryEnabled =
   "UIColor(red: 0.961, green: 0.961, blue: 0.961, alpha: 1.0)";
 export const actionSecondaryHover =
@@ -252,25 +252,25 @@ export const actionSecondaryHover =
 export const actionSecondaryActive =
   "UIColor(red: 0.878, green: 0.878, blue: 0.878, alpha: 1.0)";
 export const actionSecondaryDisabled =
-  "UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 1.0)";
+  "UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 0.059)";
 export const actionTertiaryEnabled =
   "UIColor(red: 0.878, green: 0.878, blue: 0.878, alpha: 1.0)";
 export const actionAlphaSecondaryEnabled =
-  "UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 1.0)";
+  "UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 0.039)";
 export const actionAlphaSecondaryHover =
-  "UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 1.0)";
+  "UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 0.059)";
 export const actionAlphaSecondaryActive =
-  "UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 1.0)";
+  "UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 0.122)";
 export const actionOnActionPrimary =
-  "UIColor(red: 1.000, green: 0.059, blue: NaN, alpha: 1.0)";
+  "UIColor(red: 1.000, green: 1.000, blue: 1.000, alpha: 1.0)";
 export const actionOnActionSecondary =
   "UIColor(red: 0.039, green: 0.039, blue: 0.039, alpha: 1.0)";
 export const actionOnActionDark =
-  "UIColor(red: 1.000, green: 0.059, blue: NaN, alpha: 1.0)";
+  "UIColor(red: 1.000, green: 1.000, blue: 1.000, alpha: 1.0)";
 export const actionOnActionLight =
   "UIColor(red: 0.039, green: 0.039, blue: 0.039, alpha: 1.0)";
 export const actionOnActionDisabled =
-  "UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 1.0)";
+  "UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 0.278)";
 export const statusCritical =
   "UIColor(red: 1.000, green: 0.000, blue: 0.000, alpha: 1.0)";
 export const brandYellow =
