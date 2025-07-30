@@ -30,24 +30,37 @@ StyleDictionary.registerTransform({
   }
 });
 
-// Register a custom name transform for camelCase with Sma prefix for iOS
+// Register a custom name transform for camelCase with proper dash handling
 StyleDictionary.registerTransform({
   name: "name/sma/camel",
   type: "name",
   transform: (token) => {
-    const camelCased = token.path
-      .map((segment, index) => {
-        // Clean up special characters, hyphens, and handle common patterns
-        let cleanSegment = segment
-          .replace(/[^a-zA-Z0-9]/g, '') // Remove all non-alphanumeric
-          .replace(/^on/i, 'On') // Handle 'on-action' -> 'OnAction' pattern
-          .replace(/^x/i, 'X'); // Handle 'x-large' -> 'XLarge' pattern
+    // Join all path segments with dots, then split by both dots and dashes
+    const fullPath = token.path.join('.');
+    const segments = fullPath.split(/[\.\-]/);
 
-        return index === 0
-          ? cleanSegment
-          : cleanSegment.charAt(0).toUpperCase() + cleanSegment.slice(1);
+    const camelCased = segments
+      .map((segment, index) => {
+        // Clean up the segment
+        let cleanSegment = segment
+          .replace(/[^a-zA-Z0-9]/g, '') // Remove remaining special characters
+          .toLowerCase();
+
+        // Handle special cases
+        if (cleanSegment === 'x') cleanSegment = 'X';
+        if (cleanSegment === 'xl') cleanSegment = 'XL';
+        if (cleanSegment === '2xl') cleanSegment = '2XL';
+        if (cleanSegment === '3xl') cleanSegment = '3XL';
+
+        // First segment stays lowercase, rest get capitalized
+        if (index === 0) {
+          return cleanSegment;
+        } else {
+          return cleanSegment.charAt(0).toUpperCase() + cleanSegment.slice(1);
+        }
       })
       .join("");
+
     return camelCased;
   },
 });
@@ -142,14 +155,71 @@ StyleDictionary.registerTransform({
   transform: token => undefined // Skip these tokens
 });
 
+// iOS-specific transforms to clean up values
 StyleDictionary.registerTransform({
-  name: 'size/ios-points',
+  name: 'size/ios-points-clean',
   type: 'value',
   filter: token => token.type === 'dimension' || token.type === 'spacing' || token.type === 'fontSizes' || token.type === 'borderRadius',
   transform: token => {
-    const value = parseFloat(token.value);
-    return isNaN(value) ? token.value : value;
+    let value = token.value;
+    // Remove common CSS units for iOS
+    if (typeof value === 'string') {
+      value = value.replace(/px$|pt$|rem$|em$/, '');
+    }
+    const numValue = parseFloat(value);
+    return isNaN(numValue) ? token.value : numValue;
   }
+});
+
+StyleDictionary.registerTransform({
+  name: 'color/ios-swift-clean',
+  type: 'value',
+  filter: token => token.type === 'color',
+  transform: token => {
+    let value = token.value;
+
+    // Handle hex colors
+    if (value && typeof value === 'string' && value.startsWith('#')) {
+      const r = parseInt(value.substring(1, 3), 16) / 255;
+      const g = parseInt(value.substring(3, 5), 16) / 255;
+      const b = parseInt(value.substring(5, 7), 16) / 255;
+      return `UIColor(red: ${r.toFixed(3)}, green: ${g.toFixed(3)}, blue: ${b.toFixed(3)}, alpha: 1.0)`;
+    }
+
+    // Handle rgba colors
+    if (value && typeof value === 'string' && value.includes('rgba')) {
+      const rgbaMatch = value.match(/rgba?\(([^)]+)\)/);
+      if (rgbaMatch) {
+        const values = rgbaMatch[1].split(',').map(v => parseFloat(v.trim()));
+        if (values.length >= 3) {
+          const r = values[0] / 255;
+          const g = values[1] / 255;
+          const b = values[2] / 255;
+          const alpha = values.length >= 4 ? values[3] : 1.0;
+          return `UIColor(red: ${r.toFixed(3)}, green: ${g.toFixed(3)}, blue: ${b.toFixed(3)}, alpha: ${alpha.toFixed(3)})`;
+        }
+      }
+    }
+
+    return value;
+  }
+});
+
+// Create custom iOS transform group that combines tokens-studio with iOS-specific formatting
+StyleDictionary.registerTransformGroup({
+  name: "ios-tokens-studio",
+  transforms: [
+    "name/sma/camel",
+    "ts/descriptionToComment",
+    "ts/opacity",
+    "ts/size/lineheight",
+    "ts/typography/fontWeight",
+    "ts/resolveMath",
+    "ts/color/css/hexrgba",
+    "ts/color/modifiers",
+    "color/ios-swift-clean",
+    "size/ios-points-clean"  // Clean up units for iOS
+  ],
 });
 
 // Register custom iOS Swift format for colors with proper syntax
@@ -179,21 +249,78 @@ ${body}
   },
 });
 
-// Register custom typography formatter
+// Register custom typography formatter that works with expanded tokens
 StyleDictionary.registerFormat({
   name: "ios-swift/typography.swift",
   format: ({ dictionary, options }) => {
     const className = options.className || "TypographyTokens";
 
-    const body = dictionary.allTokens
-      .map((token) => {
-        const { fontFamily, fontWeight, fontSize, lineHeight, letterSpacing } = token.value;
-        return `  public static let ${token.name} = TypographyToken(
-    fontFamily: "${fontFamily}",
-    fontSize: ${parseFloat(fontSize)},
-    fontWeight: ${parseInt(fontWeight)},
-    lineHeight: ${parseFloat(lineHeight)},
-    letterSpacing: ${parseFloat(letterSpacing)}
+    // Group typography tokens by base name
+    const typographyGroups = {};
+
+    dictionary.allTokens.forEach(token => {
+      // Only process typography-related tokens
+      if (!['fontFamily', 'fontWeight', 'fontSize', 'lineHeight', 'letterSpacing'].includes(token.type)) {
+        return;
+      }
+
+      // Extract base name by removing the property suffix (case insensitive)
+      let baseName = token.name;
+      const propertyTypes = ['fontfamily', 'fontweight', 'fontsize', 'lineheight', 'letterspacing'];
+      propertyTypes.forEach(prop => {
+        if (baseName.toLowerCase().endsWith(prop)) {
+          baseName = baseName.slice(0, -prop.length);
+        }
+      });
+
+      if (!typographyGroups[baseName]) {
+        typographyGroups[baseName] = {};
+      }
+
+      // Store the value based on token type
+      switch(token.type) {
+        case 'fontFamily':
+          typographyGroups[baseName].fontFamily = token.value.replace(/"/g, '\\"');
+          break;
+        case 'fontWeight':
+          typographyGroups[baseName].fontWeight = parseInt(token.value) || 400;
+          break;
+        case 'fontSize':
+          // Handle CGFloat(value) format from iOS transforms
+          let fontSize = token.value;
+          if (typeof fontSize === 'string' && fontSize.includes('CGFloat(')) {
+            fontSize = fontSize.match(/CGFloat\(([\d.]+)\)/)?.[1];
+          }
+          typographyGroups[baseName].fontSize = parseFloat(fontSize) || 16;
+          break;
+        case 'lineHeight':
+          // Handle percentage values like "110%"
+          let lineHeight = token.value;
+          if (typeof lineHeight === 'string' && lineHeight.includes('%')) {
+            lineHeight = lineHeight.replace('%', '');
+          }
+          typographyGroups[baseName].lineHeight = parseFloat(lineHeight) || 150;
+          break;
+        case 'letterSpacing':
+          // Handle CGFloat(value) format from iOS transforms
+          let letterSpacing = token.value;
+          if (typeof letterSpacing === 'string' && letterSpacing.includes('CGFloat(')) {
+            letterSpacing = letterSpacing.match(/CGFloat\(([-\d.]+)\)/)?.[1];
+          }
+          typographyGroups[baseName].letterSpacing = parseFloat(letterSpacing) || 0;
+          break;
+      }
+    });
+
+    const body = Object.entries(typographyGroups)
+      .filter(([name, props]) => props.fontFamily && props.fontSize) // Only include complete groups
+      .map(([name, props]) => {
+        return `  public static let ${name} = TypographyToken(
+    fontFamily: "${props.fontFamily || "'Inter', sans-serif"}",
+    fontSize: ${props.fontSize || 16},
+    fontWeight: ${props.fontWeight || 400},
+    lineHeight: ${props.lineHeight || 150},
+    letterSpacing: ${props.letterSpacing || 0}
   )`;
       })
       .join("\n\n");
@@ -717,9 +844,14 @@ const otherConfig = {
     "tokens/Mobile/**/*.json"
   ],
   preprocessors: ["tokens-studio"],
+  expand: {
+    typesMap: {
+      typography: 'expand'
+    }
+  },
   platforms: {
     ios: {
-      transformGroup: "ios-swift",
+      transformGroup: "ios-tokens-studio",
       buildPath: "dist/ios/",
       files: [
         {
@@ -739,8 +871,10 @@ const otherConfig = {
                                      token.type === 'fontWeight' ||
                                      token.type === 'lineHeight' ||
                                      token.type === 'letterSpacing';
+            const isLetterSpacingByName = token.name && token.name.toLowerCase().includes('letterspacing');
             const isBorderRadiusToken = token.type === 'borderRadius';
-            return isMobile && !isColorToken && !isTypographyToken && (isBorderRadiusToken || token.type === 'spacing' || token.type === 'dimension');
+
+            return isMobile && !isColorToken && !isTypographyToken && !isLetterSpacingByName && (isBorderRadiusToken || token.type === 'spacing' || token.type === 'dimension');
           }
         },
         {
@@ -749,7 +883,9 @@ const otherConfig = {
           options: {
             className: "SmaTypography"
           },
-          filter: token => token.type === "typography"
+          filter: token => {
+            return ['fontFamily', 'fontWeight', 'fontSize', 'lineHeight', 'letterSpacing'].includes(token.type);
+          }
         },
       ],
     },
@@ -794,7 +930,7 @@ const otherConfig = {
       ],
     },
     "web-js": {
-      transformGroup: "tokens-studio",
+      transformGroup: "ios-tokens-studio",
       buildPath: "dist/web/",
       files: [
         {
@@ -828,7 +964,7 @@ const iosLightConfig = {
   },
   platforms: {
     ios: {
-      transformGroup: "ios-swift",
+      transformGroup: "ios-tokens-studio",
       buildPath: "dist/ios/",
       files: [
         {
@@ -868,7 +1004,7 @@ const iosDarkConfig = {
   },
   platforms: {
     ios: {
-      transformGroup: "ios-swift",
+      transformGroup: "ios-tokens-studio",
       buildPath: "dist/ios/",
       files: [
         {
