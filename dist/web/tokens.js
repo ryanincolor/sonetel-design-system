@@ -255,6 +255,22 @@ export const actionSecondaryDisabled =
   "UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 0.059)";
 export const actionTertiaryEnabled =
   "UIColor(red: 0.878, green: 0.878, blue: 0.878, alpha: 1.0)";
+export const actionOnDarkEnabled =
+  "UIColor(red: 1.000, green: 1.000, blue: 1.000, alpha: 1.0)";
+export const actionOnDarkHover =
+  "UIColor(red: 0.961, green: 0.961, blue: 0.961, alpha: 1.0)";
+export const actionOnDarkActive =
+  "UIColor(red: 0.941, green: 0.941, blue: 0.941, alpha: 1.0)";
+export const actionOnDarkDisabled =
+  "UIColor(red: 0.722, green: 0.722, blue: 0.722, alpha: 1.0)";
+export const actionOnLightEnabled =
+  "UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 1.0)";
+export const actionOnLightHover =
+  "UIColor(red: 0.122, green: 0.122, blue: 0.122, alpha: 1.0)";
+export const actionOnLightActive =
+  "UIColor(red: 0.161, green: 0.161, blue: 0.161, alpha: 1.0)";
+export const actionOnLightDisabled =
+  "UIColor(red: 0.239, green: 0.239, blue: 0.239, alpha: 1.0)";
 export const actionAlphaSecondaryEnabled =
   "UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 0.039)";
 export const actionAlphaSecondaryHover =
@@ -291,6 +307,10 @@ export const onSurfaceSecondary =
   "UIColor(red: 0.400, green: 0.400, blue: 0.400, alpha: 1.0)";
 export const onSurfaceTertiary =
   "UIColor(red: 0.561, green: 0.561, blue: 0.561, alpha: 1.0)";
+export const onSurfaceOnDark =
+  "UIColor(red: 1.000, green: 1.000, blue: 1.000, alpha: 1.0)";
+export const onSurfaceOnLight =
+  "UIColor(red: 0.039, green: 0.039, blue: 0.039, alpha: 1.0)";
 export const displayXLargeFontfamily = "'Inter', sans-serif";
 export const displayXLargeFontweight = "700";
 export const displayXLargeLineheight = 1.1;
