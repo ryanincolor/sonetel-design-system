@@ -48,9 +48,9 @@ StyleDictionary.registerTransform({
 
         // Handle special cases
         if (cleanSegment === 'x') cleanSegment = 'X';
-        if (cleanSegment === 'xl') cleanSegment = 'XL';
-        if (cleanSegment === '2xl') cleanSegment = '2XL';
-        if (cleanSegment === '3xl') cleanSegment = '3XL';
+        if (cleanSegment === 'xl') cleanSegment = 'Xl';
+        if (cleanSegment === '2xl') cleanSegment = '2xl';
+        if (cleanSegment === '3xl') cleanSegment = '3xl';
 
         // First segment stays lowercase, rest get capitalized
         if (index === 0) {
