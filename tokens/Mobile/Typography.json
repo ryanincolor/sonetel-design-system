@@ -461,15 +461,15 @@
       },
       "body": {
         "sm": {
-          "value": "{font.size.12}",
-          "type": "fontSizes"
-        },
-        "md": {
           "value": "{font.size.14}",
           "type": "fontSizes"
         },
-        "lg": {
+        "md": {
           "value": "{font.size.16}",
+          "type": "fontSizes"
+        },
+        "lg": {
+          "value": "{font.size.18}",
           "type": "fontSizes"
         },
         "xl": {
@@ -479,15 +479,15 @@
       },
       "label": {
         "sm": {
-          "value": "{font.size.12}",
-          "type": "fontSizes"
-        },
-        "md": {
           "value": "{font.size.14}",
           "type": "fontSizes"
         },
-        "lg": {
+        "md": {
           "value": "{font.size.16}",
+          "type": "fontSizes"
+        },
+        "lg": {
+          "value": "{font.size.18}",
           "type": "fontSizes"
         },
         "xl": {
