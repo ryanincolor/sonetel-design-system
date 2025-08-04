@@ -202,44 +202,44 @@ public struct SmaTypography {
   }
 
   public struct bodyLargeRegular: SmaTypographyProtocol {
+    public static let font: Font = .custom("Inter", size: 18)
+    public static let fontSize: CGFloat = 18
+    public static let lineHeight: CGFloat = 27
+    public static let letterSpacing: CGFloat = -1
+  }
+
+  public struct bodyLargeProminent: SmaTypographyProtocol {
+    public static let font: Font = .custom("Inter", size: 18).weight(.medium)
+    public static let fontSize: CGFloat = 18
+    public static let lineHeight: CGFloat = 27
+    public static let letterSpacing: CGFloat = -1
+  }
+
+  public struct bodyMediumRegular: SmaTypographyProtocol {
     public static let font: Font = .custom("Inter", size: 16)
     public static let fontSize: CGFloat = 16
     public static let lineHeight: CGFloat = 24
     public static let letterSpacing: CGFloat = -1
   }
 
-  public struct bodyLargeProminent: SmaTypographyProtocol {
+  public struct bodyMediumProminent: SmaTypographyProtocol {
     public static let font: Font = .custom("Inter", size: 16).weight(.medium)
     public static let fontSize: CGFloat = 16
     public static let lineHeight: CGFloat = 24
     public static let letterSpacing: CGFloat = -1
   }
 
-  public struct bodyMediumRegular: SmaTypographyProtocol {
+  public struct bodySmallRegular: SmaTypographyProtocol {
     public static let font: Font = .custom("Inter", size: 14)
     public static let fontSize: CGFloat = 14
     public static let lineHeight: CGFloat = 21
     public static let letterSpacing: CGFloat = -1
   }
 
-  public struct bodyMediumProminent: SmaTypographyProtocol {
+  public struct bodySmallProminent: SmaTypographyProtocol {
     public static let font: Font = .custom("Inter", size: 14).weight(.medium)
     public static let fontSize: CGFloat = 14
     public static let lineHeight: CGFloat = 21
-    public static let letterSpacing: CGFloat = -1
-  }
-
-  public struct bodySmallRegular: SmaTypographyProtocol {
-    public static let font: Font = .custom("Inter", size: 12)
-    public static let fontSize: CGFloat = 12
-    public static let lineHeight: CGFloat = 18
-    public static let letterSpacing: CGFloat = -1
-  }
-
-  public struct bodySmallProminent: SmaTypographyProtocol {
-    public static let font: Font = .custom("Inter", size: 12).weight(.medium)
-    public static let fontSize: CGFloat = 12
-    public static let lineHeight: CGFloat = 18
     public static let letterSpacing: CGFloat = -1
   }
 
@@ -260,44 +260,44 @@ public struct SmaTypography {
   }
 
   public struct labelLargeRegular: SmaTypographyProtocol {
+    public static let font: Font = .custom("Inter", size: 18).weight(.medium)
+    public static let fontSize: CGFloat = 18
+    public static let lineHeight: CGFloat = 18
+    public static let letterSpacing: CGFloat = -1
+  }
+
+  public struct labelLargeProminent: SmaTypographyProtocol {
+    public static let font: Font = .custom("Inter", size: 18).weight(.semibold)
+    public static let fontSize: CGFloat = 18
+    public static let lineHeight: CGFloat = 18
+    public static let letterSpacing: CGFloat = -1
+  }
+
+  public struct labelMediumRegular: SmaTypographyProtocol {
     public static let font: Font = .custom("Inter", size: 16).weight(.medium)
     public static let fontSize: CGFloat = 16
     public static let lineHeight: CGFloat = 16
     public static let letterSpacing: CGFloat = -1
   }
 
-  public struct labelLargeProminent: SmaTypographyProtocol {
+  public struct labelMediumProminent: SmaTypographyProtocol {
     public static let font: Font = .custom("Inter", size: 16).weight(.semibold)
     public static let fontSize: CGFloat = 16
     public static let lineHeight: CGFloat = 16
     public static let letterSpacing: CGFloat = -1
   }
 
-  public struct labelMediumRegular: SmaTypographyProtocol {
+  public struct labelSmallRegular: SmaTypographyProtocol {
     public static let font: Font = .custom("Inter", size: 14).weight(.medium)
     public static let fontSize: CGFloat = 14
     public static let lineHeight: CGFloat = 14
     public static let letterSpacing: CGFloat = -1
   }
 
-  public struct labelMediumProminent: SmaTypographyProtocol {
+  public struct labelSmallProminent: SmaTypographyProtocol {
     public static let font: Font = .custom("Inter", size: 14).weight(.semibold)
     public static let fontSize: CGFloat = 14
     public static let lineHeight: CGFloat = 14
-    public static let letterSpacing: CGFloat = -1
-  }
-
-  public struct labelSmallRegular: SmaTypographyProtocol {
-    public static let font: Font = .custom("Inter", size: 12).weight(.medium)
-    public static let fontSize: CGFloat = 12
-    public static let lineHeight: CGFloat = 12
-    public static let letterSpacing: CGFloat = -1
-  }
-
-  public struct labelSmallProminent: SmaTypographyProtocol {
-    public static let font: Font = .custom("Inter", size: 12).weight(.semibold)
-    public static let fontSize: CGFloat = 12
-    public static let lineHeight: CGFloat = 12
     public static let letterSpacing: CGFloat = -1
   }
 }
